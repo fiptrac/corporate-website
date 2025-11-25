@@ -7,27 +7,28 @@ Crear una plantilla corporativa reutilizable que permita construir y mantener el
 
 ## 📁 Estructura del Proyecto
 
-/corporate-website
+```text
+corporate-website/
 │
-├── index.html # Página principal
-├── cursos.html # Página de cursos
-├── clientes.html # Página de clientes
-├── testimonios.html # Página de testimonios
-├── politicas.html # Página de políticas de privacidad/uso
+├── index.html
+├── cursos.html
+├── clientes.html
+├── testimonios.html
+├── politicas.html
 │
 ├── assets/
-│ ├── css/
-│ │ └── styles.css # Estilos globales
-│ ├── js/
-│ │ └── main.js # Funciones generales
-│ └── img/
-│ └── logo.png # Logotipo de FIPTRAC
+│   ├── css/
+│   │   └── styles.css
+│   ├── js/
+│   │   └── main.js
+│   └── img/
+│       └── logo.png
 │
 ├── gs/
-│ └── Code.gs # Backend Apps Script (si aplica)
+│   └── Code.gs
 │
-└── README.md # Documentación del repositorio
-
+└── README.md
+```
 
 
 ## 🎨 Paleta de Colores
