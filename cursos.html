@@ -1,0 +1,37 @@
+<!-- cursos.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<title>FIPTRAC - Cursos</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+<script>
+// Llama al servidor para cargar cursos
+function cargarCursos(){
+google.script.run.withSuccessHandler(function(cursos){
+var out = document.getElementById('lista-cursos');
+out.innerHTML = '';
+cursos.forEach(function(c){
+var el = document.createElement('div'); el.className='card';
+el.innerHTML = '<h3>'+c.title+'</h3><p>Duración: '+c.duration+'</p><p>Precio: '+c.price+'</p>';
+out.appendChild(el);
+});
+}).getCursos();
+}
+document.addEventListener('DOMContentLoaded', cargarCursos);
+</script>
+</head>
+<body>
+<?!= include('includes/header'); ?>
+
+
+<main class="container">
+<h1>Cursos</h1>
+<div id="lista-cursos"></div>
+</main>
+
+
+<?!= include('includes/footer'); ?>
+</body>
+</html>
