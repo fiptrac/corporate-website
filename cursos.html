@@ -1,37 +1,61 @@
-<!-- cursos.html -->
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<base target="_top">
-<meta charset="utf-8">
-<title>FIPTRAC - Cursos</title>
-<link rel="stylesheet" href="assets/css/styles.css">
-<script>
-// Llama al servidor para cargar cursos
-function cargarCursos(){
-google.script.run.withSuccessHandler(function(cursos){
-var out = document.getElementById('lista-cursos');
-out.innerHTML = '';
-cursos.forEach(function(c){
-var el = document.createElement('div'); el.className='card';
-el.innerHTML = '<h3>'+c.title+'</h3><p>Duración: '+c.duration+'</p><p>Precio: '+c.price+'</p>';
-out.appendChild(el);
-});
-}).getCursos();
-}
-document.addEventListener('DOMContentLoaded', cargarCursos);
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos | Fiptrac</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-<?!= include('includes/header'); ?>
 
+<header class="header">
+    <div class="container header-content">
+        <img src="assets/img/logo.png" class="logo" alt="Fiptrac Logo">
 
-<main class="container">
-<h1>Cursos</h1>
-<div id="lista-cursos"></div>
-</main>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="cursos.html" class="active">Cursos</a>
+            <a href="clientes.html">Clientes</a>
+            <a href="testimonios.html">Testimonios</a>
+            <a href="politicas.html">Políticas</a>
+        </nav>
+    </div>
+</header>
 
+<section class="services">
+    <div class="container">
+        <h2>Cursos Profesionales</h2>
 
-<?!= include('includes/footer'); ?>
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>Protección Contra Incendios</h3>
+                <p>Capacitación integral sobre prevención, control y respuesta ante incendios.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Capacitación Industrial</h3>
+                <p>Cursos orientados a seguridad, operación y normativas para la industria.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Habilidades Profesionales</h3>
+                <p>Desarrollo de liderazgo, comunicación efectiva y toma de decisiones.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <p>© 2025 Fiptrac • Todos los derechos reservados</p>
+
+        <div class="social">
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>
