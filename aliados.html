@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aliados Comerciales | FIPTRAC</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .aliados-container {max-width:1200px;margin:40px auto;padding:20px;text-align:center;color:var(--texto);}    
+    .aliados-container h1{font-size:2rem;margin-bottom:14px;}
+    .aliados-container p{max-width:760px;margin:0 auto 30px;color:#dcdcdc;font-size:1.05rem;}
+
+    /* Carrusel */
+    .aliados-carousel {position:relative;width:100%;overflow:hidden;padding:20px 0;}
+    .aliados-track {display:flex;gap:40px;align-items:center;transition:transform .45s ease;}
+    .aliado-item {min-width:160px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border-radius:12px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+    .aliado-item img {max-width:120px;max-height:60px;object-fit:contain;filter:brightness(1.0);}
+
+    .aliado-btn {position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);border:none;color:#fff;padding:10px 14px;font-size:1.3rem;border-radius:50%;cursor:pointer;}
+    .aliado-btn:hover{background:rgba(0,0,0,0.65);}    
+    .prev {left:10px;}    
+    .next {right:10px;}    
+
+    /* Grid alternativa */
+    .aliados-grid {margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;}
+    .aliado-card {background:rgba(255,255,255,0.04);padding:14px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,0.2);}    
+    .aliado-card img {max-height:70px;object-fit:contain;filter:brightness(1.0);}    
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo"><img src="assets/logo.png" alt="Logo FIPTRAC"/></a>
+      <ul class="nav-links">
+        <li><a href="cursos.html">Cursos</a></li>
+        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="certificaciones.html">Certificaciones</a></li>
+        <li><a href="laboratorios.html">Laboratorios</a></li>
+        <li><a href="aliados.html" class="active">Aliados</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="aliados-container">
+    <h1>Aliados Comerciales</h1>
+    <p>
+      Empresas que confían en FIPTRAC para la capacitación técnica de sus equipos.
+      Estas organizaciones han participado, se han certificado o colaboran de manera activa
+      en el fortalecimiento de la seguridad contra incendios en Latinoamérica.
+    </p>
+
+    <!-- Carrusel -->
+    <div class="aliados-carousel">
+      <button class="aliado-btn prev">❮</button>
+      <div class="aliados-track">
+        <div class="aliado-item"><img src="assets/aliados/aliado1.png" alt="Aliado 1" /></div>
+        <div class="aliado-item"><img src="assets/aliados/aliado2.png" alt="Aliado 2" /></div>
+        <div class="aliado-item"><img src="assets/aliados/aliado3.png" alt="Aliado 3" /></div>
+        <div class="aliado-item"><img src="assets/aliados/aliado4.png" alt="Aliado 4" /></div>
+        <div class="aliado-item"><img src="assets/aliados/aliado5.png" alt="Aliado 5" /></div>
+        <div class="aliado-item"><img src="assets/aliados/aliado6.png" alt="Aliado 6" /></div>
+      </div>
+      <button class="aliado-btn next">❯</button>
+    </div>
+
+    <h2 style="margin-top:50px;color:var(--texto);">Todos los Aliados</h2>
+    <div class="aliados-grid">
+      <div class="aliado-card"><img src="assets/aliados/aliado1.png"/></div>
+      <div class="aliado-card"><img src="assets/aliados/aliado2.png"/></div>
+      <div class="aliado-card"><img src="assets/aliados/aliado3.png"/></div>
+      <div class="aliado-card"><img src="assets/aliados/aliado4.png"/></div>
+      <div class="aliado-card"><img src="assets/aliados/aliado5.png"/></div>
+      <div class="aliado-card"><img src="assets/aliados/aliado6.png"/></div>
+    </div>
+  </main>
+
+  <script>
+    const track = document.querySelector('.aliados-track');
+    const items = Array.from(track.children);
+    const nextBtn = document.querySelector('.next');
+    const prevBtn = document.querySelector('.prev');
+    let index = 0;
+
+    function move() {
+      track.style.transform = `translateX(-${index * 200}px)`;
+    }
+
+    nextBtn.onclick = () => { index = (index + 1) % items.length; move(); };
+    prevBtn.onclick = () => { index = (index - 1 + items.length) % items.length; move(); };
+  </script>
+</body>
+</html>
