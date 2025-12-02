@@ -1,116 +1,324 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FIPTRAC - Formación Integral Profesional</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FIPTRAC — Fire Protection Training Center</title>
+  <meta name="description" content="FIPTRAC: Entrenamiento práctico en sistemas contra incendio. Cursos, certificaciones y simuladores con equipos reales." />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b2d59;
-      color: #fff;
+    /* Paleta basada en logo */
+    :root{
+      --brand-blue-900:#0A2A43;
+      --brand-blue-700:#134A78;
+      --brand-blue-600:#1d5fcc;
+      --brand-orange:#F15A29;
+      --brand-sand:#D0CBAF;
+      --muted:#6B6B6B;
+      --surface:#E5EDF4;
+      --bg:#071a2b;
     }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-      background: rgba(0,0,0,0.2);
-      backdrop-filter: blur(4px);
-    }
-    header img {
-      height: 55px;
-    }
-    nav a {
-      color: white;
-      margin-left: 25px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .hero {
-      padding: 120px 50px;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 750px;
-      margin: 0 auto;
-    }
-    .section {
-      padding: 80px 50px;
-      background: #0e3a74;
-      margin-top: 30px;
-    }
-    .section h2 {
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 2.2rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-    .card {
-      background: #124b9b;
-      padding: 25px;
-      border-radius: 10px;
-      text-align: center;
-      transition: 0.3s;
-      cursor: pointer;
-    }
-    .card:hover {
-      background: #1d5fcc;
-    }
-    footer {
-      margin-top: 60px;
-      background: #06203f;
-      padding: 40px 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #cdd8e6;
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Helvetica Neue", Arial; background:linear-gradient(180deg,var(--brand-blue-900) 0%, #06223a 60%); color:#fff; -webkit-font-smoothing:antialiased}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;background:linear-gradient(90deg, rgba(6,34,58,0.25), rgba(6,34,58,0.12));backdrop-filter: blur(6px);position:sticky;top:0;z-index:40}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{height:56px}
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{color:#dbe9fb;text-decoration:none;font-weight:600;padding:8px 12px;border-radius:8px}
+    nav a:hover{background:rgba(255,255,255,0.03)}
+    .cta{background:var(--brand-orange);color:#fff;padding:10px 14px;border-radius:10px;font-weight:700}
+
+    /* Hero */
+    .hero{padding:84px 24px 40px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .hero-left h1{font-size:2.6rem;margin:0 0 12px;line-height:1.02}
+    .hero-left p{margin:0 0 20px;color:rgba(235,245,255,0.9);font-size:1.05rem}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{background:var(--brand-orange);color:#fff;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:700}
+    .btn.secondary{background:transparent;border:2px solid rgba(255,255,255,0.08);color:#fff}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:20px;border-radius:12px}
+
+    /* Stats */
+    .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .stat{background:rgba(255,255,255,0.03);padding:12px 16px;border-radius:10px;min-width:120px;text-align:center}
+    .stat b{display:block;font-size:1.3rem}
+    .stat small{color:rgba(255,255,255,0.7)}
+
+    /* Sections */
+    main{max-width:1200px;margin:30px auto;padding:0 20px 80px}
+    section.card-section{background:linear-gradient(180deg,#072433 0%, rgba(19,74,120,0.06) 100%);padding:40px;border-radius:14px;margin-bottom:28px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+    .feature{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:12px}
+    .feature h3{margin:0 0 8px}
+    .feature p{margin:0;color:rgba(235,245,255,0.9)}
+
+    /* Labs cards */
+    .labs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .lab{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;display:flex;flex-direction:column;gap:8px}
+    .lab h4{margin:0}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .gallery img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+
+    /* Events / Courses lists */
+    .list{display:flex;flex-direction:column;gap:12px}
+    .item{background:rgba(255,255,255,0.03);padding:14px;border-radius:10px;display:flex;justify-content:space-between;align-items:center}
+    .item .meta{color:rgba(255,255,255,0.8);font-size:0.95rem}
+    .item .actions a{margin-left:8px}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    form{display:flex;flex-direction:column;gap:12px}
+    input,textarea{padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff}
+    button[type=submit]{background:var(--brand-blue-600);border:none;padding:12px;border-radius:10px;color:#fff;font-weight:700}
+
+    /* Allies */
+    .allies{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+    .allies img{height:48px;opacity:0.95}
+
+    footer{margin-top:40px;background:linear-gradient(180deg,#031726,#02101a);padding:28px 20px;border-top:1px solid rgba(255,255,255,0.03);color:#cfe6ff}
+    .footer-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+
+    @media (max-width:900px){.hero{grid-template-columns:1fr;}.gallery{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr}.hero-left h1{font-size:2rem}}
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="FIPTRAC Logo" />
-    <nav>
+    <div class="brand">
+      <img src="logo.png" alt="FIPTRAC Logo" />
+      <div style="line-height:1">
+        <div style="font-weight:800">FIPTRAC</div>
+        <div style="font-size:12px;color:rgba(235,245,255,0.7)">Fire Protection Training Center</div>
+      </div>
+    </div>
+    <nav aria-label="Principal">
       <a href="#inicio">Inicio</a>
-      <a href="#contacto">Contáctanos</a>
-      <a href="#galeria">Galería / Labs</a>
-      <a href="#eventos">Eventos</a>
+      <a href="#quienes">Quiénes somos</a>
+      <a href="#labs">Labs</a>
       <a href="#cursos">Cursos</a>
-      <a href="#certificaciones">Certificaciones</a>
+      <a href="#eventos">Eventos</a>
       <a href="#aliados">Aliados</a>
+      <a class="cta" href="#contacto">Contáctanos</a>
     </nav>
   </header>
 
   <section class="hero" id="inicio">
-    <h1>Bienvenido a FIPTRAC</h1>
-    <p>Centro de formación profesional orientado a mejorar el desempeño, productividad y capacidades corporativas mediante cursos, certificaciones y entrenamientos especializados.</p>
+    <div class="hero-left">
+      <h1>Entrenamiento profesional en sistemas contra incendio — práctico y certificado</h1>
+      <p>En FIPTRAC ofrecemos formación técnica especializada con enfoque práctico (70%) y teoría (30%). Nuestro objetivo: preparar a equipos que operen y mantengan sistemas contra incendio con confianza y criterio técnico.</p>
+
+      <div class="hero-actions">
+        <a class="btn" href="#cursos">Ver cursos</a>
+        <a class="btn secondary" href="#quienes">Sobre nosotros</a>
+        <a class="btn" href="https://wa.me/525576861184?text=Hola%20FIPTRAC%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20cursos" target="_blank">WhatsApp</a>
+      </div>
+
+      <div class="stats" role="status" aria-live="polite">
+        <div class="stat"><b>1,200+</b><small>Profesionales capacitados</small></div>
+        <div class="stat"><b>17</b><small>Países</small></div>
+        <div class="stat"><b>Hands-On</b><small>Entrenamiento con equipos reales</small></div>
+      </div>
+    </div>
+
+    <aside class="hero-card">
+      <h3 style="margin-top:0">Simulador de fuego vivo</h3>
+      <p style="margin:0 0 12px;color:rgba(235,245,255,0.9)">El primer simulador en México con rociadores que operan con fuego real. Experiencias controladas que enseñan la respuesta y comportamiento real de los sistemas.</p>
+      <div style="display:flex;gap:10px;margin-top:12px;align-items:center">
+        <img src="logo.png" alt="logo" style="width:64px;height:64px;object-fit:contain;border-radius:8px;background:rgba(255,255,255,0.02)"/>
+        <div>
+          <div style="font-weight:700">Próximo curso: Ingeniería de rociadores</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.7)">Inscripciones abiertas</div>
+        </div>
+      </div>
+    </aside>
   </section>
 
-  <section class="section">
-    <h2>Plataforma Institucional</h2>
-    <div class="grid">
-      <div class="card" onclick="google.script.host.openUrl('#eventos')">Eventos</div>
-      <div class="card" onclick="google.script.host.openUrl('#cursos')">Cursos</div>
-      <div class="card" onclick="google.script.host.openUrl('#certificaciones')">Certificaciones</div>
-      <div class="card" onclick="google.script.host.openUrl('#galeria')">Galería / Labs</div>
-      <div class="card" onclick="google.script.host.openUrl('#aliados')">Aliados Comerciales</div>
-      <div class="card" onclick="google.script.host.openUrl('#contacto')">Contáctanos</div>
-    </div>
-  </section>
+  <main>
+    <!-- Quiénes somos -->
+    <section id="quienes" class="card-section">
+      <h2>Quiénes somos</h2>
+      <div class="grid" style="align-items:center">
+        <div>
+          <p style="font-size:1.05rem;color:rgba(235,245,255,0.95)">FIPTRAC es el centro de capacitación líder en Latinoamérica especializado en sistemas contra incendio. Fundado en <strong>febrero de 2020</strong>, hemos formado a más de <strong>1,200 profesionales</strong> provenientes de <strong>17 países</strong>. Nuestro método se basa en la práctica con equipos reales: pruebas, diagnóstico, mantenimiento y simulación de incidentes reales.</p>
+
+          <ul style="color:rgba(235,245,255,0.9);line-height:1.8">
+            <li><strong>Instructores certificados por NFPA</strong> y expertos en campo.</li>
+            <li><strong>Constancias DC-3</strong> avaladas por la Secretaría del Trabajo (STPS).</li>
+            <li>Puntos de desarrollo profesional (CPD) reconocidos por <strong>NICET</strong>.</li>
+            <li>Entrenamiento en español y materiales técnicos actualizados.</li>
+          </ul>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:10px">
+            <strong>Dirección</strong>
+            <div style="color:rgba(255,255,255,0.8)">Fracc. Tepojaco, Tizayuca, Hidalgo, México</div>
+          </div>
+          <div style="background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:10px">
+            <strong>Contacto</strong>
+            <div style="color:rgba(255,255,255,0.8)">+52 557 686 1184 — info@fiptrac.com</div>
+          </div>
+          <div style="background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:10px">
+            <strong>Horario</strong>
+            <div style="color:rgba(255,255,255,0.8)">Lun - Vie: 08:30 — 16:00</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Labs -->
+    <section id="labs" class="card-section">
+      <h2>Nuestros laboratorios</h2>
+      <div class="labs">
+        <div class="lab">
+          <h4>Sistemas de rociadores</h4>
+          <p>Diseño, instalación, pruebas y mantenimiento con equipos reales.</p>
+        </div>
+        <div class="lab">
+          <h4>Sistemas de bombas contra incendio</h4>
+          <p>Operación, puesta en marcha y diagnóstico de sistemas de bombeo.</p>
+        </div>
+        <div class="lab">
+          <h4>Sistemas de supresión</h4>
+          <p>Agentes, diseño y pruebas de sistemas especiales.</p>
+        </div>
+        <div class="lab">
+          <h4>Sistemas de alarma y detección</h4>
+          <p>Instalación, programación y verificación de alarmas.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:18px">
+        <h3>Simulador de fuego vivo</h3>
+        <p style="margin:6px 0 0;color:rgba(235,245,255,0.9)">Un entorno controlado donde los participantes observan el comportamiento del fuego y cómo interactúan los sistemas de protección reales.</p>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="galeria" class="card-section">
+      <h2>Galería</h2>
+      <div class="gallery" aria-label="Galería de imágenes">
+        <img src="/assets/gallery/1.jpg" alt="galeria 1"/>
+        <img src="/assets/gallery/2.jpg" alt="galeria 2"/>
+        <img src="/assets/gallery/3.jpg" alt="galeria 3"/>
+        <img src="/assets/gallery/4.jpg" alt="galeria 4"/>
+      </div>
+    </section>
+
+    <!-- Cursos -->
+    <section id="cursos" class="card-section">
+      <h2>Cursos</h2>
+      <div class="list">
+        <div class="item">
+          <div>
+            <strong>Ingeniería y diseño de rociadores</strong>
+            <div class="meta">Presencial • 3 días • Español</div>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#">Inscribirme</a>
+          </div>
+        </div>
+        <div class="item">
+          <div>
+            <strong>Operación y mantenimiento de bombas</strong>
+            <div class="meta">Presencial • 2 días • Español</div>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#">Inscribirme</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Eventos -->
+    <section id="eventos" class="card-section">
+      <h2>Eventos</h2>
+      <div class="list">
+        <div class="item">
+          <div>
+            <strong>Seminario: Seguridad en instalaciones industriales</strong>
+            <div class="meta">Fecha: 2025-03-12 • Lugar: FIPTRAC</div>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#">Registrarme</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificaciones -->
+    <section id="certificaciones" class="card-section">
+      <h2>Certificaciones</h2>
+      <p style="color:rgba(235,245,255,0.9)">Nuestros programas incluyen evaluación y emisión de constancias laborales (DC-3) avaladas por STPS. Además, ofrecemos rutas de formación que aportan puntos CPD de NICET.</p>
+    </section>
+
+    <!-- Aliados -->
+    <section id="aliados" class="card-section">
+      <h2>Aliados comerciales</h2>
+      <div class="allies">
+        <img src="/assets/allies/ally1.png" alt="ally1"/>
+        <img src="/assets/allies/ally2.png" alt="ally2"/>
+        <img src="/assets/allies/ally3.png" alt="ally3"/>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contacto" class="card-section">
+      <h2>Contáctanos</h2>
+      <div class="contact-grid">
+        <form id="contactForm">
+          <input type="text" name="nombre" placeholder="Nombre completo" required />
+          <input type="email" name="email" placeholder="Correo electrónico" required />
+          <textarea name="mensaje" rows="5" placeholder="¿Cómo te podemos ayudar?" required></textarea>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button type="submit">Enviar mensaje</button>
+            <a class="btn" href="https://wa.me/525576861184?text=Hola%20FIPTRAC%2C%20quiero%20m%C3%A1s%20info" target="_blank">WhatsApp</a>
+          </div>
+          <small style="color:rgba(255,255,255,0.6)">Al enviar aceptas nuestras políticas de privacidad.</small>
+        </form>
+
+        <aside style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px">
+          <h4 style="margin-top:0">Visítanos</h4>
+          <p style="margin:6px 0;color:rgba(255,255,255,0.9)">Fraccionamiento Tepojaco, Tizayuca, Hidalgo, 43823</p>
+          <p style="margin:6px 0"><strong>Tel:</strong> +52 557 686 1184</p>
+          <p style="margin:6px 0"><strong>Horario:</strong> Lun - Vie: 08:30 — 16:00</p>
+          <a class="btn" href="#" style="margin-top:8px;display:inline-block">Ver mapa</a>
+        </aside>
+      </div>
+    </section>
+
+  </main>
 
   <footer>
-    <p>FIPTRAC © 2025 — Formación Integral Profesional para Empresas.</p>
-    <p>Contacto: info@fiptrac.com | WhatsApp: +00 0000 0000</p>
+    <div class="footer-grid">
+      <div>
+        <strong>FIPTRAC</strong>
+        <div style="color:rgba(255,255,255,0.7);margin-top:6px">© 2025 Fire Protection Training Center — Todos los derechos reservados.</div>
+      </div>
+
+      <div style="text-align:right">
+        <div style="color:rgba(255,255,255,0.8)">info@fiptrac.com</div>
+        <div style="color:rgba(255,255,255,0.8);margin-top:6px">+52 557 686 1184</div>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    // Try to submit form to Apps Script if available, otherwise fallback to mailto
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var form = e.target;
+      var data = {nombre: form.nombre.value, correo: form.email.value, mensaje: form.mensaje.value};
+
+      if(window.google && google.script && google.script.run){
+        google.script.run.withSuccessHandler(function(resp){ alert(resp); form.reset(); }).sendContactForm(data);
+      } else {
+        // Fallback: open mail client
+        var subject = encodeURIComponent('Contacto desde sitio FIPTRAC');
+        var body = encodeURIComponent('Nombre: ' + data.nombre + '\nCorreo: ' + data.correo + '\n\nMensaje:\n' + data.mensaje);
+        window.location.href = 'mailto:info@fiptrac.com?subject=' + subject + '&body=' + body;
+      }
+    });
+  </script>
 </body>
 </html>
