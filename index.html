@@ -1,85 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fiptrac | Fire Protection Training Center México</title>
-
-    <!-- Archivo CSS -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIPTRAC - Formación Integral Profesional</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b2d59;
+      color: #fff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(4px);
+    }
+    header img {
+      height: 55px;
+    }
+    nav a {
+      color: white;
+      margin-left: 25px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      padding: 120px 50px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+    .section {
+      padding: 80px 50px;
+      background: #0e3a74;
+      margin-top: 30px;
+    }
+    .section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.2rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: #124b9b;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .card:hover {
+      background: #1d5fcc;
+    }
+    footer {
+      margin-top: 60px;
+      background: #06203f;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #cdd8e6;
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <img src="logo.png" alt="FIPTRAC Logo" />
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#contacto">Contáctanos</a>
+      <a href="#galeria">Galería / Labs</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#cursos">Cursos</a>
+      <a href="#certificaciones">Certificaciones</a>
+      <a href="#aliados">Aliados</a>
+    </nav>
+  </header>
 
-    <!-- =======================
-         HEADER
-    ======================== -->
-    <header class="header">
-        <div class="container header-content">
-            <img src="assets/img/logo.png" alt="Fiptrac Logo" class="logo">
+  <section class="hero" id="inicio">
+    <h1>Bienvenido a FIPTRAC</h1>
+    <p>Centro de formación profesional orientado a mejorar el desempeño, productividad y capacidades corporativas mediante cursos, certificaciones y entrenamientos especializados.</p>
+  </section>
 
-            <nav class="nav">
-                <a href="index.html">Inicio</a>
-                <a href="cursos.html">Cursos</a>
-                <a href="clientes.html">Clientes</a>
-                <a href="testimonios.html">Testimonios</a>
-                <a href="politicas.html">Políticas</a>
-            </nav>
-        </div>
-    </header>
+  <section class="section">
+    <h2>Plataforma Institucional</h2>
+    <div class="grid">
+      <div class="card" onclick="google.script.host.openUrl('#eventos')">Eventos</div>
+      <div class="card" onclick="google.script.host.openUrl('#cursos')">Cursos</div>
+      <div class="card" onclick="google.script.host.openUrl('#certificaciones')">Certificaciones</div>
+      <div class="card" onclick="google.script.host.openUrl('#galeria')">Galería / Labs</div>
+      <div class="card" onclick="google.script.host.openUrl('#aliados')">Aliados Comerciales</div>
+      <div class="card" onclick="google.script.host.openUrl('#contacto')">Contáctanos</div>
+    </div>
+  </section>
 
-    <!-- =======================
-         HERO SECTION
-    ======================== -->
-    <section class="hero">
-        <div class="container">
-            <h1>Soluciones Profesionales para tu Crecimiento</h1>
-            <p>Desarrollo, capacitación y tecnología para impulsar a empresas y profesionales.</p>
-
-            <a href="cursos.html" class="btn-primary">Ver Cursos</a>
-        </div>
-    </section>
-
-    <!-- =======================
-         SERVICIOS
-    ======================== -->
-    <section class="services">
-        <div class="container">
-            <h2>Nuestros Servicios</h2>
-
-            <div class="service-grid">
-                <div class="service-card">
-                    <h3>Cursos Profesionales</h3>
-                    <p>Capacitación especializada para mejorar habilidades técnicas y profesionales.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Consultoría</h3>
-                    <p>Asesoría experta en procesos empresariales, normativas y protección contra incendios.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Desarrollos Personalizados</h3>
-                    <p>Soluciones tecnológicas, herramientas web y sistemas a la medida de tu empresa.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =======================
-         FOOTER
-    ======================== -->
-    <footer class="footer">
-        <div class="container footer-content">
-            <p>© 2025 Fiptrac • Todos los derechos reservados</p>
-
-            <div class="social">
-                <a href="#" target="_blank">Facebook</a>
-                <a href="#" target="_blank">Instagram</a>
-                <a href="#" target="_blank">LinkedIn</a>
-            </div>
-        </div>
-    </footer>
-
+  <footer>
+    <p>FIPTRAC © 2025 — Formación Integral Profesional para Empresas.</p>
+    <p>Contacto: info@fiptrac.com | WhatsApp: +00 0000 0000</p>
+  </footer>
 </body>
 </html>
