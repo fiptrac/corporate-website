@@ -1,209 +1,176 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FIPTRAC — Fire Protection Training Center</title>
-  <meta name="description" content="FIPTRAC: Entrenamiento práctico en sistemas contra incendio. Cursos, certificaciones y simuladores reales." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instituto de Entrenamiento</title>
 
-  <!-- Fuentes -->
+  <!-- FUENTES -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-  <!-- CSS global: reemplaza con el styles.css que acordamos -->
+  <!-- ESTILOS GENERALES -->
   <link rel="stylesheet" href="assets/css/styles.css">
 
-  <!-- Pequeños estilos inline para asegurar centrado si no reemplazaste css aún -->
+  <!-- ESTILOS ESPECÍFICOS DEL INDEX -->
   <style>
-    /* Force central layout fallback (will not conflict if your styles.css is loaded) */
-    .container { width:92%; max-width:1200px; margin:0 auto; padding:0 12px; }
-    .hero { padding: 100px 0 48px; display:flex; gap:36px; align-items:center; flex-wrap:wrap; justify-content:space-between; }
-    .hero-left { flex:1 1 560px; min-width:320px; }
-    .hero-card { flex:0 0 420px; max-width:420px; min-width:260px; }
-    .stats { display:flex; flex-direction:column; gap:12px; margin-top:18px; align-items:flex-start; }
-    .stat { min-width:160px; }
-    /* Ensure features grid centered */
-    .card-section { margin:48px auto; padding:36px; max-width:1200px; }
-    .grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:22px; }
-    /* Next events centered */
-    .events { text-align:center; padding:36px; background: #f6f7fb; border-radius:12px; }
-    /* Small screens */
-    @media(max-width:960px){
-      .hero { flex-direction:column; text-align:center; }
-      .hero-card { max-width:100%; }
-      .stats { align-items:center; }
+    /* HERO */
+    .hero {
+      background: linear-gradient(rgba(0, 32, 96, 0.7), rgba(0, 32, 96, 0.7)), url('assets/img/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 140px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    /* CONTADORES */
+    .contador-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .contador-box {
+      background: white;
+      border-radius: 14px;
+      padding: 25px 30px;
+      width: 150px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .contador-num {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--azul);
+    }
+
+    .contador-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    /* SECCION ENTRENAMIENTOS */
+    .entrenamientos {
+      background: #f4f6fa;
+      border-radius: 20px;
+      padding: 60px;
+    }
+
+    .ent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .ent-item {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+      transition: .3s;
+    }
+
+    .ent-item:hover {
+      transform: translateY(-4px);
     }
   </style>
 </head>
 <body>
 
-<!-- ============================
-     HEADER / NAVBAR (GLOBAL)
-     Coloca esto en la parte superior de cada página (index + subpáginas)
-     Rutas de imágenes: assets/images/logo-fiptrac.png
-   ============================ -->
-<header class="site-header" id="site-header" role="banner">
-  <div class="container header-inner">
-    <!-- Logo: usa un <a> para que sea clicable al home -->
-    <a class="brand" href="index.html" aria-label="FIPTRAC — Inicio">
-      <img src="assets/images/logo-fiptrac.png" alt="FIPTRAC logo" class="brand-logo">
-    </a>
+  <!-- HEADER -->
+  <header class="nav">
+    <div class="nav-container">
+      <div class="logo">INSTITUTO</div>
 
-    <!-- Mobile toggle -->
-    <button id="btn-nav" class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Abrir menú">
-      <span class="hamb"></span>
-    </button>
-
-    <!-- Nav links: normal links para GitHub Pages (rutas relativas) -->
-    <nav id="primary-nav" class="primary-nav" role="navigation" aria-label="Menú principal">
-      <ul class="nav-list">
-        <li><a href="index.html" class="nav-link active">Inicio</a></li>
-        <li><a href="laboratorios.html" class="nav-link">Laboratorios</a></li>
-        <li><a href="cursos.html" class="nav-link">Cursos</a></li>
-        <li><a href="eventos.html" class="nav-link">Eventos</a></li>
-        <li><a href="certificaciones.html" class="nav-link">Certificaciones</a></li>
-        <li><a href="aliados.html" class="nav-link">Aliados</a></li>
-        <li><a href="contacto.html" class="nav-link nav-cta">Contáctanos</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-
-  <!-- ================= HERO ================= -->
-  <main>
-    <section class="hero container" aria-labelledby="hero-title">
-      <div class="hero-left">
-        <h1 id="hero-title" style="font-family:'Montserrat',sans-serif; font-size:2.4rem; margin-bottom:12px;">
-          Centro de Entrenamiento en Protección Contra Incendios
-        </h1>
-
-        <p style="color:rgba(0,0,0,0.65); font-family:'Lato',sans-serif; margin-bottom:18px;">
-          Entrenamientos 100% prácticos con equipos reales. Somos el único centro en Latinoamérica con simulador de fuego real y certificaciones avaladas.
-        </p>
-
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="btn btn-primary" href="cursos.html">Ver Cursos</a>
-          <a class="btn btn-outline" href="contacto.html">Agendar Visita</a>
-        </div>
-
-        <!-- Contadores: verticales para que NO empujen layout -->
-        <div class="stats" aria-hidden="false" style="margin-top:22px;">
-          <div class="stat" style="background:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06);">
-            <div class="stat-num" data-target="1500" style="font-weight:700;font-family:'Montserrat';font-size:1.6rem;">0</div>
-            <small style="color:#6b7280">Profesionales capacitados</small>
-          </div>
-
-          <div class="stat" style="background:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06);">
-            <div class="stat-num" data-target="45" style="font-weight:700;font-family:'Montserrat';font-size:1.6rem;">0</div>
-            <small style="color:#6b7280">Empresas aliadas</small>
-          </div>
-
-          <div class="stat" style="background:#fff;padding:12px 16px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.06);">
-            <div class="stat-num" data-target="12" style="font-weight:700;font-family:'Montserrat';font-size:1.6rem;">0</div>
-            <small style="color:#6b7280">Simuladores reales</small>
-          </div>
-        </div>
-      </div>
-
-      <aside class="hero-card" aria-hidden="true">
-        <img src="assets/images/hero-fire.jpg" alt="Simulador de fuego controlado" style="border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,0.2);">
-      </aside>
-    </section>
-
-    <!-- ================= ENTRENAMIENTOS ESPECIALIZADOS ================= -->
-    <section class="card-section container" aria-labelledby="train-title">
-      <h2 id="train-title" class="titulo-seccion" style="text-align:center;">Entrenamientos Especializados</h2>
-
-      <!-- descripción centrada -->
-      <p style="max-width:900px;margin:12px auto 0;color:#475569;text-align:center;">
-        Somos el centro líder en entrenamiento práctico para diseño, operación y mantenimiento de sistemas contra incendio.
-      </p>
-
-      <!-- GRID CENTRADO Y BALANCEADO -->
-      <div class="grid" style="margin-top:28px;">
-        <article class="feature ent-item" style="text-align:left;">
-          <h3>Laboratorios / Simuladores</h3>
-          <p>Prácticas reales en rociadores, bombas, supresión y alarmas.</p>
-          <a class="link-btn" href="laboratorios.html">Ver laboratorios</a>
-        </article>
-
-        <article class="feature ent-item" style="text-align:left;">
-          <h3>Cursos prácticos</h3>
-          <p>Programas 70% prácticos y 30% teóricos con evaluación y constancia DC-3.</p>
-          <a class="link-btn" href="cursos.html">Ver cursos</a>
-        </article>
-
-        <article class="feature ent-item" style="text-align:left;">
-          <h3>Certificaciones</h3>
-          <p>Constancias laborales avaladas por la STPS y rutas CPD</p>
-          <a class="link-btn" href="certificaciones.html">Ver certificaciones</a>
-        </article>
-
-        <article class="feature ent-item" style="text-align:left;">
-          <h3>Aliados y casos</h3>
-          <p>Empresas que han participado y casos de éxito.</p>
-          <a class="link-btn" href="aliados.html">Ver aliados</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- ================= PRÓXIMOS EVENTOS ================= -->
-    <section class="container" style="margin-bottom:56px;">
-      <div class="events" style="max-width:980px;margin:0 auto;">
-        <h2 style="margin-bottom:10px;">Próximos Eventos</h2>
-        <p style="color:#374151;margin-bottom:18px;">Consulta los cursos programados para el resto del año y regístrate en línea.</p>
-        <a href="eventos.html" class="btn btn-primary">Ver calendario</a>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer" role="contentinfo">
-    <div style="max-width:1200px;margin:0 auto;padding:28px 12px;text-align:center;color:#6b7280;">
-      <img src="assets/images/logo-fiptrac.png" alt="FIPTRAC" style="height:40px;margin-bottom:12px;">
-      <div>Fire Protection Training Center — Tepojaco, Tizayuca, Hidalgo</div>
-      <div style="margin-top:8px;">Tel: +52 5576861184 — <a href="mailto:fiptrac.platform@gmail.com">fiptrac.platform@gmail.com</a></div>
-      <div style="margin-top:12px;font-size:13px;color:#9ca3af;">© 2025 FIPTRAC — Todos los derechos reservados.</div>
+      <nav class="menu">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
     </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Entrenamiento Profesional de Alto Nivel</h1>
+    <p>Formando operadores certificados con tecnología avanzada.</p>
+  </section>
+
+  <!-- CONTADORES -->
+  <section class="seccion">
+    <div class="contador-wrapper">
+      <div class="contador-box">
+        <div class="contador-num" data-target="1500">0</div>
+        <div class="contador-label">Profesionales capacitados</div>
+      </div>
+
+      <div class="contador-box">
+        <div class="contador-num" data-target="45">0</div>
+        <div class="contador-label">Empresas aliadas</div>
+      </div>
+
+      <div class="contador-box">
+        <div class="contador-num" data-target="12">0</div>
+        <div class="contador-label">Simuladores reales</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTRENAMIENTOS -->
+  <section class="seccion entrenamientos">
+    <h2 class="titulo-seccion">Entrenamientos Especializados</h2>
+    <p>Programas de formación altamente estructurados, impartidos con tecnología de vanguardia.</p>
+
+    <div class="ent-grid">
+      <div class="ent-item">
+        <h3>Simulador 360°</h3>
+        <p>Entrenamiento completo para operadores.</p>
+      </div>
+
+      <div class="ent-item">
+        <h3>Operación de Maquinaria Pesada</h3>
+        <p>Capacitación certificada y práctica.</p>
+      </div>
+
+      <div class="ent-item">
+        <h3>Evaluación de Competencias</h3>
+        <p>Diagnóstico profesional y reportes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 Instituto de Entrenamiento Profesional</p>
   </footer>
 
-  <!-- ================= SCRIPTS ================= -->
+  <!-- SCRIPT CONTADORES -->
   <script>
-    // contador (animación controlada por IntersectionObserver)
-    (function(){
-      const nodes = document.querySelectorAll('.stat-num');
-      if(!nodes.length) return;
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if(entry.isIntersecting){
-            const el = entry.target;
-            const target = +el.getAttribute('data-target');
-            let current = 0;
-            const step = Math.max(1, Math.floor(target / 60));
-            const tick = () => {
-              current += step;
-              if(current >= target) el.textContent = target;
-              else { el.textContent = current; requestAnimationFrame(tick); }
-            };
-            tick();
-            io.unobserve(el);
-          }
-        });
-      }, {threshold:0.4});
-      document.querySelectorAll('.stat-num').forEach(n => io.observe(n));
-    })();
+    const counters = document.querySelectorAll('.contador-num');
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const speed = 50;
+        const increment = target / speed;
 
-    // navbar scroll class
-    (function(){
-      const nav = document.getElementById('site-navbar');
-      const onScroll = () => {
-        if(window.scrollY > 20) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment);
+          setTimeout(updateCount, 40);
+        } else {
+          counter.innerText = target;
+        }
       };
-      window.addEventListener('scroll', onScroll);
-      onScroll();
-    })();
+      updateCount();
+    });
   </script>
+
 </body>
 </html>
