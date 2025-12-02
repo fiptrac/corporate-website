@@ -1,266 +1,152 @@
-/* =======================================================
-   RESET BÁSICO
-   ======================================================= */
+/* ================================================
+   RESET
+================================================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =======================================================
-   TIPOGRAFÍAS GLOBALES
-   ======================================================= */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: "Montserrat", "Lato", sans-serif;
-  background: #f5f7fa;
-  color: #1f2d3d;
-  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+  background: #ffffff;
+  color: #333;
 }
 
-/* =======================================================
-   VARIABLES DE COLOR CORPORATIVO
-   ======================================================= */
+/* ================================================
+   VARIABLES
+================================================ */
 :root {
-  --azul-oscuro: #041426;
-  --azul: #0a2d4a;
-  --azul-claro: #0f4d7a;
-  --naranja: #F15A29;
-  --gris-fondo: #f4f6fa;
-  --gris-texto: #4d5663;
+  --azul: #003A70;
+  --azul-claro: #005A9C;
+  --gris-suave: #F4F6FA;
+  --gris-texto: #555;
 }
 
-/* =======================================================
-   CONTENEDOR GLOBAL
-   ======================================================= */
-.container {
-  width: 92%;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-/* =======================================================
-   HEADER PREMIUM
-   ======================================================= */
-.site-header {
-  position: sticky;
+/* ================================================
+   HEADER
+================================================ */
+.nav {
+  width: 100%;
+  background: white;
+  padding: 16px 0;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  position: fixed;
   top: 0;
-  z-index: 2000;
-  padding: 14px 0;
-  backdrop-filter: blur(6px);
-  background: rgba(4, 20, 36, 0.18);
-  transition: background .25s ease, box-shadow .25s ease;
+  z-index: 1000;
 }
 
-.site-header.scrolled {
-  background: rgba(4, 20, 36, 0.88);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-}
-
-.header-inner {
+.nav-container {
+  width: 90%;
+  max-width: 1300px;
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.brand-logo {
-  height: 64px;
-  width: auto;
-  display: block;
-}
-
-/* NAV DESKTOP */
-.nav-list {
-  list-style: none;
-  display: flex;
-  gap: 18px;
-  align-items: center;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #e6f1ff;
-  font-weight: 600;
-  font-size: 15px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  transition: 0.25s ease;
-}
-
-.nav-link:hover {
-  background: rgba(255,255,255,0.1);
-}
-
-.nav-link.active {
-  background: rgba(255,255,255,0.18);
-}
-
-.nav-cta {
-  background: var(--naranja);
-  color: white !important;
-  padding: 10px 18px;
-  border-radius: 10px;
-}
-
-/* NAV MÓVIL */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-}
-
-.hamb {
-  width: 22px;
-  height: 2px;
-  background: white;
-  display: block;
-  position: relative;
-}
-.hamb::before,
-.hamb::after {
-  content: "";
-  width: 22px;
-  height: 2px;
-  background: white;
-  position: absolute;
-  left: 0;
-}
-.hamb::before { top: -7px; }
-.hamb::after { bottom: -7px; }
-
-/* RESPONSIVE NAV */
-@media (max-width: 980px) {
-
-  .nav-toggle { display: block; }
-
-  .nav-list {
-    position: absolute;
-    top: 85px;
-    left: 4%;
-    right: 4%;
-    background: rgba(3, 16, 28, 0.95);
-    border-radius: 14px;
-    flex-direction: column;
-    padding: 24px;
-    gap: 16px;
-    display: none;
-  }
-
-  .nav-list.show {
-    display: flex;
-  }
-
-  .nav-link {
-    font-size: 17px;
-    padding: 12px;
-  }
-}
-
-/* =======================================================
-   HERO
-   ======================================================= */
-.hero {
-  background: linear-gradient(rgba(0, 32, 96, 0.7), rgba(0, 32, 96, 0.7)),
-              url('../images/hero-fire.jpg');
-  background-size: cover;
-  background-position: center;
-  text-align: center;
-  padding: 140px 20px;
-  color: white;
-}
-
-.hero h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
-}
-
-.hero p {
-  max-width: 650px;
-  margin: auto;
-  margin-top: 16px;
-  font-size: 1.2rem;
-  opacity: 0.9;
-}
-
-/* =======================================================
-   CONTADORES ANIMADOS
-   ======================================================= */
-.contadores {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-  margin-top: -60px;
-}
-
-.contador-box {
-  background: white;
-  padding: 26px 30px;
-  width: 180px;
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  text-align: center;
-}
-
-.contador-num {
-  font-size: 48px;
+.logo {
+  font-size: 26px;
   font-weight: 700;
   color: var(--azul);
+  letter-spacing: 1px;
 }
 
-.contador-label {
-  margin-top: 6px;
-  color: var(--gris-texto);
+.menu a {
+  margin-left: 25px;
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--azul);
   font-weight: 600;
-  font-size: 15px;
+  transition: .3s;
 }
 
-/* =======================================================
-   SECCIONES GENERALES
-   ======================================================= */
+.menu a:hover {
+  color: var(--azul-claro);
+}
+
+/* ================================================
+   SECCIONES
+================================================ */
 .seccion {
-  padding: 80px 20px;
+  width: 90%;
   max-width: 1200px;
   margin: auto;
+  padding: 100px 0;
 }
 
-/* =======================================================
-   ENTRENAMIENTOS
-   ======================================================= */
-.entrenamientos {
-  background: var(--gris-fondo);
-  padding: 60px;
-  border-radius: 20px;
+.titulo-seccion {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--azul);
+  margin-bottom: 10px;
 }
 
-.ent-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-  gap: 30px;
-  margin-top: 40px;
+/* ================================================
+   FOOTER
+================================================ */
+.footer {
+  background: var(--azul);
+  color: white;
+  padding: 30px 0;
+  text-align: center;
+  margin-top: 80px;
 }
 
-.ent-item {
+/* ================================================
+   TARJETAS Y CONTENEDORES REUTILIZABLES
+================================================ */
+.card {
   background: white;
-  padding: 28px;
+  padding: 25px;
   border-radius: 16px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.06);
-  transition: 0.3s;
+  transition: .3s;
 }
 
-.ent-item:hover {
+.card:hover {
   transform: translateY(-4px);
 }
 
-/* =======================================================
-   FOOTER
-   ======================================================= */
-.footer {
-  background: var(--azul-oscuro);
-  padding: 40px 20px;
-  color: white;
-  text-align: center;
+/* ================================================
+   BOTONES
+================================================ */
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .3s;
 }
 
-.footer p {
-  opacity: 0.85;
+.btn-primario {
+  background: var(--azul);
+  color: white;
+}
+
+.btn-primario:hover {
+  background: var(--azul-claro);
+}
+
+/* ================================================
+   HERO GLOBAL
+================================================ */
+.hero {
+  padding: 160px 20px 120px 20px;
+  text-align: center;
+  color: white;
+}
+
+/* ================================================
+   RESPONSIVE
+================================================ */
+@media (max-width: 768px) {
+  .menu a {
+    margin-left: 15px;
+  }
 }
