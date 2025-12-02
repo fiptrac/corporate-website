@@ -1,242 +1,152 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- =====================================================
-       FIPTRAC — INDEX FINAL (Corporativo Premium, Responsive)
-       Fuentes: Montserrat + Lato
-       Coloca este archivo en la raíz del repo (index.html)
-       ===================================================== -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FIPTRAC — Fire Protection Training Center</title>
-  <meta name="description" content="FIPTRAC: Centro de entrenamiento en protección contra incendios. Cursos, certificaciones y simuladores reales.">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
-  <!-- CSS principal (asegúrate de pegar el styles.css provisto en assets/css/styles.css) -->
-  <link rel="stylesheet" href="assets/css/styles.css">
-
-  <!-- Pequeños estilos específicos del index que son seguros mantener aquí -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instituto de Entrenamiento</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
   <style>
-    /* Ajustes finos del hero para esta página */
-    .hero { padding-top: 96px; padding-bottom: 56px; }
-    .hero-left h1{ font-size: clamp(1.8rem, 3.2vw, 2.8rem); }
-    .hero-left p{ font-size: clamp(1rem, 1.4vw, 1.15rem); }
-    /* Ensure hero image doesn't overflow on small screens */
-    .hero-card img{ display:block; width:100%; height:auto; border-radius:14px; }
+    /* ===== CSS ESPECÍFICO DEL INDEX ===== */
+    .hero {
+      background: linear-gradient(rgba(0, 32, 96, 0.7), rgba(0, 32, 96, 0.7)), url('assets/img/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 140px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    .contador-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    .contador-box {
+      background: white;
+      border-radius: 14px;
+      padding: 25px 30px;
+      width: 150px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+    .contador-num {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--azul);
+    }
+    .contador-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: #555;
+      margin-top: 4px;
+    }
+
+    .seccion {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .entrenamientos {
+      background: #f4f6fa;
+      border-radius: 20px;
+      padding: 60px;
+    }
+
+    .ent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .ent-item {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+      transition: .3s;
+    }
+    .ent-item:hover {
+      transform: translateY(-4px);
+    }
+
   </style>
 </head>
-
 <body>
-  <!-- =====================================================
-       NAVBAR (global — usa igual en todas las páginas)
-       - Responsive: muestra botón hamburguesa en móviles
-       ===================================================== -->
-  <header class="navbar" id="site-navbar" role="banner">
-    <div class="container navbar-inner">
-      <a class="brand" href="index.html" aria-label="FIPTRAC">
-        <img src="assets/images/logo-fiptrac.png" alt="FIPTRAC logo" class="logo-img">
-      </a>
-
-      <!-- Mobile toggle -->
-      <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú">
-        <span class="hamburger" aria-hidden="true"></span>
-      </button>
-
-      <nav id="primary-nav" class="nav" role="navigation" aria-label="Menú principal">
-        <ul class="nav-links">
-          <li><a href="index.html" class="active">Inicio</a></li>
-          <li><a href="laboratorios.html">Laboratorios</a></li>
-          <li><a href="cursos.html">Cursos</a></li>
-          <li><a href="eventos.html">Eventos</a></li>
-          <li><a href="certificaciones.html">Certificaciones</a></li>
-          <li><a href="aliados.html">Aliados</a></li>
-          <li><a href="contacto.html" class="btn-contact">Contáctanos</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header class="nav">
+    <div class="logo">INSTITUTO</div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
   </header>
 
-  <!-- =====================================================
-       HERO — Mensaje + CTAs + contadores verticales
-       ===================================================== -->
-  <main>
-    <section class="hero container" role="region" aria-labelledby="hero-title">
-      <div class="hero-left">
-        <h1 id="hero-title">Formación profesional en protección contra incendios — práctica y certificada</h1>
-        <p>Entrenamiento con equipos reales, simulador de fuego controlado, instructores certificados y certificaciones válidas nacional e internacionalmente.</p>
+  <!-- HERO PRINCIPAL -->
+  <section class="hero">
+    <h1>Entrenamiento Profesional de Alto Nivel</h1>
+    <p>Formando operadores certificados con tecnología avanzada.</p>
+  </section>
 
-        <div class="hero-ctas">
-          <a class="btn btn-primary" href="cursos.html">Ver cursos</a>
-          <a class="btn btn-outline" href="contacto.html">Agendar visita</a>
-        </div>
-
-        <!-- Contadores (vertical) -->
-        <div class="stats" aria-hidden="false">
-          <div class="stat" aria-label="Profesionales capacitados">
-            <div class="stat-num" data-target="1500">0</div>
-            <small>Profesionales capacitados</small>
-          </div>
-
-          <div class="stat" aria-label="Empresas aliadas">
-            <div class="stat-num" data-target="45">0</div>
-            <small>Empresas aliadas</small>
-          </div>
-
-          <div class="stat" aria-label="Simuladores reales">
-            <div class="stat-num" data-target="12">0</div>
-            <small>Simuladores reales</small>
-          </div>
-        </div>
+  <!-- CONTADORES -->
+  <section class="seccion">
+    <div class="contador-wrapper">
+      <div class="contador-box">
+        <div class="contador-num" data-target="1500">0</div>
+        <div class="contador-label">Profesionales capacitados</div>
       </div>
 
-      <aside class="hero-card" aria-hidden="true">
-        <!-- Reemplaza hero-fire.jpg por una imagen de alta calidad en assets/images/hero-fire.jpg -->
-        <img src="assets/images/hero-fire.jpg" alt="Simulador de fuego controlado en FIPTRAC">
-      </aside>
-    </section>
-
-    <!-- =====================================================
-         SECCIÓN: Entrenamientos / Features
-         ===================================================== -->
-    <section class="card-section container" aria-labelledby="features-title">
-      <h2 id="features-title">Entrenamientos especializados</h2>
-
-      <div class="grid">
-        <article class="feature">
-          <h3>Laboratorios y Simuladores</h3>
-          <p>Prácticas reales en sistemas de rociadores, bombas, supresión y detección.</p>
-          <a class="link-btn" href="laboratorios.html">Ver laboratorios</a>
-        </article>
-
-        <article class="feature">
-          <h3>Cursos</h3>
-          <p>Programas 70% prácticos y 30% teóricos, con evaluación y constancia DC-3.</p>
-          <a class="link-btn" href="cursos.html">Ver cursos</a>
-        </article>
-
-        <article class="feature">
-          <h3>Certificaciones</h3>
-          <p>Certificaciones laborales y rutas CPD avaladas y reconocidas.</p>
-          <a class="link-btn" href="certificaciones.html">Ver certificaciones</a>
-        </article>
-
-        <article class="feature">
-          <h3>Aliados</h3>
-          <p>Empresas que confían en FIPTRAC para la formación de su personal.</p>
-          <a class="link-btn" href="aliados.html">Ver aliados</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- =====================================================
-         SECCIÓN: Eventos
-         ===================================================== -->
-    <section class="card-section container" aria-labelledby="events-title">
-      <h2 id="events-title">Próximos eventos</h2>
-      <p>Consulta el calendario anual y regístrate en cursos y certificaciones.</p>
-      <a class="btn btn-primary" href="eventos.html">Ver calendario</a>
-    </section>
-  </main>
-
-  <!-- =====================================================
-       FOOTER
-  ===================================================== -->
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <img src="assets/images/logo-fiptrac.png" alt="FIPTRAC" class="footer-logo">
-        <p>Fire Protection Training Center</p>
-        <small>Tepojaco, Tizayuca, Hidalgo — México</small>
+      <div class="contador-box">
+        <div class="contador-num" data-target="45">0</div>
+        <div class="contador-label">Empresas aliadas</div>
       </div>
 
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <h4>Enlaces</h4>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="cursos.html">Cursos</a></li>
-          <li><a href="eventos.html">Eventos</a></li>
-          <li><a href="certificaciones.html">Certificaciones</a></li>
-        </ul>
-      </nav>
-
-      <div class="footer-contact">
-        <h4>Contacto</h4>
-        <p><a href="mailto:fiptrac.platform@gmail.com">fiptrac.platform@gmail.com</a></p>
-        <p><a href="https://wa.me/525576861184?text=Hola%20FIPTRAC,%20quiero%20más%20información." target="_blank">WhatsApp</a></p>
+      <div class="contador-box">
+        <div class="contador-num" data-target="12">0</div>
+        <div class="contador-label">Simuladores reales</div>
       </div>
     </div>
+  </section>
 
-    <div class="footer-copy">© 2025 FIPTRAC — Todos los derechos reservados.</div>
+  <!-- ENTRENAMIENTOS -->
+  <section class="seccion entrenamientos">
+    <h2 class="titulo-seccion">Entrenamientos Especializados</h2>
+    <p>Programas de formación altamente estructurados, impartidos con tecnología de vanguardia.</p>
+
+    <div class="ent-grid">
+      <div class="ent-item"><h3>Simulador 360°</h3><p>Entrenamiento completo para operadores.</p></div>
+      <div class="ent-item"><h3>Operación de Maquinaria Pesada</h3><p>Capacitación certificada y práctica.</p></div>
+      <div class="ent-item"><h3>Evaluación de Competencias</h3><p>Diagnóstico profesional y reportes.</p></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Instituto de Entrenamiento Profesional</p>
   </footer>
 
-  <!-- =====================================================
-       SCRIPTS
-       - contador (vertical)
-       - menú móvil (toggle)
-       - navbar scrolled class
-       ===================================================== -->
+
   <script>
-    /* ---------------------------
-       Mobile menu toggle
-    --------------------------- */
-    const navToggle = document.getElementById('nav-toggle');
-    const primaryNav = document.getElementById('primary-nav');
-    navToggle && navToggle.addEventListener('click', () => {
-      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', !expanded);
-      primaryNav.classList.toggle('nav-open');
-    });
-
-    /* ---------------------------
-       Navbar: add class when scrolled
-    --------------------------- */
-    const navbar = document.getElementById('site-navbar');
-    const onScroll = () => {
-      if (window.scrollY > 20) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
-    };
-    window.addEventListener('scroll', onScroll);
-    onScroll();
-
-    /* ---------------------------
-       Counters: animate each vertically without shifting layout
-       Implementation: increment fixed digits and never change container width
-    --------------------------- */
-    document.addEventListener('DOMContentLoaded', () => {
-      const counters = document.querySelectorAll('.stat-num');
-      const speed = 120; // bigger => slower
-
-      // Prepare width lock: replace number content with monospace-like layout using CSS (done in CSS)
-      // Animate when in viewport using IntersectionObserver
-      const animateCounter = (el) => {
-        const target = +el.getAttribute('data-target');
-        let current = 0;
-        const step = Math.max(1, Math.floor(target / 60)); // ~60 frames
-        const tick = () => {
-          current += step;
-          if (current >= target) {
-            el.textContent = target;
-          } else {
-            el.textContent = current;
-            requestAnimationFrame(tick);
-          }
-        };
-        tick();
+    // ===== CONTADORES ANIMADOS =====
+    const counters = document.querySelectorAll('.contador-num');
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const speed = 50;
+        const increment = target / speed;
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment);
+          setTimeout(updateCount, 40);
+        } else {
+          counter.innerText = target;
+        }
       };
-
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const el = entry.target;
-            animateCounter(el);
-            io.unobserve(el);
-          }
-        });
-      }, {threshold: 0.5});
-
-      counters.forEach(c => io.observe(c));
+      updateCount();
     });
   </script>
 </body>
