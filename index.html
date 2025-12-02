@@ -1,176 +1,152 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instituto de Entrenamiento</title>
+/* ================================================
+   RESET
+================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <!-- FUENTES -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+html {
+  scroll-behavior: smooth;
+}
 
-  <!-- ESTILOS GENERALES -->
-  <link rel="stylesheet" href="assets/css/styles.css">
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #ffffff;
+  color: #333;
+}
 
-  <!-- ESTILOS ESPECÍFICOS DEL INDEX -->
-  <style>
-    /* HERO */
-    .hero {
-      background: linear-gradient(rgba(0, 32, 96, 0.7), rgba(0, 32, 96, 0.7)), url('assets/img/hero.jpg');
-      background-size: cover;
-      background-position: center;
-      padding: 140px 20px;
-      text-align: center;
-      color: white;
-    }
+/* ================================================
+   VARIABLES
+================================================ */
+:root {
+  --azul: #003A70;
+  --azul-claro: #005A9C;
+  --gris-suave: #F4F6FA;
+  --gris-texto: #555;
+}
 
-    /* CONTADORES */
-    .contador-wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      margin-top: 40px;
-    }
+/* ================================================
+   HEADER
+================================================ */
+.nav {
+  width: 100%;
+  background: white;
+  padding: 16px 0;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
 
-    .contador-box {
-      background: white;
-      border-radius: 14px;
-      padding: 25px 30px;
-      width: 150px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-      text-align: center;
-    }
+.nav-container {
+  width: 90%;
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .contador-num {
-      font-size: 42px;
-      font-weight: 700;
-      color: var(--azul);
-    }
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--azul);
+  letter-spacing: 1px;
+}
 
-    .contador-label {
-      font-size: 15px;
-      font-weight: 600;
-      color: #555;
-      margin-top: 4px;
-    }
+.menu a {
+  margin-left: 25px;
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--azul);
+  font-weight: 600;
+  transition: .3s;
+}
 
-    /* SECCION ENTRENAMIENTOS */
-    .entrenamientos {
-      background: #f4f6fa;
-      border-radius: 20px;
-      padding: 60px;
-    }
+.menu a:hover {
+  color: var(--azul-claro);
+}
 
-    .ent-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
+/* ================================================
+   SECCIONES
+================================================ */
+.seccion {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 100px 0;
+}
 
-    .ent-item {
-      background: white;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.06);
-      transition: .3s;
-    }
+.titulo-seccion {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--azul);
+  margin-bottom: 10px;
+}
 
-    .ent-item:hover {
-      transform: translateY(-4px);
-    }
-  </style>
-</head>
-<body>
+/* ================================================
+   FOOTER
+================================================ */
+.footer {
+  background: var(--azul);
+  color: white;
+  padding: 30px 0;
+  text-align: center;
+  margin-top: 80px;
+}
 
-  <!-- HEADER -->
-  <header class="nav">
-    <div class="nav-container">
-      <div class="logo">INSTITUTO</div>
+/* ================================================
+   TARJETAS Y CONTENEDORES REUTILIZABLES
+================================================ */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+  transition: .3s;
+}
 
-      <nav class="menu">
-        <a href="index.html">Inicio</a>
-        <a href="nosotros.html">Nosotros</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="contacto.html">Contacto</a>
-      </nav>
-    </div>
-  </header>
+.card:hover {
+  transform: translateY(-4px);
+}
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Entrenamiento Profesional de Alto Nivel</h1>
-    <p>Formando operadores certificados con tecnología avanzada.</p>
-  </section>
+/* ================================================
+   BOTONES
+================================================ */
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .3s;
+}
 
-  <!-- CONTADORES -->
-  <section class="seccion">
-    <div class="contador-wrapper">
-      <div class="contador-box">
-        <div class="contador-num" data-target="1500">0</div>
-        <div class="contador-label">Profesionales capacitados</div>
-      </div>
+.btn-primario {
+  background: var(--azul);
+  color: white;
+}
 
-      <div class="contador-box">
-        <div class="contador-num" data-target="45">0</div>
-        <div class="contador-label">Empresas aliadas</div>
-      </div>
+.btn-primario:hover {
+  background: var(--azul-claro);
+}
 
-      <div class="contador-box">
-        <div class="contador-num" data-target="12">0</div>
-        <div class="contador-label">Simuladores reales</div>
-      </div>
-    </div>
-  </section>
+/* ================================================
+   HERO GLOBAL
+================================================ */
+.hero {
+  padding: 160px 20px 120px 20px;
+  text-align: center;
+  color: white;
+}
 
-  <!-- ENTRENAMIENTOS -->
-  <section class="seccion entrenamientos">
-    <h2 class="titulo-seccion">Entrenamientos Especializados</h2>
-    <p>Programas de formación altamente estructurados, impartidos con tecnología de vanguardia.</p>
-
-    <div class="ent-grid">
-      <div class="ent-item">
-        <h3>Simulador 360°</h3>
-        <p>Entrenamiento completo para operadores.</p>
-      </div>
-
-      <div class="ent-item">
-        <h3>Operación de Maquinaria Pesada</h3>
-        <p>Capacitación certificada y práctica.</p>
-      </div>
-
-      <div class="ent-item">
-        <h3>Evaluación de Competencias</h3>
-        <p>Diagnóstico profesional y reportes.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>© 2025 Instituto de Entrenamiento Profesional</p>
-  </footer>
-
-  <!-- SCRIPT CONTADORES -->
-  <script>
-    const counters = document.querySelectorAll('.contador-num');
-    counters.forEach(counter => {
-      const updateCount = () => {
-        const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-        const speed = 50;
-        const increment = target / speed;
-
-        if (count < target) {
-          counter.innerText = Math.ceil(count + increment);
-          setTimeout(updateCount, 40);
-        } else {
-          counter.innerText = target;
-        }
-      };
-      updateCount();
-    });
-  </script>
-
-</body>
-</html>
+/* ================================================
+   RESPONSIVE
+================================================ */
+@media (max-width: 768px) {
+  .menu a {
+    margin-left: 15px;
+  }
+}
