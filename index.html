@@ -1,152 +1,216 @@
-/* ================================================
-   RESET
-================================================ */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instituto de Entrenamiento Profesional</title>
 
-html {
-  scroll-behavior: smooth;
-}
+  <!-- FUENTES -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
 
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: #ffffff;
-  color: #333;
-}
+  <!-- CSS GLOBAL -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
 
-/* ================================================
-   VARIABLES
-================================================ */
-:root {
-  --azul: #003A70;
-  --azul-claro: #005A9C;
-  --gris-suave: #F4F6FA;
-  --gris-texto: #555;
-}
+  <!-- ESTILOS ESPECÍFICOS DEL INDEX -->
+  <style>
+    /* ===============================
+       HERO INDEX
+    =============================== */
+    .hero {
+      background: linear-gradient(rgba(0, 58, 112, 0.78), rgba(0, 58, 112, 0.78)),
+                  url('assets/img/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding: 180px 20px 160px 20px;
+      text-align: center;
+      color: white;
+    }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+    }
+    .hero p {
+      font-size: 20px;
+      margin-top: 12px;
+      font-weight: 300;
+    }
 
-/* ================================================
-   HEADER
-================================================ */
-.nav {
-  width: 100%;
-  background: white;
-  padding: 16px 0;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-}
+    /* ===============================
+       CONTADORES
+    =============================== */
+    .contador-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 35px;
+      flex-wrap: wrap;
+      margin-top: -60px;
+    }
+    .contador-box {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      width: 170px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+    .contador-num {
+      font-size: 46px;
+      font-weight: 700;
+      color: var(--azul);
+    }
+    .contador-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gris-texto);
+      margin-top: 6px;
+    }
 
-.nav-container {
-  width: 90%;
-  max-width: 1300px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+    /* ===============================
+       ENTRENAMIENTOS
+    =============================== */
+    .entrenamientos {
+      background: var(--gris-suave);
+      border-radius: 20px;
+      padding: 70px 50px;
+    }
+    .ent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 35px;
+      margin-top: 40px;
+    }
+    .ent-item h3 {
+      color: var(--azul);
+      font-size: 20px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+  </style>
+</head>
 
-.logo {
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--azul);
-  letter-spacing: 1px;
-}
+<body>
 
-.menu a {
-  margin-left: 25px;
-  text-decoration: none;
-  font-size: 16px;
-  color: var(--azul);
-  font-weight: 600;
-  transition: .3s;
-}
+  <!-- =============================== -->
+  <!-- HEADER / MENÚ GLOBAL -->
+  <!-- =============================== -->
+  <header class="nav">
+    <div class="nav-container">
 
-.menu a:hover {
-  color: var(--azul-claro);
-}
+      <div class="logo">INSTITUTO</div>
 
-/* ================================================
-   SECCIONES
-================================================ */
-.seccion {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 100px 0;
-}
+      <nav class="menu">
+        <a href="index.html">Inicio</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="eventos.html">Eventos</a>
+        <a href="certificaciones.html">Certificaciones</a>
+        <a href="laboratorios.html">Laboratorios</a>
+        <a href="aliados.html">Aliados</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
 
-.titulo-seccion {
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--azul);
-  margin-bottom: 10px;
-}
+    </div>
+  </header>
 
-/* ================================================
-   FOOTER
-================================================ */
-.footer {
-  background: var(--azul);
-  color: white;
-  padding: 30px 0;
-  text-align: center;
-  margin-top: 80px;
-}
 
-/* ================================================
-   TARJETAS Y CONTENEDORES REUTILIZABLES
-================================================ */
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
-  transition: .3s;
-}
 
-.card:hover {
-  transform: translateY(-4px);
-}
+  <!-- =============================== -->
+  <!-- HERO -->
+  <!-- =============================== -->
+  <section class="hero">
+    <h1>Formación Profesional de Alto Nivel</h1>
+    <p>Capacitación certificada con tecnología avanzada y simuladores reales.</p>
+  </section>
 
-/* ================================================
-   BOTONES
-================================================ */
-.btn {
-  display: inline-block;
-  padding: 12px 22px;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: .3s;
-}
 
-.btn-primario {
-  background: var(--azul);
-  color: white;
-}
 
-.btn-primario:hover {
-  background: var(--azul-claro);
-}
+  <!-- =============================== -->
+  <!-- CONTADORES ANIMADOS -->
+  <!-- =============================== -->
+  <section class="seccion">
+    <div class="contador-wrapper">
 
-/* ================================================
-   HERO GLOBAL
-================================================ */
-.hero {
-  padding: 160px 20px 120px 20px;
-  text-align: center;
-  color: white;
-}
+      <div class="contador-box">
+        <div class="contador-num" data-target="1500">0</div>
+        <div class="contador-label">Profesionales capacitados</div>
+      </div>
 
-/* ================================================
-   RESPONSIVE
-================================================ */
-@media (max-width: 768px) {
-  .menu a {
-    margin-left: 15px;
-  }
-}
+      <div class="contador-box">
+        <div class="contador-num" data-target="45">0</div>
+        <div class="contador-label">Empresas aliadas</div>
+      </div>
+
+      <div class="contador-box">
+        <div class="contador-num" data-target="12">0</div>
+        <div class="contador-label">Simuladores reales</div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- =============================== -->
+  <!-- ENTRENAMIENTOS -->
+  <!-- =============================== -->
+  <section class="seccion entrenamientos">
+
+    <h2 class="titulo-seccion">Entrenamientos Especializados</h2>
+    <p>Programas de formación certificados, impartidos por instructores autorizados y tecnología de alto rendimiento.</p>
+
+    <div class="ent-grid">
+
+      <div class="card ent-item">
+        <h3>Simulador 360°</h3>
+        <p>Experiencias inmersivas para desarrollar habilidades reales en un entorno seguro.</p>
+      </div>
+
+      <div class="card ent-item">
+        <h3>Operación de Maquinaria Pesada</h3>
+        <p>Entrenamientos prácticos con certificación avalada por estándares internacionales.</p>
+      </div>
+
+      <div class="card ent-item">
+        <h3>Evaluación de Competencias</h3>
+        <p>Diagnóstico profesional de habilidades técnicas con reportes detallados.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =============================== -->
+  <!-- FOOTER GLOBAL -->
+  <!-- =============================== -->
+  <footer class="footer">
+    <p>© 2025 Instituto de Entrenamiento Profesional – Todos los derechos reservados</p>
+  </footer>
+
+
+  <!-- =============================== -->
+  <!-- SCRIPT DE CONTADORES -->
+  <!-- =============================== -->
+  <script>
+    const counters = document.querySelectorAll('.contador-num');
+
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = target / 70;
+
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment);
+          requestAnimationFrame(updateCount);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  </script>
+
+</body>
+</html>
