@@ -1,102 +1,121 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FIPTRAC - Plataforma de Formación</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FIPTRAC — Fire Protection Training Center</title>
+  <meta name="description" content="FIPTRAC: Entrenamiento práctico en sistemas contra incendio.">
 
-    <!-- ============================= -->
-    <!-- GOOGLE FONTS: Montserrat, Lato y Segoe UI alternativa -->
-    <!-- ============================= -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <!-- ============================= -->
-    <!-- CSS GLOBAL -->
-    <!-- ============================= -->
-    <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- Stylesheet Global -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-    <!-- ========================================================= -->
-    <!-- NAVBAR PRINCIPAL                                          -->
-    <!-- ========================================================= -->
-    <header class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">FIPTRAC</a>
-            <nav class="nav-links">
-                <!-- Estos enlaces redirigen a las SUBPÁGINAS reales -->
-                <a href="cursos.html">Cursos</a>
-                <a href="eventos.html">Eventos</a>
-                <a href="certificaciones.html">Certificaciones</a>
-                <a href="laboratorios.html">Laboratorios</a>
-                <a href="aliados.html">Aliados</a>
-                <a href="contacto.html" class="btn-nav">Contacto</a>
-            </nav>
-        </div>
-    </header>
 
-    <!-- ========================================================= -->
-    <!-- HERO / PORTADA                                            -->
-    <!-- ========================================================= -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Formación Profesional con Estándares Internacionales</h1>
-            <p>Capacitación • Certificación • Innovación Tecnológica</p>
-            <div class="hero-buttons">
-                <a href="cursos.html" class="btn-primary">Ver Cursos</a>
-                <a href="contacto.html" class="btn-secondary">Contáctanos</a>
-            </div>
-        </div>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo"><img src="assets/images/logo-fiptrac.png"></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="laboratorios.html">Laboratorios</a></li>
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="eventos.html">Eventos</a></li>
+          <li><a href="certificaciones.html">Certificaciones</a></li>
+          <li><a href="aliados.html">Aliados</a></li>
+          <li><a href="contacto.html" class="btn-nav-contacto">Contáctanos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- HERO REDISEÑADO CON CONTADOR ANIMADO -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Centro de Entrenamiento en Protección Contra Incendios</h1>
+      <p>Prácticas reales con fuego, sistemas contra incendio, simuladores profesionales y certificaciones internacionales.</p>
+
+      <div class="hero-actions">
+        <a class="btn" href="cursos.html">Ver Cursos</a>
+        <a class="btn secondary" href="contacto.html">Agendar Visita</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b class="counter" data-target="1500">0</b><small>Profesionales capacitados</small></div>
+        <div class="stat"><b class="counter" data-target="45">0</b><small>Empresas aliadas</small></div>
+        <div class="stat"><b class="counter" data-target="12">0</b><small>Simuladores reales</small></div>
+      </div>
+    </div>
+
+    <div class="hero-img">
+      <img src="assets/images/hero-fire.jpg" />
+    </div>
+  </section>
+
+
+  <main>
+    <section class="card-section">
+      <h2>Entrenamientos Especializados</h2>
+      <div class="grid">
+        <div class="feature"><h3>Laboratorios / Simuladores</h3><p>Instalaciones reales para prácticas de fuego, bombas, paneles y más.</p><a href="laboratorios.html" class="btn secondary">Ver laboratorios</a></div>
+        <div class="feature"><h3>Cursos</h3><p>Formación profesional certificada en sistemas contra incendio.</p><a href="cursos.html" class="btn secondary">Ver cursos</a></div>
+        <div class="feature"><h3>Certificaciones</h3><p>Aval internacional con entidades especializadas.</p><a href="certificaciones.html" class="btn secondary">Ver certificaciones</a></div>
+        <div class="feature"><h3>Aliados</h3><p>Empresas líderes confían en FIPTRAC.</p><a href="aliados.html" class="btn secondary">Ver aliados</a></div>
+      </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- SECCIÓN DESTACADOS                                        -->
-    <!-- ========================================================= -->
-    <section class="destacados section">
-        <h2 class="section-title">¿Qué ofrecemos?</h2>
-        <div class="cards-container">
-            <div class="card">
-                <h3>Cursos</h3>
-                <p>Programas formativos diseñados para el desarrollo profesional.</p>
-                <a href="cursos.html" class="card-btn">Ver más</a>
-            </div>
-
-            <div class="card">
-                <h3>Eventos</h3>
-                <p>Conferencias, workshops y actividades de actualización.</p>
-                <a href="eventos.html" class="card-btn">Calendario</a>
-            </div>
-
-            <div class="card">
-                <h3>Certificaciones</h3>
-                <p>Certificaciones avaladas por organismos internacionales.</p>
-                <a href="certificaciones.html" class="card-btn">Explorar</a>
-            </div>
-        </div>
+    <section class="card-section">
+      <h2>Próximos Eventos</h2>
+      <p>Capacitaciones abiertas, certificaciones y entrenamientos especiales.</p>
+      <a href="eventos.html" class="btn">Ver calendario</a>
     </section>
+  </main>
 
-    <!-- ========================================================= -->
-    <!-- SECCIÓN LABORATORIOS                                      -->
-    <!-- ========================================================= -->
-    <section class="section alt-bg">
-        <h2 class="section-title">Laboratorios y Prácticas</h2>
-        <p class="section-text">Instalaciones equipadas con tecnología de punta.</p>
-        <a href="laboratorios.html" class="btn-primary">Ver Laboratorios</a>
-    </section>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><img src="assets/images/logo-fiptrac.png" class="footer-logo"><p>Fire Protection Training Center</p><p>Tepojaco, Tizayuca, Hidalgo 43823</p><p>Tel. +52 5576861184</p></div>
+      <div><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="laboratorios.html">Laboratorios</a></li><li><a href="cursos.html">Cursos</a></li><li><a href="eventos.html">Eventos</a></li><li><a href="certificaciones.html">Certificaciones</a></li><li><a href="aliados.html">Aliados</a></li><li><a href="contacto.html">Contáctanos</a></li></ul></div>
+      <div><h4>Contacto rápido</h4><p><a href="mailto:fiptrac.platform@gmail.com">fiptrac.platform@gmail.com</a></p><p><a href="https://wa.me/525576861184">WhatsApp</a></p></div>
+    </div>
+    <div class="footer-copy">Copyright © 2025 FIPTRAC</div>
+  </footer>
 
-    <!-- ========================================================= -->
-    <!-- SECCIÓN ALIADOS                                           -->
-    <!-- ========================================================= -->
-    <section class="section">
-        <h2 class="section-title">Nuestros Aliados</h2>
-        <p class="section-text">Empresas y organizaciones que confían en nosotros.</p>
-        <a href="aliados.html" class="btn-secondary">Ver Aliados</a>
-    </section>
+  <!-- SCRIPT DE ANIMACIÓN -->
+  <script>
+    const counters = document.querySelectorAll('.counter');
+    const speed = 60;
 
-    <!-- ========================================================= -->
-    <!-- FOOTER                                                    -->
-    <!-- ========================================================= -->
-    <footer class="footer">
-        <p>© 2025 FIPTRAC — Plataforma de Formación Profesional</p>
-    </footer>
+    const animateCounters = () => {
+      counters.forEach(counter => {
+        const update = () => {
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText;
+          const increment = target / speed;
+          if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            requestAnimationFrame(update);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        update();
+      });
+    };
+
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        animateCounters();
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.querySelector('.stats'));
+  </script>
+
 </body>
 </html>
