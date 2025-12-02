@@ -1,190 +1,323 @@
 <!doctype html>
 <html lang="es">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FIPTRAC — Fire Protection Training Center</title>
-  <meta name="description" content="FIPTRAC: Entrenamiento práctico en sistemas contra incendio. Cursos, certificaciones y simuladores con equipos reales." />
+    <!-- ================================================
+         META Y CONFIGURACIÓN GENERAL
+         ================================================ -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- CSS Global -->
-  <link rel="stylesheet" href="assets/css/styles.css">
+    <title>FIPTRAC — Fire Protection Training Center</title>
+    <meta name="description"
+        content="FIPTRAC: Entrenamiento profesional en sistemas contra incendio. Cursos, certificaciones y simuladores reales." />
 
-  <style>
-    /* Estilos adicionales del Index (Hero + Secciones especiales)
-       Puedes moverlos a styles.css cuando quieras centralizar todo */
-    .hero{
-      padding:84px 24px 40px;
-      max-width:1200px;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns:1fr 420px;
-      gap:28px;
-      align-items:center;
-    }
-    .hero-left h1{font-size:2.6rem;margin:0 0 12px;line-height:1.02}
-    .hero-left p{margin:0 0 20px;color:rgba(235,245,255,0.9);font-size:1.05rem}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{background:var(--brand-orange);color:#fff;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:700}
-    .btn.secondary{background:transparent;border:2px solid rgba(255,255,255,0.08);color:#fff}
+    <!-- ================================================
+         CSS GLOBAL (styles.css)
+         Contiene: navbar, botones, hero, grids, cards,
+         footer, paleta de colores, responsive, etc.
+         ================================================ -->
+    <link rel="stylesheet" href="assets/css/styles.css">
 
-    .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .stat{background:rgba(255,255,255,0.03);padding:12px 16px;border-radius:10px;min-width:120px;text-align:center}
-    .stat b{display:block;font-size:1.3rem}
-    .stat small{color:rgba(255,255,255,0.7)}
+    <!-- ================================================
+         CSS EXTRA SOLO PARA EL INDEX
+         (Puedes moverlo a styles.css si quieres unificar)
+         ================================================ -->
+    <style>
+        /* ----------------------------------------------------
+           HERO ESPECÍFICO DEL INDEX (versión Grid)
+           ---------------------------------------------------- */
+        .hero {
+            padding: 120px 24px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
 
-    section.card-section{
-      background:linear-gradient(180deg,#072433 0%, rgba(19,74,120,0.06) 100%);
-      padding:40px;
-      border-radius:14px;
-      margin-bottom:28px
-    }
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-    .feature{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:12px}
-    .feature h3{margin:0 0 8px}
-    .feature p{margin:0;color:rgba(235,245,255,0.9)}
-  </style>
+            /* Grid para dividir texto e imagen */
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 32px;
+            align-items: center;
+
+            text-align: left;
+        }
+
+        .hero-left h1 {
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+            line-height: 1.05;
+            color: #fff;
+        }
+
+        .hero-left p {
+            font-size: 1.1rem;
+            color: var(--color-texto);
+            margin-bottom: 20px;
+        }
+
+        /* Contenedor de botones del hero */
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        /* Stats de impacto (cifras destacadas) */
+        .stats {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 14px 18px;
+            border-radius: 10px;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .stat b {
+            font-size: 1.3rem;
+            display: block;
+        }
+
+        .stat small {
+            color: var(--color-texto-suave);
+        }
+
+        /* ----------------------------------------------------
+           SECCIONES TIPO "CARD" DEL INDEX
+           Contienen features, cursos, etc.
+           ---------------------------------------------------- */
+        section.card-section {
+            background: linear-gradient(180deg, #072433 0%, rgba(19, 74, 120, 0.06) 100%);
+            padding: 40px;
+            border-radius: 14px;
+            margin-bottom: 32px;
+        }
+
+        .card-section h2 {
+            margin-bottom: 18px;
+        }
+
+        /* Features dentro del grid */
+        .feature {
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.03),
+                    rgba(255, 255, 255, 0.015));
+            padding: 22px;
+            border-radius: 12px;
+        }
+
+        .feature h3 {
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: var(--color-texto);
+            margin-bottom: 14px;
+        }
+
+        /* ----------------------------------------------------
+           RESPONSIVE — versión móvil
+           ---------------------------------------------------- */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-left h1 {
+                font-size: 2.2rem;
+            }
+
+            .stats {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- NAVBAR GLOBAL FIPTRAC -->
-  <header class="navbar">
-    <div class="container nav-content">
+    <!-- ==========================================================
+         NAVBAR GLOBAL FIPTRAC
+         (Aparece igual en todas las páginas)
+         ========================================================== -->
+    <header class="navbar">
+        <div class="navbar-container">
 
-      <a href="index.html" class="logo">
-        <img src="assets/images/logo-fiptrac.png" alt="FIPTRAC Logo">
-      </a>
+            <!-- LOGO (dirige al home) -->
+            <a href="index.html">
+                <img src="assets/images/logo-fiptrac.png" alt="FIPTRAC Logo">
+            </a>
 
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="laboratorios.html">Laboratorios</a></li>
-          <li><a href="cursos.html">Cursos</a></li>
-          <li><a href="eventos.html">Eventos</a></li>
-          <li><a href="certificaciones.html">Certificaciones</a></li>
-          <li><a href="aliados.html">Aliados</a></li>
-          <li><a href="contacto.html" class="btn-nav-contacto">Contáctanos</a></li>
-        </ul>
-      </nav>
+            <!-- MENÚ DE NAVEGACIÓN -->
+            <nav>
+                <ul class="nav-links">
+                    <!-- 
+                        Nota: "active" se usa para marcar la página actual
+                        y puedes aplicarlo en cada subpágina.
+                    -->
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="laboratorios.html">Laboratorios</a></li>
+                    <li><a href="cursos.html">Cursos</a></li>
+                    <li><a href="eventos.html">Eventos</a></li>
+                    <li><a href="certificaciones.html">Certificaciones</a></li>
+                    <li><a href="aliados.html">Aliados</a></li>
+                    <li><a href="contacto.html" class="btn-acento">Contáctanos</a></li>
+                </ul>
+            </nav>
 
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <h1>Centro de Entrenamiento en Protección Contra Incendios</h1>
-      <p>Prácticas reales con fuego, sistemas contra incendio, simuladores profesionales y certificaciones internacionales.</p>
-
-      <div class="hero-actions">
-        <a class="btn" href="cursos.html">Ver Cursos</a>
-        <a class="btn secondary" href="contacto.html">Agendar Visita</a>
-      </div>
-
-      <div class="stats">
-        <div class="stat">
-          <b>+1500</b>
-          <small>Profesionales capacitados</small>
         </div>
-        <div class="stat">
-          <b>+45</b>
-          <small>Empresas aliadas</small>
-        </div>
-        <div class="stat">
-          <b>+12</b>
-          <small>Simuladores reales</small>
-        </div>
-      </div>
-    </div>
+    </header>
 
-    <div class="hero-card">
-      <img src="assets/images/hero-fire.jpg" style="width:100%;border-radius:12px;">
-    </div>
-  </section>
+    <!-- ==========================================================
+         HERO PRINCIPAL DEL INDEX
+         ========================================================== -->
+    <section class="hero">
 
-  <main>
+        <!-- LADO IZQUIERDO: TEXTO -->
+        <div class="hero-left fade-in">
+            <h1>Centro de Entrenamiento en Protección Contra Incendios</h1>
 
-    <!-- Sección de características -->
-    <section class="card-section">
-      <h2>Entrenamientos Especializados</h2>
+            <p>
+                Prácticas reales con fuego, sistemas contra incendio, simuladores profesionales
+                y certificaciones internacionales para empresas y profesionales.
+            </p>
 
-      <div class="grid">
-        <div class="feature">
-          <h3>Laboratorios / Simuladores</h3>
-          <p>Instalaciones reales para prácticas de fuego, bombas, paneles, rociadores y más.</p>
-          <br>
-          <a href="laboratorios.html" class="btn secondary">Ver laboratorios</a>
-        </div>
+            <!-- BOTONES -->
+            <div class="hero-actions">
+                <!-- Usa los estilos globales del CSS -->
+                <a href="cursos.html" class="btn-primary">Ver Cursos</a>
+                <a href="contacto.html" class="btn-outline">Agendar Visita</a>
+            </div>
 
-        <div class="feature">
-          <h3>Cursos</h3>
-          <p>Formación profesional certificada en sistemas contra incendio.</p>
-          <br>
-          <a href="cursos.html" class="btn secondary">Ver cursos</a>
+            <!-- Números destacados -->
+            <div class="stats">
+                <div class="stat">
+                    <b>+1500</b>
+                    <small>Profesionales capacitados</small>
+                </div>
+                <div class="stat">
+                    <b>+45</b>
+                    <small>Empresas aliadas</small>
+                </div>
+                <div class="stat">
+                    <b>+12</b>
+                    <small>Simuladores reales</small>
+                </div>
+            </div>
         </div>
 
-        <div class="feature">
-          <h3>Certificaciones</h3>
-          <p>Aval internacional con entidades de protección contra incendio.</p>
-          <br>
-          <a href="certificaciones.html" class="btn secondary">Ver certificaciones</a>
+        <!-- LADO DERECHO: IMAGEN -->
+        <div class="hero-image fade-in">
+            <img src="assets/images/hero-fire.jpg" alt="Entrenamiento con fuego real"
+                style="width:100%; border-radius:12px;">
         </div>
 
-        <div class="feature">
-          <h3>Aliados</h3>
-          <p>Empresas líderes que confían en FIPTRAC para capacitar a su personal.</p>
-          <br>
-          <a href="aliados.html" class="btn secondary">Ver aliados</a>
-        </div>
-      </div>
     </section>
 
-    <!-- Eventos -->
-    <section class="card-section">
-      <h2>Próximos Eventos</h2>
-      <p>Capacitaciones abiertas, certificaciones y entrenamientos especiales.</p>
-      <br>
-      <a href="eventos.html" class="btn">Ver calendario</a>
-    </section>
 
-  </main>
+    <!-- ==========================================================
+         CONTENIDO PRINCIPAL DEL INDEX
+         ========================================================== -->
+    <main>
 
-  <!-- FOOTER GLOBAL FIPTRAC -->
-  <footer class="footer">
-    <div class="container footer-grid">
+        <!-- ------------------------------------------------------
+             SECCIÓN: CARACTERÍSTICAS / ÁREAS PRINCIPALES
+             ------------------------------------------------------ -->
+        <section class="card-section fade-in">
+            <h2>Entrenamientos Especializados</h2>
 
-      <div>
-        <img src="assets/images/logo-fiptrac.png" class="footer-logo">
-        <p>Fire Protection Training Center</p>
-        <p>Tepojaco, Tizayuca, Hidalgo 43823, México</p>
-        <p>Tel. +52 5576861184</p>
-      </div>
+            <div class="grid grid-3">
 
-      <div>
-        <h4>Navegación</h4>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="laboratorios.html">Laboratorios</a></li>
-          <li><a href="cursos.html">Cursos</a></li>
-          <li><a href="eventos.html">Eventos</a></li>
-          <li><a href="certificaciones.html">Certificaciones</a></li>
-          <li><a href="aliados.html">Aliados</a></li>
-          <li><a href="contacto.html">Contáctanos</a></li>
-        </ul>
-      </div>
+                <div class="feature">
+                    <h3>Laboratorios / Simuladores</h3>
+                    <p>Instalaciones reales para prácticas de fuego, bombas, paneles, rociadores y más.</p>
+                    <a href="laboratorios.html" class="btn-outline">Ver laboratorios</a>
+                </div>
 
-      <div>
-        <h4>Contacto rápido</h4>
-        <p><a href="mailto:fiptrac.platform@gmail.com">fiptrac.platform@gmail.com</a></p>
-        <p><a href="https://wa.me/525576861184?text=Hola%20FIPTRAC,%20quiero%20más%20información." target="_blank">WhatsApp</a></p>
-      </div>
+                <div class="feature">
+                    <h3>Cursos</h3>
+                    <p>Formación profesional certificada en sistemas contra incendio.</p>
+                    <a href="cursos.html" class="btn-outline">Ver cursos</a>
+                </div>
 
-    </div>
+                <div class="feature">
+                    <h3>Certificaciones</h3>
+                    <p>Aval internacional con entidades reconocidas de protección contra incendio.</p>
+                    <a href="certificaciones.html" class="btn-outline">Ver certificaciones</a>
+                </div>
 
-    <div class="footer-copy">
-      Copyright © 2025 FIPTRAC — Todos los derechos reservados.
-    </div>
-  </footer>
+                <div class="feature">
+                    <h3>Aliados</h3>
+                    <p>Empresas líderes que confían en FIPTRAC para capacitar a su personal.</p>
+                    <a href="aliados.html" class="btn-outline">Ver aliados</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ------------------------------------------------------
+             SECCIÓN: EVENTOS Y CAPACITACIONES
+             ------------------------------------------------------ -->
+        <section class="card-section fade-in">
+            <h2>Próximos Eventos</h2>
+            <p>Capacitaciones abiertas, certificaciones y entrenamientos especiales.</p>
+            <br>
+            <a href="eventos.html" class="btn-primary">Ver calendario</a>
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================================
+         FOOTER GLOBAL FIPTRAC
+         ========================================================== -->
+    <footer class="footer">
+        <div class="container footer-grid">
+
+            <!-- Información del centro -->
+            <div>
+                <img src="assets/images/logo-fiptrac.png" class="footer-logo" alt="FIPTRAC Logo">
+                <p>Fire Protection Training Center</p>
+                <p>Tepojaco, Tizayuca, Hidalgo 43823, México</p>
+                <p>Tel. +52 5576861184</p>
+            </div>
+
+            <!-- Navegación rápida -->
+            <div>
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="laboratorios.html">Laboratorios</a></li>
+                    <li><a href="cursos.html">Cursos</a></li>
+                    <li><a href="eventos.html">Eventos</a></li>
+                    <li><a href="certificaciones.html">Certificaciones</a></li>
+                    <li><a href="aliados.html">Aliados</a></li>
+                    <li><a href="contacto.html">Contáctanos</a></li>
+                </ul>
+            </div>
+
+            <!-- Contacto rápido -->
+            <div>
+                <h4>Contacto rápido</h4>
+                <p><a href="mailto:fiptrac.platform@gmail.com">fiptrac.platform@gmail.com</a></p>
+                <p><a href="https://wa.me/525576861184?text=Hola%20FIPTRAC,%20quiero%20más%20información."
+                        target="_blank">WhatsApp</a></p>
+            </div>
+
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-copy">
+            Copyright © 2025 FIPTRAC — Todos los derechos reservados.
+        </div>
+    </footer>
 
 </body>
+
 </html>
