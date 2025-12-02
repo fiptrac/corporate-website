@@ -1,0 +1,323 @@
+/* ==========================================================
+   FIPTRAC — CSS Global
+   Estilo corporativo profesional
+   Autor: ChatGPT
+   Ubicación: assets/css/styles.css
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   PALETA DE COLORES (basada en tu logo)
+   ---------------------------------------------------------- */
+:root {
+    --color-primario: #1d5fcc;       /* Azul corporativo principal */
+    --color-primario-oscuro: #0A2A43;
+    --color-secundario: #134A78;
+    --color-acento: #F15A29;         /* Naranja del logo */
+    --color-sand: #D0CBAF;
+
+    --color-texto: #e8f2ff;
+    --color-texto-oscuro: #0a1726;
+    --color-texto-suave: #b8cee4;
+
+    --color-fondo: #071a2b;
+    --color-fondo-suave: #0d263b;
+    --color-superficie: rgba(255,255,255,0.05);
+
+    --sombra-suave: 0 4px 10px rgba(0,0,0,.15);
+
+    --radius: 12px;
+    --transicion: 0.25s ease;
+}
+
+/* ----------------------------------------------------------
+   RESET BÁSICO
+   ---------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", system-ui, Arial, sans-serif;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.45;
+}
+
+/* Para mejorar la lectura */
+p {
+    margin-bottom: 12px;
+}
+
+/* Links */
+a {
+    color: var(--color-primario);
+    text-decoration: none;
+    transition: var(--transicion);
+}
+a:hover {
+    opacity: 0.8;
+}
+
+/* ----------------------------------------------------------
+   CONTENEDORES
+   ---------------------------------------------------------- */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ----------------------------------------------------------
+   NAVBAR
+   ---------------------------------------------------------- */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(4, 20, 36, 0.55);
+    backdrop-filter: blur(6px);
+    padding: 14px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+}
+
+.navbar-container {
+    width: 92%;
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar img {
+    height: 56px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 18px;
+}
+
+.nav-links a {
+    color: var(--color-texto);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.nav-links a:hover,
+.nav-links .active {
+    background: var(--color-superficie);
+}
+
+/* ----------------------------------------------------------
+   HERO SECTIONS
+   ---------------------------------------------------------- */
+.hero {
+    padding: 140px 20px 100px;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0,0,0,.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #eaf3ff;
+}
+
+/* ----------------------------------------------------------
+   BOTONES
+   ---------------------------------------------------------- */
+.btn {
+    display: inline-block;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    text-align: center;
+    transition: var(--transicion);
+}
+
+.btn-primary {
+    background: var(--color-primario);
+    color: white;
+}
+.btn-primary:hover {
+    background: var(--color-secundario);
+}
+
+.btn-acento {
+    background: var(--color-acento);
+    color: white;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--color-texto);
+    color: var(--color-texto);
+}
+.btn-outline:hover {
+    background: var(--color-superficie);
+}
+
+/* ----------------------------------------------------------
+   TARJETAS (USADO EN CURSOS/EVENTOS)
+   ---------------------------------------------------------- */
+.card {
+    background: var(--color-superficie);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--sombra-suave);
+    transition: var(--transicion);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+/* ----------------------------------------------------------
+   LISTAS DE ITEMS (CURSOS/EVENTOS)
+   ---------------------------------------------------------- */
+.list-item {
+    background: var(--color-superficie);
+    padding: 18px;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transicion);
+}
+
+.list-item:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+/* ----------------------------------------------------------
+   GRID GENERAL
+   ---------------------------------------------------------- */
+.grid {
+    display: grid;
+    gap: 20px;
+}
+
+.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grid-4 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* ----------------------------------------------------------
+   GALERÍA / CARRUSEL
+   ---------------------------------------------------------- */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+/* Carrusel contenedor */
+.carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+}
+
+/* Las imágenes del carrusel */
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s;
+}
+
+.carousel img {
+    width: 100%;
+    flex: 0 0 100%;
+}
+
+/* ----------------------------------------------------------
+   FORMULARIOS
+   ---------------------------------------------------------- */
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.07);
+    color: var(--color-texto);
+    margin-bottom: 14px;
+}
+
+form textarea {
+    resize: none;
+}
+
+/* ----------------------------------------------------------
+   FOOTER
+   ---------------------------------------------------------- */
+.footer {
+    padding: 40px 20px;
+    background: #02101a;
+    text-align: center;
+    color: var(--color-texto-suave);
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer a {
+    color: var(--color-primario);
+}
+
+/* ----------------------------------------------------------
+   ANIMACIONES
+   ---------------------------------------------------------- */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    0% {opacity:0; transform: translateY(20px);}
+    100% {opacity:1; transform: translateY(0);}
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE GENERAL
+   ---------------------------------------------------------- */
+@media (max-width: 900px) {
+    .navbar-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero h1 {
+        font-size: 2.3rem;
+    }
+
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+
+    .list-item {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
