@@ -1,336 +1,266 @@
-/* ==========================================================
-   FIPTRAC — Global CSS
-   Diseño profesional, moderno y consistente
-   Tipografías: Montserrat + Lato
-   ========================================================== */
-
-/* GOOGLE FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
-
-/* ----------------------------------------------------------
-   VARIABLES GLOBALES DE DISEÑO
-   ---------------------------------------------------------- */
-:root {
-    --color-primario: #1d5fcc;
-    --color-primario-dark: #0f3a7a;
-    --color-acento: #F15A29;
-
-    --color-texto: #eaf4ff;
-    --color-texto-suave: #bcd1e8;
-    --color-bg: #071a2b;
-    --color-bg-suave: #0d263b;
-
-    --radius: 14px;
-    --transition: 0.25s ease;
-}
-
-/* ----------------------------------------------------------
-   RESET
-   ---------------------------------------------------------- */
+/* =======================================================
+   RESET BÁSICO
+   ======================================================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
+/* =======================================================
+   TIPOGRAFÍAS GLOBALES
+   ======================================================= */
 body {
-    background: var(--color-bg);
-    font-family: "Montserrat", "Lato", system-ui;
-    color: var(--color-texto);
-    -webkit-font-smoothing: antialiased;
+  font-family: "Montserrat", "Lato", sans-serif;
+  background: #f5f7fa;
+  color: #1f2d3d;
+  line-height: 1.5;
 }
 
-/* ----------------------------------------------------------
-   CONTENEDOR
-   ---------------------------------------------------------- */
+/* =======================================================
+   VARIABLES DE COLOR CORPORATIVO
+   ======================================================= */
+:root {
+  --azul-oscuro: #041426;
+  --azul: #0a2d4a;
+  --azul-claro: #0f4d7a;
+  --naranja: #F15A29;
+  --gris-fondo: #f4f6fa;
+  --gris-texto: #4d5663;
+}
+
+/* =======================================================
+   CONTENEDOR GLOBAL
+   ======================================================= */
 .container {
-    width: 92%;
-    max-width: 1300px;
-    margin: auto;
+  width: 92%;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
-/* ======================
-   HEADER / NAVBAR STYLES
-   (Copy to assets/css/styles.css)
-   ====================== */
-
-/* Container helper (should exist already, kept for safety) */
-.container { width:92%; max-width:1300px; margin:0 auto; padding:0 12px; }
-
-/* Header base */
+/* =======================================================
+   HEADER PREMIUM
+   ======================================================= */
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 1100;
-  background: rgba(255,255,255,0.0); /* transparent by default */
-  transition: background .22s ease, box-shadow .22s ease;
+  z-index: 2000;
+  padding: 14px 0;
   backdrop-filter: blur(6px);
+  background: rgba(4, 20, 36, 0.18);
+  transition: background .25s ease, box-shadow .25s ease;
 }
 
-/* When scrolled add a class .scrolled to tighten contrast */
 .site-header.scrolled {
-  background: rgba(4,20,36,0.92); /* dark glass */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  background: rgba(4, 20, 36, 0.88);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
 }
 
-/* Inner layout: align logo and nav */
 .header-inner {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  padding:12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* Brand (logo) */
-.brand { display:flex; align-items:center; text-decoration:none; }
 .brand-logo {
-  height:56px;               /* fixed height to keep layout stable */
-  width:auto;
-  display:block;
+  height: 64px;
+  width: auto;
+  display: block;
 }
 
-/* Nav toggle (mobile) - hidden on desktop */
-.nav-toggle {
-  display:none;
-  background:transparent;
-  border:0;
-  cursor:pointer;
-  padding:8px;
-}
-
-/* hamburger lines */
-.hamb {
-  width:22px;
-  height:2px;
-  background:#fff;
-  display:block;
-  position:relative;
-}
-.hamb::before, .hamb::after {
-  content:"";
-  position:absolute;
-  left:0; right:0;
-  height:2px;
-  background:#fff;
-}
-.hamb::before { top:-7px; }
-.hamb::after  { bottom:-7px; }
-
-/* Primary nav (desktop) */
-.primary-nav { }
+/* NAV DESKTOP */
 .nav-list {
-  list-style:none;
-  display:flex;
-  gap:14px;
-  align-items:center;
-  margin:0;
-  padding:0;
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  align-items: center;
 }
+
 .nav-link {
-  color:#eaf4ff;               /* Ensure contrast over header */
-  text-decoration:none;
-  font-weight:600;
-  padding:8px 12px;
-  border-radius:8px;
-  transition: background .18s ease, color .18s ease;
-  font-family: "Montserrat", "Lato", system-ui;
+  text-decoration: none;
+  color: #e6f1ff;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: 0.25s ease;
 }
-.nav-link:hover { background: rgba(255,255,255,0.04); color:#fff; }
-.nav-link.active { background: rgba(255,255,255,0.06); }
 
-/* CTA (contact) - emphasized */
+.nav-link:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.nav-link.active {
+  background: rgba(255,255,255,0.18);
+}
+
 .nav-cta {
-  background: var(--accent, #F15A29);
-  color:#fff !important;
-  padding:9px 14px;
-  border-radius:10px;
+  background: var(--naranja);
+  color: white !important;
+  padding: 10px 18px;
+  border-radius: 10px;
 }
 
-/* Mobile: collapse nav into vertical drawer */
+/* NAV MÓVIL */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+}
+
+.hamb {
+  width: 22px;
+  height: 2px;
+  background: white;
+  display: block;
+  position: relative;
+}
+.hamb::before,
+.hamb::after {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: 0;
+}
+.hamb::before { top: -7px; }
+.hamb::after { bottom: -7px; }
+
+/* RESPONSIVE NAV */
 @media (max-width: 980px) {
-  .nav-toggle { display:inline-block; }
-  .nav-list { 
+
+  .nav-toggle { display: block; }
+
+  .nav-list {
     position: absolute;
-    top: 72px;                /* below header */
-    left: 12px;
-    right: 12px;
+    top: 85px;
+    left: 4%;
+    right: 4%;
+    background: rgba(3, 16, 28, 0.95);
+    border-radius: 14px;
     flex-direction: column;
-    gap: 12px;
-    background: rgba(4,20,36,0.98);
-    padding: 18px;
-    border-radius: 12px;
-    display: none;            /* toggled by JS */
+    padding: 24px;
+    gap: 16px;
+    display: none;
   }
-  .nav-list.show { display:flex; }
-  .nav-link { color: #dbe9fb; padding:10px 12px; }
-  .hamb, .hamb::before, .hamb::after { background:#dbe9fb; }
+
+  .nav-list.show {
+    display: flex;
+  }
+
+  .nav-link {
+    font-size: 17px;
+    padding: 12px;
+  }
 }
 
-
-/* ----------------------------------------------------------
-   HERO SECTION
-   ---------------------------------------------------------- */
+/* =======================================================
+   HERO
+   ======================================================= */
 .hero {
-    padding: 120px 0 80px;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 40px;
-    align-items: center;
+  background: linear-gradient(rgba(0, 32, 96, 0.7), rgba(0, 32, 96, 0.7)),
+              url('../images/hero-fire.jpg');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 140px 20px;
+  color: white;
 }
 
 .hero h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    line-height: 1.1;
+  font-size: 2.8rem;
+  font-weight: 700;
 }
 
 .hero p {
-    margin: 14px 0 24px;
-    font-size: 1.15rem;
-    color: var(--color-texto-suave);
+  max-width: 650px;
+  margin: auto;
+  margin-top: 16px;
+  font-size: 1.2rem;
+  opacity: 0.9;
 }
 
-/* Botones de hero */
-.btn {
-    display: inline-block;
-    padding: 14px 20px;
-    border-radius: var(--radius);
-    font-weight: 700;
-    transition: var(--transition);
-    text-decoration: none;
-}
-
-.btn-primary {
-    background: var(--color-primario);
-    color: #fff;
-}
-.btn-primary:hover {
-    background: var(--color-primario-dark);
-}
-
-.btn-secondary {
-    border: 2px solid rgba(255,255,255,0.15);
-    color: #fff;
-}
-.btn-secondary:hover {
-    background: rgba(255,255,255,0.07);
-}
-
-/* ----------------------------------------------------------
+/* =======================================================
    CONTADORES ANIMADOS
-   ---------------------------------------------------------- */
-.stats {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-    flex-wrap: wrap;
+   ======================================================= */
+.contadores {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: -60px;
 }
 
-.stat {
-    background: rgba(255,255,255,0.05);
-    padding: 16px 22px;
-    border-radius: var(--radius);
-    min-width: 130px;
-    text-align: center;
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+.contador-box {
+  background: white;
+  padding: 26px 30px;
+  width: 180px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  text-align: center;
 }
 
-.stat b {
-    font-size: 1.8rem;
-    font-weight: 700;
+.contador-num {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--azul);
 }
 
-/* Animación */
-.stat-num {
-    display: inline-block;
-    font-weight: 700;
-    font-size: 2rem;
-    color: #fff;
-    animation: fadeIn 1s ease forwards;
+.contador-label {
+  margin-top: 6px;
+  color: var(--gris-texto);
+  font-weight: 600;
+  font-size: 15px;
 }
 
-/* ----------------------------------------------------------
-   SECCIONES TARJETA
-   ---------------------------------------------------------- */
-.card-section {
-    background: linear-gradient(180deg, #072433, rgba(19,74,120,0.08));
-    padding: 50px 40px;
-    border-radius: var(--radius);
-    margin: 40px 0;
+/* =======================================================
+   SECCIONES GENERALES
+   ======================================================= */
+.seccion {
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.card-section h2 {
-    font-size: 1.9rem;
-    margin-bottom: 18px;
+/* =======================================================
+   ENTRENAMIENTOS
+   ======================================================= */
+.entrenamientos {
+  background: var(--gris-fondo);
+  padding: 60px;
+  border-radius: 20px;
 }
 
-.grid {
-    display: grid;
-    gap: 22px;
+.ent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: 30px;
+  margin-top: 40px;
 }
 
-.feature {
-    background: rgba(255,255,255,0.04);
-    padding: 22px;
-    border-radius: var(--radius);
-    border: 1px solid rgba(255,255,255,0.05);
-    transition: var(--transition);
+.ent-item {
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+  transition: 0.3s;
 }
 
-.feature:hover {
-    transform: translateY(-5px);
-    background: rgba(255,255,255,0.07);
+.ent-item:hover {
+  transform: translateY(-4px);
 }
 
-/* ----------------------------------------------------------
+/* =======================================================
    FOOTER
-   ---------------------------------------------------------- */
+   ======================================================= */
 .footer {
-    background: #02101a;
-    padding: 50px 0;
-    margin-top: 50px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    color: var(--color-texto-suave);
+  background: var(--azul-oscuro);
+  padding: 40px 20px;
+  color: white;
+  text-align: center;
 }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-    gap: 30px;
-}
-
-.footer a {
-    color: var(--color-primario);
-    transition: var(--transition);
-}
-.footer a:hover {
-    opacity: 0.8;
-}
-
-/* ----------------------------------------------------------
-   ANIMACIÓN FADE IN
-   ---------------------------------------------------------- */
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-/* ----------------------------------------------------------
-   RESPONSIVE
-   ---------------------------------------------------------- */
-@media (max-width: 900px) {
-    .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    .stats {
-        justify-content: center;
-    }
+.footer p {
+  opacity: 0.85;
 }
