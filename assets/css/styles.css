@@ -53,53 +53,124 @@ body {
     margin: auto;
 }
 
-/* ----------------------------------------------------------
-   NAVBAR
-   ---------------------------------------------------------- */
-.navbar {
-    width: 100%;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: rgba(4, 20, 36, 0.6);
-    backdrop-filter: blur(10px);
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
+/* ======================
+   HEADER / NAVBAR STYLES
+   (Copy to assets/css/styles.css)
+   ====================== */
+
+/* Container helper (should exist already, kept for safety) */
+.container { width:92%; max-width:1300px; margin:0 auto; padding:0 12px; }
+
+/* Header base */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  background: rgba(255,255,255,0.0); /* transparent by default */
+  transition: background .22s ease, box-shadow .22s ease;
+  backdrop-filter: blur(6px);
 }
 
-.nav-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/* When scrolled add a class .scrolled to tighten contrast */
+.site-header.scrolled {
+  background: rgba(4,20,36,0.92); /* dark glass */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
 }
 
-.nav-links {
-    display: flex;
-    gap: 22px;
-    list-style: none;
+/* Inner layout: align logo and nav */
+.header-inner {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:12px 0;
 }
 
-.nav-links a {
-    color: var(--color-texto);
-    font-weight: 600;
-    padding: 8px 14px;
-    border-radius: 8px;
-    transition: var(--transition);
+/* Brand (logo) */
+.brand { display:flex; align-items:center; text-decoration:none; }
+.brand-logo {
+  height:56px;               /* fixed height to keep layout stable */
+  width:auto;
+  display:block;
 }
 
-.nav-links a:hover,
-.nav-links .active {
-    background: rgba(255,255,255,0.08);
+/* Nav toggle (mobile) - hidden on desktop */
+.nav-toggle {
+  display:none;
+  background:transparent;
+  border:0;
+  cursor:pointer;
+  padding:8px;
 }
 
-/* Botón de contacto en navegación */
-.btn-nav-contacto {
-    background: var(--color-acento);
-    border-radius: 8px;
+/* hamburger lines */
+.hamb {
+  width:22px;
+  height:2px;
+  background:#fff;
+  display:block;
+  position:relative;
 }
-.btn-nav-contacto:hover {
-    opacity: 0.85;
+.hamb::before, .hamb::after {
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  height:2px;
+  background:#fff;
 }
+.hamb::before { top:-7px; }
+.hamb::after  { bottom:-7px; }
+
+/* Primary nav (desktop) */
+.primary-nav { }
+.nav-list {
+  list-style:none;
+  display:flex;
+  gap:14px;
+  align-items:center;
+  margin:0;
+  padding:0;
+}
+.nav-link {
+  color:#eaf4ff;               /* Ensure contrast over header */
+  text-decoration:none;
+  font-weight:600;
+  padding:8px 12px;
+  border-radius:8px;
+  transition: background .18s ease, color .18s ease;
+  font-family: "Montserrat", "Lato", system-ui;
+}
+.nav-link:hover { background: rgba(255,255,255,0.04); color:#fff; }
+.nav-link.active { background: rgba(255,255,255,0.06); }
+
+/* CTA (contact) - emphasized */
+.nav-cta {
+  background: var(--accent, #F15A29);
+  color:#fff !important;
+  padding:9px 14px;
+  border-radius:10px;
+}
+
+/* Mobile: collapse nav into vertical drawer */
+@media (max-width: 980px) {
+  .nav-toggle { display:inline-block; }
+  .nav-list { 
+    position: absolute;
+    top: 72px;                /* below header */
+    left: 12px;
+    right: 12px;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(4,20,36,0.98);
+    padding: 18px;
+    border-radius: 12px;
+    display: none;            /* toggled by JS */
+  }
+  .nav-list.show { display:flex; }
+  .nav-link { color: #dbe9fb; padding:10px 12px; }
+  .hamb, .hamb::before, .hamb::after { background:#dbe9fb; }
+}
+
 
 /* ----------------------------------------------------------
    HERO SECTION
