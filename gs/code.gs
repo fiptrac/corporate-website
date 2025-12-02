@@ -1,54 +1,32 @@
-/* Code.gs
-- Punto de entrada para Web App de Google Apps Script
-- Usa HtmlService con templates para incluir header/footer
-*/
-
-
-function doGet(e) {
-// Determina cuál página servir según query param "page"
-var page = (e && e.parameter && e.parameter.page) || 'index';
-return renderPage(page);
+function doGet() {
+  return HtmlService.createHtmlOutputFromFile('index');
 }
 
+function sendContactForm(data) {
+  var email = "info@fiptrac.com";
+  var subject = "Nuevo mensaje de contacto desde FIPTRAC";
+  var body = "Nombre: " + data.nombre + "\n"
+           + "Correo: " + data.correo + "\n"
+           + "Mensaje:\n" + data.mensaje;
 
-function renderPage(page) {
-// Valida páginas permitidas
-var allowed = ['index','cursos','clientes','politicas','testimonios'];
-if (allowed.indexOf(page) === -1) page = 'index';
-
-
-var template = HtmlService.createTemplateFromFile(page);
-// Puedes pasar datos al template aquí, por ejemplo: cursos, clientes, testimonios
-template.data = {
-siteName: 'FIPTRAC',
-baseUrl: ScriptApp.getService().getUrl ? ScriptApp.getService().getUrl() : '',
-};
-var html = template.evaluate().setTitle('FIPTRAC - ' + (page==='index'?'Inicio':page));
-html.addMetaTag('viewport','width=device-width, initial-scale=1');
-return html;
+  MailApp.sendEmail(email, subject, body);
+  return "Mensaje enviado exitosamente";
 }
 
-
-// Helper para incluir archivos HTML (header/footer)
-function include(filename) {
-return HtmlService.createHtmlOutputFromFile(filename).getContent();
+function registrarEvento(datos) {
+  var sheet = SpreadsheetApp.getActive().getSheetByName('Eventos');
+  sheet.appendRow([new Date(), datos.nombre, datos.correo, datos.telefono, datos.evento]);
+  return "Registro completado";
 }
 
-
-// EJEMPLO: función para obtener cursos (simulada)
-function getCursos() {
-// En un proyecto real, esto podría leer de una hoja de cálculo o base de datos
-return [
-{ id: 'c1', title: 'Protección contra incendios - Básico', duration: '8 h', price: '$1,200 MXN' },
-{ id: 'c2', title: 'Manejo de extintores y brigadas', duration: '4 h', price: '$800 MXN' },
-];
+function registrarCurso(datos) {
+  var sheet = SpreadsheetApp.getActive().getSheetByName('Cursos');
+  sheet.appendRow([new Date(), datos.nombre, datos.correo, datos.telefono, datos.curso]);
+  return "Registro completado";
 }
 
-
-// EJEMPLO: función para enviar mensaje de contacto (desde formulario cliente)
-function enviarContacto(payload) {
-// payload: {name, email, message}
-// Aquí podrías escribir a una hoja de cálculo, mandar un correo, etc.
-Logger.log('Contacto recibido: ' + JSON.stringify(payload));
-return { ok: true, message: 'Mensaje recibido, gracias.' };
+function registrarCertificacion(datos) {
+  var sheet = SpreadsheetApp.getActive().getSheetByName('Certificaciones');
+  sheet.appendRow([new Date(), datos.nombre, datos.correo, datos.telefono, datos.certificacion]);
+  return "Registro completado";
 }
