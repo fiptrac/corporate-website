@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorios | FIPTRAC</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* ===== ESTILOS ESPECÍFICOS PARA ESTE ARCHIVO ===== */
+
+        .labs-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .lab-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .lab-header h1 {
+            font-size: 2rem;
+            color: var(--texto);
+        }
+
+        .lab-header p {
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        /* ===== CAROUSEL ===== */
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 360px;
+            overflow: hidden;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            background: #000;
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.45s ease;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Botones */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.45);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            font-size: 1.3rem;
+        }
+
+        .carousel-btn:hover { background: rgba(0,0,0,0.65); }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        /* ===== GALERÍA ===== */
+
+        .gallery-grid {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 165px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Logo FIPTRAC">
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="certificaciones.html">Certificaciones</a></li>
+                <li><a href="laboratorios.html" class="active">Laboratorios</a></li>
+                <li><a href="aliados.html">Aliados</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="labs-container">
+
+        <div class="lab-header">
+            <h1>Laboratorios y Simuladores</h1>
+            <p>
+                Contamos con equipamiento real para el entrenamiento técnico en todos los sistemas contra incendio:
+                bombeo, rociadores, supresión, detección y simulador de fuego vivo.
+                Nuestros laboratorios permiten prácticas altamente realistas bajo condiciones controladas.
+            </p>
+        </div>
+
+        <!-- ===== CARRUSEL PRINCIPAL ===== -->
+        <div class="carousel">
+            <div class="carousel-track">
+
+                <!-- SLIDE 1 -->
+                <div class="carousel-slide">
+                    <img src="assets/labs/lab1.jpg" alt="Laboratorio 1">
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div class="carousel-slide">
+                    <img src="assets/labs/lab2.jpg" alt="Laboratorio 2">
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="carousel-slide">
+                    <img src="assets/labs/lab3.jpg" alt="Laboratorio 3">
+                </div>
+
+                <!-- SLIDE 4 -->
+                <div class="carousel-slide">
+                    <img src="assets/labs/lab4.jpg" alt="Laboratorio 4">
+                </div>
+
+            </div>
+
+            <!-- Botones -->
+            <button class="carousel-btn prev">❮</button>
+            <button class="carousel-btn next">❯</button>
+        </div>
+
+        <!-- ===== GALERÍA COMPLETA ===== -->
+        <h2 style="margin-top: 50px; color: var(--texto);">Galería</h2>
+
+        <div class="gallery-grid">
+            <img src="assets/labs/lab1.jpg">
+            <img src="assets/labs/lab2.jpg">
+            <img src="assets/labs/lab3.jpg">
+            <img src="assets/labs/lab4.jpg">
+            <img src="assets/labs/lab5.jpg">
+            <img src="assets/labs/lab6.jpg">
+            <img src="assets/labs/lab7.jpg">
+            <img src="assets/labs/lab8.jpg">
+        </div>
+
+    </main>
+
+    <!-- ===== SCRIPT DEL CARRUSEL ===== -->
+    <script>
+        const track = document.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextBtn = document.querySelector('.next');
+        const prevBtn = document.querySelector('.prev');
+
+        let index = 0;
+
+        function moveCarousel() {
+            track.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        nextBtn.onclick = () => {
+            index = (index + 1) % slides.length;
+            moveCarousel();
+        };
+
+        prevBtn.onclick = () => {
+            index = (index - 1 + slides.length) % slides.length;
+            moveCarousel();
+        };
+    </script>
+
+</body>
+</html>
