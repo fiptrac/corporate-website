@@ -186,12 +186,26 @@
   }
 
   /* CONTADORES */
-  .contador-wrapper { display:flex; justify-content:center; gap:35px; flex-wrap:wrap; margin-top:-60px; }
+  .contador-wrapper {
+    display:flex;
+    justify-content:center;
+    gap:35px;
+    flex-wrap:wrap;
+    margin-top:-30px; /* era -60, ya no lo necesitamos tan alto */
+    margin-bottom:20px; /* reduce el hueco hacia abajo */
+  }
   .contador-box { background:white; border-radius:18px; padding:28px; width:170px; text-align:center; box-shadow:0 6px 20px rgba(0,0,0,0.08); }
   .contador-num { font-size:46px; color:#003A70; font-weight:700; }
 
   /* NOSOTROS */
-  .nosotros { max-width:1100px; margin:80px auto; padding:0 25px; display:flex; align-items:center; gap:50px; }
+  .nosotros {
+    max-width:1100px;
+    margin:40px auto; /* antes 80px */
+    padding:0 25px;
+    display:flex;
+    align-items:center;
+    gap:40px; /* un poco más compacto */
+  }
   .nosotros img { width:48%; border-radius:14px; box-shadow:0 5px 18px rgba(0,0,0,0.1); }
   .nosotros-text { width:52%; }
   .nosotros-text h2 { font-size:32px; color:#003A70; font-weight:700; }
