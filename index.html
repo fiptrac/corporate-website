@@ -1,403 +1,150 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instituto de Entrenamiento Profesional</title>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FIPTRAC — Fire Protection Training Center</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
 
-  <meta name="description" 
-        content="FIPTRAC: Centro de entrenamiento especializado en protección contra incendios. Cursos, certificaciones y simuladores profesionales.">
-
-  <!-- Tipografías corporativas -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
-  <!-- CSS Global -->
-  <link rel="stylesheet" href="assets/css/styles.css">
-
-  <!-- Ajustes visuales y responsive específicos del INDEX -->
   <style>
+    body { margin:0; font-family: 'Montserrat', sans-serif; }
 
-    /* -----------------------------------------------------
-       HERO — Layout corregido y totalmente responsivo
-    ------------------------------------------------------ */
-    .hero {
-      padding: 120px 20px 80px;
-      max-width: 1280px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 48px;
-      align-items: center;
+    /* NAV */
+    .nav { width:100%; background:white; box-shadow:0 3px 15px rgba(0,0,0,0.08); position:fixed; top:0; z-index:20; }
+    .nav-container { max-width:1200px; margin:auto; padding:18px 25px; display:flex; justify-content:space-between; align-items:center; }
+    .logo img { height:48px; }
+
+    .menu { display:flex; gap:25px; }
+    .menu a { text-decoration:none; font-weight:600; color:#003A70; }
+
+    /* HAMBURGER */
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+    .hamburger span { width:28px; height:3px; background:#003A70; border-radius:4px; }
+
+    @media(max-width:850px){
+      .menu { position:absolute; top:75px; right:0; background:white; width:220px; padding:20px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.15); flex-direction:column; gap:18px; opacity:0; pointer-events:none; transform:translateY(-10px); transition:0.3s; }
+      .menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+      .hamburger { display:flex; }
     }
 
-    .hero-left h1 {
-      font-family: "Montserrat", sans-serif;
-      font-size: 3rem;
-      line-height: 1.08;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
+    /* HERO */
+    .hero { background:linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78)), url('assets/img/hero.jpg'); background-size:cover; background-position:center; padding:180px 20px 170px; text-align:center; color:white; }
+    .hero h1 { font-size:48px; font-weight:800; }
+    .hero p { margin-top:14px; font-size:20px; }
+    @media(max-width:700px){ .hero h1{ font-size:34px; } }
 
-    .hero-left p {
-      font-size: 1.15rem;
-      margin-bottom: 28px;
-      color: rgba(235,245,255,0.9);
-      font-family: "Lato", sans-serif;
-    }
+    /* CONTADORES */
+    .contador-wrapper { display:flex; justify-content:center; gap:35px; flex-wrap:wrap; margin-top:-60px; }
+    .contador-box { background:white; border-radius:18px; padding:28px; width:170px; text-align:center; box-shadow:0 6px 20px rgba(0,0,0,0.08); }
+    .contador-num { font-size:46px; color:#003A70; font-weight:700; }
 
-    /* Imagen */
-    .hero-card img {
-      width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
-    }
+    /* NOSOTROS */
+    .nosotros { max-width:1100px; margin:80px auto; padding:0 25px; display:flex; align-items:center; gap:50px; }
+    .nosotros img { width:48%; border-radius:14px; box-shadow:0 5px 18px rgba(0,0,0,0.1); }
+    .nosotros-text { width:52%; }
+    .nosotros-text h2 { font-size:32px; color:#003A70; font-weight:700; }
+    .nosotros-text p { margin-top:12px; line-height:1.6; color:#333; }
+    @media(max-width:850px){ .nosotros{ flex-direction:column; } .nosotros img, .nosotros-text{ width:100%; } }
 
-    /* -----------------------------------------------------
-       SECCIÓN NOSOTROS
-    ------------------------------------------------------ */
-    .nosotros {
-      max-width: 1080px;
-      margin: 80px auto 40px;
-      padding: 20px;
-      text-align: center;
-    }
+    /* MAPA */
+    .mapa-contenedor { width:80%; height:650px; margin:60px auto; border-radius:18px; overflow:hidden; box-shadow:0 5px 18px rgba(0,0,0,0.08); }
+    @media(max-width:900px){ .mapa-contenedor{ height:420px; width:90%; } }
+    @media(max-width:600px){ .mapa-contenedor{ height:360px; width:94%; } }
+    .mapa-contenedor iframe{ width:100%; height:100%; border:none; }
 
-    .nosotros h2 {
-      font-size: 2.4rem;
-      color: var(--azul);
-      margin-bottom: 20px;
-    }
+    /* ENTRENAMIENTOS */
+    .entrenamientos { background:#f4f4f4; padding:80px 40px; border-radius:20px; max-width:1200px; margin:60px auto; }
+    .ent-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:30px; margin-top:40px; }
+    .ent-item { background:white; padding:25px; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,0.08); }
+    .ent-item h3 { color:#003A70; margin-bottom:10px; }
 
-    .nosotros p {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      color: var(--gris-texto);
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    /* -----------------------------------------------------
-       NUESTRO ALCANCE (contadores + mapa)
-    ------------------------------------------------------ */
-    .alcance {
-      max-width: 1080px;
-      margin: 60px auto;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .alcance h2 {
-      font-size: 2.4rem;
-      color: var(--azul);
-      margin-bottom: 30px;
-    }
-
-    /* Contadores */
-    .stats {
-      display: flex;
-      gap: 24px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 40px;
-    }
-
-    .stat {
-      text-align: center;
-      background: rgba(0,0,0,0.05);
-      padding: 16px 20px;
-      border-radius: 12px;
-      min-width: 150px;
-      transition: 0.25s;
-    }
-
-    .stat b {
-      font-size: 2rem;
-      font-weight: 700;
-      display: block;
-      margin-bottom: 6px;
-      color: var(--azul);
-      font-family: "Montserrat", sans-serif;
-    }
-
-    .stat small {
-      font-size: 0.95rem;
-      color: var(--gris-texto);
-      font-family: "Lato", sans-serif;
-    }
-
-    /* Mapa */
-    .mapa-contenedor {
-      width: 90%;
-      height: 500px;
-      margin: 0 auto;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-    }
-
-    .mapa-contenedor iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* -----------------------------------------------------
-       Ajuste de LOGO pequeño
-    ------------------------------------------------------ */
-    .navbar .logo img {
-      height: 52px;   /* antes era más grande */
-      width: auto;
-    }
-
-    /* Responsivo hero */
-    @media (max-width: 960px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding-top: 100px;
-      }
-      .hero-card img {
-        max-width: 420px;
-        margin: 0 auto;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-left h1 { font-size: 2.2rem; }
-      .hero-left p { font-size: 1rem; }
-      .stat b { font-size: 1.7rem; }
-      .mapa-contenedor { height: 360px; }
-    }
-
+    footer { text-align:center; margin-top:70px; padding:40px; color:#666; }
   </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     NAVBAR GLOBAL
-====================================================== -->
-<header class="navbar">
-  <div class="navbar-container">
+<header class="nav">
+  <div class="nav-container">
+    <div class="logo"><img src="assets/images/nombre.png"></div>
 
-    <a href="index.html" class="logo">
-      <img src="assets/images/logo-fiptrac.png" alt="FIPTRAC Logo">
-    </a>
-
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Inicio</a></li>
-        <li><a href="laboratorios.html">Laboratorios</a></li>
-        <li><a href="cursos.html">Cursos</a></li>
-        <li><a href="certificaciones.html">Certificaciones</a></li>
-        <li><a href="aliados.html">Aliados</a></li>
-        <li><a href="contacto.html" class="btn-nav-contacto">Contáctanos</a></li>
-      </ul>
+    <nav class="menu" id="menu">
+      <a href="index.html">Inicio</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="certificaciones.html">Certificaciones</a>
+      <a href="laboratorios.html">Laboratorios</a>
+      <a href="aliados.html">Aliados</a>
+      <a href="contacto.html">Contacto</a>
     </nav>
 
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </header>
 
-
-<!-- =====================================================
-     HERO PRINCIPAL
-====================================================== -->
-<section class="hero fade-in">
-
-  <div class="hero-left">
-    <h1>Centro de Entrenamiento en Protección Contra Incendios</h1>
-    <p>
-      Prácticas reales con fuego, sistemas contra incendio, simuladores profesionales 
-      y certificaciones con estándares internacionales.
-    </p>
-
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="cursos.html">Ver Cursos</a>
-      <a class="btn btn-outline" href="contacto.html">Agendar Visita</a>
-    </div>
-  </div>
-
-  <div class="hero-card">
-    <img src="assets/images/hero-fire.jpg" alt="Entrenamiento en FIPTRAC">
-  </div>
-
+<section class="hero">
+  <h1>Formación Profesional de Alto Nivel</h1>
+  <p>Capacitación certificada con tecnología avanzada y simuladores reales.</p>
 </section>
 
-
-
-<!-- =====================================================
-     NUEVA SECCIÓN — NOSOTROS
-====================================================== -->
-<section class="nosotros fade-in">
-  <h2>Nosotros</h2>
-
-  <p>
-    FIPTRAC es el único centro de capacitación en toda Latinoamérica diseñado 
-    exclusivamente para el entrenamiento técnico en diseño, operación y mantenimiento 
-    de sistemas contra incendio.  
-    <br><br>
-    Desde febrero de 2020 hemos capacitado a más de <strong>1200 profesionales de 17 países</strong>, 
-    ofreciendo programas con enfoque <strong>Hands On Training</strong>, donde cada participante practica 
-    con equipos reales, fuego vivo y simuladores profesionales.  
-    <br><br>
-    Nuestros instructores cuentan con reconocimiento NFPA y todos nuestros cursos otorgan 
-    constancia DC-3 avalada por la Secretaría del Trabajo y Previsión Social en México, además 
-    de puntos CPD del organismo internacional NICET.
-    <br><br>
-    En FIPTRAC formamos especialistas capaces de operar y mantener correctamente los sistemas 
-    que protegen vidas e infraestructura en situaciones reales.
-  </p>
+<section class="seccion">
+  <div class="contador-wrapper">
+    <div class="contador-box"><div class="contador-num" data-target="1500">0</div><div>Profesionales capacitados</div></div>
+    <div class="contador-box"><div class="contador-num" data-target="45">0</div><div>Empresas aliadas</div></div>
+    <div class="contador-box"><div class="contador-num" data-target="12">0</div><div>Simuladores reales</div></div>
+  </div>
 </section>
 
-
-
-<!-- =====================================================
-     SECCIÓN — NUESTRO ALCANCE (contadores + mapa)
-====================================================== -->
-<section class="alcance fade-in">
-  <h2>Nuestro Alcance</h2>
-
-  <div class="stats">
-    <div class="stat">
-      <b class="counter" data-target="1500">0</b>
-      <small>Profesionales capacitados</small>
-    </div>
-
-    <div class="stat">
-      <b class="counter" data-target="45">0</b>
-      <small>Empresas aliadas</small>
-    </div>
-
-    <div class="stat">
-      <b class="counter" data-target="12">0</b>
-      <small>Simuladores reales</small>
-    </div>
+<section class="nosotros">
+  <img src="assets/img/nosotros.jpg">
+  <div class="nosotros-text">
+    <h2>Sobre Nosotros</h2>
+    <p>Somos un centro especializado en formación técnica avanzada, con certificaciones oficiales, simuladores de última generación y programas desarrollados junto a la industria para garantizar preparación real y profesional.</p>
   </div>
+</section>
 
+<section class="seccion">
+  <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">Nuestro Alcance</h2>
   <div class="mapa-contenedor">
-    <iframe 
-      src="https://script.google.com/macros/s/AKfycbwZYvcoTht_RLGDcZqht3kkdyjRG3IRFWfAOZKacHMovs3JLppr3w4UM5k5xwLOjNUl/exec"
-      allowfullscreen>
-    </iframe>
-  </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     ENTRENAMIENTOS ESPECIALIZADOS
-====================================================== -->
-<section class="card-section fade-in">
-  <h2>Entrenamientos Especializados</h2>
-
-  <div class="grid">
-    <div class="feature">
-      <h3>Laboratorios / Simuladores</h3>
-      <p>Instalaciones reales para prácticas de fuego, bombas, paneles y más.</p>
-      <br>
-      <a href="laboratorios.html" class="btn btn-outline">Ver laboratorios</a>
-    </div>
-
-    <div class="feature">
-      <h3>Cursos</h3>
-      <p>Formación profesional certificada en sistemas contra incendio.</p>
-      <br>
-      <a href="cursos.html" class="btn btn-outline">Ver cursos</a>
-    </div>
-
-    <div class="feature">
-      <h3>Certificaciones</h3>
-      <p>Aval internacional con entidades líderes en protección contra incendio.</p>
-      <br>
-      <a href="certificaciones.html" class="btn btn-outline">Ver certificaciones</a>
-    </div>
-
-    <div class="feature">
-      <h3>Aliados</h3>
-      <p>Empresas que confían en FIPTRAC para capacitar a su personal.</p>
-      <br>
-      <a href="aliados.html" class="btn btn-outline">Ver aliados</a>
-    </div>
+    <iframe src="https://script.google.com/macros/s/AKfycbwZYvcoTht_RLGDcZqht3kkdyjRG3IRFWfAOZKacHMovs3JLppr3w4UM5k5xwLOjNUl/exec"></iframe>
   </div>
 </section>
 
+<section class="entrenamientos">
+  <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">Entrenamientos Especializados</h2>
+  <p style="text-align:center; max-width:800px; margin:auto; margin-top:10px; color:#333;">Programas certificados impartidos por instructores autorizados y tecnología de alto rendimiento.</p>
 
-
-<!-- =====================================================
-     FOOTER
-====================================================== -->
-<footer class="footer">
-  <div class="container footer-grid">
-
-    <div>
-      <img src="assets/images/logo-fiptrac.png" class="footer-logo">
-      <p>Fire Protection Training Center</p>
-      <p>Tepojaco, Tizayuca, Hidalgo 43823, México</p>
-      <p>Tel. +52 5576861184</p>
-    </div>
-
-    <div>
-      <h4>Navegación</h4>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="laboratorios.html">Laboratorios</a></li>
-        <li><a href="cursos.html">Cursos</a></li>
-        <li><a href="certificaciones.html">Certificaciones</a></li>
-        <li><a href="aliados.html">Aliados</a></li>
-        <li><a href="contacto.html">Contáctanos</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h4>Contacto rápido</h4>
-      <p><a href="mailto:fiptrac.platform@gmail.com">fiptrac.platform@gmail.com</a></p>
-      <p><a href="https://wa.me/525576861184?text=Hola%20FIPTRAC,%20quiero%20más%20información." target="_blank">WhatsApp</a></p>
-    </div>
-
+  <div class="ent-grid">
+    <div class="ent-item"><h3>Simulador 360°</h3><p>Experiencias inmersivas para desarrollar habilidades reales en un entorno seguro.</p></div>
+    <div class="ent-item"><h3>Maquinaria Pesada</h3><p>Entrenamientos prácticos con certificación avalada por estándares internacionales.</p></div>
+    <div class="ent-item"><h3>Evaluación de Competencias</h3><p>Diagnóstico profesional de habilidades técnicas con reportes detallados.</p></div>
   </div>
+</section>
 
-  <div class="footer-copy">
-    © 2025 FIPTRAC — Todos los derechos reservados.
-  </div>
+<footer>
+  © 2025 Instituto de Entrenamiento Profesional – Todos los derechos reservados
 </footer>
 
-
-
-
-<!-- =====================================================
-     SCRIPT — Animación de contadores
-====================================================== -->
 <script>
-  const counters = document.querySelectorAll('.counter');
+  document.getElementById('hamburger').addEventListener('click', ()=>{
+    document.getElementById('menu').classList.toggle('show');
+  });
 
-  counters.forEach(counter => {
-    const target = +counter.getAttribute('data-target');
-    let count = 0;
-
-    const update = () => {
-      count += Math.ceil(target / 60);
-      if (count >= target) {
-        counter.textContent = target;
-      } else {
-        counter.textContent = count;
-        requestAnimationFrame(update);
-      }
+  const counters=document.querySelectorAll('.contador-num');
+  counters.forEach(counter=>{
+    const update=()=>{
+      const target=+counter.dataset.target;
+      const count=+counter.innerText;
+      const inc=target/70;
+      if(count<target){ counter.innerText=Math.ceil(count+inc); requestAnimationFrame(update); }
+      else counter.innerText=target;
     };
-
-    const observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
-        update();
-        observer.disconnect();
-      }
-    }, { threshold: 0.4 });
-
-    observer.observe(counter);
+    update();
   });
 </script>
-
 
 </body>
 </html>
