@@ -1,253 +1,260 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instituto de Entrenamiento Profesional</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instituto</title>
 
-  <!-- FUENTES -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+<style>
+    /* ===========================
+       RESET BÁSICO
+    ============================ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-  <!-- CSS GLOBAL -->
-  <link rel="stylesheet" href="assets/css/styles.css" />
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        color: #333;
+    }
 
-  <!-- ESTILOS ESPECÍFICOS DEL INDEX -->
-  <style>
-    /* ===============================
-       HERO INDEX
+    /* ===========================
+       HEADER + MENÚ
+    ============================ */
+    header {
+        background: #002b5b;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
+
+    /* LOGO */
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo-img {
+        height: 60px;
+        width: auto;
+    }
+
+    /* MENÚ */
+    nav ul {
+        display: flex;
+        list-style: none;
+        gap: 25px;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    nav ul li a:hover {
+        opacity: 0.7;
+    }
+
+    /* ==============================
+       MENÚ HAMBURGUESA (MÓVIL)
     =============================== */
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+    }
+    .hamburger div {
+        width: 28px;
+        height: 3px;
+        background: white;
+    }
+
+    /* Oculto en móvil */
+    nav {
+        transition: 0.3s ease;
+    }
+
+    /* ===========================
+       HERO
+    ============================ */
     .hero {
-      background: linear-gradient(rgba(0, 58, 112, 0.78), rgba(0, 58, 112, 0.78)),
-                  url('assets/img/hero.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      padding: 180px 20px 160px 20px;
-      text-align: center;
-      color: white;
+        background: url('assets/images/background.jpg') center/cover no-repeat;
+        padding: 100px 20px;
+        text-align: center;
+        color: white;
     }
+
     .hero h1 {
-      font-size: 48px;
-      font-weight: 800;
+        font-size: 40px;
+        margin-bottom: 10px;
     }
+
     .hero p {
-      font-size: 20px;
-      margin-top: 12px;
-      font-weight: 300;
+        font-size: 20px;
     }
 
-    /* ===============================
+    /* ===========================
        CONTADORES
-    =============================== */
-    .contador-wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 35px;
-      flex-wrap: wrap;
-      margin-top: -60px;
-    }
-    .contador-box {
-      background: white;
-      border-radius: 18px;
-      padding: 28px;
-      width: 170px;
-      text-align: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    }
-    .contador-num {
-      font-size: 46px;
-      font-weight: 700;
-      color: var(--azul);
-    }
-    .contador-label {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--gris-texto);
-      margin-top: 6px;
+    ============================ */
+    .counters {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        padding: 60px 20px;
+        background: white;
     }
 
-
-    /* ==========================================
-       MAPA INTERACTIVO
-    ========================================== */
-    
-    .mapa-contenedor {
-        width: 80%;
-        height: 730px;   /* Puedes ajustar este número, 340–420 funciona muy bien */
-        margin-top: 40px;
-        border-radius: 18px;
-        overflow: hidden;  /* Muy importante para que NO salga scroll */
-        box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+    .counter {
+        text-align: center;
     }
-    .mapa-contenedor iframe {
+
+    .counter h2 {
+        font-size: 45px;
+        color: #002b5b;
+    }
+
+    /* ===========================
+       MAPA RESPONSIVO
+    ============================ */
+    .map-container {
         width: 100%;
-        height: 100%;
+        max-width: 1100px;
+        margin: 40px auto;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .map-container iframe {
+        width: 100%;
+        height: 450px;
         border: none;
     }
 
+    /* ===========================
+       FOOTER
+    ============================ */
+    footer {
+        background: #002b5b;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+    }
 
+    /* ===========================
+       RESPONSIVE
+    ============================ */
+    @media (max-width: 900px) {
+        .hero h1 { font-size: 30px; }
+    }
 
-    /* ===============================
-       ENTRENAMIENTOS
-    =============================== */
-    .entrenamientos {
-      background: var(--gris-suave);
-      border-radius: 20px;
-      padding: 70px 50px;
+    @media (max-width: 700px) {
+
+        /* Menú hamburguesa visible */
+        .hamburger {
+            display: flex;
+        }
+
+        nav {
+            position: absolute;
+            top: 80px;
+            right: 0;
+            background: #002b5b;
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        nav.open {
+            height: 200px;
+            padding-top: 20px;
+        }
+
+        nav ul {
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .counters {
+            flex-direction: column;
+        }
     }
-    .ent-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 35px;
-      margin-top: 40px;
+
+</style>
+
+<script>
+    function toggleMenu() {
+        document.getElementById("nav").classList.toggle("open");
     }
-    .ent-item h3 {
-      color: var(--azul);
-      font-size: 20px;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-  </style>
+</script>
+
 </head>
-
 <body>
 
-  <!-- =============================== -->
-  <!-- HEADER / MENÚ GLOBAL -->
-  <!-- =============================== -->
-  <header class="nav">
-    <div class="nav-container">
-
-      <div class="logo">INSTITUTO</div>
-
-      <nav class="menu">
-        <a href="index.html">Inicio</a>
-        <a href="cursos.html">Cursos</a>
-        <a href="eventos.html">Eventos</a>
-        <a href="certificaciones.html">Certificaciones</a>
-        <a href="laboratorios.html">Laboratorios</a>
-        <a href="aliados.html">Aliados</a>
-        <a href="contacto.html">Contacto</a>
-      </nav>
-
-    </div>
-  </header>
-
-
-
-  <!-- =============================== -->
-  <!-- HERO -->
-  <!-- =============================== -->
-  <section class="hero">
-    <h1>Formación Profesional de Alto Nivel</h1>
-    <p>Capacitación certificada con tecnología avanzada y simuladores reales.</p>
-  </section>
-
-
-
-  <!-- =============================== -->
-  <!-- CONTADORES ANIMADOS -->
-  <!-- =============================== -->
-  <section class="seccion">
-    <div class="contador-wrapper">
-
-      <div class="contador-box">
-        <div class="contador-num" data-target="1500">0</div>
-        <div class="contador-label">Profesionales capacitados</div>
-      </div>
-
-      <div class="contador-box">
-        <div class="contador-num" data-target="45">0</div>
-        <div class="contador-label">Empresas aliadas</div>
-      </div>
-
-      <div class="contador-box">
-        <div class="contador-num" data-target="12">0</div>
-        <div class="contador-label">Simuladores reales</div>
-      </div>
-
-    </div>
-  </section>
-
-  
-
-  <!-- =============================== -->
-  <!-- MAPA INTERACTIVO -->
-  <!-- =============================== -->
-
-  <section id="mapa" class="seccion">
-    <h2 class="titulo-seccion">Nuestro alcance</h2>
-  
-    <div class="mapa-contenedor">
-      <iframe 
-          src="https://script.google.com/macros/s/AKfycbwZYvcoTht_RLGDcZqht3kkdyjRG3IRFWfAOZKacHMovs3JLppr3w4UM5k5xwLOjNUl/exec"
-          frameborder="0"
-          allowfullscreen>
-      </iframe>
-    </div>
-  </section>
-
-  <!-- =============================== -->
-  <!-- ENTRENAMIENTOS -->
-  <!-- =============================== -->
-  <section class="seccion entrenamientos">
-
-    <h2 class="titulo-seccion">Entrenamientos Especializados</h2>
-    <p>Programas de formación certificados, impartidos por instructores autorizados y tecnología de alto rendimiento.</p>
-
-    <div class="ent-grid">
-
-      <div class="card ent-item">
-        <h3>Simulador 360°</h3>
-        <p>Experiencias inmersivas para desarrollar habilidades reales en un entorno seguro.</p>
-      </div>
-
-      <div class="card ent-item">
-        <h3>Operación de Maquinaria Pesada</h3>
-        <p>Entrenamientos prácticos con certificación avalada por estándares internacionales.</p>
-      </div>
-
-      <div class="card ent-item">
-        <h3>Evaluación de Competencias</h3>
-        <p>Diagnóstico profesional de habilidades técnicas con reportes detallados.</p>
-      </div>
-
+<header>
+    <div class="logo">
+        <img src="assets/images/nombre.png" alt="Logo" class="logo-img">
     </div>
 
-  </section>
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div><div></div><div></div>
+    </div>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="#">Programas</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
 
 
-
-  <!-- =============================== -->
-  <!-- FOOTER GLOBAL -->
-  <!-- =============================== -->
-  <footer class="footer">
-    <p>© 2025 Instituto de Entrenamiento Profesional – Todos los derechos reservados</p>
-  </footer>
+<!-- HERO -->
+<section class="hero">
+    <h1>Bienvenido al Instituto</h1>
+    <p>Formando el futuro con excelencia</p>
+</section>
 
 
-  <!-- =============================== -->
-  <!-- SCRIPT DE CONTADORES -->
-  <!-- =============================== -->
-  <script>
-    const counters = document.querySelectorAll('.contador-num');
+<!-- CONTADORES -->
+<section class="counters">
+    <div class="counter">
+        <h2>1500+</h2>
+        <p>Estudiantes</p>
+    </div>
+    <div class="counter">
+        <h2>25</h2>
+        <p>Programas</p>
+    </div>
+    <div class="counter">
+        <h2>10</h2>
+        <p>Años</p>
+    </div>
+</section>
 
-    counters.forEach(counter => {
-      const updateCount = () => {
-        const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-        const increment = target / 70;
 
-        if (count < target) {
-          counter.innerText = Math.ceil(count + increment);
-          requestAnimationFrame(updateCount);
-        } else {
-          counter.innerText = target;
-        }
-      };
-      updateCount();
-    });
-  </script>
+<!-- MAPA RESPONSIVO -->
+<div class="map-container">
+    <iframe src="https://script.google.com/macros/s/AKfycbwZYvcoTht_RLGDcZqht3kkdyjRG3IRFWfAOZKacHMovs3JLppr3w4UM5k5xwLOjNUl/exec"></iframe>
+</div>
+
+
+<footer>
+    © 2025 Instituto — Todos los derechos reservados
+</footer>
 
 </body>
 </html>
