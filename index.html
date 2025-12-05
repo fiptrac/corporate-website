@@ -11,6 +11,15 @@
   <style>
     body { margin:0; font-family: 'Montserrat', sans-serif; }
 
+    /* LOGO tamaño */
+    .logo img {
+      height: 36px;   /* ← AJUSTA AQUÍ EL TAMAÑO DEL LOGO */
+      object-fit: contain;
+    }
+    @media(max-width:850px){
+  .logo img { height: 36px; }
+    }
+
     /* NAV (línea más delgada) */
     .nav-container { 
       max-width:1200px; 
