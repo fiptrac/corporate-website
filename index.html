@@ -8,132 +8,177 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 
-
 <style>
-  body { margin:0; font-family: 'Montserrat', sans-serif; }
+  /* ===========================
+     BASE / TIPOGRAFÍA
+  ============================ */
+  body { margin:0; font-family: 'Montserrat', sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
 
-  /* ===== HEADER STICKY CON EFECTO AL HACER SCROLL ===== */
+  /* ===========================
+     HEADER STICKY (compact & scroll)
+     - header.scrolled: fondo semitransparente + compact
+     - header.nav-hide: se oculta al bajar scroll
+  ============================ */
   header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 999;
-    transition: padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
+    transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
     background: transparent;
   }
 
+  /* Cuando el usuario baja lo volvemos más pequeño / con fondo */
   header.scrolled {
     background: rgba(255,255,255,0.92);
     backdrop-filter: blur(6px);
-    padding: 3px 0 !important; /* aún más delgada cuando baja */
     box-shadow: 0 2px 12px rgba(0,0,0,0.10);
   }
 
-  /* LOGO tamaño */
-  .logo img {
-    height: 30px;
-    object-fit: contain;
-    transition: height 0.25s ease;
+  /* Cuando el usuario baja rápido ocultamos la barra */
+  header.nav-hide {
+    transform: translateY(-110%);
   }
 
-  header.scrolled .logo img {
-    height: 26px; /* más compacto al hacer scroll */
-  }
-
-  @media(max-width:850px){
-    .logo img { height: 36px; }
-    header.scrolled .logo img { height: 32px; }
-  }
-
-  /* NAV (línea más delgada) */
-  .nav-container { 
-    max-width:1200px; 
-    margin:auto; 
-    padding:8px 25px;
-    display:flex; 
-    justify-content:space-between; 
-    align-items:center; 
+  /* Contenedor del nav: aquí se controla el "grosor" de la línea.
+     Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
+  .nav-container {
+    max-width:1200px;
+    margin:auto;
+    padding:8px 25px; /* <-- AJUSTA AQUÍ el grosor vertical del header */
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     transition:padding 0.25s ease;
   }
 
-  .menu { display:flex; gap:25px; }
-  .menu a { text-decoration:none; font-weight:600; color:#003A70; }
+  /* ===========================
+     LOGO (clicable) - tamaño controlable
+     Ajusta height para dejarlo a tu preferencia.
+  ============================ */
+  .logo img {
+    height: 36px; /* <-- AJUSTA AQUÍ el tamaño del logo (desktop) */
+    object-fit: contain;
+    transition: height 0.2s ease;
+    display:block;
+  }
+  @media(max-width:850px){
+    .logo img { height: 32px; } /* logo en móvil */
+  }
 
-  /* MENU MOVIL */
-  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
-  .hamburger span { width:28px; height:3px; background:#003A70; border-radius:4px; }
+  /* ===========================
+     MENÚ
+  ============================ */
+  .menu {
+    display:flex;
+    gap:25px;
+    align-items:center;
+  }
+  .menu a {
+    text-decoration:none;
+    font-weight:600;
+    color:#003A70;
+    padding:6px 8px;
+    border-radius:8px;
+    transition:background .18s, color .18s;
+  }
+  .menu a:hover { background: rgba(0,58,112,0.06); }
+
+  /* ====== HAMBURGER (movil) ====== */
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
+  .hamburger span { width:28px; height:3px; background:#003A70; border-radius:3px; display:block; }
 
   @media(max-width:850px){
-    .menu { 
-      position:absolute; top:75px; right:0; background:white; 
-      width:220px; padding:20px; border-radius:12px; 
-      box-shadow:0 4px 20px rgba(0,0,0,0.15);
-      flex-direction:column; gap:18px; 
-      opacity:0; pointer-events:none; transform:translateY(-10px); transition:0.3s;
+    .menu {
+      position:absolute; top:72px; right:12px; background:white;
+      width:220px; padding:16px; border-radius:12px;
+      box-shadow:0 8px 26px rgba(0,0,0,0.12);
+      flex-direction:column; gap:12px;
+      opacity:0; pointer-events:none; transform:translateY(-6px);
+      transition:opacity .28s, transform .28s;
     }
     .menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
     .hamburger { display:flex; }
   }
 
-  /* ===== HERO MÁS GRANDE Y VISUAL ===== */
-  .hero { 
-    background:linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78)); 
-    background-size:cover;
+  /* ===========================
+     HERO (slider) - más alto e impactante
+  ============================ */
+  .hero {
+    background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
     background-position:center;
-    padding:230px 20px 220px; /* ← más alto e impactante */
-    text-align:center; 
-    color:white;
-  }
-  
-  .hero h1 {
-    font-size:48px;
-    font-weight:800;
-  } 
-  
-  .hero p {
-    margin-top:14px;
-    font-size:20px;
+    background-size:cover;
+    padding:230px 20px 220px; /* alto del hero */
+    text-align:center;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
   }
 
-  @media(max-width:700px){ 
-    .hero h1{ font-size:34px; }
-  }
-  
   .hero-content {
-    max-width:900px;
+    max-width:920px;
     margin:auto;
-    min-height:260px; /* más espacio para los elementos del slider */
+    min-height:260px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     position:relative;
   }
-  
+
   .fade-item {
     position:absolute;
+    left:50%;
+    transform:translateX(-50%);
     opacity:0;
-    transition:opacity 1.8s ease;
+    transition:opacity 1.4s ease, transform 0.6s ease;
     font-size:44px;
     font-weight:700;
+    line-height:1.05;
+    max-width:92%;
   }
-  
+
   .fade-item.active {
     opacity:1;
+    transform:translateX(-50%) translateY(0);
   }
-  
-  /* ===== IMÁGENES DEL SLIDER MÁS GRANDES ===== */
+
+  /* Texto del slider (ajústalo con .fade-item .slide-text) */
+  .fade-item .slide-text {
+    display:block;
+    font-size:38px;
+  }
+  .fade-item p { margin-top:10px; font-size:18px; font-weight:400; color:rgba(255,255,255,0.95); }
+
+  /* ===========================
+     SLIDER: IMÁGENES / CONTROL POR CLASE (TAMAÑOS INDIVIDUALES)
+     - Usa las clases .img-1, .img-2, .img-3, .img-4 en cada <img>
+     - Ajusta width / max-width / height aquí según quieras
+  ============================ */
   .fade-item img {
-    width:320px; /* antes 180px */
-    max-width:70vw;
-    filter:drop-shadow(0 8px 22px rgba(0,0,0,0.45));
-    transition:0.3s ease;
+    display:block;
+    width: 320px;      /* valor por defecto si no se especifica clase */
+    max-width: 68vw;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+    transition: transform .28s ease;
   }
-  
-  @media(max-width:700px){
+
+  /* Tamaños individuales (modifica estos valores libremente) */
+  .fade-item img.img-1 { width: 360px; }   /* imagen 1 */
+  .fade-item img.img-2 { width: 300px; }   /* imagen 2 */
+  .fade-item img.img-3 { width: 420px; }   /* imagen 3 (más grande) */
+  .fade-item img.img-4 { width: 340px; }   /* imagen 4 */
+
+  /* Responsivo: reduce imágenes en móvil */
+  @media (max-width:700px){
     .fade-item { font-size:28px; }
     .fade-item img { width:220px; }
+    .fade-item img.img-1 { width:240px; }
+    .fade-item img.img-2 { width:200px; }
+    .fade-item img.img-3 { width:260px; }
+    .fade-item img.img-4 { width:220px; }
   }
 
   /* CONTADORES */
@@ -163,18 +208,22 @@
 
   footer { text-align:center; margin-top:70px; padding:40px; color:#666; }
 </style>
-
-
-  
 </head>
 
 <body>
 
 <header class="nav">
   <div class="nav-container">
-    <div class="logo"><img src="assets/images/nombre.png"></div>
+    <!-- Logo clicable: vuelve a index.html -->
+    <div class="logo">
+      <a href="index.html" aria-label="Ir al inicio">
+        <img src="assets/images/nombre.png" alt="FIPTRAC - logo">
+      </a>
+    </div>
 
+    <!-- Menú (Eventos permanece incluido) -->
     <nav class="menu" id="menu">
+      <a href="index.html">Inicio</a>
       <a href="cursos.html">Cursos</a>
       <a href="eventos.html">Eventos</a>
       <a href="certificaciones.html">Certificaciones</a>
@@ -183,36 +232,42 @@
       <a href="contacto.html">Contacto</a>
     </nav>
 
-    <div class="hamburger" id="hamburger">
+    <div class="hamburger" id="hamburger" aria-label="Abrir menú">
       <span></span><span></span><span></span>
     </div>
   </div>
 </header>
 
-<section class="hero">
+<!-- HERO / SLIDER -->
+<section class="hero" aria-label="Hero">
   <div class="hero-content">
 
+    <!-- Cada .fade-item puede ser texto o imagen. 
+         Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
     <div class="fade-item active" id="fade1">
-      <h1>Formación Profesional de Alto Nivel</h1>
+      <span class="slide-text">Formación Profesional de Alto Nivel</span>
       <p>Capacitación certificada con tecnología avanzada y simuladores reales.</p>
     </div>
 
     <div class="fade-item" id="fade2">
-      <img src="assets/images/icono.png">
+      <!-- imagen con clase individual img-2 -->
+      <img src="assets/images/icono.png" alt="Icono" class="img-2">
     </div>
 
     <div class="fade-item" id="fade3">
-      Excelencia técnica con estándares internacionales
+      <span class="slide-text">Excelencia técnica con estándares internacionales</span>
+      <p>Instructores certificados NFPA, DC-3 y acreditaciones internacionales.</p>
     </div>
 
     <div class="fade-item" id="fade4">
-      <img src="assets/images/sin fondo.png">
+      <!-- imagen con clase individual img-4 -->
+      <img src="assets/images/sin fondo.png" alt="Logo fondo" class="img-4">
     </div>
 
   </div>
 </section>
 
-
+<!-- CONTADORES (moved below hero) -->
 <section class="seccion">
   <div class="contador-wrapper">
     <div class="contador-box"><div class="contador-num" data-target="1500">0</div><div>Profesionales capacitados</div></div>
@@ -221,21 +276,24 @@
   </div>
 </section>
 
+<!-- SOBRE NOSOTROS -->
 <section class="nosotros">
-  <img src="assets/img/nosotros.jpg">
+  <img src="assets/img/nosotros.jpg" alt="Instalaciones FIPTRAC">
   <div class="nosotros-text">
     <h2>Sobre Nosotros</h2>
-    <p>Somos un centro especializado en formación técnica avanzada, con certificaciones oficiales, simuladores de última generación y programas desarrollados junto a la industria para garantizar preparación real y profesional.</p>
+    <p>FIPTRAC es el centro en Latinoamérica especializado en capacitación técnica para diseño, operación y mantenimiento de sistemas contra incendio. Desde 2020 hemos formado a más de 1200 profesionales de 17 países mediante programas prácticos (Hands On Training) y certificaciones reconocidas.</p>
   </div>
 </section>
 
+<!-- NUESTRO ALCANCE (mapa centrado) -->
 <section class="seccion">
   <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">Nuestro Alcance</h2>
-  <div class="mapa-contenedor">
-    <iframe src="https://script.google.com/macros/s/AKfycbwZYvcoTht_RLGDcZqht3kkdyjRG3IRFWfAOZKacHMovs3JLppr3w4UM5k5xwLOjNUl/exec"></iframe>
+  <div class="mapa-contenedor" aria-label="Mapa interactivo">
+    <iframe src="https://script.google.com/macros/s/AKfycbwZYvcoTht_RLGDcZqht3kkdyjRG3IRFWfAOZKacHMovs3JLppr3w4UM5k5xwLOjNUl/exec" loading="lazy"></iframe>
   </div>
 </section>
 
+<!-- ENTRENAMIENTOS -->
 <section class="entrenamientos">
   <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">Entrenamientos Especializados</h2>
   <p style="text-align:center; max-width:800px; margin:auto; margin-top:10px; color:#333;">Programas certificados impartidos por instructores autorizados y tecnología de alto rendimiento.</p>
@@ -251,11 +309,14 @@
   © 2025 Instituto de Entrenamiento Profesional – Todos los derechos reservados
 </footer>
 
+<!-- ========== SCRIPTS ========== -->
 <script>
+  // HAMBURGER toggle (movil)
   document.getElementById('hamburger').addEventListener('click', ()=>{
     document.getElementById('menu').classList.toggle('show');
   });
 
+  // CONTADORES (simple animation)
   const counters=document.querySelectorAll('.contador-num');
   counters.forEach(counter=>{
     const update=()=>{
@@ -270,6 +331,7 @@
 </script>
 
 <script>
+  // SLIDER / TRANSICIONES
   const items = [
     document.getElementById("fade1"),
     document.getElementById("fade2"),
@@ -278,25 +340,42 @@
   ];
 
   let index = 0;
-
   function changeSlide(){
     items.forEach(i => i.classList.remove("active"));
     items[index].classList.add("active");
-
     index = (index + 1) % items.length;
   }
+  // inicia intercambio (puedes cambiar 3500 a otro valor en ms)
+  let slideInterval = setInterval(changeSlide, 3500);
 
-  setInterval(changeSlide, 3500); // velocidad de transición
+  // si quieres controlar manualmente (ej. pausar on hover) puedes hacerlo:
+  document.querySelector('.hero').addEventListener('mouseenter', ()=> clearInterval(slideInterval));
+  document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 3500));
 </script>
 
- <script>
-window.addEventListener("scroll", () => {
-  const header = document.querySelector("header");
-  if (window.scrollY > 30) header.classList.add("scrolled");
-  else header.classList.remove("scrolled");
-});
+<script>
+  // HEADER: añadir clase .scrolled + comportamiento "hide on scroll"
+  (function(){
+    const header = document.querySelector('header');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const current = window.pageYOffset || document.documentElement.scrollTop;
+      // scrolled style (background + compact)
+      if (current > 30) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+
+      // hide/show on scroll direction
+      if (current > lastScroll && current > 120) {
+        // scrolling down
+        header.classList.add('nav-hide');
+      } else {
+        // scrolling up
+        header.classList.remove('nav-hide');
+      }
+      lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
+    }, { passive: true });
+  })();
 </script>
 
-  
 </body>
 </html>
