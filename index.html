@@ -11,10 +11,15 @@
   <style>
     body { margin:0; font-family: 'Montserrat', sans-serif; }
 
-    /* NAV */
-    .nav { width:100%; background:white; box-shadow:0 3px 15px rgba(0,0,0,0.08); position:fixed; top:0; z-index:20; }
-    .nav-container { max-width:1200px; margin:auto; padding:18px 25px; display:flex; justify-content:space-between; align-items:center; }
-    .logo img { height:48px; }
+    /* NAV (línea más delgada) */
+    .nav-container { 
+      max-width:1200px; 
+      margin:auto; 
+      padding:12px 25px; /* ← AJUSTA EL GROSOR AQUÍ */
+      display:flex; 
+      justify-content:space-between; 
+      align-items:center; 
+    }
 
     .menu { display:flex; gap:25px; }
     .menu a { text-decoration:none; font-weight:600; color:#003A70; }
@@ -29,11 +34,56 @@
       .hamburger { display:flex; }
     }
 
-    /* HERO */
-    .hero { background:linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78)), url('assets/img/hero.jpg'); background-size:cover; background-position:center; padding:180px 20px 170px; text-align:center; color:white; }
-    .hero h1 { font-size:48px; font-weight:800; }
-    .hero p { margin-top:14px; font-size:20px; }
-    @media(max-width:700px){ .hero h1{ font-size:34px; } }
+    /* HERO nuevo con transiciones */
+    .hero { 
+      background:linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78)); 
+      background-size:cover;
+      background-position:center;
+      padding:180px 20px 170px;
+      text-align:center; color:white;
+    }
+    
+    .hero h1 {
+      font-size:48px;
+      font-weight:800;
+    } 
+    
+    .hero p {
+      margin-top:14px;
+      font-size:20px;
+    } @media(max-width:700px){ .hero h1{ font-size:34px; } }
+    
+    .hero-content {
+      max-width:900px;
+      margin:auto;
+      min-height:180px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+    }
+    
+    .fade-item {
+      position:absolute;
+      opacity:0;
+      transition:opacity 1.8s ease;
+      font-size:44px;
+      font-weight:700;
+    }
+    
+    .fade-item.active {
+      opacity:1;
+    }
+    
+    .fade-item img {
+      width:180px;
+      filter:drop-shadow(0 4px 15px rgba(0,0,0,0.45));
+    }
+    
+    @media(max-width:700px){
+      .fade-item { font-size:28px; }
+      .fade-item img { width:130px; }
+    }
 
     /* CONTADORES */
     .contador-wrapper { display:flex; justify-content:center; gap:35px; flex-wrap:wrap; margin-top:-60px; }
@@ -73,6 +123,7 @@
     <nav class="menu" id="menu">
       <a href="index.html">Inicio</a>
       <a href="cursos.html">Cursos</a>
+      <a href="eventos.html">Eventos</a>
       <a href="certificaciones.html">Certificaciones</a>
       <a href="laboratorios.html">Laboratorios</a>
       <a href="aliados.html">Aliados</a>
@@ -86,13 +137,32 @@
 </header>
 
 <section class="hero">
-  <h1>Formación Profesional de Alto Nivel</h1>
-  <p>Capacitación certificada con tecnología avanzada y simuladores reales.</p>
+  <div class="hero-content">
+
+    <div class="fade-item active" id="fade1">
+      <h1>Formación Profesional de Alto Nivel</h1>
+      <p>Capacitación certificada con tecnología avanzada y simuladores reales.</p>
+    </div>
+
+    <div class="fade-item" id="fade2">
+      <img src="assets/images/ícono.png">
+    </div>
+
+    <div class="fade-item" id="fade3">
+      Excelencia técnica con estándares internacionales
+    </div>
+
+    <div class="fade-item" id="fade4">
+      <img src="assets/images/fondo blanco.png">
+    </div>
+
+  </div>
 </section>
+
 
 <section class="seccion">
   <div class="contador-wrapper">
-    <div class="contador-box"><div class="contador-num" data-target="1500">0</div><div>Profesionales capacitados</div></div>
+    <div class="contador-box"><div class="contador-num" data-target="1500">0</div><div>+ Profesionales capacitados</div></div>
     <div class="contador-box"><div class="contador-num" data-target="45">0</div><div>Empresas aliadas</div></div>
     <div class="contador-box"><div class="contador-num" data-target="12">0</div><div>Simuladores reales</div></div>
   </div>
@@ -146,5 +216,26 @@
   });
 </script>
 
+<script>
+  const items = [
+    document.getElementById("fade1"),
+    document.getElementById("fade2"),
+    document.getElementById("fade3"),
+    document.getElementById("fade4")
+  ];
+
+  let index = 0;
+
+  function changeSlide(){
+    items.forEach(i => i.classList.remove("active"));
+    items[index].classList.add("active");
+
+    index = (index + 1) % items.length;
+  }
+
+  setInterval(changeSlide, 3500); // velocidad de transición
+</script>
+
+  
 </body>
 </html>
