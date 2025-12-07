@@ -586,6 +586,16 @@
 <!-- FontAwesome para íconos -->
 <script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
 
+<div id="footer-container"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-container").innerHTML = data;
+    });
+</script>
+
   
 </body>
 </html>
