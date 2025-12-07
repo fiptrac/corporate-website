@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | FIPTRAC</title>
+
+    <!-- Estilos globales -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Ícono -->
+    <link rel="icon" href="assets/img/logo/favicon.png" type="image/png">
+
+    <style>
+        /* ---------------------------
+           ESTILOS LOCALES DE CONTACTO
+        ----------------------------*/
+        .contact-hero {
+            background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),
+                        url('assets/img/header/contacto-bg.jpg') center/cover;
+            padding: 120px 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .contact-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0,0,0,.12);
+        }
+
+        .contact-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: #fafafa;
+            font-size: 16px;
+        }
+
+        form textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--color-primario);
+            color: #fff;
+            border: none;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            margin-top: 10px;
+        }
+
+        .info-box {
+            margin-top: 40px;
+            padding: 25px;
+            background: var(--color-fondo);
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR (opcional si ya lo tienes modular) -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logo/logo.png" alt="FIPTRAC">
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="cursos.html">Cursos</a>
+                <a href="eventos.html">Eventos</a>
+                <a href="laboratorios.html">Laboratorios</a>
+                <a href="aliados.html">Aliados</a>
+                <a href="contacto.html" class="active">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="contact-hero">
+        <h1>Contáctanos</h1>
+        <p>Estamos aquí para ayudarte. Escríbenos y nos pondremos en contacto.</p>
+    </section>
+
+    <!-- FORMULARIO -->
+    <section class="contact-container">
+        <h2>Envíanos un mensaje</h2>
+
+        <form id="contactForm">
+            <!-- Nombre válido -->
+            <input 
+                type="text" 
+                name="nombre" 
+                placeholder="Nombre Completo" 
+                required 
+                pattern="[A-Za-zÀ-ÿ\s]{3,50}"
+                title="Solo letras, mínimo 3 caracteres">
+
+            <!-- Email válido -->
+            <input 
+                type="email" 
+                name="email" 
+                placeholder="Correo Electrónico" 
+                required 
+                title="Ingresa un correo válido">
+
+            <!-- Teléfono internacional -->
+            <input 
+                type="tel"
+                name="telefono"
+                placeholder="Teléfono (con código internacional, ej: +52)"
+                required
+                pattern="^\+[0-9]{6,15}$"
+                title="Debe iniciar con + y contener entre 6 y 15 dígitos">
+
+            <textarea 
+                name="mensaje"
+                placeholder="¿Cómo podemos ayudarte?"
+                required></textarea>
+
+            <button class="btn-primary" type="submit">Enviar por correo</button>
+
+            <button type="button" class="btn-primary btn-whatsapp" id="btnWhatsapp">
+                Enviar por WhatsApp
+            </button>
+        </form>
+
+        <!-- Información adicional -->
+        <div class="info-box">
+            <h3>Datos de contacto</h3>
+            <p><strong>Teléfono:</strong> +52 55 76 86 11 84</p>
+            <p><strong>Correo:</strong> fiptrac.platform@gmail.com</p>
+            <p><strong>Dirección:</strong> Tepojaco, Tizayuca, Hidalgo, México.</p>
+            <p><strong>Horario:</strong> Lunes a Viernes — 08:30 a 16:00</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2025 FIPTRAC — Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- SCRIPT DE ENVÍO -->
+    <script>
+        // --------------------------
+        // ENVÍO A CORREO (Apps Script)
+        // --------------------------
+        document.getElementById("contactForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const datos = {
+                nombre: this.nombre.value,
+                email: this.email.value,
+                telefono: this.telefono.value,
+                mensaje: this.mensaje.value
+            };
+
+            // URL del Apps Script Web App
+            const endpoint = "URL_DE_TU_WEB_APP_AQUI";
+
+            const res = await fetch(endpoint, {
+                method: "POST",
+                body: JSON.stringify(datos),
+                headers: { "Content-Type": "application/json" }
+            });
+
+            if (res.ok) {
+                alert("Mensaje enviado correctamente. ¡Gracias por contactarnos!");
+                this.reset();
+            } else {
+                alert("Hubo un problema al enviar el mensaje.");
+            }
+        });
+
+        // -----------------------------------
+        // ENVÍO POR WHATSAPP
+        // -----------------------------------
+        document.getElementById("btnWhatsapp").addEventListener("click", function () {
+            const nombre = document.querySelector("[name='nombre']").value;
+            const telefono = document.querySelector("[name='telefono']").value;
+            const mensaje = document.querySelector("[name='mensaje']").value;
+
+            const texto = encodeURIComponent(
+                `Hola FIPTRAC, mi nombre es ${nombre}.  
+Mi teléfono es ${telefono}.  
+Quiero solicitar más información:  
+${mensaje}`
+            );
+
+            window.open("https://wa.me/5215576861184?text=" + texto, "_blank");
+        });
+    </script>
+
+</body>
+</html>

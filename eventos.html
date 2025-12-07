@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos FIPTRAC</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+        /* --- ESTILOS ESPECÍFICOS DE EVENTOS (PUEDES MOVER A styles.css) --- */
+        .eventos-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .anio-selector {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .anio-selector select {
+            font-size: 1.1rem;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .calendario {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .evento-card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+            transition: 0.3s;
+            border-left: 6px solid var(--principal);
+        }
+
+        .evento-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .evento-fecha {
+            font-weight: bold;
+            color: var(--principal);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .evento-titulo {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .evento-descripcion {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 12px;
+        }
+
+        .btn-detalles {
+            background: var(--principal);
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .btn-detalles:hover {
+            opacity: 0.9;
+        }
+
+        .detalles {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f7f7f7;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Logo FIPTRAC">
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="eventos.html" class="active">Eventos</a></li>
+                <li><a href="certificaciones.html">Certificaciones</a></li>
+                <li><a href="laboratorios.html">Laboratorios</a></li>
+                <li><a href="aliados.html">Aliados</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="eventos-container">
+        <h1>Eventos FIPTRAC</h1>
+        <p>Aquí encontrarás todos los cursos, certificaciones, congresos y actividades programadas por FIPTRAC.</p>
+
+        <!-- Selector de año -->
+        <div class="anio-selector">
+            <select id="selectAnio" onchange="cargarEventos()">
+                <option value="2025" selected>Calendario 2025</option>
+                <option value="2026">Calendario 2026</option>
+                <option value="2027">Calendario 2027</option>
+            </select>
+        </div>
+
+        <!-- Calendario dinámico -->
+        <div id="contenedorEventos" class="calendario"></div>
+    </main>
+
+    <script>
+        /* ============================
+           BASE DE DATOS DE EVENTOS
+           ============================ */
+
+        const eventos = {
+            "2025": [
+                {
+                    fecha: "12 Enero 2025",
+                    titulo: "Certificación en Sistemas Contra Incendios",
+                    descripcion: "Curso oficial avalado por NFPA. Modalidad presencial.",
+                    detalles: "Duración: 3 días | Requisitos: ninguno | Cupo limitado."
+                },
+                {
+                    fecha: "5 Marzo 2025",
+                    titulo: "Seminario de Alarmas y Detección",
+                    descripcion: "Actualización técnica y normativa para profesionales.",
+                    detalles: "Incluye taller práctico y entrega de constancia."
+                },
+                {
+                    fecha: "22 Julio 2025",
+                    titulo: "Congreso Nacional FIPTRAC",
+                    descripcion: "Reunión anual de expertos en protección contra incendios.",
+                    detalles: "Ponentes internacionales, networking, stands de aliados."
+                }
+            ],
+            "2026": [
+                {
+                    fecha: "10 Febrero 2026",
+                    titulo: "Taller Avanzado de Supresión",
+                    descripcion: "Sesiones técnicas sobre agentes limpios y CO₂.",
+                    detalles: "Incluye simulaciones y prácticas en laboratorio."
+                }
+            ],
+            "2027": []
+        };
+
+        /* ============================
+           FUNCIÓN PARA CARGAR EVENTOS
+           ============================ */
+
+        function cargarEventos() {
+            const year = document.getElementById("selectAnio").value;
+            const contenedor = document.getElementById("contenedorEventos");
+
+            contenedor.innerHTML = ""; // limpiar
+
+            if (eventos[year].length === 0) {
+                contenedor.innerHTML = `<p>No hay eventos registrados para este año.</p>`;
+                return;
+            }
+
+            eventos[year].forEach((evento, index) => {
+                const card = document.createElement("div");
+                card.classList.add("evento-card");
+
+                card.innerHTML = `
+                    <div class="evento-fecha">${evento.fecha}</div>
+                    <div class="evento-titulo">${evento.titulo}</div>
+                    <div class="evento-descripcion">${evento.descripcion}</div>
+
+                    <button class="btn-detalles" onclick="toggleDetalles(${year}, ${index})">
+                        Ver detalles
+                    </button>
+
+                    <div id="detalles-${year}-${index}" class="detalles">
+                        ${evento.detalles}
+                    </div>
+                `;
+
+                contenedor.appendChild(card);
+            });
+        }
+
+        function toggleDetalles(year, index) {
+            const div = document.getElementById(`detalles-${year}-${index}`);
+            div.style.display = div.style.display === "block" ? "none" : "block";
+        }
+
+        // Inicial
+        cargarEventos();
+    </script>
+
+</body>
+</html>

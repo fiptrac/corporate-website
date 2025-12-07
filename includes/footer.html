@@ -1,0 +1,20 @@
+<!-- footer.html -->
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="social">
+<a href="#" target="_blank" aria-label="Facebook">Facebook</a>
+<a href="#" target="_blank" aria-label="Instagram">Instagram</a>
+<a href="#" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+</div>
+<div class="legal">© <span id="year"></span> FIPTRAC — All rights reserved.</div>
+</div>
+</footer>
+
+
+<script>
+// Pequeño script para mostrar año actual
+document.addEventListener('DOMContentLoaded', function(){
+var y = new Date().getFullYear();
+var el = document.getElementById('year'); if (el) el.textContent = y;
+});
+</script>

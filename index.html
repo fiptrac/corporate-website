@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instituto de Entrenamiento Profesional</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+<style>
+  /* ===========================
+     BASE / TIPOGRAFÍA
+  ============================ */
+  body { margin:0; font-family: 'Montserrat', sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+  /* ===========================
+     HEADER STICKY (compact & scroll)
+     - header.scrolled: fondo semitransparente + compact
+     - header.nav-hide: se oculta al bajar scroll
+  ============================ */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
+    background: transparent;
+  }
+
+  /* Cuando el usuario baja lo volvemos más pequeño / con fondo */
+  header.scrolled {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  }
+
+  /* Cuando el usuario baja rápido ocultamos la barra */
+  header.nav-hide {
+    transform: translateY(-110%);
+  }
+
+  /* Contenedor del nav: aquí se controla el "grosor" de la línea.
+     Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
+  .nav-container {
+    max-width:1200px;
+    margin:auto;
+    padding:5px 15px; /* <-- AJUSTA AQUÍ el grosor vertical del header */
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:padding 0.25s ease;
+  }
+
+  /* ===========================
+     LOGO (clicable) - tamaño controlable
+     Ajusta height para dejarlo a tu preferencia.
+  ============================ */
+  .logo img {
+    height: 36px; /* <-- AJUSTA AQUÍ el tamaño del logo (desktop) */
+    object-fit: contain;
+    transition: height 0.2s ease;
+    display:block;
+  }
+  @media(max-width:850px){
+    .logo img { height: 32px; } /* logo en móvil */
+  }
+
+  /* ===========================
+     MENÚ
+  ============================ */
+  .menu {
+    display:flex;
+    gap:25px;
+    align-items:center;
+  }
+  .menu a {
+    text-decoration:none;
+    font-weight:600;
+    color:#003A70;
+    padding:6px 8px;
+    border-radius:8px;
+    transition:background .18s, color .18s;
+  }
+  .menu a:hover { background: rgba(0,58,112,0.06); }
+
+  /* ====== HAMBURGER (movil) ====== */
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
+  .hamburger span { width:28px; height:3px; background:#003A70; border-radius:3px; display:block; }
+
+  @media(max-width:850px){
+    .menu {
+      position:absolute; top:72px; right:12px; background:white;
+      width:220px; padding:16px; border-radius:12px;
+      box-shadow:0 8px 26px rgba(0,0,0,0.12);
+      flex-direction:column; gap:12px;
+      opacity:0; pointer-events:none; transform:translateY(-6px);
+      transition:opacity .28s, transform .28s;
+    }
+    .menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .hamburger { display:flex; }
+  }
+
+  /* ===========================
+     HERO (slider) - más alto e impactante
+  ============================ */
+  .hero {
+    background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
+    background-position:center;
+    background-size:cover;
+    padding:80px 20px 20px; /* alto del hero */
+    text-align:center;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero-content {
+    max-width:1000px;
+    margin:auto;
+    min-height:260px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+  }
+
+  .fade-item {
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:0;
+    transition:opacity 1.4s ease, transform 0.6s ease;
+    font-size:44px;
+    font-weight:700;
+    line-height:1.05;
+    max-width:92%;
+  }
+
+  .fade-item:not(:has(img)) {
+    white-space: normal;
+    text-align:center;
+  }
+
+  .fade-item.active {
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+  /* Texto del slider (ajústalo con .fade-item .slide-text) */
+  .fade-item .slide-text {
+    display:block;
+    font-size:38px;
+  }
+  .fade-item p { margin-top:10px; font-size:18px; font-weight:400; color:rgba(255,255,255,0.95); }
+
+  /* ===========================
+     SLIDER: IMÁGENES / CONTROL POR CLASE (TAMAÑOS INDIVIDUALES)
+     - Usa las clases .img-1, .img-2, .img-3, .img-4 en cada <img>
+     - Ajusta width / max-width / height aquí según quieras
+  ============================ */
+  .fade-item img {
+    display:block;
+    width: 320px;      /* valor por defecto si no se especifica clase */
+    max-width: 68vw;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+    transition: transform .28s ease;
+  }
+
+  /* Tamaños individuales (modifica estos valores libremente) */
+  .fade-item img.img-1 { width: 360px; }   /* imagen 1 */
+  .fade-item img.img-2 { width: 300px; }   /* imagen 2 */
+  .fade-item img.img-3 { width: 420px; }   /* imagen 3 */
+  .fade-item img.img-4 { width: 500px; }   /* imagen 4 */
+
+  /* Responsivo: reduce imágenes en móvil */
+  @media (max-width:700px){
+    .fade-item { font-size:28px; }
+    .fade-item img { width:220px; }
+    .fade-item img.img-1 { width:240px; }
+    .fade-item img.img-2 { width:200px; }
+    .fade-item img.img-3 { width:260px; }
+    .fade-item img.img-4 { width:220px; }
+  }
+
+  /* CONTADORES */
+  .contador-wrapper {
+    display:flex;
+    justify-content:center;
+    gap:35px;
+    flex-wrap:wrap;
+    margin-top:-30px; /* era -60, ya no lo necesitamos tan alto */
+    margin-bottom:20px; /* reduce el hueco hacia abajo */
+  }
+  .contador-box { background:white; border-radius:18px; padding:28px; width:170px; text-align:center; box-shadow:0 6px 20px rgba(0,0,0,0.08); }
+  .contador-num { font-size:46px; color:#003A70; font-weight:700; }
+
+  /* NOSOTROS */
+  .nosotros {
+    max-width:1100px;
+    margin:40px auto; /* antes 80px */
+    padding:0 25px;
+    display:flex;
+    align-items:center;
+    gap:40px; /* un poco más compacto */
+  }
+  .nosotros img { width:48%; border-radius:14px; box-shadow:0 5px 18px rgba(0,0,0,0.1); }
+  .nosotros-text { width:52%; }
+  .nosotros-text h2 { font-size:32px; color:#003A70; font-weight:700; }
+  .nosotros-text p { margin-top:12px; line-height:1.6; color:#333; }
+  .nosotros-text h2,
+  .nosotros-text p {
+    text-align: center;
+  }
+  @media(max-width:850px){ .nosotros{ flex-direction:column; } .nosotros img, .nosotros-text{ width:100%; } }
+
+   /* MAPA */
+  .mapa-contenedor { width:70%; height:680px; margin:60px auto; border-radius:18px; overflow:hidden; box-shadow:0 5px 18px rgba(0,0,0,0.08); }
+  @media(max-width:900px){ .mapa-contenedor{ height:420px; width:90%; } }
+  @media(max-width:600px){ .mapa-contenedor{ height:360px; width:94%; } }
+  .mapa-contenedor iframe{ width:100%; height:100%; border:none; }
+
+ 
+  /* ENTRENAMIENTOS */
+  .entrenamientos { background:#f4f4f4; padding:80px 40px; border-radius:20px; max-width:1200px; margin:60px auto; }
+  .ent-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:30px; margin-top:40px; }
+  .ent-item { background:white; padding:25px; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,0.08); }
+  .ent-item h3 { color:#003A70; margin-bottom:10px; }
+  .ent-item h3,
+  .ent-item p {
+    text-align: center;
+  }
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<header class="nav">
+  <div class="nav-container">
+    <!-- Logo clicable: vuelve a index.html -->
+    <div class="logo">
+      <a href="index.html" aria-label="Ir al inicio">
+        <img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
+      </a>
+    </div>
+
+    <!-- Menú (Eventos permanece incluido) -->
+    <nav class="menu" id="menu">
+      <a href="cursos.html">Cursos</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="certificaciones.html">Certificaciones</a>
+      <a href="laboratorios.html">Laboratorios</a>
+      <a href="aliados.html">Alianzas Comerciales</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO / SLIDER -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-content">
+
+    <!-- Cada .fade-item puede ser texto o imagen. 
+         Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
+    <div class="fade-item active" id="fade1">
+      <span class="slide-text">Formación Profesional de Alto Nivel</span>
+      <p>Capacitación certificada con tecnología avanzada y simuladores reales.</p>
+    </div>
+
+    <div class="fade-item" id="fade2">
+      <!-- imagen con clase individual img-2 -->
+      <img src="assets/images/icono.png" alt="Icono" class="img-2">
+    </div>
+
+    <div class="fade-item" id="fade3">
+      <span class="slide-text">Excelencia técnica con estándares internacionales</span>
+      <p>Instructores certificados NFPA, DC-3 y acreditaciones internacionales.</p>
+    </div>
+
+    <div class="fade-item" id="fade4">
+      <!-- imagen con clase individual img-4 -->
+      <img src="assets/images/sin fondo.png" alt="Logo fondo" class="img-4">
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTADORES (moved below hero) -->
+<section class="seccion">
+  <div class="contador-wrapper">
+    <div class="contador-box"><div class="contador-num" data-target="2000">0</div><div>Profesionales capacitados</div></div>
+    <div class="contador-box"><div class="contador-num" data-target="45">0</div><div>Empresas aliadas</div></div>
+    <div class="contador-box"><div class="contador-num" data-target="20">0</div><div>Países cubiertos</div></div>
+  </div>
+</section>
+
+<!-- SOBRE NOSOTROS -->
+<section class="nosotros">
+  <img src="assets/img/nosotros.jpg" alt="Instalaciones FIPTRAC">
+  <div class="nosotros-text">
+    <h2>Sobre Nosotros</h2>
+    <p>FIPTRAC es el centro en Latinoamérica especializado en capacitación técnica para diseño, operación y mantenimiento de sistemas contra incendio. Desde 2020 hemos formado a más de 1200 profesionales de 17 países mediante programas prácticos (Hands On Training) y certificaciones reconocidas.</p>
+  </div>
+</section>
+
+<!-- NUESTRO ALCANCE (mapa centrado) -->
+<section class="seccion">
+  <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">Nuestro Alcance</h2>
+  <div class="mapa-contenedor" aria-label="Mapa interactivo">
+    <iframe src="https://script.google.com/macros/s/AKfycbwZYvcoTht_RLGDcZqht3kkdyjRG3IRFWfAOZKacHMovs3JLppr3w4UM5k5xwLOjNUl/exec" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- ENTRENAMIENTOS -->
+<section class="entrenamientos">
+  <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">Entrenamientos Especializados</h2>
+  <p style="text-align:center; max-width:800px; margin:auto; margin-top:10px; color:#333;">Programas certificados impartidos por instructores autorizados y tecnología de alto rendimiento.</p>
+
+  <div class="ent-grid">
+    <div class="ent-item"><h3>Simulador 360°</h3><p>Experiencias inmersivas para desarrollar habilidades reales en un entorno seguro.</p></div>
+    <div class="ent-item"><h3>Laboratorios Especializados</h3><p>Entrenamientos prácticos con certificación avalada por estándares internacionales.</p></div>
+    <div class="ent-item"><h3>Evaluación de Competencias</h3><p>Diagnóstico profesional de habilidades técnicas con reportes detallados.</p></div>
+  </div>
+</section>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+  // HAMBURGER toggle (movil)
+  document.getElementById('hamburger').addEventListener('click', ()=>{
+    document.getElementById('menu').classList.toggle('show');
+  });
+
+  // CONTADORES (simple animation)
+  const counters=document.querySelectorAll('.contador-num');
+  counters.forEach(counter=>{
+    const update=()=>{
+      const target=+counter.dataset.target;
+      const count=+counter.innerText;
+      const inc=target/70;
+      if(count<target){ counter.innerText=Math.ceil(count+inc); requestAnimationFrame(update); }
+      else counter.innerText=target;
+    };
+    update();
+  });
+</script>
+
+<script>
+  // SLIDER / TRANSICIONES
+  const items = [
+    document.getElementById("fade1"),
+    document.getElementById("fade2"),
+    document.getElementById("fade3"),
+    document.getElementById("fade4")
+  ];
+
+  let index = 0;
+  function changeSlide(){
+    items.forEach(i => i.classList.remove("active"));
+    items[index].classList.add("active");
+    index = (index + 1) % items.length;
+  }
+  // inicia intercambio (puedes cambiar 3500 a otro valor en ms)
+  let slideInterval = setInterval(changeSlide, 3500);
+
+  // si quieres controlar manualmente (ej. pausar on hover) puedes hacerlo:
+  document.querySelector('.hero').addEventListener('mouseenter', ()=> clearInterval(slideInterval));
+  document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 3500));
+</script>
+
+<script>
+  // HEADER: añadir clase .scrolled + comportamiento "hide on scroll"
+  (function(){
+    const header = document.querySelector('header');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const current = window.pageYOffset || document.documentElement.scrollTop;
+      // scrolled style (background + compact)
+      if (current > 30) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+
+      // hide/show on scroll direction
+      if (current > lastScroll && current > 120) {
+        // scrolling down
+        header.classList.add('nav-hide');
+      } else {
+        // scrolling up
+        header.classList.remove('nav-hide');
+      }
+      lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
+    }, { passive: true });
+  })();
+</script>
+
+<script>
+  const openPriv = document.getElementById("openPrivacidad");
+  const closePriv = document.getElementById("closePrivacidad");
+  const popup = document.getElementById("popupPrivacidad");
+
+  openPriv.addEventListener("click", (e) => {
+    e.preventDefault();
+    popup.style.display = "flex";
+  });
+
+  closePriv.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === popup) popup.style.display = "none";
+  });
+</script>
+
+<!-- FontAwesome para íconos -->
+<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
+
+<div id="footer-container"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-container").innerHTML = data;
+    });
+</script>
+
+  
+</body>
+</html>

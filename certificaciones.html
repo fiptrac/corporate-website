@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificaciones | FIPTRAC</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* ===== ESTILOS ESPECÍFICOS PARA CERTIFICACIONES ===== */
+
+        .cert-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .cert-grid {
+            margin-top: 35px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 25px;
+        }
+
+        .cert-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            border-left: 6px solid var(--principal);
+            transition: 0.25s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.16);
+        }
+
+        .cert-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--texto);
+        }
+
+        .cert-desc {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .btn-pdf {
+            background: var(--principal);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: 0.2s ease;
+        }
+
+        .btn-pdf:hover {
+            opacity: 0.88;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Logo FIPTRAC">
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="eventos.html">Eventos</a></li>
+                <li><a href="certificaciones.html" class="active">Certificaciones</a></li>
+                <li><a href="laboratorios.html">Laboratorios</a></li>
+                <li><a href="aliados.html">Aliados</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="cert-container">
+        <h1>Certificaciones FIPTRAC</h1>
+        <p>Contamos con certificaciones oficiales reconocidas internacionalmente, avaladas por NFPA, NICET y la Secretaría del Trabajo y Previsión Social (STPS).  
+        Todas nuestras certificaciones están diseñadas para garantizar competencias técnicas reales aplicables al campo laboral.</p>
+
+        <!-- TARJETAS DINÁMICAS -->
+        <div class="cert-grid">
+            <!-- CERTIFICACIÓN 1 -->
+            <div class="cert-card">
+                <div class="cert-title">Certificación en Sistemas de Rociadores</div>
+                <div class="cert-desc">
+                    Alineada a los estándares NFPA 13. Incluye entrenamiento práctico con equipos reales y evaluación final.
+                </div>
+                <a class="btn-pdf" href="assets/pdf/cert-rociadores.pdf" target="_blank">
+                    Descargar PDF
+                </a>
+            </div>
+
+            <!-- CERTIFICACIÓN 2 -->
+            <div class="cert-card">
+                <div class="cert-title">Certificación en Bombas Contra Incendios</div>
+                <div class="cert-desc">
+                    Basada en NFPA 20 y NFPA 25. Entrenamiento en operación, mantenimiento y diagnóstico.
+                </div>
+                <a class="btn-pdf" href="assets/pdf/cert-bombas.pdf" target="_blank">
+                    Descargar PDF
+                </a>
+            </div>
+
+            <!-- CERTIFICACIÓN 3 -->
+            <div class="cert-card">
+                <div class="cert-title">Certificación en Sistemas de Supresión</div>
+                <div class="cert-desc">
+                    Incluye agentes limpios, CO₂, FM-200 y novec. Prácticas en laboratorios especializados.
+                </div>
+                <a class="btn-pdf" href="assets/pdf/cert-supresion.pdf" target="_blank">
+                    Descargar PDF
+                </a>
+            </div>
+
+            <!-- CERTIFICACIÓN 4 -->
+            <div class="cert-card">
+                <div class="cert-title">Certificación en Alarmas y Detección</div>
+                <div class="cert-desc">
+                    Basada en NFPA 72. Capacitación práctica, programación y pruebas funcionales.
+                </div>
+                <a class="btn-pdf" href="assets/pdf/cert-alarmas.pdf" target="_blank">
+                    Descargar PDF
+                </a>
+            </div>
+
+            <!-- CERTIFICACIÓN 5 -->
+            <div class="cert-card">
+                <div class="cert-title">Certificación STPS DC-3</div>
+                <div class="cert-desc">
+                    Certificación laboral válida en todo México. Competencias técnicas en sistemas contra incendio.
+                </div>
+                <a class="btn-pdf" href="assets/pdf/cert-dc3.pdf" target="_blank">
+                    Descargar PDF
+                </a>
+            </div>
+
+            <!-- CERTIFICACIÓN 6 -->
+            <div class="cert-card">
+                <div class="cert-title">Certificación Internacional NICET (CPD)</div>
+                <div class="cert-desc">
+                    Programas con puntos de desarrollo profesional continuo reconocidos internacionalmente.
+                </div>
+                <a class="btn-pdf" href="assets/pdf/cert-nicet.pdf" target="_blank">
+                    Descargar PDF
+                </a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
