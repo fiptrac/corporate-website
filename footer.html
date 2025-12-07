@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Footer FIPTRAC</title>
+
+<!-- FUENTE GLOBAL -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- ICONOS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ======================== */
+/* ESTILOS DEL FOOTER */
+/* ======================== */
+
+.footer {
+  background:#00294d;
+  color:white;
+  padding:50px 25px;
+  font-family:'Montserrat', sans-serif;
+}
+
+.footer-container {
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:40px;
+}
+
+/* COLUMNA IZQUIERDA */
+.footer-left {
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  text-align:center;          /* ← CENTRADO */
+  align-items:center;          /* ← CENTRADO */
+}
+
+/* Íconos redes */
+.footer-social {
+  display:flex;
+  gap:18px;
+  justify-content:center;      /* ← CENTRADO */
+}
+
+.footer-social a {
+  color:white;
+  font-size:26px;
+  transition:0.3s;
+}
+
+.footer-social a:hover {
+  color:#1da1f2;
+  transform:scale(1.15);
+}
+
+/* CONTACTO */
+.footer-contact div {
+  margin:6px 0;
+  font-size:15px;
+}
+
+.footer-contact i {
+  margin-right:8px;
+}
+
+/* COLUMNA DERECHA */
+.footer-right {
+  text-align:center;           /* ← CENTRADO */
+  font-size:15px;
+  align-items:center;
+}
+
+.footer-right a {
+  color:#75c7ff;
+  cursor:pointer;
+  text-decoration:underline;
+}
+
+.footer-bottom {
+  margin-top:35px;
+  text-align:center;
+  font-size:13px;
+  opacity:0.8;
+}
+
+
+
+/* ===========================================
+   POPUP UNIFICADO PREMIUM 
+=========================================== */
+
+.fiptrac-overlay {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.fiptrac-popup {
+  background:#fff;
+  max-width:550px;
+  width:92%;
+  padding:30px 35px;
+  border-radius:16px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.18);
+  animation:popupEnter .35s ease;
+  font-family:'Montserrat', sans-serif;
+  position:relative;
+}
+
+@keyframes popupEnter {
+  from { transform:scale(.85); opacity:0; }
+  to   { transform:scale(1); opacity:1; }
+}
+
+.fiptrac-popup h2 {
+  margin-bottom:14px;
+  color:#003A70;
+  font-size:24px;
+  font-weight:700;
+  text-align:center;
+}
+
+.fiptrac-popup p {
+  margin-top:8px;
+  line-height:1.55;
+  color:#333;
+}
+
+.fiptrac-close {
+  position:absolute;
+  top:18px;
+  right:22px;
+  font-size:22px;
+  color:#003A70;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.fiptrac-close:hover {
+  color:#0074D9;
+  transform:scale(1.15);
+}
+
+/* FORMULARIO */
+
+.fiptrac-form-group { margin-top:10px; }
+
+.fiptrac-form-group input,
+.fiptrac-form-group textarea {
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid #CCC;
+  font-size:15px;
+  margin-top:6px;
+  outline:none;
+  transition:.3s;
+}
+
+.fiptrac-form-group input:focus,
+.fiptrac-form-group textarea:focus {
+  border-color:#003A70;
+}
+
+.fiptrac-btn {
+  display:block;
+  width:100%;
+  margin-top:22px;
+  padding:13px;
+  background:#003A70;
+  color:#fff;
+  font-weight:700;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  transition:.3s;
+  font-size:16px;
+}
+
+.fiptrac-btn:hover {
+  background:#005A9C;
+}
+
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .footer-container {
+    text-align:center;
+    flex-direction:column;
+    align-items:center;
+  }
+  .footer-right {
+    text-align:center;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ==================================== -->
+<!-- FOOTER -->
+<!-- ==================================== -->
+
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- IZQUIERDA -->
+    <div class="footer-left">
+
+      <div class="footer-social">
+        <a href="https://www.facebook.com/fiptrac/" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/fiptracmx" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/fiptracmx/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.youtube.com/channel/UC2ha_K6AIBIjV_fGwbmXFmw/featured" target="_blank"><i class="fab fa-youtube"></i></a>
+
+        <a href="https://wa.me/525576861184?text=Hola%20FIPTRAC,%20solicito%20información" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+
+        <a onclick="abrirPopup('popup-contacto')" style="cursor:pointer;">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </div>
+
+      <div class="footer-contact">
+        <div><i class="fa-solid fa-phone"></i> +52 55 7686 1184</div>
+      </div>
+
+    </div>
+
+    <!-- DERECHA -->
+    <div class="footer-right">
+      <div>Fraccionamiento Tepojaco, Hidalgo 43823, México</div>
+      <div style="margin-top:10px;">
+        <a onclick="abrirPopup('popup-privacidad')">Política de privacidad</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 Instituto de Entrenamiento Profesional – Todos los derechos reservados
+  </div>
+</footer>
+
+
+
+<!-- ==================================== -->
+<!-- POPUP — POLÍTICA DE PRIVACIDAD -->
+<!-- ==================================== -->
+
+<div id="popup-privacidad" class="fiptrac-overlay">
+  <div class="fiptrac-popup">
+    <span class="fiptrac-close" onclick="cerrarPopup('popup-privacidad')">&times;</span>
+    <h2>Política de Privacidad</h2>
+    <p>
+      De acuerdo a lo previsto en la “Ley Federal de Protección de Datos Personales”, Fire Protection Training Center
+      FIPTRAC SC ® se declara responsable del uso de sus datos y hace de su conocimiento que la información que usted
+      proporcione será tratada de forma estrictamente confidencial.
+      <br><br>
+      1. Reunimos información no personal del navegador y sistema operativo para administración del sitio web.<br><br>
+      2. Los datos ingresados en formularios se utilizan únicamente para establecer contacto relacionado con solicitudes,
+      envíos de información y finalidades compatibles.<br><br>
+      3. No difundimos ni comercializamos sus datos. Usted tiene derechos ARCO en cualquier momento.<br><br>
+      4. Puede solicitar baja de la base de datos vía correo a contacto@fiptrac.com o al teléfono 55 7686 1184.<br><br>
+      Este aviso podrá ser modificado y publicado en www.fiptrac.com.
+    </p>
+  </div>
+</div>
+
+
+
+<!-- ==================================== -->
+<!-- POPUP — FORMULARIO DE CONTACTO -->
+<!-- ==================================== -->
+
+<div id="popup-contacto" class="fiptrac-overlay">
+  <div class="fiptrac-popup">
+    <span class="fiptrac-close" onclick="cerrarPopup('popup-contacto')">&times;</span>
+    <h2>Solicitar Información</h2>
+
+    <div class="fiptrac-form-group">
+      <label>Nombre completo *</label>
+      <input id="c-nombre" type="text">
+    </div>
+
+    <div class="fiptrac-form-group">
+      <label>Cargo / Área *</label>
+      <input id="c-cargo" type="text">
+    </div>
+
+    <div class="fiptrac-form-group">
+      <label>Empresa *</label>
+      <input id="c-empresa" type="text">
+    </div>
+
+    <div class="fiptrac-form-group">
+      <label>Estado o País *</label>
+      <input id="c-ubicacion" type="text">
+    </div>
+
+    <div class="fiptrac-form-group">
+      <label>Teléfono *</label>
+      <input id="c-telefono" type="text">
+    </div>
+
+    <div class="fiptrac-form-group">
+      <label>Correo electrónico *</label>
+      <input id="c-email" type="email">
+    </div>
+
+    <div class="fiptrac-form-group">
+      <label>Mensaje *</label>
+      <textarea id="c-mensaje" rows="4"></textarea>
+    </div>
+
+    <button class="fiptrac-btn" onclick="enviarCorreo()">Enviar solicitud</button>
+  </div>
+</div>
+
+
+
+<!-- ==================================== -->
+<!-- SCRIPTS -->
+<!-- ==================================== -->
+
+<script>
+function abrirPopup(id){
+  document.getElementById(id).style.display = "flex";
+}
+
+function cerrarPopup(id){
+  document.getElementById(id).style.display = "none";
+}
+
+function enviarCorreo() {
+  const campos = {
+    nombre: document.getElementById("c-nombre").value.trim(),
+    cargo: document.getElementById("c-cargo").value.trim(),
+    empresa: document.getElementById("c-empresa").value.trim(),
+    ubicacion: document.getElementById("c-ubicacion").value.trim(),
+    telefono: document.getElementById("c-telefono").value.trim(),
+    email: document.getElementById("c-email").value.trim(),
+    mensaje: document.getElementById("c-mensaje").value.trim(),
+  };
+
+  for (const key in campos) {
+    if (!campos[key]) {
+      alert("Por favor completa todos los campos obligatorios.");
+      return;
+    }
+  }
+
+  const subject = encodeURIComponent("SOLICITUD DE CONTACTO - FIPTRAC");
+  const body = encodeURIComponent(
+    `Nombre: ${campos.nombre}\nCargo: ${campos.cargo}\nEmpresa: ${campos.empresa}\nUbicación: ${campos.ubicacion}\nTeléfono: ${campos.telefono}\nCorreo: ${campos.email}\n\nMensaje:\n${campos.mensaje}`
+  );
+
+  window.location.href = `mailto:fiptrac.platform@gmail.com?subject=${subject}&body=${body}`;
+  cerrarPopup('popup-contacto');
+}
+</script>
+
+</body>
+</html>
