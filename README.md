@@ -19,15 +19,13 @@ corporate-website/
 ├── assets/
 │   ├── css/
 │   │   └── styles.css
-│   ├── js/
-│   │   └── main.js
-│   └── img/
-│       └── logo.png
-│
-├── gs/
-│   └── Code.gs
+│   ├── img/
+│   │   └── logo.png   ← (usa aquí la imagen que subiste)
+│   └── js/
+│       └── main.js
 │
 └── README.md
+
 ```
 
 
