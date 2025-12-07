@@ -31,20 +31,33 @@
   gap:40px;
 }
 
+/* LOGO CENTRAL */
+.footer-logo {
+  width:100%;
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.footer-logo img {
+  width:100px;
+  height:auto;
+  filter:drop-shadow(0 0 4px rgba(255,255,255,0.5));
+}
+
 /* COLUMNA IZQUIERDA */
 .footer-left {
   display:flex;
   flex-direction:column;
   gap:20px;
-  text-align:center;          /* ← CENTRADO */
-  align-items:center;          /* ← CENTRADO */
+  text-align:center;
+  align-items:center;
 }
 
 /* Íconos redes */
 .footer-social {
   display:flex;
   gap:18px;
-  justify-content:center;      /* ← CENTRADO */
+  justify-content:center;
 }
 
 .footer-social a {
@@ -70,9 +83,10 @@
 
 /* COLUMNA DERECHA */
 .footer-right {
-  text-align:center;           /* ← CENTRADO */
+  text-align:center;
   font-size:15px;
   align-items:center;
+  white-space:pre-line;        /* ← Mantiene los saltos de línea */
 }
 
 .footer-right a {
@@ -213,6 +227,12 @@
 <!-- ==================================== -->
 
 <footer class="footer">
+
+  <!-- LOGO CENTRADO -->
+  <div class="footer-logo">
+    <img src="sin fondo.png" alt="FIPTRAC">
+  </div>
+
   <div class="footer-container">
 
     <!-- IZQUIERDA -->
@@ -242,10 +262,11 @@
     <!-- DERECHA -->
     <div class="footer-right">
       <div>
-Fraccionamiento Plutarco Elías Calles
-Lote 10, Tepojaco 43823
+Fraccionamiento Plutarco Elías Calles  
+Lote 10, Tepojaco 43823  
 Corredor Industrial Huitzila Tepojaco, Hidalgo.
       </div>
+
       <div style="margin-top:10px;">
         <a onclick="abrirPopup('popup-privacidad')">Política de privacidad</a>
       </div>
@@ -269,15 +290,12 @@ Corredor Industrial Huitzila Tepojaco, Hidalgo.
     <span class="fiptrac-close" onclick="cerrarPopup('popup-privacidad')">&times;</span>
     <h2>Política de Privacidad</h2>
     <p>
-      De acuerdo a lo previsto en la “Ley Federal de Protección de Datos Personales”, Fire Protection Training Center
-      FIPTRAC SC ® se declara responsable del uso de sus datos y hace de su conocimiento que la información que usted
-      proporcione será tratada de forma estrictamente confidencial.
+      De acuerdo a la Ley Federal de Protección de Datos Personales, Fire Protection Training Center FIPTRAC SC® es responsable del uso y tratamiento de los datos personales proporcionados.  
       <br><br>
-      1. Reunimos información no personal del navegador y sistema operativo para administración del sitio web.<br><br>
-      2. Los datos ingresados en formularios se utilizan únicamente para establecer contacto relacionado con solicitudes,
-      envíos de información y finalidades compatibles.<br><br>
-      3. No difundimos ni comercializamos sus datos. Usted tiene derechos ARCO en cualquier momento.<br><br>
-      4. Puede solicitar baja de la base de datos vía correo a contacto@fiptrac.com o al teléfono 55 7686 1184.<br><br>
+      La información proporcionada será utilizada únicamente con fines de contacto, seguimiento, envío de información o finalidades compatibles.  
+      <br><br>
+      Usted puede ejercer sus derechos ARCO o solicitar baja de nuestra base de datos enviando un correo a contacto@fiptrac.com o llamando al 55 7686 1184.  
+      <br><br>
       Este aviso podrá ser modificado y publicado en www.fiptrac.com.
     </p>
   </div>
