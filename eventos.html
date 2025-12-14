@@ -9,19 +9,25 @@
 
 <style>
 body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
-.eventos{max-width:1200px;margin:120px auto;padding:20px}
+.eventos{max-width:1200px;margin:140px auto 80px;padding:20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
-.card{background:#fff;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,.1);overflow:hidden}
+.card{background:#fff;border-radius:18px;box-shadow:0 8px 22px rgba(0,0,0,.1);overflow:hidden;text-align:center;transition:transform .25s ease,box-shadow .25s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,.16)}
 .card img{width:100%;height:180px;object-fit:cover}
-.card-body{padding:20px}
-.card h3{color:#003A70}
-.btn{display:inline-block;margin-top:10px;padding:10px 16px;border-radius:8px;background:#003A70;color:#fff;text-decoration:none;cursor:pointer}
+.card-body{padding:22px;display:flex;flex-direction:column;align-items:center}
+.card h3{color:#003A70;margin-bottom:8px}
+.card p{margin:6px 0;color:#333}
+.btn-group{display:flex;gap:12px;margin-top:14px}
+.btn{padding:10px 18px;border-radius:10px;background:#003A70;color:#fff;text-decoration:none;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.25);background:#002b55}
 
 
 /* POPUP */
 .popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);align-items:center;justify-content:center;z-index:9999}
-.popup form{background:#fff;padding:25px;border-radius:16px;max-width:500px;width:90%}
-.popup input,.popup select{width:100%;padding:10px;margin:6px 0}
+.popup form{background:#fff;padding:28px;border-radius:18px;max-width:520px;width:92%}
+.popup h3{text-align:center;color:#003A70;margin-bottom:10px}
+.popup input,.popup select{width:100%;padding:11px;margin:7px 0;border-radius:8px;border:1px solid #ccc}
+.popup button{width:100%;margin-top:10px}
 </style>
 </head>
 
@@ -30,7 +36,7 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 
 
 <section class="eventos">
-<h1>Eventos y Cursos</h1>
+<h1 style="text-align:center;color:#003A70">Eventos y Cursos</h1>
 <div class="grid" id="grid"></div>
 </section>
 
@@ -78,16 +84,24 @@ fetch(API)
 .then(data=>{
 const grid=document.getElementById('grid');
 data.forEach(ev=>{
+const fecha = new Date(ev.FECHA).toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
+const duracion = new Date(ev.DURACIÓN);
+const horas = duracion.getHours();
+const minutos = duracion.getMinutes();
+
+
 grid.innerHTML+=`
 <div class="card">
-<img src="assets/images/eventos/${ev.NOMBRE}.jpg">
+<img src="assets/images/eventos/${ev.NOMBRE}.jpg" alt="${ev.NOMBRE}">
 <div class="card-body">
 <h3>${ev.NOMBRE}</h3>
 <p>${ev.DESCRIPCIÓN}</p>
-<p><b>Fecha:</b> ${ev.FECHA}</p>
-<p><b>Duración:</b> ${ev.DURACIÓN} hrs</p>
+<p><b>Fecha:</b> ${fecha}</p>
+<p><b>Duración:</b> ${horas}h ${minutos}m</p>
+<div class="btn-group">
 <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
 <button class="btn" onclick="inscribirse('${ev.NOMBRE}')">Inscribirse</button>
+</div>
 </div>
 </div>`;
 })
