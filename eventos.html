@@ -171,7 +171,20 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 
 <!-- POPUP FORM -->
 <div class="popup" id="popup">
-<form id="form">
+<form id="form" style="position:relative">
+<button type="button" id="closePopup"
+  style="
+    position:absolute;
+    top:14px;
+    right:16px;
+    background:none;
+    border:none;
+    font-size:22px;
+    cursor:pointer;
+    color:#003A70;
+  "
+  aria-label="Cerrar formulario">✕</button>
+
 <h3 id="cursoTitulo"></h3>
 <input type="email" name="correo" placeholder="Correo" required>
 <input type="text" name="nombre" placeholder="NOMBRE COMPLETO" required oninput="this.value=this.value.toUpperCase()">
@@ -196,8 +209,17 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 <option>Chica</option><option>Mediana</option><option>Grande</option><option>Extra Grande</option>
 </select>
 
+<div id="costoCurso"
+     style="margin-top:14px;font-weight:600;color:#003A70;text-align:center">
+</div>
 
-<button class="btn">Enviar inscripción</button>
+<p style="font-size:13px;text-align:center;color:#555;margin-top:6px">
+Después de solicitar su inscripción, recibirá un correo con el enlace de pago
+para finalizar el proceso.
+</p>
+
+<button class="btn" onclick="inscribirse('${ev.NOMBRE}', '${ev['COSTO MXN']}')">Solicitar inscripción</button>
+<!-- <button class="btn">Solicitar inscripción</button> -->
 </form>
 </div>
 
@@ -275,11 +297,16 @@ grid.innerHTML+=`
 });
 
 
-function inscribirse(nombre){
-cursoActual=nombre;
-document.getElementById('cursoTitulo').innerText=nombre;
-document.getElementById('popup').style.display='flex';
+function inscribirse(nombre, costo){
+  cursoActual = nombre;
+  document.getElementById('cursoTitulo').innerText = nombre;
+
+  document.getElementById('costoCurso').innerHTML =
+    `Costo del curso: <b>$${Number(costo).toLocaleString('es-MX')} MXN</b>`;
+
+  document.getElementById('popup').style.display = 'flex';
 }
+
 
 
 const form=document.getElementById('form');
@@ -299,6 +326,35 @@ document.getElementById('popup').style.display='none';
 </script>
 
 
+<!-- CERRAR FORM -->
+   <script>
+  const popup = document.getElementById('popup');
+  const closeBtn = document.getElementById('closePopup');
+
+  function cerrarPopup(){
+    popup.style.display = 'none';
+  }
+
+  // Click en botón ✕
+  closeBtn.addEventListener('click', cerrarPopup);
+
+  // Click fuera del formulario
+  popup.addEventListener('click', (e)=>{
+    if(e.target === popup){
+      cerrarPopup();
+    }
+  });
+
+  // Tecla ESC
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+      cerrarPopup();
+    }
+  });
+</script>
+
+
+  
 
 <!-- FOOTER: FontAwesome para íconos -->
 <script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
