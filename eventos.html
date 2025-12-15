@@ -292,6 +292,19 @@ fetch(API)
       const horas = duracion.getHours();
       const minutos = duracion.getMinutes();
 
+
+            /*
+            OPCIONALMENTE AGREGAR EL COSTO EN LAS TARJETAS DEBAJO DE LA LÍNEA
+
+            <p><b>Duración:</b> ${horas}h ${minutos}m</p>
+
+            
+            <p style="margin-top:10px;font-size:18px;color:#003A70;">
+              <b>Costo:</b> $${ev.COSTO_MXN} MXN
+            </p>
+
+            */
+      
       grid.innerHTML += `
         <div class="card">
           <img src="assets/images/eventos/${ev.NOMBRE}.jpg" alt="${ev.NOMBRE}">
@@ -299,7 +312,7 @@ fetch(API)
             <h3>${ev.NOMBRE}</h3>
             <p>${ev.DESCRIPCIÓN}</p>
             <p><b>Fecha:</b> ${fecha}</p>
-            <p><b>Duración:</b> ${horas}h ${minutos}m</p>
+            <p><b>Duración:</b> ${horas}h ${minutos}m</p>   
 
             <div class="btn-group">
               <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
