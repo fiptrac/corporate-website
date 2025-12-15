@@ -126,10 +126,27 @@ body {
   text-align:center;
 }
 
+  .cap-card i{
+  font-size:34px;
+  color:#003A70;
+  margin-bottom:14px;
+}
+
+
 .cap-card h3{
   color:#003A70;
   margin-bottom:10px;
 }
+
+  .cap-card{
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.cap-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 28px rgba(0,0,0,.16);
+}
+
 
 .cap-card p{
   font-size:.95rem;
@@ -328,25 +345,30 @@ body {
   <!-- CAPACIDADES -->
   <section class="capabilities">
     <div class="cap-card">
+      <i class="fa-solid fa-water"></i>
       <h3>Sistemas de Bombeo</h3>
       <p>Pruebas hidráulicas, arranque, curvas, fallas y mantenimiento.</p>
     </div>
-
+  
     <div class="cap-card">
+      <i class="fa-solid fa-fire-sprinkler"></i>
       <h3>Rociadores Automáticos</h3>
       <p>Diseño, inspección, pruebas y verificación de desempeño.</p>
     </div>
-
+  
     <div class="cap-card">
+      <i class="fa-solid fa-flask"></i>
       <h3>Supresión Especial</h3>
       <p>Agentes limpios, CO₂, espuma y sistemas especiales.</p>
     </div>
-
+  
     <div class="cap-card">
+      <i class="fa-solid fa-bell"></i>
       <h3>Detección y Alarmas</h3>
       <p>Configuración, pruebas, diagnóstico y fallas reales.</p>
     </div>
   </section>
+
 
   <!-- GALERÍA -->
   <h2 class="gallery-title">Galería de instalaciones</h2>
