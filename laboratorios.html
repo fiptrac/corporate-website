@@ -351,9 +351,7 @@
 
 </main>
 
-<!-- FOOTER -->
-<div id="footer-container"></div>
-
+  
 <!-- CARRUSEL SCRIPT -->
 <script>
 const track=document.querySelector('.carousel-track');
@@ -369,6 +367,20 @@ document.querySelector('.prev').onclick=()=>{
   index=(index-1+slides.length)%slides.length;
   track.style.transform=`translateX(-${index*100}%)`;
 };
+</script>
+
+
+<!--  FOOTER  --> 
+<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
+
+<div id="footer-container"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-container").innerHTML = data;
+    });
 </script>
 
 </body>
