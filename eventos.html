@@ -220,7 +220,7 @@ Después de solicitar su inscripción, recibirá un correo con el enlace de pago
 para finalizar el proceso.
 </p>
 
-<button class="btn" onclick="inscribirse('${ev.NOMBRE}', '${ev['COSTO MXN']}')">Solicitar inscripción</button>
+<button class="btn" onclick="inscribirse('${ev.NOMBRE}')">Solicitar inscripción</button>
 <!-- <button class="btn">Solicitar inscripción</button> -->
 </form>
 </div>
@@ -304,7 +304,7 @@ function inscribirse(nombre, costo){
   document.getElementById('cursoTitulo').innerText = nombre;
 
   document.getElementById('costoCurso').innerHTML =
-    `Costo del curso: <b>$${Number(costo).toLocaleString('es-MX')} MXN</b>`;
+    `Costo del curso: <b>$${ev.COSTO MXN} MXN</b>`;
 
   document.getElementById('popup').style.display = 'flex';
 }
