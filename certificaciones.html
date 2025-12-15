@@ -7,6 +7,102 @@
     <link rel="stylesheet" href="styles.css">
 
     <style>
+
+
+/*==================  ESTO EN TODAS LAS PÁGINAS ==================*/
+  
+  /* ===========================
+     HEADER STICKY (compact & scroll)
+     - header.scrolled: fondo semitransparente + compact
+     - header.nav-hide: se oculta al bajar scroll
+  ============================ */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
+    background: rgba(255,255,255,0.92);
+  }
+
+  /* Cuando el usuario baja lo volvemos más pequeño / con fondo */
+  header.scrolled {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  }
+
+  /* Cuando el usuario baja rápido ocultamos la barra */
+  header.nav-hide {
+    transform: translateY(-110%);
+  }
+
+  /* Contenedor del nav: aquí se controla el "grosor" de la línea.
+     Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
+  .nav-container {
+    max-width:1200px;
+    margin:auto;
+    padding:5px 15px; /* <-- AJUSTA AQUÍ el grosor vertical del header */
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:padding 0.25s ease;
+  }
+
+  /* ===========================
+     LOGO (clicable) - tamaño controlable
+     Ajusta height para dejarlo a tu preferencia.
+  ============================ */
+  .logo img {
+    height: 36px; /* <-- AJUSTA AQUÍ el tamaño del logo (desktop) */
+    object-fit: contain;
+    transition: height 0.2s ease;
+    display:block;
+  }
+  @media(max-width:850px){
+    .logo img { height: 32px; } /* logo en móvil */
+  }
+
+  /* ===========================
+     MENÚ
+  ============================ */
+  .menu {
+    display:flex;
+    gap:25px;
+    align-items:center;
+  }
+  .menu a {
+    text-decoration:none;
+    font-weight:600;
+    color:#003A70;
+    padding:6px 8px;
+    border-radius:8px;
+    transition:background .18s, color .18s;
+  }
+  .menu a:hover { background: rgba(0,58,112,0.06); }
+
+  /* ====== HAMBURGER (movil) ====== */
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
+  .hamburger span { width:28px; height:3px; background:#003A70; border-radius:3px; display:block; }
+
+  @media(max-width:850px){
+    .menu {
+      position:absolute; top:72px; right:12px; background:white;
+      width:220px; padding:16px; border-radius:12px;
+      box-shadow:0 8px 26px rgba(0,0,0,0.12);
+      flex-direction:column; gap:12px;
+      opacity:0; pointer-events:none; transform:translateY(-6px);
+      transition:opacity .28s, transform .28s;
+    }
+    .menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .hamburger { display:flex; }
+  }
+/*==================  HASTA AQUÍ EN TODAS LAS PÁGINAS ==================*/
+
+
+
+        
         /* ===== ESTILOS ESPECÍFICOS PARA CERTIFICACIONES ===== */
 
         .cert-container {
@@ -68,23 +164,36 @@
 
 <body>
 
-    <!-- NAVBAR -->
-    <header>
-        <nav class="navbar">
-            <a href="index.html" class="logo">
-                <img src="assets/logo.png" alt="Logo FIPTRAC">
-            </a>
 
-            <ul class="nav-links">
-                <li><a href="cursos.html">Cursos</a></li>
-                <li><a href="eventos.html">Eventos</a></li>
-                <li><a href="certificaciones.html" class="active">Certificaciones</a></li>
-                <li><a href="laboratorios.html">Laboratorios</a></li>
-                <li><a href="aliados.html">Aliados</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+    
+    <!-- NAVBAR -->
+<header class="nav">
+  <div class="nav-container">
+    <!-- Logo clicable: vuelve a index.html -->
+    <div class="logo">
+      <a href="index.html" aria-label="Ir al inicio">
+        <img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
+      </a>
+    </div>
+
+    <!-- Menú (Eventos permanece incluido) -->
+    <nav class="menu" id="menu">
+      <a href="cursos.html">Cursos</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="certificaciones.html">Certificaciones</a>
+      <a href="laboratorios.html">Laboratorios</a>
+      <a href="aliados.html">Alianzas Comerciales</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+
+    
 
     <!-- CONTENIDO -->
     <main class="cert-container">
