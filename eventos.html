@@ -270,70 +270,88 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 </script>
 
   
-<!--  TARJETAS GOOGLE APPS SCRIPT  --> 
 <script>
-  // LEER LA API DE GOOGLE APPS SCRIPT
+/* ================== CONFIG ================== */
 const API = "https://script.google.com/macros/s/AKfycbwr8zssuWFjxg-uVy5_gBQuWLOX61jkXJfBiTNy80A4QjrrzIuSBee5b-SFS_jzR-fV/exec";
-let cursoActual="";
+let cursoActual = "";
+let costoActual = "";
 
+/* ================== CARGAR EVENTOS ================== */
 fetch(API)
-.then(r=>r.json())
-.then(data=>{
-const grid=document.getElementById('grid');
-data.forEach(ev=>{
-const fecha = new Date(ev.FECHA).toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'});
-const duracion = new Date(ev.DURACIÓN);
-const horas = duracion.getHours();
-const minutos = duracion.getMinutes();
+  .then(r => r.json())
+  .then(data => {
+    const grid = document.getElementById('grid');
+    grid.innerHTML = ""; // limpia texto inicial
 
-grid.innerHTML += `
-<div class="card">
-  <img src="assets/images/eventos/${ev.NOMBRE}.jpg" alt="${ev.NOMBRE}">
-  <div class="card-body">
-    <h3>${ev.NOMBRE}</h3>
-    <p>${ev.DESCRIPCIÓN}</p>
-    <p><b>Fecha:</b> ${fecha}</p>
-    <p><b>Duración:</b> ${horas}h ${minutos}m</p>
+    data.forEach(ev => {
 
-    <p style="margin-top:10px;font-size:18px;color:#003A70;">
-      <b>Costo:</b> $${ev.COSTO_MXN} MXN
-    </p>
+      const fecha = new Date(ev.FECHA)
+        .toLocaleDateString('es-MX', { day:'2-digit', month:'long', year:'numeric' });
 
-    <div class="btn-group">
-      <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
-      <button class="btn"
-        onclick="inscribirse('${ev.NOMBRE}', '${ev.COSTO_MXN}')">
-        Inscribirse
-      </button>
-    </div>
-  </div>
-</div>`;
+      const duracion = new Date(ev.DURACIÓN);
+      const horas = duracion.getHours();
+      const minutos = duracion.getMinutes();
 
+      grid.innerHTML += `
+        <div class="card">
+          <img src="assets/images/eventos/${ev.NOMBRE}.jpg" alt="${ev.NOMBRE}">
+          <div class="card-body">
+            <h3>${ev.NOMBRE}</h3>
+            <p>${ev.DESCRIPCIÓN}</p>
+            <p><b>Fecha:</b> ${fecha}</p>
+            <p><b>Duración:</b> ${horas}h ${minutos}m</p>
+
+            <p style="margin-top:10px;font-size:18px;color:#003A70;">
+              <b>Costo:</b> $${ev.COSTO_MXN} MXN
+            </p>
+
+            <div class="btn-group">
+              <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
+              <button class="btn"
+                onclick="inscribirse('${ev.NOMBRE}', '${ev.COSTO_MXN}')">
+                Inscribirse
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  });
+
+/* ================== ABRIR POPUP ================== */
 function inscribirse(nombre, costo){
   cursoActual = nombre;
+  costoActual = costo;
 
   document.getElementById('cursoTitulo').innerText = nombre;
-
   document.getElementById('costoCurso').innerHTML =
-    `Costo del curso: <b>$${ev.COSTO_MXN} MXN</b>`;
+    `Costo del curso: <b>$${costo} MXN</b>`;
 
   document.getElementById('popup').style.display = 'flex';
 }
 
-const form=document.getElementById('form');
-form.addEventListener('submit',e=>{
-e.preventDefault();
-const data=Object.fromEntries(new FormData(form));
-data.curso=cursoActual;
+/* ================== ENVIAR FORMULARIO ================== */
+const form = document.getElementById('form');
 
-fetch(API,{method:'POST',body:JSON.stringify(data)})
-.then(()=>{
-alert('Solicitud enviada correctamente');
-form.reset();
-document.getElementById('popup').style.display='none';
-})
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(form));
+  data.curso = cursoActual;
+  data.costo = costoActual;
+
+  fetch(API, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    alert('Solicitud enviada correctamente');
+    form.reset();
+    document.getElementById('popup').style.display = 'none';
+  });
 });
 </script>
+
 
 
 <!--  CERRAR FORM  --> 
