@@ -1,211 +1,255 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorios | FIPTRAC</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratorios | FIPTRAC</title>
+<link rel="stylesheet" href="styles.css">
 
-    <style>
-        /* ===== ESTILOS ESPECÍFICOS PARA ESTE ARCHIVO ===== */
+<style>
+/* ================= LABORATORIOS ================= */
 
-        .labs-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+.labs-hero{
+  background:linear-gradient(rgba(0,58,112,.75),rgba(0,58,112,.75)),
+             url("assets/labs/lab1.jpg") center/cover;
+  color:#fff;
+  padding:110px 20px 90px;
+  text-align:center;
+}
 
-        .lab-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 40px;
-        }
+.labs-hero h1{
+  font-size:2.6rem;
+  margin-bottom:14px;
+}
 
-        .lab-header h1 {
-            font-size: 2rem;
-            color: var(--texto);
-        }
+.labs-hero p{
+  max-width:850px;
+  margin:auto;
+  font-size:1.1rem;
+  line-height:1.7;
+  opacity:.95;
+}
 
-        .lab-header p {
-            color: #555;
-            font-size: 1.05rem;
-        }
+/* CONTENEDOR */
+.labs-container{
+  max-width:1200px;
+  margin:70px auto;
+  padding:20px;
+}
 
-        /* ===== CAROUSEL ===== */
+/* BLOQUE DESCRIPTIVO */
+.labs-intro{
+  text-align:center;
+  max-width:900px;
+  margin:0 auto 60px;
+}
 
-        .carousel {
-            position: relative;
-            width: 100%;
-            height: 360px;
-            overflow: hidden;
-            border-radius: 14px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-            background: #000;
-        }
+.labs-intro h2{
+  color:#003A70;
+  margin-bottom:12px;
+}
 
-        .carousel-track {
-            display: flex;
-            height: 100%;
-            transition: transform 0.45s ease;
-        }
+.labs-intro p{
+  font-size:1.05rem;
+  line-height:1.7;
+  color:#444;
+}
 
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-        }
+/* ===== CAROUSEL ===== */
+.carousel{
+  position:relative;
+  height:420px;
+  overflow:hidden;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.2);
+}
 
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.carousel-track{
+  display:flex;
+  height:100%;
+  transition:transform .5s ease;
+}
 
-        /* Botones */
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.45);
-            color: #fff;
-            padding: 10px 14px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: none;
-            font-size: 1.3rem;
-        }
+.carousel-slide{
+  min-width:100%;
+}
 
-        .carousel-btn:hover { background: rgba(0,0,0,0.65); }
+.carousel-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-        .prev { left: 10px; }
-        .next { right: 10px; }
+.carousel-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.5);
+  border:none;
+  color:#fff;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:1.4rem;
+}
 
-        /* ===== GALERÍA ===== */
+.carousel-btn:hover{background:rgba(0,0,0,.75)}
+.prev{left:16px}
+.next{right:16px}
 
-        .gallery-grid {
-            margin-top: 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 15px;
-        }
+/* ===== CAPACIDADES ===== */
+.capabilities{
+  margin:80px 0;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
 
-        .gallery-grid img {
-            width: 100%;
-            height: 165px;
-            object-fit: cover;
-            border-radius: 10px;
-            transition: 0.3s ease;
-            cursor: pointer;
-        }
+.cap-card{
+  background:#fff;
+  padding:26px;
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  text-align:center;
+}
 
-        .gallery-grid img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-        }
-    </style>
+.cap-card h3{
+  color:#003A70;
+  margin-bottom:10px;
+}
+
+.cap-card p{
+  font-size:.95rem;
+  color:#444;
+}
+
+/* ===== GALERÍA ===== */
+.gallery-title{
+  text-align:center;
+  margin-bottom:26px;
+  color:#003A70;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+
+.gallery-grid img{
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  border-radius:14px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.gallery-grid img:hover{
+  transform:scale(1.04);
+  box-shadow:0 10px 26px rgba(0,0,0,.25);
+}
+</style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <header>
-        <nav class="navbar">
-            <a href="index.html" class="logo">
-                <img src="assets/logo.png" alt="Logo FIPTRAC">
-            </a>
+<!-- NAVBAR (el tuyo existente) -->
+<header>...</header>
 
-            <ul class="nav-links">
-                <li><a href="cursos.html">Cursos</a></li>
-                <li><a href="eventos.html">Eventos</a></li>
-                <li><a href="certificaciones.html">Certificaciones</a></li>
-                <li><a href="laboratorios.html" class="active">Laboratorios</a></li>
-                <li><a href="aliados.html">Aliados</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- HERO -->
+<section class="labs-hero">
+  <h1>Laboratorios y Simuladores FIPTRAC</h1>
+  <p>
+    Entrenamiento técnico avanzado con equipamiento real, simuladores funcionales
+    y escenarios controlados que replican condiciones reales de operación
+    en sistemas contra incendio.
+  </p>
+</section>
 
-    <!-- CONTENIDO -->
-    <main class="labs-container">
+<main class="labs-container">
 
-        <div class="lab-header">
-            <h1>Laboratorios y Simuladores</h1>
-            <p>
-                Contamos con equipamiento real para el entrenamiento técnico en todos los sistemas contra incendio:
-                bombeo, rociadores, supresión, detección y simulador de fuego vivo.
-                Nuestros laboratorios permiten prácticas altamente realistas bajo condiciones controladas.
-            </p>
-        </div>
+  <!-- INTRO -->
+  <div class="labs-intro">
+    <h2>Entrenamiento práctico de alto nivel</h2>
+    <p>
+      Nuestros laboratorios están diseñados para que cada participante
+      <strong>aprenda haciendo</strong>.
+      Aquí se practican pruebas, diagnósticos, operación y mantenimiento
+      sobre sistemas reales utilizados en la industria.
+    </p>
+  </div>
 
-        <!-- ===== CARRUSEL PRINCIPAL ===== -->
-        <div class="carousel">
-            <div class="carousel-track">
+  <!-- CARRUSEL -->
+  <div class="carousel">
+    <div class="carousel-track">
+      <div class="carousel-slide"><img src="assets/labs/lab1.jpg"></div>
+      <div class="carousel-slide"><img src="assets/labs/lab2.jpg"></div>
+      <div class="carousel-slide"><img src="assets/labs/lab3.jpg"></div>
+      <div class="carousel-slide"><img src="assets/labs/lab4.jpg"></div>
+    </div>
+    <button class="carousel-btn prev">❮</button>
+    <button class="carousel-btn next">❯</button>
+  </div>
 
-                <!-- SLIDE 1 -->
-                <div class="carousel-slide">
-                    <img src="assets/labs/lab1.jpg" alt="Laboratorio 1">
-                </div>
+  <!-- CAPACIDADES -->
+  <section class="capabilities">
+    <div class="cap-card">
+      <h3>Sistemas de Bombeo</h3>
+      <p>Pruebas hidráulicas, arranque, curvas, fallas y mantenimiento.</p>
+    </div>
 
-                <!-- SLIDE 2 -->
-                <div class="carousel-slide">
-                    <img src="assets/labs/lab2.jpg" alt="Laboratorio 2">
-                </div>
+    <div class="cap-card">
+      <h3>Rociadores Automáticos</h3>
+      <p>Diseño, inspección, pruebas y verificación de desempeño.</p>
+    </div>
 
-                <!-- SLIDE 3 -->
-                <div class="carousel-slide">
-                    <img src="assets/labs/lab3.jpg" alt="Laboratorio 3">
-                </div>
+    <div class="cap-card">
+      <h3>Supresión Especial</h3>
+      <p>Agentes limpios, CO₂, espuma y sistemas especiales.</p>
+    </div>
 
-                <!-- SLIDE 4 -->
-                <div class="carousel-slide">
-                    <img src="assets/labs/lab4.jpg" alt="Laboratorio 4">
-                </div>
+    <div class="cap-card">
+      <h3>Detección y Alarmas</h3>
+      <p>Configuración, pruebas, diagnóstico y fallas reales.</p>
+    </div>
+  </section>
 
-            </div>
+  <!-- GALERÍA -->
+  <h2 class="gallery-title">Galería de instalaciones</h2>
+  <div class="gallery-grid">
+    <img src="assets/labs/lab1.jpg">
+    <img src="assets/labs/lab2.jpg">
+    <img src="assets/labs/lab3.jpg">
+    <img src="assets/labs/lab4.jpg">
+    <img src="assets/labs/lab5.jpg">
+    <img src="assets/labs/lab6.jpg">
+    <img src="assets/labs/lab7.jpg">
+    <img src="assets/labs/lab8.jpg">
+  </div>
 
-            <!-- Botones -->
-            <button class="carousel-btn prev">❮</button>
-            <button class="carousel-btn next">❯</button>
-        </div>
+</main>
 
-        <!-- ===== GALERÍA COMPLETA ===== -->
-        <h2 style="margin-top: 50px; color: var(--texto);">Galería</h2>
+<!-- FOOTER -->
+<div id="footer-container"></div>
 
-        <div class="gallery-grid">
-            <img src="assets/labs/lab1.jpg">
-            <img src="assets/labs/lab2.jpg">
-            <img src="assets/labs/lab3.jpg">
-            <img src="assets/labs/lab4.jpg">
-            <img src="assets/labs/lab5.jpg">
-            <img src="assets/labs/lab6.jpg">
-            <img src="assets/labs/lab7.jpg">
-            <img src="assets/labs/lab8.jpg">
-        </div>
+<!-- CARRUSEL SCRIPT -->
+<script>
+const track=document.querySelector('.carousel-track');
+const slides=[...track.children];
+let index=0;
 
-    </main>
+document.querySelector('.next').onclick=()=>{
+  index=(index+1)%slides.length;
+  track.style.transform=`translateX(-${index*100}%)`;
+};
 
-    <!-- ===== SCRIPT DEL CARRUSEL ===== -->
-    <script>
-        const track = document.querySelector('.carousel-track');
-        const slides = Array.from(track.children);
-        const nextBtn = document.querySelector('.next');
-        const prevBtn = document.querySelector('.prev');
-
-        let index = 0;
-
-        function moveCarousel() {
-            track.style.transform = `translateX(-${index * 100}%)`;
-        }
-
-        nextBtn.onclick = () => {
-            index = (index + 1) % slides.length;
-            moveCarousel();
-        };
-
-        prevBtn.onclick = () => {
-            index = (index - 1 + slides.length) % slides.length;
-            moveCarousel();
-        };
-    </script>
+document.querySelector('.prev').onclick=()=>{
+  index=(index-1+slides.length)%slides.length;
+  track.style.transform=`translateX(-${index*100}%)`;
+};
+</script>
 
 </body>
 </html>
