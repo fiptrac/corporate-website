@@ -212,13 +212,23 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 </select>
 
 <div id="costoCurso"
-     style="margin-top:14px;font-weight:600;color:#003A70;text-align:center">
+     style="
+       margin-top:14px;
+       padding:12px;
+       background:#f4f6f8;
+       border-radius:10px;
+       text-align:center;
+       font-size:16px;
+       color:#003A70;
+       font-weight:600;
+     ">
 </div>
 
 <p style="font-size:13px;text-align:center;color:#555;margin-top:6px">
-Después de solicitar su inscripción, recibirá un correo con el enlace de pago
-para finalizar el proceso.
+  Después de solicitar su inscripción recibirá un correo con el enlace de pago
+  para finalizar el proceso.
 </p>
+
 
 <button class="btn" onclick="inscribirse('${ev.NOMBRE}')">Solicitar inscripción</button>
 <!-- <button class="btn">Solicitar inscripción</button> -->
@@ -281,33 +291,41 @@ const horas = duracion.getHours();
 const minutos = duracion.getMinutes();
 
 
-grid.innerHTML+=`
+grid.innerHTML += `
 <div class="card">
-<img src="assets/images/eventos/${ev.NOMBRE}.jpg" alt="${ev.NOMBRE}">
-<div class="card-body">
-<h3>${ev.NOMBRE}</h3>
-<p>${ev.DESCRIPCIÓN}</p>
-<p><b>Fecha:</b> ${fecha}</p>
-<p><b>Duración:</b> ${horas}h ${minutos}m</p>
-<div class="btn-group">
-<a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
-<button class="btn" onclick="inscribirse('${ev.NOMBRE}', '${ev['COSTO']}')">Inscribirse</button>
-</div>
-</div>
+  <img src="assets/images/eventos/${ev.NOMBRE}.jpg" alt="${ev.NOMBRE}">
+  <div class="card-body">
+    <h3>${ev.NOMBRE}</h3>
+    <p>${ev.DESCRIPCIÓN}</p>
+    <p><b>Fecha:</b> ${fecha}</p>
+    <p><b>Duración:</b> ${horas}h ${minutos}m</p>
+
+    <p style="margin-top:10px;font-size:18px;color:#003A70;">
+      <b>Costo:</b> $${Number(ev.COSTO_MXN).toLocaleString('es-MX')} MXN
+    </p>
+
+    <div class="btn-group">
+      <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
+      <button class="btn"
+        onclick="inscribirse('${ev.NOMBRE}', '${ev.COSTO_MXN}')">
+        Inscribirse
+      </button>
+    </div>
+  </div>
 </div>`;
-})
-});
 
 
 function inscribirse(nombre, costo){
   cursoActual = nombre;
+
   document.getElementById('cursoTitulo').innerText = nombre;
 
-//  document.getElementById('costoCurso').innerHTML =
-//    `Costo del curso: <b>$${ev.COSTO} MXN</b>`;
+  document.getElementById('costoCurso').innerHTML =
+    `Costo del curso: <b>$${Number(costo).toLocaleString('es-MX')} MXN</b>`;
 
   document.getElementById('popup').style.display = 'flex';
 }
+
 
 
 
