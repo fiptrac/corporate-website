@@ -291,7 +291,7 @@ grid.innerHTML+=`
 <p><b>Duración:</b> ${horas}h ${minutos}m</p>
 <div class="btn-group">
 <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
-<button class="btn" onclick="inscribirse('${ev.NOMBRE}')">Inscribirse</button>
+<button class="btn" onclick="inscribirse('${ev.NOMBRE}', '${ev['COSTO_MXN']}')">Inscribirse</button>
 </div>
 </div>
 </div>`;
@@ -304,7 +304,7 @@ function inscribirse(nombre, costo){
   document.getElementById('cursoTitulo').innerText = nombre;
 
   document.getElementById('costoCurso').innerHTML =
-    `Costo del curso: <b>$ ${ev.COSTO_MXN} MXN</b>`;
+    `Costo del curso: <b>$${ev.COSTO_MXN} MXN</b>`;
 
   document.getElementById('popup').style.display = 'flex';
 }
