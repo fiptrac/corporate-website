@@ -81,6 +81,52 @@ button.btn {
  
 
 
+/* ================= EVENTOS – HIGHLIGHTS TIPO ENTRENAMIENTOS ================= */
+
+.eventos-highlights{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+  gap:30px;
+  margin:40px auto 30px;
+  max-width:1000px;
+}
+
+.eventos-highlight-item{
+  background:#fff;
+  padding:26px 22px;
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  text-align:center;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.eventos-highlight-item:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 28px rgba(0,0,0,0.14);
+}
+
+.eventos-highlight-item i{
+  font-size:32px;
+  color:#003A70;
+  margin-bottom:12px;
+}
+
+.eventos-highlight-item h4{
+  color:#003A70;
+  font-size:18px;
+  margin-bottom:8px;
+  font-weight:700;
+}
+
+.eventos-highlight-item p{
+  font-size:14.5px;
+  color:#444;
+  line-height:1.5;
+}
+
+
+  
+
 /*==================  NAVBAR ==================*/
   /* ===========================
      HEADER STICKY (compact & scroll)
@@ -217,7 +263,6 @@ button.btn {
 
   
 <!-- EVENOTS Y CURSOS -->
-<!-- EVENOTS Y CURSOS -->
 <section class="eventos">
 
   <div class="intro-eventos">
@@ -228,30 +273,44 @@ button.btn {
       que buscan <strong>dominar la aplicación real</strong> de los sistemas contra incendio,
       no solo conocer la teoría.
     </p>
-
-    <p>
-      En FIPTRAC, cada programa combina aproximadamente
-      <strong>70 % práctica y 30 % teoría</strong>, con entrenamiento directo
-      en equipos reales, simulaciones y escenarios de campo.
-    </p>
-
-    <p>
-      Somos el <strong>único centro de capacitación en Latinoamérica</strong> enfocado
-      exclusivamente en la formación técnica aplicada, ofreciendo verdaderos programas
-      de <strong>Hands On Training</strong>.
-    </p>
-
-    <p>
-      Al finalizar cada curso se otorga una <strong>Constancia DC-3</strong> avalada
-      por la <strong>STPS</strong>, y programas seleccionados otorgan
-      <strong>puntos CPD reconocidos por NICET</strong>.
-    </p>
+    
+    <!-- BLOQUE DESTACADO TIPO ENTRENAMIENTOS (REUTILIZABLE) -->
+    <div class="eventos-highlights">
+      <div class="eventos-highlight-item">
+        <i class="fa-solid fa-check"></i>
+        <h4>Entrenamiento práctico real</h4>
+        <p>Cada programa combina aproximadamente
+        <strong>70 % práctica y 30 % teoría</strong>,
+        con trabajo directo en equipos reales,
+        simulaciones y escenarios de campo.</p>
+      </div>
+    
+      <div class="eventos-highlight-item">
+        <i class="fa-solid fa-tools"></i>
+        <h4>Hands On Training</h4>
+        <p>Somos el <strong>único centro en Latinoamérica</strong>
+        enfocado exclusivamente en la
+        <strong>formación técnica aplicada</strong>,
+        ofreciendo verdaderos programas de Hands On Training.</p>
+      </div>
+    
+      <div class="eventos-highlight-item">
+        <i class="fa-solid fa-chart-line"></i>
+        <h4>Reconocimiento oficial</h4>
+        <p>Al finalizar cada curso se otorga una
+        <strong>Constancia DC-3 avalada por la STPS</strong>,
+        y programas seleccionados otorgan
+        <strong>puntos CPD reconocidos por NICET</strong>.</p>
+      </div>
+    </div>
+    <!-- FIN BLOQUE -->
 
     <div class="highlights">
       <span>✔ Cursos 100 % en español</span>
       <span>✔ Enfoque práctico y técnico</span>
       <span>✔ Impacto directo en el desempeño profesional</span>
-    </div>
+    </div>   
+
 
     <h2>Consulta los eventos programados para el 2026</h2>
   </div>
