@@ -181,7 +181,6 @@ body {
 }
 
 
-
 /*==================  NAVBAR ==================*/
   /* ===========================
      HEADER STICKY (compact & scroll)
@@ -272,7 +271,87 @@ body {
   }
 /*==================  FIN NAVBAR ==================*/
   
+/*==================  HERO ==================*/
+  .hero {
+    background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
+    background-position:center;
+    background-size:cover;
+    padding:80px 20px 20px; /* alto del hero */
+    text-align:center;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
 
+  .hero-content {
+    max-width:1000px;
+    margin:auto;
+    min-height:260px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+  }
+
+  .fade-item {
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:0;
+    transition:opacity 1.4s ease, transform 0.6s ease;
+    font-size:44px;
+    font-weight:700;
+    line-height:1.05;
+    max-width:92%;
+  }
+
+  .fade-item:not(:has(img)) {
+    white-space: normal;
+    text-align:center;
+  }
+
+  .fade-item.active {
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+  /* Texto del slider (ajústalo con .fade-item .slide-text) */
+  .fade-item .slide-text {
+    display:block;
+    font-size:38px;
+  }
+  .fade-item p { margin-top:10px; font-size:18px; font-weight:400; color:rgba(255,255,255,0.95); }
+
+  /* ===========================
+     SLIDER: IMÁGENES / CONTROL POR CLASE (TAMAÑOS INDIVIDUALES)
+     - Usa las clases .img-1, .img-2, .img-3, .img-4 en cada <img>
+     - Ajusta width / max-width / height aquí según quieras
+  ============================ */
+  .fade-item img {
+    display:block;
+    width: 320px;      /* valor por defecto si no se especifica clase */
+    max-width: 68vw;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+    transition: transform .28s ease;
+  }
+
+  /* Tamaños individuales (modifica estos valores libremente) */
+  .fade-item img.img-1 { width: 360px; }   /* imagen 1 */
+  .fade-item img.img-2 { width: 300px; }   /* imagen 2 */
+  .fade-item img.img-3 { width: 420px; }   /* imagen 3 */
+  .fade-item img.img-4 { width: 500px; }   /* imagen 4 */
+
+  /* Responsivo: reduce imágenes en móvil */
+  @media (max-width:700px){
+    .fade-item { font-size:28px; }
+    .fade-item img { width:220px; }
+    .fade-item img.img-1 { width:240px; }
+    .fade-item img.img-2 { width:200px; }
+    .fade-item img.img-3 { width:260px; }
+    .fade-item img.img-4 { width:220px; }
+  }
 
 
   
@@ -307,28 +386,33 @@ body {
   </div>
 </header>
 
-<!-- HERO -->
-<section class="labs-hero">
-  <h1>Laboratorios y Simuladores FIPTRAC</h1>
-  <p>
-    Entrenamiento técnico avanzado con equipamiento real, simuladores funcionales
-    y escenarios controlados que replican condiciones reales de operación
-    en sistemas contra incendio.
-  </p>
+
+<!-- HERO / SLIDER -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-content">
+
+    <!-- Cada .fade-item puede ser texto o imagen. 
+         Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
+    <div class="fade-item active" id="fade1">
+      <span class="slide-text">✔ Entrenamiento técnico avanzado con equipamiento real</span>
+    </div>
+
+    <div class="fade-item" id="fade2">
+      <span class="slide-text">✔ simuladores funcionales y escenarios controlados</span>
+    </div>
+
+    <div class="fade-item" id="fade3">
+      <span class="slide-text">✔ condiciones reales de operación en sistemas contra incendio</span>
+    </div>
+
+    <div class="fade-item" id="fade4">
+      <!-- imagen con clase individual img-4 -->
+      <img src="assets/images/sin fondo.png" alt="Logo fondo" class="img-4">
+    </div>
+
+  </div>
 </section>
 
-<main class="labs-container">
-
-  <!-- INTRO -->
-  <div class="labs-intro">
-    <h2>Entrenamiento práctico de alto nivel</h2>
-    <p>
-      Nuestros laboratorios están diseñados para que cada participante
-      <strong>aprenda haciendo</strong>.
-      Aquí se practican pruebas, diagnósticos, operación y mantenimiento
-      sobre sistemas reales utilizados en la industria.
-    </p>
-  </div>
 
   <!-- CARRUSEL -->
   <div class="carousel">
