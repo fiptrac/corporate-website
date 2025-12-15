@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="assets/css/styles.css">
 
 
+<!-- ============================== STYLES ============================== -->
+
+  
 <style>
 body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 .eventos{max-width:1200px;margin:140px auto 80px;padding:20px}
@@ -23,7 +26,6 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 
 
 /*==================  NAVBAR ==================*/
-
   /* ===========================
      HEADER STICKY (compact & scroll)
      - header.scrolled: fondo semitransparente + compact
@@ -112,7 +114,6 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
     .hamburger { display:flex; }
   }
 /*==================  FIN NAVBAR ==================*/
-
   
 
 /* POPUP */
@@ -125,10 +126,14 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 </head>
 
 
+
+<!-- ============================== BODY ============================== -->
+
+  
 <body>
 
 
-
+<!-- NAVBAR -->
 <header class="nav">
   <div class="nav-container">
     <!-- Logo clicable: vuelve a index.html -->
@@ -155,9 +160,7 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 </header>
 
   
-
 <!-- EVENOTS Y CURSOS -->
-  
 <section class="eventos">
 <h1 style="text-align:center;color:#003A70">Eventos y Cursos</h1>
 <div class="grid" id="grid">
@@ -165,10 +168,7 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 </div>
 </section>
 
-
-
-
-
+  
 <!-- POPUP FORM -->
 <div class="popup" id="popup">
 <form id="form" style="position:relative; padding-top:100px;">
@@ -185,14 +185,12 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
     color:#003A70;
   "
   aria-label="Cerrar formulario">x</button>
-
   
 <h3 id="cursoTitulo"></h3>
 <input type="email" name="correo" placeholder="Correo" required>
 <input type="text" name="nombre" placeholder="NOMBRE COMPLETO" required oninput="this.value=this.value.toUpperCase()">
 <input type="text" name="puesto" placeholder="Puesto o cargo" required>
 <input type="tel" name="celular" placeholder="Celular (10 dígitos)" pattern="[0-9]{10}" required>
-
 
 <label>¿Cómo se enteró?</label>
 <select name="medio" required>
@@ -204,7 +202,6 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 <option value="Recomendación">Recomendación</option>
 <option value="Otro">Otro</option>
 </select>
-
 
 <label>Talla de playera</label>
 <select name="talla" required>
@@ -229,7 +226,6 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
   para finalizar el proceso.
 </p>
 
-
 <button class="btn" onclick="inscribirse('${ev.NOMBRE}')">Solicitar inscripción</button>
 <!-- <button class="btn">Solicitar inscripción</button> -->
 </form>
@@ -238,7 +234,8 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 
 <!-- ============================== SCRIPTS ============================== -->
 
-<!-- ========== HASMBURGER ========== --> 
+  
+<!--  HAMBURGER  --> 
 <script>
   // HAMBURGER toggle (movil)
   document.getElementById('hamburger').addEventListener('click', ()=>{
@@ -247,7 +244,7 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 </script>
   
 
-<!-- ========== NAVBAR ========== --> 
+<!--  NAVBAR  --> 
 <script>
   // HEADER: añadir clase .scrolled + comportamiento "hide on scroll"
   (function(){
@@ -273,7 +270,7 @@ body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 </script>
 
   
-<!-- ========== TARJETAS GOOGLE APPS SCRIPT ========== --> 
+<!--  TARJETAS GOOGLE APPS SCRIPT  --> 
 <script>
   // LEER LA API DE GOOGLE APPS SCRIPT
 const API = "https://script.google.com/macros/s/AKfycbwr8zssuWFjxg-uVy5_gBQuWLOX61jkXJfBiTNy80A4QjrrzIuSBee5b-SFS_jzR-fV/exec";
@@ -339,7 +336,7 @@ document.getElementById('popup').style.display='none';
 </script>
 
 
-<!-- ========== CERRAR FORM ========== --> 
+<!--  CERRAR FORM  --> 
    <script>
   const popup = document.getElementById('popup');
   const closeBtn = document.getElementById('closePopup');
@@ -367,7 +364,7 @@ document.getElementById('popup').style.display='none';
 </script>
 
 
-<!-- ========== FOOTER ========== --> 
+<!--  FOOTER  --> 
 <script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
 
 <div id="footer-container"></div>
