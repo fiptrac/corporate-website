@@ -237,7 +237,9 @@ button.btn {
   para finalizar el proceso.
 </p>
 
-<button class="btn" onclick="inscribirse('${ev.NOMBRE}')">Solicitar inscripción</button>
+<button class="btn" type="submit">
+  Solicitar inscripción
+</button>
 <!-- <button class="btn">Solicitar inscripción</button> -->
 </form>
 </div>
@@ -366,7 +368,7 @@ form.addEventListener('submit', e => {
     body: JSON.stringify(data)
   })
   .then(() => {
-    alert('Solicitud enviada correctamente');
+    alert('Solicitud enviada correctamente, espere el correo de confirmación junto con el enlace de pago');
     form.reset();
     document.getElementById('popup').style.display = 'none';
   });
