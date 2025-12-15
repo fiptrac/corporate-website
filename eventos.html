@@ -34,8 +34,6 @@ button.btn {
   box-shadow: none;
 }
 
-
-
  .intro-eventos{
   max-width: 900px;
   margin: 0 auto 50px;
@@ -79,7 +77,6 @@ button.btn {
   margin-top:10px;
 }
  
-
 
 /* ================= EVENTOS – HIGHLIGHTS TIPO ENTRENAMIENTOS ================= */
 
@@ -125,6 +122,87 @@ button.btn {
 }
 
 
+/*==================  HERO ==================*/
+  .hero {
+    background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
+    background-position:center;
+    background-size:cover;
+    padding:80px 20px 20px; /* alto del hero */
+    text-align:center;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero-content {
+    max-width:1000px;
+    margin:auto;
+    min-height:260px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+  }
+
+  .fade-item {
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:0;
+    transition:opacity 1.4s ease, transform 0.6s ease;
+    font-size:44px;
+    font-weight:700;
+    line-height:1.05;
+    max-width:92%;
+  }
+
+  .fade-item:not(:has(img)) {
+    white-space: normal;
+    text-align:center;
+  }
+
+  .fade-item.active {
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+  /* Texto del slider (ajústalo con .fade-item .slide-text) */
+  .fade-item .slide-text {
+    display:block;
+    font-size:38px;
+  }
+  .fade-item p { margin-top:10px; font-size:18px; font-weight:400; color:rgba(255,255,255,0.95); }
+
+  /* ===========================
+     SLIDER: IMÁGENES / CONTROL POR CLASE (TAMAÑOS INDIVIDUALES)
+     - Usa las clases .img-1, .img-2, .img-3, .img-4 en cada <img>
+     - Ajusta width / max-width / height aquí según quieras
+  ============================ */
+  .fade-item img {
+    display:block;
+    width: 320px;      /* valor por defecto si no se especifica clase */
+    max-width: 68vw;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+    transition: transform .28s ease;
+  }
+
+  /* Tamaños individuales (modifica estos valores libremente) */
+  .fade-item img.img-1 { width: 360px; }   /* imagen 1 */
+  .fade-item img.img-2 { width: 300px; }   /* imagen 2 */
+  .fade-item img.img-3 { width: 420px; }   /* imagen 3 */
+  .fade-item img.img-4 { width: 500px; }   /* imagen 4 */
+
+  /* Responsivo: reduce imágenes en móvil */
+  @media (max-width:700px){
+    .fade-item { font-size:28px; }
+    .fade-item img { width:220px; }
+    .fade-item img.img-1 { width:240px; }
+    .fade-item img.img-2 { width:200px; }
+    .fade-item img.img-3 { width:260px; }
+    .fade-item img.img-4 { width:220px; }
+  }
   
 
 /*==================  NAVBAR ==================*/
@@ -261,6 +339,29 @@ button.btn {
   </div>
 </header>
 
+
+<!-- HERO / SLIDER -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-content">
+
+    <!-- Cada .fade-item puede ser texto o imagen. 
+         Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
+    <div class="fade-item active" id="fade1">
+      <span class="slide-text">✔ Cursos 100 % en español</span>
+    </div>
+
+    <div class="fade-item" id="fade2">
+      <span class="slide-text">✔ Impacto directo en el desempeño profesional</span>
+    </div>
+
+    <div class="fade-item" id="fade3">
+      <span class="slide-text">✔ Enfoque práctico y técnicos</span>
+      <p>Instructores certificados NFPA, DC-3 y acreditaciones internacionales.</p>
+    </div>
+
+  </div>
+</section>
+  
   
 <!-- EVENOTS Y CURSOS -->
 <section class="eventos">
@@ -421,7 +522,33 @@ button.btn {
   })();
 </script>
 
-  
+
+<!--  HERO  --> 
+<script>
+  // SLIDER / TRANSICIONES
+  const items = [
+    document.getElementById("fade1"),
+    document.getElementById("fade2"),
+    document.getElementById("fade3"),
+    document.getElementById("fade4")
+  ];
+
+  let index = 0;
+  function changeSlide(){
+    items.forEach(i => i.classList.remove("active"));
+    items[index].classList.add("active");
+    index = (index + 1) % items.length;
+  }
+  // inicia intercambio (puedes cambiar 3500 a otro valor en ms)
+  let slideInterval = setInterval(changeSlide, 2500);
+
+  // si quieres controlar manualmente (ej. pausar on hover) puedes hacerlo:
+  document.querySelector('.hero').addEventListener('mouseenter', ()=> clearInterval(slideInterval));
+  document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 2500));
+</script>
+
+
+<!--  MENÚ DE TARJETAS  --> 
 <script>
 /* ================== CONFIG ================== */
 const API = "https://script.google.com/macros/s/AKfycbwleZxkMAoAe7GomTTb8raroqw3anrksUM2hueAAnlvlO3G7cHfMHa7eLUDqtwJAKnk/exec";
