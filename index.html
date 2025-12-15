@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instituto de Entrenamiento Profesional</title>
+  <title>FIPTRAC - Fire Protection Training Center</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
@@ -332,7 +332,14 @@
   </div>
 </section>
 
+
+
+
+
 <!-- ========== SCRIPTS ========== -->
+
+
+  
 <script>
   // HAMBURGER toggle (movil)
   document.getElementById('hamburger').addEventListener('click', ()=>{
@@ -369,11 +376,11 @@
     index = (index + 1) % items.length;
   }
   // inicia intercambio (puedes cambiar 3500 a otro valor en ms)
-  let slideInterval = setInterval(changeSlide, 3500);
+  let slideInterval = setInterval(changeSlide, 2500);
 
   // si quieres controlar manualmente (ej. pausar on hover) puedes hacerlo:
   document.querySelector('.hero').addEventListener('mouseenter', ()=> clearInterval(slideInterval));
-  document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 3500));
+  document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 2500));
 </script>
 
 <script>
