@@ -492,56 +492,82 @@ body {
 
   
 <script>
-function abrirPopup(id){document.getElementById(id).style.display='flex'}
-function cerrarPopup(id){document.getElementById(id).style.display='none'}
+/* ================= POPUPS ================= */
+
+// Abrir popup
+function abrirPopup(id){
+  document.getElementById(id).style.display = 'flex';
+}
+
+// Cerrar popup específico
+function cerrarPopup(id){
+  document.getElementById(id).style.display = 'none';
+}
+
+// Cerrar todos los popups (ESC / click fuera)
+function cerrarTodosLosPopups(){
+  document.querySelectorAll('.popup').forEach(popup=>{
+    popup.style.display = 'none';
+  });
+}
+
+// Click fuera del contenido
+document.querySelectorAll('.popup').forEach(popup=>{
+  popup.addEventListener('click', e=>{
+    if(e.target === popup){
+      popup.style.display = 'none';
+    }
+  });
+});
+
+// Tecla ESC
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape'){
+    cerrarTodosLosPopups();
+  }
+});
+
+/* ================= ENVÍOS ================= */
 
 function enviarWhatsApp(e){
   e.preventDefault();
-  const nombre=wa-nombre.value;
-  const tel=wa-telefono.value;
-  const msg=wa-mensaje.value;
-  const texto=encodeURIComponent(`Nombre: ${nombre}\nTeléfono: ${tel}\nMensaje: ${msg}`);
-  window.open(`https://wa.me/525576861184?text=${texto}`,'_blank');
+  const nombre = document.getElementById('wa-nombre').value;
+  const tel    = document.getElementById('wa-telefono').value;
+  const msg    = document.getElementById('wa-mensaje').value;
+
+  const texto = encodeURIComponent(
+    `Nombre: ${nombre}\nTeléfono: ${tel}\nMensaje: ${msg}`
+  );
+
+  window.open(`https://wa.me/525576861184?text=${texto}`, '_blank');
   cerrarPopup('popup-wa');
 }
 
 function enviarCorreo(e){
   e.preventDefault();
-  const body=encodeURIComponent(
-    `Nombre: ${c-nombre.value}\nCargo: ${c-cargo.value}\nEmpresa: ${c-empresa.value}\nUbicación: ${c-ubicacion.value}\nTeléfono: ${c-telefono.value}\nCorreo: ${c-email.value}\n\nMensaje:\n${c-mensaje.value}`
+
+  const body = encodeURIComponent(
+    `Nombre: ${document.getElementById('c-nombre').value}
+Cargo: ${document.getElementById('c-cargo').value}
+Empresa: ${document.getElementById('c-empresa').value}
+Ubicación: ${document.getElementById('c-ubicacion').value}
+Teléfono: ${document.getElementById('c-telefono').value}
+Correo: ${document.getElementById('c-email').value}
+
+Mensaje:
+${document.getElementById('c-mensaje').value}`
   );
-  window.location.href=`mailto:fiptrac.platform@gmail.com?subject=SOLICITUD%20DE%20CONTACTO%20-%20FIPTRAC&body=${body}`;
+
+  window.location.href =
+    `mailto:fiptrac.platform@gmail.com?subject=SOLICITUD%20DE%20CONTACTO%20-%20FIPTRAC&body=${body}`;
+
   cerrarPopup('popup-mail');
 }
 </script>
 
 
-<!--  CERRAR FORM  --> 
-   <script>
-  const popup = document.getElementById('popup');
-  const closeBtn = document.getElementById('closePopup');
 
-  function cerrarPopup(){
-    popup.style.display = 'none';
-  }
 
-  // Click en botón ✕
-  closeBtn.addEventListener('click', cerrarPopup);
-
-  // Click fuera del formulario
-  popup.addEventListener('click', (e)=>{
-    if(e.target === popup){
-      cerrarPopup();
-    }
-  });
-
-  // Tecla ESC
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape'){
-      cerrarPopup();
-    }
-  });
-   </script>
 
 <!--  FOOTER  --> 
 <script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
