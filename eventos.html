@@ -721,24 +721,25 @@ form.addEventListener('submit', e => {
   const popup = document.getElementById('popup');
   const closeBtn = document.getElementById('closePopup');
 
-  function cerrarPopup(){
-    popup.style.display = 'none';
+  function cerrarPopupInscripcion(){
+  popup.style.display = 'none';
   }
 
+
   // Click en botón ✕
-  closeBtn.addEventListener('click', cerrarPopup);
+  closeBtn.addEventListener('click', cerrarPopupInscripcion);
 
   // Click fuera del formulario
   popup.addEventListener('click', (e)=>{
     if(e.target === popup){
-      cerrarPopup();
+      cerrarPopupInscripcion();
     }
   });
 
   // Tecla ESC
   document.addEventListener('keydown', (e)=>{
     if(e.key === 'Escape'){
-      cerrarPopup();
+      cerrarPopupInscripcion();
     }
   });
 </script>
