@@ -1,221 +1,220 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto | FIPTRAC</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto | FIPTRAC</title>
 
-    <!-- Estilos globales -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
 
-    <!-- Ícono -->
-    <link rel="icon" href="assets/img/logo/favicon.png" type="image/png">
+<style>
+body{
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background:#f5f7fa;
+  color:#003A70;
+}
 
-    <style>
-        /* ---------------------------
-           ESTILOS LOCALES DE CONTACTO
-        ----------------------------*/
-        .contact-hero {
-            background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),
-                        url('assets/img/header/contacto-bg.jpg') center/cover;
-            padding: 120px 20px;
-            text-align: center;
-            color: #fff;
-        }
+/* ===== HERO CONTACTO ===== */
+.contact-hero{
+  background:linear-gradient(rgba(0,58,112,.85),rgba(0,58,112,.85));
+  color:#fff;
+  padding:120px 20px 80px;
+  text-align:center;
+}
+.contact-hero h1{font-size:2.4rem;margin-bottom:10px}
+.contact-hero p{max-width:720px;margin:auto;font-size:1.1rem;opacity:.95}
 
-        .contact-hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
+/* ===== BOTONES PRINCIPALES ===== */
+.contact-actions{
+  max-width:900px;
+  margin:-40px auto 80px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+  padding:0 20px;
+}
 
-        .contact-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 30px;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 4px 14px rgba(0,0,0,.12);
-        }
+.action-card{
+  background:#fff;
+  border-radius:20px;
+  padding:34px 26px;
+  text-align:center;
+  box-shadow:0 10px 28px rgba(0,0,0,.12);
+  cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
 
-        .contact-container h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
+.action-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 36px rgba(0,0,0,.18);
+}
 
-        form input, form textarea {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 18px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            background: #fafafa;
-            font-size: 16px;
-        }
+.action-card i{
+  font-size:46px;
+  margin-bottom:14px;
+}
 
-        form textarea {
-            height: 150px;
-            resize: none;
-        }
+.action-card.whatsapp i{color:#25D366}
+.action-card.mail i{color:#003A70}
 
-        .btn-primary {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: var(--color-primario);
-            color: #fff;
-            border: none;
-            font-size: 1.2rem;
-            border-radius: 10px;
-            cursor: pointer;
-        }
+.action-card h3{margin-bottom:8px}
+.action-card p{font-size:.95rem;color:#444}
 
-        .btn-whatsapp {
-            background: #25D366;
-            margin-top: 10px;
-        }
+/* ===== POPUPS ===== */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
 
-        .info-box {
-            margin-top: 40px;
-            padding: 25px;
-            background: var(--color-fondo);
-            border-radius: 12px;
-        }
-    </style>
+.popup-content{
+  background:#fff;
+  width:100%;
+  max-width:520px;
+  border-radius:18px;
+  padding:30px;
+  position:relative;
+}
+
+.popup-content h2{margin-bottom:16px}
+
+.close-btn{
+  position:absolute;
+  top:14px;
+  right:18px;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* ===== FORM ===== */
+.popup-content form{
+  display:grid;
+  gap:14px;
+}
+
+.popup-content input,
+.popup-content textarea{
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-family:inherit;
+}
+
+.popup-content textarea{resize:none;min-height:90px}
+
+.popup-content button{
+  margin-top:6px;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.btn-mail{background:#003A70;color:#fff}
+.btn-wa{background:#25D366;color:#fff}
+
+/* ===== INFO FIJA ===== */
+.contact-info{
+  max-width:900px;
+  margin:0 auto 80px;
+  padding:0 20px;
+  text-align:center;
+}
+
+.contact-info p{margin:6px 0;color:#444}
+
+</style>
 </head>
-
 <body>
 
-    <!-- NAVBAR (opcional si ya lo tienes modular) -->
-    <header class="navbar">
-        <div class="navbar-container">
-            <a href="index.html" class="logo">
-                <img src="assets/img/logo/logo.png" alt="FIPTRAC">
-            </a>
-            <nav class="nav-links">
-                <a href="index.html">Inicio</a>
-                <a href="cursos.html">Cursos</a>
-                <a href="eventos.html">Eventos</a>
-                <a href="laboratorios.html">Laboratorios</a>
-                <a href="aliados.html">Aliados</a>
-                <a href="contacto.html" class="active">Contacto</a>
-            </nav>
-        </div>
-    </header>
+<section class="contact-hero">
+  <h1>Contacto</h1>
+  <p>Estamos listos para apoyarte. Escríbenos por el canal que prefieras y nuestro equipo te responderá a la brevedad.</p>
+</section>
 
-    <!-- HERO -->
-    <section class="contact-hero">
-        <h1>Contáctanos</h1>
-        <p>Estamos aquí para ayudarte. Escríbenos y nos pondremos en contacto.</p>
-    </section>
+<section class="contact-actions">
+  <div class="action-card whatsapp" onclick="abrirPopup('popup-wa')">
+    <i class="fa-brands fa-whatsapp"></i>
+    <h3>WhatsApp</h3>
+    <p>Comunicación directa y rápida con nuestro equipo.</p>
+  </div>
 
-    <!-- FORMULARIO -->
-    <section class="contact-container">
-        <h2>Envíanos un mensaje</h2>
+  <div class="action-card mail" onclick="abrirPopup('popup-mail')">
+    <i class="fa-solid fa-envelope"></i>
+    <h3>Correo electrónico</h3>
+    <p>Envíanos los detalles de tu solicitud o proyecto.</p>
+  </div>
+</section>
 
-        <form id="contactForm">
-            <!-- Nombre válido -->
-            <input 
-                type="text" 
-                name="nombre" 
-                placeholder="Nombre Completo" 
-                required 
-                pattern="[A-Za-zÀ-ÿ\s]{3,50}"
-                title="Solo letras, mínimo 3 caracteres">
+<section class="contact-info">
+  <p><strong>Teléfono:</strong> +52 55 76 86 11 84</p>
+  <p><strong>Correo:</strong> fiptrac.platform@gmail.com</p>
+  <p><strong>Ubicación:</strong> Tepojaco, Tizayuca, Hidalgo, México</p>
+  <p><strong>Horario:</strong> L–V | 08:30 – 16:00</p>
+</section>
 
-            <!-- Email válido -->
-            <input 
-                type="email" 
-                name="email" 
-                placeholder="Correo Electrónico" 
-                required 
-                title="Ingresa un correo válido">
+<!-- ===== POPUP WHATSAPP ===== -->
+<div class="popup" id="popup-wa">
+  <div class="popup-content">
+    <span class="close-btn" onclick="cerrarPopup('popup-wa')">✕</span>
+    <h2>Mensaje por WhatsApp</h2>
+    <form onsubmit="enviarWhatsApp(event)">
+      <input id="wa-nombre" placeholder="Nombre completo" required>
+      <input id="wa-telefono" placeholder="Teléfono (+52...)" pattern="^\+[0-9]{6,15}$" required>
+      <textarea id="wa-mensaje" placeholder="Escribe tu mensaje" required></textarea>
+      <button class="btn-wa" type="submit">Enviar WhatsApp</button>
+    </form>
+  </div>
+</div>
 
-            <!-- Teléfono internacional -->
-            <input 
-                type="tel"
-                name="telefono"
-                placeholder="Teléfono (con código internacional, ej: +52)"
-                required
-                pattern="^\+[0-9]{6,15}$"
-                title="Debe iniciar con + y contener entre 6 y 15 dígitos">
+<!-- ===== POPUP CORREO ===== -->
+<div class="popup" id="popup-mail">
+  <div class="popup-content">
+    <span class="close-btn" onclick="cerrarPopup('popup-mail')">✕</span>
+    <h2>Enviar correo</h2>
+    <form onsubmit="enviarCorreo(event)">
+      <input id="c-nombre" placeholder="Nombre completo" required>
+      <input id="c-cargo" placeholder="Cargo" required>
+      <input id="c-empresa" placeholder="Empresa" required>
+      <input id="c-ubicacion" placeholder="Ubicación" required>
+      <input id="c-telefono" placeholder="Teléfono (+52...)" pattern="^\+[0-9]{6,15}$" required>
+      <input id="c-email" type="email" placeholder="Correo electrónico" required>
+      <textarea id="c-mensaje" placeholder="Mensaje" required></textarea>
+      <button class="btn-mail" type="submit">Enviar correo</button>
+    </form>
+  </div>
+</div>
 
-            <textarea 
-                name="mensaje"
-                placeholder="¿Cómo podemos ayudarte?"
-                required></textarea>
+<script>
+function abrirPopup(id){document.getElementById(id).style.display='flex'}
+function cerrarPopup(id){document.getElementById(id).style.display='none'}
 
-            <button class="btn-primary" type="submit">Enviar por correo</button>
+function enviarWhatsApp(e){
+  e.preventDefault();
+  const nombre=wa-nombre.value;
+  const tel=wa-telefono.value;
+  const msg=wa-mensaje.value;
+  const texto=encodeURIComponent(`Nombre: ${nombre}\nTeléfono: ${tel}\nMensaje: ${msg}`);
+  window.open(`https://wa.me/525576861184?text=${texto}`,'_blank');
+  cerrarPopup('popup-wa');
+}
 
-            <button type="button" class="btn-primary btn-whatsapp" id="btnWhatsapp">
-                Enviar por WhatsApp
-            </button>
-        </form>
-
-        <!-- Información adicional -->
-        <div class="info-box">
-            <h3>Datos de contacto</h3>
-            <p><strong>Teléfono:</strong> +52 55 76 86 11 84</p>
-            <p><strong>Correo:</strong> fiptrac.platform@gmail.com</p>
-            <p><strong>Dirección:</strong> Tepojaco, Tizayuca, Hidalgo, México.</p>
-            <p><strong>Horario:</strong> Lunes a Viernes — 08:30 a 16:00</p>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <p>© 2025 FIPTRAC — Todos los derechos reservados.</p>
-    </footer>
-
-    <!-- SCRIPT DE ENVÍO -->
-    <script>
-        // --------------------------
-        // ENVÍO A CORREO (Apps Script)
-        // --------------------------
-        document.getElementById("contactForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
-
-            const datos = {
-                nombre: this.nombre.value,
-                email: this.email.value,
-                telefono: this.telefono.value,
-                mensaje: this.mensaje.value
-            };
-
-            // URL del Apps Script Web App
-            const endpoint = "URL_DE_TU_WEB_APP_AQUI";
-
-            const res = await fetch(endpoint, {
-                method: "POST",
-                body: JSON.stringify(datos),
-                headers: { "Content-Type": "application/json" }
-            });
-
-            if (res.ok) {
-                alert("Mensaje enviado correctamente. ¡Gracias por contactarnos!");
-                this.reset();
-            } else {
-                alert("Hubo un problema al enviar el mensaje.");
-            }
-        });
-
-        // -----------------------------------
-        // ENVÍO POR WHATSAPP
-        // -----------------------------------
-        document.getElementById("btnWhatsapp").addEventListener("click", function () {
-            const nombre = document.querySelector("[name='nombre']").value;
-            const telefono = document.querySelector("[name='telefono']").value;
-            const mensaje = document.querySelector("[name='mensaje']").value;
-
-            const texto = encodeURIComponent(
-                `Hola FIPTRAC, mi nombre es ${nombre}.  
-Mi teléfono es ${telefono}.  
-Quiero solicitar más información:  
-${mensaje}`
-            );
-
-            window.open("https://wa.me/5215576861184?text=" + texto, "_blank");
-        });
-    </script>
+function enviarCorreo(e){
+  e.preventDefault();
+  const body=encodeURIComponent(
+    `Nombre: ${c-nombre.value}\nCargo: ${c-cargo.value}\nEmpresa: ${c-empresa.value}\nUbicación: ${c-ubicacion.value}\nTeléfono: ${c-telefono.value}\nCorreo: ${c-email.value}\n\nMensaje:\n${c-mensaje.value}`
+  );
+  window.location.href=`mailto:fiptrac.platform@gmail.com?subject=SOLICITUD%20DE%20CONTACTO%20-%20FIPTRAC&body=${body}`;
+  cerrarPopup('popup-mail');
+}
+</script>
 
 </body>
 </html>
