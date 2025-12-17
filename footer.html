@@ -31,7 +31,7 @@
   gap:40px;
 }
 
-/* LOGO CENTRAL */
+/* LOGO CENTRAL 
 .footer-logo {
   width:100%;
   text-align:center;
@@ -43,6 +43,7 @@
   height:auto;
   filter:drop-shadow(0 0 4px rgba(255,255,255,0.5));
 }
+  */
 
 /* COLUMNA IZQUIERDA */
 .footer-left {
@@ -165,46 +166,6 @@
   transform:scale(1.15);
 }
 
-/* FORMULARIO */
-
-.fiptrac-form-group { margin-top:10px; }
-
-.fiptrac-form-group input,
-.fiptrac-form-group textarea {
-  width:100%;
-  padding:12px 14px;
-  border-radius:10px;
-  border:1px solid #CCC;
-  font-size:15px;
-  margin-top:6px;
-  outline:none;
-  transition:.3s;
-}
-
-.fiptrac-form-group input:focus,
-.fiptrac-form-group textarea:focus {
-  border-color:#003A70;
-}
-
-.fiptrac-btn {
-  display:block;
-  width:100%;
-  margin-top:22px;
-  padding:13px;
-  background:#003A70;
-  color:#fff;
-  font-weight:700;
-  border-radius:10px;
-  border:none;
-  cursor:pointer;
-  transition:.3s;
-  font-size:16px;
-}
-
-.fiptrac-btn:hover {
-  background:#005A9C;
-}
-
 
 /* RESPONSIVE */
 @media(max-width:700px){
@@ -228,11 +189,11 @@
 
 <footer class="footer">
 
-  <!-- LOGO CENTRADO -->
+  <!-- LOGO CENTRADO 
   <div class="footer-logo">
     <img src="sin fondo.png" alt="FIPTRAC">
   </div>
-
+-->
   <div class="footer-container">
 
     <!-- IZQUIERDA -->
@@ -298,56 +259,6 @@ Corredor Industrial Huitzila Tepojaco, Hidalgo.
       <br><br>
       Este aviso podrá ser modificado y publicado en www.fiptrac.com.
     </p>
-  </div>
-</div>
-
-
-
-<!-- ==================================== -->
-<!-- POPUP — FORMULARIO DE CONTACTO -->
-<!-- ==================================== -->
-
-<div id="popup-contacto" class="fiptrac-overlay">
-  <div class="fiptrac-popup">
-    <span class="fiptrac-close" onclick="cerrarPopup('popup-contacto')">&times;</span>
-    <h2>Solicitar Información</h2>
-
-    <div class="fiptrac-form-group">
-      <label>Nombre completo *</label>
-      <input id="c-nombre" type="text">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Cargo / Área *</label>
-      <input id="c-cargo" type="text">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Empresa *</label>
-      <input id="c-empresa" type="text">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Estado o País *</label>
-      <input id="c-ubicacion" type="text">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Teléfono *</label>
-      <input id="c-telefono" type="text">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Correo electrónico *</label>
-      <input id="c-email" type="email">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Mensaje *</label>
-      <textarea id="c-mensaje" rows="4"></textarea>
-    </div>
-
-    <button class="fiptrac-btn" onclick="enviarCorreo()">Enviar solicitud</button>
   </div>
 </div>
 
