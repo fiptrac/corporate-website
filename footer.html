@@ -287,7 +287,7 @@ Corredor Industrial Huitzila Tepojaco, Hidalgo.
 
 <div id="popup-privacidad" class="fiptrac-overlay">
   <div class="fiptrac-popup">
-    <span class="fiptrac-close" onclick="cerrarPopup('popup-privacidad')">&times;</span>
+    <span class="fiptrac-close" onclick="cerrarPopup('popup-privacidad')">✕</span>
     <h2>Política de Privacidad</h2>
     <p>
       De acuerdo a la Ley Federal de Protección de Datos Personales, Fire Protection Training Center FIPTRAC SC® es responsable del uso y tratamiento de los datos personales proporcionados.  
@@ -357,42 +357,37 @@ Corredor Industrial Huitzila Tepojaco, Hidalgo.
 <!-- SCRIPTS -->
 <!-- ==================================== -->
 
-<script>
+  <script>
+
+    
+/* ================= POPUPS FOOTER ================= */
+
 function abrirPopup(id){
-  document.getElementById(id).style.display = "flex";
+  const popup = document.getElementById(id);
+  if(popup) popup.style.display = 'flex';
 }
 
 function cerrarPopup(id){
-  document.getElementById(id).style.display = "none";
+  const popup = document.getElementById(id);
+  if(popup) popup.style.display = 'none';
 }
 
-function enviarCorreo() {
-  const campos = {
-    nombre: document.getElementById("c-nombre").value.trim(),
-    cargo: document.getElementById("c-cargo").value.trim(),
-    empresa: document.getElementById("c-empresa").value.trim(),
-    ubicacion: document.getElementById("c-ubicacion").value.trim(),
-    telefono: document.getElementById("c-telefono").value.trim(),
-    email: document.getElementById("c-email").value.trim(),
-    mensaje: document.getElementById("c-mensaje").value.trim(),
-  };
-
-  for (const key in campos) {
-    if (!campos[key]) {
-      alert("Por favor completa todos los campos obligatorios.");
-      return;
-    }
+/* Cerrar con click fuera */
+document.addEventListener('click', e => {
+  if(e.target.classList.contains('fiptrac-overlay')){
+    e.target.style.display = 'none';
   }
+});
 
-  const subject = encodeURIComponent("SOLICITUD DE CONTACTO - FIPTRAC");
-  const body = encodeURIComponent(
-    `Nombre: ${campos.nombre}\nCargo: ${campos.cargo}\nEmpresa: ${campos.empresa}\nUbicación: ${campos.ubicacion}\nTeléfono: ${campos.telefono}\nCorreo: ${campos.email}\n\nMensaje:\n${campos.mensaje}`
-  );
-
-  window.location.href = `mailto:fiptrac.platform@gmail.com?subject=${subject}&body=${body}`;
-  cerrarPopup('popup-contacto');
-}
-</script>
+/* Cerrar con ESC */
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    document
+      .querySelectorAll('.fiptrac-overlay')
+      .forEach(p => p.style.display = 'none');
+  }
+});
+  </script>
 
 </body>
 </html>
