@@ -515,6 +515,34 @@ function enviarCorreo(e){
 }
 </script>
 
+
+<!--  CERRAR FORM  --> 
+   <script>
+  const popup = document.getElementById('popup');
+  const closeBtn = document.getElementById('closePopup');
+
+  function cerrarPopup(){
+    popup.style.display = 'none';
+  }
+
+  // Click en botón ✕
+  closeBtn.addEventListener('click', cerrarPopup);
+
+  // Click fuera del formulario
+  popup.addEventListener('click', (e)=>{
+    if(e.target === popup){
+      cerrarPopup();
+    }
+  });
+
+  // Tecla ESC
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape'){
+      cerrarPopup();
+    }
+  });
+   </script>
+
 <!--  FOOTER  --> 
 <script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
 
