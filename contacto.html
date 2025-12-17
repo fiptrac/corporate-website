@@ -230,13 +230,14 @@ body {
 
 /* ===== POPUPS ===== */
 .popup{
+  display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.55);
-  display:none;
-  justify-content:center;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter: blur(3px);
   align-items:center;
-  z-index:2000;
+  justify-content:center;
+  z-index:9999;
 }
 
 .popup-content{
@@ -246,6 +247,13 @@ body {
   border-radius:18px;
   padding:30px;
   position:relative;
+}
+
+.popup h3{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:14px;
+  font-size:22px;
 }
 
 .popup-content h2{margin-bottom:16px}
@@ -391,7 +399,7 @@ body {
 <div class="popup" id="popup-wa">
   <div class="popup-content">
     <span class="close-btn" onclick="cerrarPopup('popup-wa')">✕</span>
-    <h2>Mensaje por WhatsApp</h2>
+    <h3>Mensaje por WhatsApp</h3>
     <form onsubmit="enviarWhatsApp(event)">
       <input id="wa-nombre" placeholder="Nombre completo" required>
       <input id="wa-telefono" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
@@ -405,7 +413,7 @@ body {
 <div class="popup" id="popup-mail">
   <div class="popup-content">
     <span class="close-btn" onclick="cerrarPopup('popup-mail')">✕</span>
-    <h2>Enviar correo</h2>
+    <h3>Enviar correo</h3>
     <form onsubmit="enviarCorreo(event)">
       <input id="c-nombre" placeholder="Nombre completo" required>
       <input id="c-cargo" placeholder="Cargo" required>
