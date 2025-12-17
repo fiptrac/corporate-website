@@ -380,7 +380,7 @@ body{
     <h2>Mensaje por WhatsApp</h2>
     <form onsubmit="enviarWhatsApp(event)">
       <input id="wa-nombre" placeholder="Nombre completo" required>
-      <input id="wa-telefono" placeholder="Teléfono (+52...)" pattern="^\+[0-9]{6,15}$" required>
+      <input id="wa-telefono" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
       <textarea id="wa-mensaje" placeholder="Escribe tu mensaje" required></textarea>
       <button class="btn-wa" type="submit">Enviar WhatsApp</button>
     </form>
@@ -397,7 +397,7 @@ body{
       <input id="c-cargo" placeholder="Cargo" required>
       <input id="c-empresa" placeholder="Empresa" required>
       <input id="c-ubicacion" placeholder="Ubicación" required>
-      <input id="c-telefono" placeholder="Teléfono (+52...)" pattern="^\+[0-9]{6,15}$" required>
+      <input id="c-telefono" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
       <input id="c-email" type="email" placeholder="Correo electrónico" required>
       <textarea id="c-mensaje" placeholder="Mensaje" required></textarea>
       <button class="btn-mail" type="submit">Enviar correo</button>
