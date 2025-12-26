@@ -1,204 +1,276 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aliados Comerciales | FIPTRAC</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
+<meta charset="UTF-8">
+<title>Aliados Comerciales | FIPTRAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="stylesheet" href="assets/css/styles.css">
 
+<style>
+/* ======================================================
+   ESTILOS GENERALES
+====================================================== */
+body{
+  font-family:Montserrat,sans-serif;
+  background:#f4f6f8;
+  margin:0;
+}
 
-/*==================  ESTO EN TODAS LAS PÁGINAS ==================*/
-  
-  /* ===========================
-     HEADER STICKY (compact & scroll)
-     - header.scrolled: fondo semitransparente + compact
-     - header.nav-hide: se oculta al bajar scroll
-  ============================ */
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
-    background: rgba(255,255,255,0.92);
-  }
+/* Separación para navbar fijo */
+.page-spacer{
+  height:90px;
+}
 
-  /* Cuando el usuario baja lo volvemos más pequeño / con fondo */
-  header.scrolled {
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-  }
+/* Contenedor principal */
+.aliados-container{
+  max-width:1200px;
+  margin:0 auto 80px;
+  padding:0 20px;
+}
 
-  /* Cuando el usuario baja rápido ocultamos la barra */
-  header.nav-hide {
-    transform: translateY(-110%);
-  }
+/* TÍTULOS */
+.aliados-title{
+  text-align:center;
+  color:#003A70;
+  font-size:32px;
+  margin-bottom:16px;
+}
 
-  /* Contenedor del nav: aquí se controla el "grosor" de la línea.
-     Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
-  .nav-container {
-    max-width:1200px;
-    margin:auto;
-    padding:5px 15px; /* <-- AJUSTA AQUÍ el grosor vertical del header */
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    transition:padding 0.25s ease;
-  }
+.aliados-intro{
+  text-align:center;
+  max-width:900px;
+  margin:0 auto 50px;
+  font-size:16px;
+  line-height:1.7;
+  color:#444;
+}
 
-  /* ===========================
-     LOGO (clicable) - tamaño controlable
-     Ajusta height para dejarlo a tu preferencia.
-  ============================ */
-  .logo img {
-    height: 36px; /* <-- AJUSTA AQUÍ el tamaño del logo (desktop) */
-    object-fit: contain;
-    transition: height 0.2s ease;
-    display:block;
-  }
-  @media(max-width:850px){
-    .logo img { height: 32px; } /* logo en móvil */
-  }
+/* ======================================================
+   CARRUSELES AUTOMÁTICOS (FLUJO CONTINUO)
+====================================================== */
+.carousel-wrapper{
+  overflow:hidden;
+  position:relative;
+  margin:40px 0;
+}
 
-  /* ===========================
-     MENÚ
-  ============================ */
-  .menu {
-    display:flex;
-    gap:25px;
-    align-items:center;
-  }
-  .menu a {
-    text-decoration:none;
-    font-weight:600;
-    color:#003A70;
-    padding:6px 8px;
-    border-radius:8px;
-    transition:background .18s, color .18s;
-  }
-  .menu a:hover { background: rgba(0,58,112,0.06); }
+.carousel-track{
+  display:flex;
+  width:max-content;
+  animation:scroll 40s linear infinite;
+}
 
-  /* ====== HAMBURGER (movil) ====== */
-  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
-  .hamburger span { width:28px; height:3px; background:#003A70; border-radius:3px; display:block; }
+.carousel-track.slow{
+  animation-duration:60s;
+}
 
-  @media(max-width:850px){
-    .menu {
-      position:absolute; top:72px; right:12px; background:white;
-      width:220px; padding:16px; border-radius:12px;
-      box-shadow:0 8px 26px rgba(0,0,0,0.12);
-      flex-direction:column; gap:12px;
-      opacity:0; pointer-events:none; transform:translateY(-6px);
-      transition:opacity .28s, transform .28s;
-    }
-    .menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
-    .hamburger { display:flex; }
-  }
-/*==================  HASTA AQUÍ EN TODAS LAS PÁGINAS ==================*/
+.carousel-item{
+  flex:0 0 auto;
+  padding:0 40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    
-    .aliados-container {max-width:1200px;margin:40px auto;padding:20px;text-align:center;color:var(--texto);}    
-    .aliados-container h1{font-size:2rem;margin-bottom:14px;}
-    .aliados-container p{max-width:760px;margin:0 auto 30px;color:#dcdcdc;font-size:1.05rem;}
+.carousel-item img{
+  height:70px;
+  max-width:160px;
+  object-fit:contain;
+  filter:grayscale(100%);
+  opacity:.85;
+  transition:.3s;
+}
 
-    /* Carrusel */
-    .aliados-carousel {position:relative;width:100%;overflow:hidden;padding:20px 0;}
-    .aliados-track {display:flex;gap:40px;align-items:center;transition:transform .45s ease;}
-    .aliado-item {min-width:160px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border-radius:12px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,0.15);}
-    .aliado-item img {max-width:120px;max-height:60px;object-fit:contain;filter:brightness(1.0);}
+.carousel-item img:hover{
+  filter:grayscale(0%);
+  opacity:1;
+}
 
-    .aliado-btn {position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);border:none;color:#fff;padding:10px 14px;font-size:1.3rem;border-radius:50%;cursor:pointer;}
-    .aliado-btn:hover{background:rgba(0,0,0,0.65);}    
-    .prev {left:10px;}    
-    .next {right:10px;}    
+/* Animación continua */
+@keyframes scroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
 
-    /* Grid alternativa */
-    .aliados-grid {margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;}
-    .aliado-card {background:rgba(255,255,255,0.04);padding:14px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,0.2);}    
-    .aliado-card img {max-height:70px;object-fit:contain;filter:brightness(1.0);}    
-  </style>
+/* ======================================================
+   FRANJA EMPRESAS REPRESENTATIVAS (CON LINKS)
+====================================================== */
+.representativas{
+  background:#ffffff;
+  border-radius:18px;
+  padding:40px 30px;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+  margin:60px 0;
+}
+
+.representativas h3{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:10px;
+}
+
+.representativas p{
+  text-align:center;
+  color:#555;
+  margin-bottom:30px;
+}
+
+.representativas-logos{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:30px;
+}
+
+.representativas-logos a img{
+  height:65px;
+  max-width:160px;
+  object-fit:contain;
+  transition:.3s;
+}
+
+.representativas-logos a:hover img{
+  transform:scale(1.08);
+}
+
+/* ======================================================
+   FRANJA INSTITUCIONES CERTIFICADORAS
+====================================================== */
+.certificadoras{
+  margin-top:80px;
+}
+
+.certificadoras h3{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:14px;
+}
+
+.certificadoras p{
+  text-align:center;
+  color:#555;
+  max-width:800px;
+  margin:0 auto 35px;
+}
+
+.certificadoras-logos{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:35px;
+}
+
+.certificadoras-logos img{
+  height:70px;
+  max-width:170px;
+  object-fit:contain;
+  opacity:.9;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .carousel-item{ padding:0 25px; }
+  .carousel-item img{ height:55px; }
+}
+</style>
 </head>
+
 <body>
 
+<!-- ESPACIO PARA NAVBAR (header fijo) -->
+<div class="page-spacer"></div>
 
+<section class="aliados-container">
 
-<header class="nav">
-  <div class="nav-container">
-    <!-- Logo clicable: vuelve a index.html -->
-    <div class="logo">
-      <a href="index.html" aria-label="Ir al inicio">
-        <img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
-      </a>
-    </div>
+  <h1 class="aliados-title">Aliados Comerciales</h1>
 
-    <!-- Menú (Eventos permanece incluido) -->
-    <nav class="menu" id="menu">
-      <a href="cursos.html">Cursos</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="certificaciones.html">Certificaciones</a>
-      <a href="laboratorios.html">Laboratorios</a>
-      <a href="aliados.html">Alianzas Comerciales</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
+  <p class="aliados-intro">
+    Empresas que confían en <strong>FIPTRAC</strong> para la
+    <strong>capacitación técnica especializada</strong> de sus equipos.
+    Estas organizaciones han participado, se han certificado o colaboran
+    activamente en el fortalecimiento de la
+    <strong>seguridad contra incendios en Latinoamérica</strong>.
+  </p>
 
-    <div class="hamburger" id="hamburger" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
+  <!-- ================== CARRUSEL 1 ================== -->
+  <div class="carousel-wrapper">
+    <div class="carousel-track">
+      <!-- DUPLICA LOS LOGOS PARA EFECTO INFINITO -->
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo1.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo2.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo3.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo4.png"></div>
+
+      <!-- repetidos -->
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo1.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo2.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo3.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo4.png"></div>
     </div>
   </div>
-</header>
 
+  <!-- ================== CARRUSEL 2 (más lento) ================== -->
+  <div class="carousel-wrapper">
+    <div class="carousel-track slow">
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo5.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo6.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo7.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo8.png"></div>
 
+      <!-- repetidos -->
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo5.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo6.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo7.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/logo8.png"></div>
+    </div>
+  </div>
 
-  <main class="aliados-container">
-    <h1>Aliados Comerciales</h1>
+  <!-- ================== EMPRESAS REPRESENTATIVAS ================== -->
+  <div class="representativas">
+    <h3>Empresas Representativas</h3>
     <p>
-      Empresas que confían en FIPTRAC para la capacitación técnica de sus equipos.
-      Estas organizaciones han participado, se han certificado o colaboran de manera activa
-      en el fortalecimiento de la seguridad contra incendios en Latinoamérica.
+      Organizaciones líderes del sector que colaboran de manera directa
+      y continua con FIPTRAC.
     </p>
 
-    <!-- Carrusel -->
-    <div class="aliados-carousel">
-      <button class="aliado-btn prev">❮</button>
-      <div class="aliados-track">
-        <div class="aliado-item"><img src="assets/aliados/aliado1.png" alt="Aliado 1" /></div>
-        <div class="aliado-item"><img src="assets/aliados/aliado2.png" alt="Aliado 2" /></div>
-        <div class="aliado-item"><img src="assets/aliados/aliado3.png" alt="Aliado 3" /></div>
-        <div class="aliado-item"><img src="assets/aliados/aliado4.png" alt="Aliado 4" /></div>
-        <div class="aliado-item"><img src="assets/aliados/aliado5.png" alt="Aliado 5" /></div>
-        <div class="aliado-item"><img src="assets/aliados/aliado6.png" alt="Aliado 6" /></div>
-      </div>
-      <button class="aliado-btn next">❯</button>
+    <div class="representativas-logos">
+      <a href="https://empresa1.com" target="_blank">
+        <img src="assets/images/aliados_logos/empresa1.png">
+      </a>
+      <a href="https://empresa2.com" target="_blank">
+        <img src="assets/images/aliados_logos/empresa2.png">
+      </a>
+      <a href="https://empresa3.com" target="_blank">
+        <img src="assets/images/aliados_logos/empresa3.png">
+      </a>
     </div>
+  </div>
 
-    <h2 style="margin-top:50px;color:var(--texto);">Todos los Aliados</h2>
-    <div class="aliados-grid">
-      <div class="aliado-card"><img src="assets/aliados/aliado1.png"/></div>
-      <div class="aliado-card"><img src="assets/aliados/aliado2.png"/></div>
-      <div class="aliado-card"><img src="assets/aliados/aliado3.png"/></div>
-      <div class="aliado-card"><img src="assets/aliados/aliado4.png"/></div>
-      <div class="aliado-card"><img src="assets/aliados/aliado5.png"/></div>
-      <div class="aliado-card"><img src="assets/aliados/aliado6.png"/></div>
+  <!-- ================== INSTITUCIONES CERTIFICADORAS ================== -->
+  <div class="certificadoras">
+    <h3>Instituciones que respaldan nuestra formación</h3>
+    <p>
+      FIPTRAC colabora y se alinea con organismos e instituciones
+      reconocidas a nivel nacional e internacional.
+    </p>
+
+    <div class="certificadoras-logos">
+      <img src="assets/images/aliados_logos/nfpa.png">
+      <img src="assets/images/aliados_logos/nicet.png">
+      <img src="assets/images/aliados_logos/stps.png">
     </div>
-  </main>
+  </div>
 
-  <script>
-    const track = document.querySelector('.aliados-track');
-    const items = Array.from(track.children);
-    const nextBtn = document.querySelector('.next');
-    const prevBtn = document.querySelector('.prev');
-    let index = 0;
+</section>
 
-    function move() {
-      track.style.transform = `translateX(-${index * 200}px)`;
-    }
+<!-- FOOTER -->
+<div id="footer-container"></div>
+<script>
+  fetch("footer.html")
+    .then(r=>r.text())
+    .then(html=>document.getElementById("footer-container").innerHTML=html);
+</script>
 
-    nextBtn.onclick = () => { index = (index + 1) % items.length; move(); };
-    prevBtn.onclick = () => { index = (index - 1 + items.length) % items.length; move(); };
-  </script>
 </body>
 </html>
