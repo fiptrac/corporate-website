@@ -217,42 +217,47 @@
   }
   @media(max-width:850px){ .nosotros{ flex-direction:column; } .nosotros img, .nosotros-text{ width:100%; } }
 
-  /* MAPA INTEGRADO A LA SECCIÓN */
-  
-  /* El iframe fluye como contenido */
-  .alcance-full {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    overflow: hidden; /* CLAVE */
-  }
-  
+
+
+/* ---------------------------------------------------- MAPA */
+
+.alcance-full {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  overflow: hidden; /* CLAVE */
+}
+
+.alcance-full iframe {
+  width: 100%;
+  height: 1400px;
+  border: none;
+  display: block;
+
+  /* 🔥 ESCALADO */
+  transform: scale(0.50);          /* ← ajusta aquí */
+  transform-origin: top center;    /* ← mantiene centrado */
+}
+
+/* Tablet */
+@media (max-width: 900px) {
   .alcance-full iframe {
-    width: 100%;
-    height: 1400px;
-    border: none;
-    display: block;
-  
-    /* 🔥 ESCALADO */
-    transform: scale(0.50);          /* ← ajusta aquí */
-    transform-origin: top center;    /* ← mantiene centrado */
+    height: 900px;
+    transform: scale(0.9);
   }
-  
-  /* Tablet */
-  @media (max-width: 900px) {
-    .alcance-full iframe {
-      height: 900px;
-      transform: scale(0.9);
-    }
+}
+
+/* Móvil */
+@media (max-width: 600px) {
+  .alcance-full iframe {
+    height: 700px;
+    transform: scale(0.95);
   }
+}
+
+
+/* ---------------------------------------------------- MAPA */
   
-  /* Móvil */
-  @media (max-width: 600px) {
-    .alcance-full iframe {
-      height: 700px;
-      transform: scale(0.95);
-    }
-  }
 
  
   /* ENTRENAMIENTOS */
@@ -343,11 +348,7 @@
   </div>
 </section>
 
-<!-- NUESTRO ALCANCE -->
-<section class="seccion">
-  <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">
-    Nuestro Alcance
-  </h2>
+<!-- NUESTRO ALCANCE (mapa centrado) -->
 
 <section class="alcance-full">
   <iframe
@@ -355,6 +356,9 @@
     loading="lazy">
   </iframe>
 </section>
+
+
+  
 
 
 <!-- ENTRENAMIENTOS -->
@@ -444,6 +448,9 @@
   })();
 </script>
 
+
+
+  
 
 <script>
 /* ================= POPUPS FOOTER ================= */
