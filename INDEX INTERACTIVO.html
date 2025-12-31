@@ -218,10 +218,18 @@
   @media(max-width:850px){ .nosotros{ flex-direction:column; } .nosotros img, .nosotros-text{ width:100%; } }
 
    /* MAPA */
-  .mapa-contenedor { width:70%; height:680px; margin:60px auto; border-radius:18px; overflow:hidden; box-shadow:0 5px 18px rgba(0,0,0,0.08); }
-  @media(max-width:900px){ .mapa-contenedor{ height:420px; width:90%; } }
-  @media(max-width:600px){ .mapa-contenedor{ height:360px; width:94%; } }
-  .mapa-contenedor iframe{ width:100%; height:100%; border:none; }
+  #mapa {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  #mapa svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
 
  
   /* ENTRENAMIENTOS */
@@ -314,11 +322,19 @@
 
 <!-- NUESTRO ALCANCE (mapa centrado) -->
 <section class="seccion">
-  <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">Nuestro Alcance</h2>
-  <div class="mapa-contenedor" aria-label="Mapa interactivo">
-    <iframe src="https://script.google.com/macros/s/AKfycbwZYvcoTht_RLGDcZqht3kkdyjRG3IRFWfAOZKacHMovs3JLppr3w4UM5k5xwLOjNUl/exec" loading="lazy"></iframe>
+  <h2 class="titulo-seccion">Nuestro Alcance</h2>
+
+  <!-- MAPA INTEGRADO -->
+  <div id="mapa"></div>
+
+  <div id="contador">
+    <div class="tarjeta">
+      <div class="numero">Haz clic en un estado</div>
+      <div class="nota">para ver nuestro alcance</div>
+    </div>
   </div>
 </section>
+
 
 <!-- ENTRENAMIENTOS -->
 <section class="entrenamientos">
@@ -407,6 +423,20 @@
   })();
 </script>
 
+
+
+<script>
+/* === mapa ---*/
+  fetch("assets/svg/mapa-latam.svg")
+  .then(res => res.text())
+  .then(svg => {
+    document.getElementById("mapa").innerHTML = svg;
+    inicializarMapa();
+  });
+</script>
+
+
+  
 
 <script>
 /* ================= POPUPS FOOTER ================= */
