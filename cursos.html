@@ -217,18 +217,6 @@
   }
   @media(max-width:850px){ .nosotros{ flex-direction:column; } .nosotros img, .nosotros-text{ width:100%; } }
 
-   /* MAPA */
-  #mapa {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  #mapa svg {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
 
 
 /* ---------------------------------------------------- MAPA */
@@ -354,23 +342,6 @@
 </section>
 
 <!-- NUESTRO ALCANCE (mapa centrado) -->
-<section class="seccion">
-  <h2 class="titulo-seccion">Nuestro Alcance</h2>
-
-  <!-- MAPA INTEGRADO -->
-  <div id="mapa"></div>
-
-  <div id="contador">
-    <div class="tarjeta">
-      <div class="numero">Haz clic en un estado</div>
-      <div class="nota">para ver nuestro alcance</div>
-    </div>
-  </div>
-</section>
-
-
-
-
 
 <section class="alcance-full">
   <iframe
@@ -470,17 +441,6 @@
   })();
 </script>
 
-
-
-<script>
-/* === mapa ---*/
-  fetch("assets/svg/mapa-latam.svg")
-  .then(res => res.text())
-  .then(svg => {
-    document.getElementById("mapa").innerHTML = svg;
-    inicializarMapa();
-  });
-</script>
 
 
   
