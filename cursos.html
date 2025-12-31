@@ -225,6 +225,7 @@
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
+  overflow: hidden; /* CLAVE */
 }
 
 .alcance-full iframe {
@@ -232,22 +233,28 @@
   height: 1400px;
   border: none;
   display: block;
-  overflow: hidden;
+
+  /* 🔥 ESCALADO */
+  transform: scale(0.85);          /* ← ajusta aquí */
+  transform-origin: top center;    /* ← mantiene centrado */
 }
 
+/* Tablet */
 @media (max-width: 900px) {
   .alcance-full iframe {
-    height: 55vh;
-    min-height: 420px;
+    height: 900px;
+    transform: scale(0.9);
   }
 }
 
+/* Móvil */
 @media (max-width: 600px) {
   .alcance-full iframe {
-    height: 50vh;
-    min-height: 360px;
+    height: 700px;
+    transform: scale(0.95);
   }
 }
+
 
 /* ---------------------------------------------------- MAPA */
   
