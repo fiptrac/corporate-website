@@ -231,7 +231,7 @@
   }
 
 
-
+/* ---------------------------------------------------- MAPA */
 
 .alcance-full {
   width: 100vw;
@@ -241,13 +241,27 @@
 
 .alcance-full iframe {
   width: 100%;
-  height: 85vh;
+  height: 520px;
   border: none;
   display: block;
   overflow: hidden;
 }
 
+@media (max-width: 900px) {
+  .alcance-full iframe {
+    height: 55vh;
+    min-height: 420px;
+  }
+}
 
+@media (max-width: 600px) {
+  .alcance-full iframe {
+    height: 50vh;
+    min-height: 360px;
+  }
+}
+
+/* ---------------------------------------------------- MAPA */
   
 
  
