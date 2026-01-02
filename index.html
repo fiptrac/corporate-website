@@ -222,14 +222,14 @@
 /* ---------------------------------------------------- MAPA */
 
 .alcance-full {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
+  width: auto;
+  height: auto;
+  padding: 0px 0px 0px 250px;
   overflow: hidden; /* CLAVE */
 }
 
 .alcance-full iframe {
-  max-width: 1200;
+  max-width: 500;
   height: 500px;
   border: none;
   display: block;
@@ -251,6 +251,7 @@
 @media (max-width: 600px) {
   .alcance-full iframe {
     height: 400px;
+    padding: 0px 0px 0px 19px;
     transform: scale(0.95);
   }
 }
