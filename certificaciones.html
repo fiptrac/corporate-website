@@ -1,275 +1,265 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificaciones | FIPTRAC</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>Certificados y Proveedores | FIPTRAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
+<style>
+body{
+  font-family:Montserrat,sans-serif;
+  background:#f4f6f8;
+  margin:0;
+}
 
+/* ================= HERO ================= */
+.hero{
+  background:linear-gradient(rgba(0,58,112,.82),rgba(0,58,112,.82));
+  color:#fff;
+  padding:90px 20px 50px;
+  text-align:center;
+}
+.hero h1{font-size:36px;margin-bottom:10px}
+.hero p{font-size:18px;max-width:900px;margin:auto}
 
-/*==================  ESTO EN TODAS LAS PÁGINAS ==================*/
-  
-  /* ===========================
-     HEADER STICKY (compact & scroll)
-     - header.scrolled: fondo semitransparente + compact
-     - header.nav-hide: se oculta al bajar scroll
-  ============================ */
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
-    background: rgba(255,255,255,0.92);
-  }
+/* ================= FILTROS ================= */
+.filtros{
+  background:#fff;
+  max-width:1200px;
+  margin:-40px auto 40px;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:18px;
+}
+.filtros select,
+.filtros button{
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+.filtros button{
+  background:#003A70;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
 
-  /* Cuando el usuario baja lo volvemos más pequeño / con fondo */
-  header.scrolled {
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-  }
+/* ================= GRID ================= */
+.directorio{
+  max-width:1200px;
+  margin:20px auto 80px;
+  padding:20px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
 
-  /* Cuando el usuario baja rápido ocultamos la barra */
-  header.nav-hide {
-    transform: translateY(-110%);
-  }
+/* ================= CARD ================= */
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 8px 22px rgba(0,0,0,.1);
+  transition:.25s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 30px rgba(0,0,0,.16);
+}
+.card h3{color:#003A70;margin-bottom:6px}
+.card p{font-size:14px;color:#444;margin:4px 0}
+.badge{
+  display:inline-block;
+  background:#e8eef5;
+  color:#003A70;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  margin-top:6px;
+}
+.card .btns{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+.btn{
+  flex:1;
+  text-align:center;
+  background:#003A70;
+  color:#fff;
+  padding:10px;
+  border-radius:10px;
+  text-decoration:none;
+  cursor:pointer;
+  font-size:14px;
+}
+.btn.secondary{
+  background:#555;
+}
 
-  /* Contenedor del nav: aquí se controla el "grosor" de la línea.
-     Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
-  .nav-container {
-    max-width:1200px;
-    margin:auto;
-    padding:5px 15px; /* <-- AJUSTA AQUÍ el grosor vertical del header */
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    transition:padding 0.25s ease;
-  }
+/* ================= CTA ================= */
+.cta{
+  background:#003A70;
+  color:#fff;
+  padding:50px 20px;
+  text-align:center;
+}
+.cta button{
+  margin-top:14px;
+  padding:14px 26px;
+  font-size:16px;
+  border-radius:14px;
+  border:none;
+  background:#fff;
+  color:#003A70;
+  cursor:pointer;
+}
 
-  /* ===========================
-     LOGO (clicable) - tamaño controlable
-     Ajusta height para dejarlo a tu preferencia.
-  ============================ */
-  .logo img {
-    height: 36px; /* <-- AJUSTA AQUÍ el tamaño del logo (desktop) */
-    object-fit: contain;
-    transition: height 0.2s ease;
-    display:block;
-  }
-  @media(max-width:850px){
-    .logo img { height: 32px; } /* logo en móvil */
-  }
-
-  /* ===========================
-     MENÚ
-  ============================ */
-  .menu {
-    display:flex;
-    gap:25px;
-    align-items:center;
-  }
-  .menu a {
-    text-decoration:none;
-    font-weight:600;
-    color:#003A70;
-    padding:6px 8px;
-    border-radius:8px;
-    transition:background .18s, color .18s;
-  }
-  .menu a:hover { background: rgba(0,58,112,0.06); }
-
-  /* ====== HAMBURGER (movil) ====== */
-  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
-  .hamburger span { width:28px; height:3px; background:#003A70; border-radius:3px; display:block; }
-
-  @media(max-width:850px){
-    .menu {
-      position:absolute; top:72px; right:12px; background:white;
-      width:220px; padding:16px; border-radius:12px;
-      box-shadow:0 8px 26px rgba(0,0,0,0.12);
-      flex-direction:column; gap:12px;
-      opacity:0; pointer-events:none; transform:translateY(-6px);
-      transition:opacity .28s, transform .28s;
-    }
-    .menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
-    .hamburger { display:flex; }
-  }
-/*==================  HASTA AQUÍ EN TODAS LAS PÁGINAS ==================*/
-
-
-
-        
-        /* ===== ESTILOS ESPECÍFICOS PARA CERTIFICACIONES ===== */
-
-        .cert-container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .cert-grid {
-            margin-top: 35px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 25px;
-        }
-
-        .cert-card {
-            background: #fff;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-            border-left: 6px solid var(--principal);
-            transition: 0.25s ease;
-        }
-
-        .cert-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.16);
-        }
-
-        .cert-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--texto);
-        }
-
-        .cert-desc {
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            color: #444;
-        }
-
-        .btn-pdf {
-            background: var(--principal);
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: inline-block;
-            transition: 0.2s ease;
-        }
-
-        .btn-pdf:hover {
-            opacity: 0.88;
-        }
-    </style>
+/* ================= POPUP ================= */
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.popup-card{
+  background:#fff;
+  width:92%;
+  max-width:520px;
+  padding:28px;
+  border-radius:20px;
+}
+.popup-card h3{color:#003A70;text-align:center}
+.popup-card input, .popup-card select{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+</style>
 </head>
 
 <body>
 
+<!-- HERO -->
+<section class="hero">
+  <h1>Directorio de Proveedores Certificados</h1>
+  <p>Consulta y contacta proveedores avalados por FIPTRAC, filtrando por ubicación, servicios y certificaciones.</p>
+</section>
 
-    
-    <!-- NAVBAR -->
-<header class="nav">
-  <div class="nav-container">
-    <!-- Logo clicable: vuelve a index.html -->
-    <div class="logo">
-      <a href="index.html" aria-label="Ir al inicio">
-        <img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
-      </a>
-    </div>
+<!-- FILTROS -->
+<div class="filtros">
+  <select id="fPais"><option value="">País</option></select>
+  <select id="fEstado"><option value="">Estado</option></select>
+  <select id="fServicio"><option value="">Servicio</option></select>
+  <select id="fCertificado"><option value="">Certificación</option></select>
+  <button onclick="aplicarFiltros()">Filtrar</button>
+</div>
 
-    <!-- Menú (Eventos permanece incluido) -->
-    <nav class="menu" id="menu">
-      <a href="cursos.html">Cursos</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="certificaciones.html">Certificaciones</a>
-      <a href="laboratorios.html">Laboratorios</a>
-      <a href="aliados.html">Alianzas Comerciales</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
+<!-- DIRECTORIO -->
+<section class="directorio">
+  <div class="grid" id="grid"></div>
+</section>
 
-    <div class="hamburger" id="hamburger" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </div>
+<!-- CTA -->
+<section class="cta">
+  <h2>¿Eres proveedor certificado?</h2>
+  <p>Solicita tu alta para aparecer en el directorio oficial</p>
+  <button onclick="abrirPopup()">Solicitar registro</button>
+</section>
+
+<!-- POPUP ALTA -->
+<div class="popup" id="popup">
+  <div class="popup-card">
+    <h3>Solicitud de alta</h3>
+    <input id="empresa" placeholder="Empresa">
+    <input id="pais" placeholder="País">
+    <input id="estado" placeholder="Estado">
+    <input id="servicio" placeholder="Servicio">
+    <input id="certificado" placeholder="Certificación">
+    <input id="telefono" placeholder="Teléfono">
+    <input id="correo" placeholder="Correo">
+    <button class="btn" onclick="enviarSolicitud()">Enviar solicitud</button>
   </div>
-</header>
+</div>
 
+<script>
+const API = "API_CERTIFICADOS";
+let dataGlobal = [];
 
-    
+fetch(API).then(r=>r.json()).then(data=>{
+  dataGlobal = data.filter(d=>d.ALTA==="APROBADO");
+  render(dataGlobal);
+  cargarFiltros(dataGlobal);
+});
 
-    <!-- CONTENIDO -->
-    <main class="cert-container">
-        <h1>Certificaciones FIPTRAC</h1>
-        <p>Contamos con certificaciones oficiales reconocidas internacionalmente, avaladas por NFPA, NICET y la Secretaría del Trabajo y Previsión Social (STPS).  
-        Todas nuestras certificaciones están diseñadas para garantizar competencias técnicas reales aplicables al campo laboral.</p>
-
-        <!-- TARJETAS DINÁMICAS -->
-        <div class="cert-grid">
-            <!-- CERTIFICACIÓN 1 -->
-            <div class="cert-card">
-                <div class="cert-title">Certificación en Sistemas de Rociadores</div>
-                <div class="cert-desc">
-                    Alineada a los estándares NFPA 13. Incluye entrenamiento práctico con equipos reales y evaluación final.
-                </div>
-                <a class="btn-pdf" href="assets/pdf/cert-rociadores.pdf" target="_blank">
-                    Descargar PDF
-                </a>
-            </div>
-
-            <!-- CERTIFICACIÓN 2 -->
-            <div class="cert-card">
-                <div class="cert-title">Certificación en Bombas Contra Incendios</div>
-                <div class="cert-desc">
-                    Basada en NFPA 20 y NFPA 25. Entrenamiento en operación, mantenimiento y diagnóstico.
-                </div>
-                <a class="btn-pdf" href="assets/pdf/cert-bombas.pdf" target="_blank">
-                    Descargar PDF
-                </a>
-            </div>
-
-            <!-- CERTIFICACIÓN 3 -->
-            <div class="cert-card">
-                <div class="cert-title">Certificación en Sistemas de Supresión</div>
-                <div class="cert-desc">
-                    Incluye agentes limpios, CO₂, FM-200 y novec. Prácticas en laboratorios especializados.
-                </div>
-                <a class="btn-pdf" href="assets/pdf/cert-supresion.pdf" target="_blank">
-                    Descargar PDF
-                </a>
-            </div>
-
-            <!-- CERTIFICACIÓN 4 -->
-            <div class="cert-card">
-                <div class="cert-title">Certificación en Alarmas y Detección</div>
-                <div class="cert-desc">
-                    Basada en NFPA 72. Capacitación práctica, programación y pruebas funcionales.
-                </div>
-                <a class="btn-pdf" href="assets/pdf/cert-alarmas.pdf" target="_blank">
-                    Descargar PDF
-                </a>
-            </div>
-
-            <!-- CERTIFICACIÓN 5 -->
-            <div class="cert-card">
-                <div class="cert-title">Certificación STPS DC-3</div>
-                <div class="cert-desc">
-                    Certificación laboral válida en todo México. Competencias técnicas en sistemas contra incendio.
-                </div>
-                <a class="btn-pdf" href="assets/pdf/cert-dc3.pdf" target="_blank">
-                    Descargar PDF
-                </a>
-            </div>
-
-            <!-- CERTIFICACIÓN 6 -->
-            <div class="cert-card">
-                <div class="cert-title">Certificación Internacional NICET (CPD)</div>
-                <div class="cert-desc">
-                    Programas con puntos de desarrollo profesional continuo reconocidos internacionalmente.
-                </div>
-                <a class="btn-pdf" href="assets/pdf/cert-nicet.pdf" target="_blank">
-                    Descargar PDF
-                </a>
-            </div>
+function render(data){
+  const g=document.getElementById("grid");
+  g.innerHTML="";
+  data.forEach(p=>{
+    g.innerHTML+=`
+      <div class="card">
+        <h3>${p.EMPRESA}</h3>
+        <p>${p.PAÍS} · ${p.ESTADO}</p>
+        <span class="badge">${p.SERVICIO}</span>
+        <span class="badge">${p.CERTIFICADO}</span>
+        <div class="btns">
+          <a class="btn" href="mailto:${p.CORREO}">Contactar</a>
         </div>
-    </main>
+      </div>`;
+  });
+}
+
+function cargarFiltros(data){
+  ["PAÍS","ESTADO","SERVICIO","CERTIFICADO"].forEach(k=>{
+    const sel=document.getElementById("f"+k.charAt(0)+k.slice(1).toLowerCase());
+    [...new Set(data.map(d=>d[k]))].forEach(v=>{
+      sel.innerHTML+=`<option>${v}</option>`;
+    });
+  });
+}
+
+function aplicarFiltros(){
+  const f = d => 
+    (!fPais.value||d.PAÍS===fPais.value) &&
+    (!fEstado.value||d.ESTADO===fEstado.value) &&
+    (!fServicio.value||d.SERVICIO===fServicio.value) &&
+    (!fCertificado.value||d.CERTIFICADO===fCertificado.value);
+  render(dataGlobal.filter(f));
+}
+
+function abrirPopup(){popup.style.display="flex"}
+popup.onclick=e=>{if(e.target===popup)popup.style.display="none"}
+
+function enviarSolicitud(){
+  fetch(API,{
+    method:"POST",
+    body:JSON.stringify({
+      ALTA:"SOLICITUD",
+      EMPRESA:empresa.value,
+      PAÍS:pais.value,
+      ESTADO:estado.value,
+      SERVICIO:servicio.value,
+      CERTIFICADO:certificado.value,
+      TELÉFONO:telefono.value,
+      CORREO:correo.value
+    })
+  }).then(()=>{
+    alert("Solicitud enviada correctamente");
+    popup.style.display="none";
+  });
+}
+</script>
 
 </body>
 </html>
