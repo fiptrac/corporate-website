@@ -721,6 +721,54 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+  <!-- ===== POPUP NUEVO TESTIMONIO ===== -->
+<div class="popup" id="popupTestimonio">
+
+  <div class="popup-card">
+
+    <button class="close-btn" onclick="cerrarTestimonio()">✕</button>
+
+    <h3>Enviar testimonio</h3>
+
+    <form id="formTestimonio">
+
+      <input
+        type="text"
+        id="nombre"
+        placeholder="Nombre completo"
+        required
+      />
+
+      <input
+        type="text"
+        id="rol"
+        placeholder="Rol / Puesto"
+        required
+      />
+
+      <input
+        type="text"
+        id="empresa"
+        placeholder="Empresa"
+        required
+      />
+
+      <textarea
+        id="testimonio"
+        rows="4"
+        placeholder="Escribe tu testimonio"
+        required
+      ></textarea>
+
+      <button type="submit" class="btn-fiptrac" style="width:100%; margin-top:10px;">
+        Enviar testimonio
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
 
   
 
