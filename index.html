@@ -652,9 +652,6 @@
   
   
 <script>
-
-/* ===== CARGA TESTIMONIOS ===== */
-
 document.addEventListener("DOMContentLoaded", () => {
 
   const carousel = document.getElementById("carousel");
@@ -687,66 +684,46 @@ document.addEventListener("DOMContentLoaded", () => {
       carousel.innerHTML = "<p>Error al cargar testimonios.</p>";
     });
 
+  function mostrarTestimonio(){
+    const prev = carousel.querySelector(".testimonio-card");
 
+    const card = document.createElement("div");
+    card.className = "testimonio-card";
 
-  
-function mostrarTestimonio(){
-  const card = document.createElement("div");
-  card.className = "testimonio-card";
+    card.innerHTML = `
+      <p class="testimonio-text">
+        “${testimonios[testimonialIndex].TESTIMONIO}”
+      </p>
+      <div class="testimonio-autor">
+        ${testimonios[testimonialIndex].NOMBRE}
+      </div>
+      <div class="testimonio-rol">
+        ${testimonios[testimonialIndex].ROL} · ${testimonios[testimonialIndex].EMPRESA}
+      </div>
+    `;
 
-  card.innerHTML = `
-    <p class="testimonio-text">
-      “${testimonios[testimonialIndex].TESTIMONIO}”
-    </p>
-    <div class="testimonio-autor">
-      ${testimonios[testimonialIndex].NOMBRE}
-    </div>
-    <div class="testimonio-rol">
-      ${testimonios[testimonialIndex].ROL} · ${testimonios[testimonialIndex].EMPRESA}
-    </div>
-  `;
+    carousel.appendChild(card);
 
-  carousel.appendChild(card);
+    requestAnimationFrame(() => {
+      card.classList.add("enter");
+    });
 
-  // Forzar reflow → activar entrada
-  requestAnimationFrame(() => {
-    card.classList.add("enter");
-  });
-
-  // Eliminar tarjeta anterior
-  const prev = carousel.querySelector(".testimonio-card:not(.enter)");
-  if(prev){
-    prev.classList.remove("enter");
-    prev.classList.add("exit");
-
-    setTimeout(() => {
-      prev.remove();
-    }, 600); // igual al tiempo de transición
+    if(prev){
+      prev.classList.remove("enter");
+      prev.classList.add("exit");
+      setTimeout(() => prev.remove(), 600);
+    }
   }
-}
 
-function siguiente(){
-  testimonialIndex = (testimonialIndex + 1) % testimonios.length;
-  mostrarTestimonio();
-}
-
-
-
-
-
-
-  
+  function siguiente(){
+    testimonialIndex = (testimonialIndex + 1) % testimonios.length;
+    mostrarTestimonio();
+  }
 
   /* ===== POPUP ===== */
-  window.abrirTestimonio = () => {
-    popupTestimonio.style.display = "flex";
-  };
+  window.abrirTestimonio = () => popupTestimonio.style.display = "flex";
+  window.cerrarTestimonio = () => popupTestimonio.style.display = "none";
 
-  window.cerrarTestimonio = () => {
-    popupTestimonio.style.display = "none";
-  };
-
-  /* ===== SUBMIT ===== */
   formTestimonio.addEventListener("submit", e => {
     e.preventDefault();
 
