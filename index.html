@@ -301,19 +301,17 @@
 }
 
 .testimonio-card{
-  background:#fff;
-  border-radius:20px;
-  padding:38px 34px;
-  box-shadow:0 8px 26px rgba(0,0,0,0.10);
   opacity:0;
-  transform:translateY(18px) scale(0.98);
-  transition:opacity .6s ease, transform .6s ease;
+  transform:translateY(20px);
+  transition:opacity .65s cubic-bezier(.4,0,.2,1),
+             transform .65s cubic-bezier(.4,0,.2,1);
 }
 
 .testimonio-card.active{
   opacity:1;
-  transform:translateY(0) scale(1);
+  transform:translateY(0);
 }
+
 
 .testimonio-text{
   font-size:16px;
