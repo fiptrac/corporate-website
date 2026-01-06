@@ -77,6 +77,18 @@
   opacity:.85;
 }
 
+  .footer-privacy a {
+  color: var(--fiptrac-accent);
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.25s ease;
+}
+
+.footer-privacy a:hover {
+  color: #75e0ff; /* ligero cambio al pasar el mouse */
+}
+
+
 /* ================= POPUP ================= */
 .fiptrac-overlay{
   position:fixed; inset:0;
@@ -142,10 +154,17 @@ Fraccionamiento Plutarco Elías Calles
 Lote 10, Tepojaco 43823  
 Corredor Industrial Huitzila Tepojaco, Hidalgo.
       </div>
-      <div style="margin-top:10px;">
-        <a role="button" tabindex="0" onclick="abrirPopup('popup-privacidad')">Política de privacidad</a>
-      </div>
     </div>
+
+  </div>
+
+  <!-- ENLACE PRIVACIDAD CENTRADO -->
+  <div class="footer-privacy" style="text-align:center; margin:16px 0;">
+    <a role="button" tabindex="0" onclick="abrirPopup('popup-privacidad')">Política de privacidad</a>
+  </div>
+
+  <div class="footer-bottom">© 2025 FIPTRAC — Fire Protection Training Center. Todos los derechos reservados.</div>
+</footer>
 
   </div>
 
