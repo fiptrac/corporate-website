@@ -301,16 +301,37 @@
 }
 
 .testimonio-card{
+  background:#fff;
+  border-radius:20px;
+  padding:38px 34px;
+  box-shadow:0 10px 28px rgba(0,0,0,0.12);
+  position:absolute;
+  width:100%;
   opacity:0;
-  transform:translateY(20px);
-  transition:opacity .65s cubic-bezier(.4,0,.2,1),
-             transform .65s cubic-bezier(.4,0,.2,1);
+  transform:translateX(60px);
+  transition:
+    opacity .6s cubic-bezier(.4,0,.2,1),
+    transform .6s cubic-bezier(.4,0,.2,1);
 }
+
+/* Entrada */
+.testimonio-card.enter{
+  opacity:1;
+  transform:translateX(0);
+}
+
+/* Salida */
+.testimonio-card.exit{
+  opacity:0;
+  transform:translateX(-60px);
+}
+
 
 .testimonio-card.active{
   opacity:1;
   transform:translateY(0);
 }
+
 
 
 .testimonio-text{
@@ -540,7 +561,7 @@
     Empresas y profesionales que confían en el directorio y la certificación.
   </p>
 
-  <div class="carousel" id="carousel"></div>
+<div class="carousel" id="carousel" style="position:relative; min-height:220px;"></div>
 
   <button class="btn-fiptrac" onclick="abrirTestimonio()">
     Enviar testimonio
@@ -646,7 +667,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const testimonio = document.getElementById("testimonio");
 
   let testimonios = [];
-  let index = 0;
+  let testimonialIndex = 0;
 
   const API_TESTIMONIOS =
     "https://script.google.com/macros/s/AKfycbykGeFlYf2444aqErH93EfaDUfupHBQnoKIDywy8xc8hsb-__fb3dWjIedQuLTwjT7A/exec";
@@ -666,26 +687,55 @@ document.addEventListener("DOMContentLoaded", () => {
       carousel.innerHTML = "<p>Error al cargar testimonios.</p>";
     });
 
-  function mostrarTestimonio(){
-    carousel.innerHTML = `
-      <div class="testimonio-card active">
-        <p class="testimonio-text">
-          “${testimonios[index].TESTIMONIO}”
-        </p>
-        <div class="testimonio-autor">
-          ${testimonios[index].NOMBRE}
-        </div>
-        <div class="testimonio-rol">
-          ${testimonios[index].ROL} · ${testimonios[index].EMPRESA}
-        </div>
-      </div>
-    `;
-  }
 
-  function siguiente(){
-    index = (index + 1) % testimonios.length;
-    mostrarTestimonio();
+
+  
+function mostrarTestimonio(){
+  const card = document.createElement("div");
+  card.className = "testimonio-card";
+
+  card.innerHTML = `
+    <p class="testimonio-text">
+      “${testimonios[testimonialIndex].TESTIMONIO}”
+    </p>
+    <div class="testimonio-autor">
+      ${testimonios[testimonialIndex].NOMBRE}
+    </div>
+    <div class="testimonio-rol">
+      ${testimonios[testimonialIndex].ROL} · ${testimonios[testimonialIndex].EMPRESA}
+    </div>
+  `;
+
+  carousel.appendChild(card);
+
+  // Forzar reflow → activar entrada
+  requestAnimationFrame(() => {
+    card.classList.add("enter");
+  });
+
+  // Eliminar tarjeta anterior
+  const prev = carousel.querySelector(".testimonio-card:not(.enter)");
+  if(prev){
+    prev.classList.remove("enter");
+    prev.classList.add("exit");
+
+    setTimeout(() => {
+      prev.remove();
+    }, 600); // igual al tiempo de transición
   }
+}
+
+function siguiente(){
+  testimonialIndex = (testimonialIndex + 1) % testimonios.length;
+  mostrarTestimonio();
+}
+
+
+
+
+
+
+  
 
   /* ===== POPUP ===== */
   window.abrirTestimonio = () => {
