@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ================== BASE ================== */
 body{
   margin:0;
   font-family:'Montserrat',sans-serif;
@@ -16,30 +15,26 @@ body{
   color:#e5e7eb;
 }
 
-/* ================== CONTENEDOR ================== */
 .certificados{
   max-width:1300px;
   margin:auto;
   padding:120px 20px 60px;
 }
 
-/* ================== FILTROS ================== */
+/* FILTROS */
 .filters{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:16px;
   margin-bottom:30px;
 }
-
 select,input{
   background:#111827;
   border:1px solid #1f2937;
   color:#e5e7eb;
   padding:12px;
   border-radius:10px;
-  font-size:14px;
 }
-
 .btn{
   background:#ef4444;
   border:none;
@@ -51,32 +46,22 @@ select,input{
 }
 .btn:hover{ background:#dc2626 }
 
-/* ================== GRID ================== */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
   gap:22px;
 }
-
 .card{
   background:linear-gradient(180deg,#111827,#020617);
   border:1px solid #1f2937;
   border-radius:18px;
   padding:22px;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
-.card h4{
-  margin:0 0 8px;
-  font-size:17px;
-  color:#fff;
-}
-.card p{
-  margin:5px 0;
-  font-size:14px;
-  color:#9ca3af;
-}
+.card h4{margin:0 0 8px;color:#fff}
+.card p{margin:4px 0;font-size:14px;color:#9ca3af}
 
-/* ================== POPUP ================== */
+/* POPUP */
 .popup{
   position:fixed;
   inset:0;
@@ -87,7 +72,6 @@ select,input{
   justify-content:center;
   z-index:9999;
 }
-
 .popup-card{
   background:#020617;
   border:1px solid #1f2937;
@@ -97,24 +81,15 @@ select,input{
   max-width:480px;
   position:relative;
 }
-
-.popup-card h3{
-  margin:0 0 18px;
-}
-
-.popup-card form{
-  display:grid;
-  gap:14px;
-}
-
+.popup-card form{display:grid;gap:14px}
 .close-btn{
   position:absolute;
   top:14px;
   right:16px;
-  font-size:20px;
   background:none;
   border:none;
   color:#9ca3af;
+  font-size:20px;
   cursor:pointer;
 }
 </style>
@@ -124,7 +99,7 @@ select,input{
 
 <section class="certificados">
 
-  <!-- FILTROS -->
+  <!-- FILTROS (DIRECTORIO) -->
   <div class="filters">
     <select id="pais"><option>País</option></select>
     <select id="entidad"><option>Entidad</option></select>
@@ -132,7 +107,6 @@ select,input{
     <button class="btn" onclick="abrirFormulario()">Solicitar Registro</button>
   </div>
 
-  <!-- GRID -->
   <div class="grid" id="grid"></div>
 </section>
 
@@ -150,9 +124,9 @@ select,input{
       <input id="otroCert" placeholder="OTRO CERTIFICADO" style="display:none">
 
       <input id="servicio" placeholder="SERVICIO (CORTO)" required>
-      <input name="EMPRESA" placeholder="EMPRESA" required>
-      <input name="TELÉFONO" placeholder="TELÉFONO" required>
-      <input name="CORREO" type="email" placeholder="CORREO" required>
+      <input id="empresa" placeholder="EMPRESA" required>
+      <input id="telefono" placeholder="TELÉFONO" required>
+      <input id="correo" type="email" placeholder="CORREO" required>
 
       <button class="btn">Enviar solicitud</button>
     </form>
@@ -160,43 +134,42 @@ select,input{
 </div>
 
 <script>
-/* ================= CONFIG ================= */
 const API = "https://script.google.com/macros/s/AKfycbyZoE_MxXBmx_ViCv0_PatQJ7AKDWUyELOwzLcwh3XCb-mB5bn9yz6TvBpKq2lm2FcE/exec";
 
-let catalogo = {};
+let baseDatos = {};
 let directorio = [];
 
-/* ================= LOAD ================= */
+/* ===== CARGA DIRECTORIO (FILTROS + GRID) ===== */
 fetch(API)
   .then(r=>r.json())
   .then(data=>{
-    catalogo = data.catalogo;
-    directorio = data.directorio;
-    cargarPaises();
+    directorio = data;
+    cargarFiltros();
     pintar(directorio);
   });
 
-/* ================= FILTROS ================= */
-function cargarPaises(){
+function cargarFiltros(){
   pais.innerHTML="<option>País</option>";
-  Object.keys(catalogo).forEach(p=>pais.innerHTML+=`<option>${p}</option>`);
+  [...new Set(directorio.map(x=>x.PAÍS))].forEach(p=>pais.innerHTML+=`<option>${p}</option>`);
 }
 
 pais.onchange=()=>{
   entidad.innerHTML="<option>Entidad</option>";
   certificacion.innerHTML="<option>Certificado</option>";
-  Object.keys(catalogo[pais.value]||{}).forEach(e=>{
-    entidad.innerHTML+=`<option>${e}</option>`;
-  });
+  directorio.filter(x=>x.PAÍS===pais.value)
+    .map(x=>x.ENTIDAD)
+    .filter((v,i,a)=>a.indexOf(v)===i)
+    .forEach(e=>entidad.innerHTML+=`<option>${e}</option>`);
   filtrar();
 };
 
 entidad.onchange=()=>{
   certificacion.innerHTML="<option>Certificado</option>";
-  (catalogo[pais.value]?.[entidad.value]||[]).forEach(c=>{
-    certificacion.innerHTML+=`<option>${c}</option>`;
-  });
-  certificacion.innerHTML+=`<option>OTRO</option>`;
+  directorio
+    .filter(x=>(pais.value==="País"||x.PAÍS===pais.value) && x.ENTIDAD===entidad.value)
+    .map(x=>x.CERTIFICADO)
+    .filter((v,i,a)=>a.indexOf(v)===i)
+    .forEach(c=>certificacion.innerHTML+=`<option>${c}</option>`);
   filtrar();
 };
 
@@ -210,7 +183,6 @@ function filtrar(){
   pintar(r);
 }
 
-/* ================= GRID ================= */
 function pintar(lista){
   grid.innerHTML="";
   lista.forEach(p=>{
@@ -226,39 +198,50 @@ function pintar(lista){
   });
 }
 
-/* ================= POPUP ================= */
+/* ===== POPUP (BASE DE DATOS) ===== */
 function abrirFormulario(){
   popup.style.display="flex";
-  fPais.innerHTML=pais.innerHTML;
-  fEntidad.innerHTML=entidad.innerHTML;
-  fCert.innerHTML=certificacion.innerHTML;
+
+  fetch(API+"?catalogo=true")
+    .then(r=>r.json())
+    .then(cat=>{
+      baseDatos = cat;
+
+      fPais.innerHTML="<option>País</option>";
+      Object.keys(baseDatos.paises).forEach(p=>fPais.innerHTML+=`<option>${p}</option>`);
+
+      fCert.innerHTML="<option>Certificado</option>";
+      baseDatos.certificados.forEach(c=>fCert.innerHTML+=`<option>${c}</option>`);
+      fCert.innerHTML+=`<option>OTRO</option>`;
+    });
 }
 
-function cerrar(){ popup.style.display="none"; }
-
-popup.onclick=e=>{ if(e.target===popup) cerrar(); }
-document.onkeydown=e=>{ if(e.key==="Escape") cerrar(); }
-
-servicio.oninput=()=>servicio.value=servicio.value.toUpperCase();
-otroCert.oninput=()=>otroCert.value=otroCert.value.toUpperCase();
+fPais.onchange=()=>{
+  fEntidad.innerHTML="<option>Entidad</option>";
+  (baseDatos.paises[fPais.value]||[]).forEach(e=>fEntidad.innerHTML+=`<option>${e}</option>`);
+};
 
 fCert.onchange=e=>{
   otroCert.style.display = e.target.value==="OTRO"?"block":"none";
 };
 
-/* ================= SUBMIT ================= */
+servicio.oninput=()=>servicio.value=servicio.value.toUpperCase();
+otroCert.oninput=()=>otroCert.value=otroCert.value.toUpperCase();
+
+/* ===== SUBMIT ===== */
 form.onsubmit=e=>{
   e.preventDefault();
+
   fetch(API,{
     method:"POST",
     body:JSON.stringify({
       PAÍS:fPais.value,
       ENTIDAD:fEntidad.value,
       CERTIFICADO:fCert.value==="OTRO"?otroCert.value:fCert.value,
-      SERVICIO:servicio.value.toUpperCase(),
-      EMPRESA:form.EMPRESA.value,
-      TELÉFONO:form.TELÉFONO.value,
-      CORREO:form.CORREO.value
+      SERVICIO:servicio.value,
+      EMPRESA:empresa.value,
+      TELÉFONO:telefono.value,
+      CORREO:correo.value
     })
   }).then(()=>{
     alert("Solicitud enviada correctamente");
@@ -266,6 +249,10 @@ form.onsubmit=e=>{
     form.reset();
   });
 };
+
+function cerrar(){ popup.style.display="none"; }
+popup.onclick=e=>{ if(e.target===popup) cerrar(); };
+document.onkeydown=e=>{ if(e.key==="Escape") cerrar(); };
 </script>
 
 </body>
