@@ -293,32 +293,37 @@
   font-size:15px;
 }
 
-.carousel{
-  position:relative;
-  max-width:780px;
-  margin:0 auto 42px;
-  min-height:220px;
+.carousel {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto 42px;
+  min-height: 220px;
+  overflow: hidden; /* CLAVE: recorta lo que sale de la vista */
 }
+
 
 .testimonio-card {
   position: absolute;
   width: 100%;
+  top: 0;
+  left: 0;
   opacity: 0;
-  transform: translateX(100%) scale(0.95); /* inicia a la derecha y un poco más pequeña */
+  transform: translateX(100%) scale(0.95); /* fuera de vista a la derecha */
   transition: opacity 0.8s ease, transform 0.8s ease;
-  pointer-events: none; /* evita clics mientras no está activo */
+  pointer-events: none;
 }
 
 .testimonio-card.enter {
   opacity: 1;
-  transform: translateX(0) scale(1); /* se mueve a su posición central */
+  transform: translateX(0) scale(1); /* posición central */
   pointer-events: auto;
 }
 
 .testimonio-card.exit {
   opacity: 0;
-  transform: translateX(-100%) scale(0.95); /* se va a la izquierda y se achica */
+  transform: translateX(-100%) scale(0.95); /* se va a la izquierda */
 }
+
 
 
 
@@ -551,7 +556,7 @@
 
 <section class="testimonios">
 
-  <h2>Lo que dicen nuestros aliados</h2>
+  <h2>Lo que dicen nuestros clientes</h2>
   <p class="subtitulo">
     Empresas y profesionales que confían en el directorio y la certificación.
   </p>
@@ -694,10 +699,11 @@ function mostrarTestimonio() {
   // Inserta la nueva tarjeta
   carousel.appendChild(card);
 
-  // Forzar reflow
-  requestAnimationFrame(() => {
-    card.classList.add("enter");
-  });
+  // 🔥 Forzar que el navegador registre la posición inicial
+  card.getBoundingClientRect();
+
+  // Ahora aplica la clase enter
+  card.classList.add("enter");
 
   // Si hay tarjeta previa, la hacemos salir
   if(prev) {
@@ -709,6 +715,7 @@ function mostrarTestimonio() {
     }, 800); // coincide con la duración del transition
   }
 }
+
 
 
   function siguiente(){
