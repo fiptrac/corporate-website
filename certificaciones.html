@@ -1,361 +1,255 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Certificados y Proveedores | FIPTRAC</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Directorio de Proveedores Certificados</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Tipografía -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
-<style>
-/* =========================================================
-   ESTILOS GENERALES
-   ========================================================= */
-body{
-  font-family: Montserrat, sans-serif;
-  background:#f4f6f8;
-  margin:0;
-}
+  <style>
+    /* ===============================
+       ESTILOS GENERALES
+    =============================== */
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #f4f6f9;
+      color: #003A70;
+    }
 
-/* =========================================================
-   FILTROS
-   ========================================================= */
-.filtros{
-  background:#fff;
-  max-width:1200px;
-  margin:-40px auto 40px;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.12);
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:18px;
-}
+    h1 {
+      text-align: center;
+      margin: 40px 0 20px;
+    }
 
-.filtros select,
-.filtros button{
-  padding:12px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  font-size:14px;
-}
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
 
-.filtros button{
-  background:#003A70;
-  color:#fff;
-  border:none;
-  cursor:pointer;
-}
+    /* ===============================
+       FILTROS
+    =============================== */
+    .filtros {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
 
-/* =========================================================
-   DIRECTORIO
-   ========================================================= */
-.directorio{
-  max-width:1200px;
-  margin:20px auto 80px;
-  padding:20px;
-}
+    .filtros select {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 0.95rem;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-}
+    /* ===============================
+       TARJETAS
+    =============================== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
 
-/* =========================================================
-   CARD DE PROVEEDOR
-   ========================================================= */
-.card{
-  background:#fff;
-  border-radius:18px;
-  padding:22px;
-  box-shadow:0 8px 22px rgba(0,0,0,.1);
-  transition:.25s;
-}
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border-left: 6px solid #003A70;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
 
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 14px 30px rgba(0,0,0,.16);
-}
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
 
-.card h3{
-  color:#003A70;
-  margin-bottom:6px;
-}
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 1.1rem;
+    }
 
-.card p{
-  font-size:14px;
-  color:#444;
-  margin:4px 0;
-}
+    .card p {
+      margin: 4px 0;
+      font-size: 0.9rem;
+      color: #444;
+    }
 
-.badge{
-  display:inline-block;
-  background:#e8eef5;
-  color:#003A70;
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:12px;
-  margin-top:6px;
-}
+    .card a {
+      color: #003A70;
+      font-weight: 600;
+      text-decoration: none;
+    }
 
-.btns{
-  display:flex;
-  gap:10px;
-  margin-top:14px;
-}
+    /* ===============================
+       BOTÓN SOLICITUD
+    =============================== */
+    .solicitud {
+      margin-top: 50px;
+      text-align: center;
+    }
 
-.btn{
-  flex:1;
-  text-align:center;
-  background:#003A70;
-  color:#fff;
-  padding:10px;
-  border-radius:10px;
-  text-decoration:none;
-  cursor:pointer;
-  font-size:14px;
-}
+    .solicitud button {
+      background: #003A70;
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
 
-/* =========================================================
-   CTA
-   ========================================================= */
-.cta{
-  background:#003A70;
-  color:#fff;
-  padding:50px 20px;
-  text-align:center;
-}
-
-.cta button{
-  margin-top:14px;
-  padding:14px 26px;
-  font-size:16px;
-  border-radius:14px;
-  border:none;
-  background:#fff;
-  color:#003A70;
-  cursor:pointer;
-}
-
-/* =========================================================
-   POPUP SOLICITUD
-   ========================================================= */
-.popup{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-
-.popup-card{
-  background:#fff;
-  width:92%;
-  max-width:520px;
-  padding:28px;
-  border-radius:20px;
-}
-
-.popup-card h3{
-  color:#003A70;
-  text-align:center;
-}
-
-.popup-card input{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:10px;
-  border:1px solid #ccc;
-}
-</style>
+    .solicitud button:hover {
+      background: #002a52;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     FILTROS
-     ========================================================= -->
-<div class="filtros">
-  <select id="fPais"><option value="">País</option></select>
-  <select id="fEstado"><option value="">Estado</option></select>
-  <select id="fServicio"><option value="">Servicio</option></select>
-  <select id="fCertificado"><option value="">Certificación</option></select>
-  <button onclick="aplicarFiltros()">Filtrar</button>
-</div>
+  <h1>Directorio de Proveedores Certificados</h1>
 
-<!-- =========================================================
-     DIRECTORIO
-     ========================================================= -->
-<section class="directorio">
-  <div class="grid" id="grid"></div>
-</section>
+  <div class="container">
 
-<!-- =========================================================
-     CTA
-     ========================================================= -->
-<section class="cta">
-  <h2>¿Eres proveedor certificado?</h2>
-  <p>Solicita tu alta para aparecer en el directorio oficial</p>
-  <button onclick="abrirPopupCertificados()">Solicitar registro</button>
-</section>
+    <!-- FILTROS -->
+    <div class="filtros">
+      <select id="filtroPais">
+        <option value="">País</option>
+      </select>
 
-<!-- =========================================================
-     POPUP SOLICITUD
-     ========================================================= -->
-<div class="popup" id="popupCertificados">
-  <div class="popup-card">
-    <h3>Solicitud de alta</h3>
+      <select id="filtroEstado">
+        <option value="">Estado</option>
+      </select>
 
-    <!-- Campos del formulario -->
-    <input id="empresa" placeholder="Empresa" required>
-    <input id="pais" placeholder="País" required>
-    <input id="estado" placeholder="Estado" required>
-    <input id="servicio" placeholder="Servicio" required>
-    <input id="certificado" placeholder="Certificación" required>
-    <input id="telefono" placeholder="Teléfono">
-    <input id="correo" placeholder="Correo" type="email" required>
+      <select id="filtroServicio">
+        <option value="">Servicio</option>
+      </select>
 
-    <button class="btn" onclick="enviarSolicitud()">Enviar solicitud</button>
+      <select id="filtroCertificado">
+        <option value="">Certificación</option>
+      </select>
+    </div>
+
+    <!-- TARJETAS -->
+    <div class="grid" id="grid"></div>
+
+    <!-- SOLICITUD -->
+    <div class="solicitud">
+      <button onclick="alert('Aquí puedes abrir un formulario de alta')">
+        Solicitar alta en el directorio
+      </button>
+    </div>
+
   </div>
-</div>
 
-<!-- =========================================================
-     JAVASCRIPT
-     ========================================================= -->
-<script>
-/* =========================================================
-   CONFIGURACIÓN
-   ========================================================= */
+  <script>
+    /* ===============================
+       CONFIGURACIÓN
+    =============================== */
+    const API_URL = "https://script.google.com/macros/s/AKfycbyWpZPgCMXExDAgGES0YpY34gvGPKOvJg7hhslvYwBIwbVNqCToT2QXe6sUTiCBGnp6/exec";
 
-// URL del Apps Script (CAMBIAR POR LA REAL)
-const API = "API_CERTIFICADOS";
+    let dataGlobal = [];
 
-// Array global con proveedores aprobados
-let dataGlobal = [];
+    /* ===============================
+       CARGA DE DATOS
+    =============================== */
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(response => {
 
-/* =========================================================
-   CARGA DE DATOS DESDE GOOGLE SHEETS
-   ========================================================= */
-fetch(API)
-  .then(r => r.json())
-  .then(data => {
-    // Solo mostramos proveedores APROBADOS
-    dataGlobal = data.filter(d => d.ALTA === "APROBADO");
-    render(dataGlobal);
-    cargarFiltros(dataGlobal);
-  });
+        console.log("Respuesta Apps Script:", response);
 
-/* =========================================================
-   RENDERIZAR CARDS
-   ========================================================= */
-function render(data){
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
+        // Validación correcta
+        if (!response.data) {
+          console.error("La respuesta no contiene data");
+          return;
+        }
 
-  // Si no hay resultados
-  if(!data.length){
-    grid.innerHTML = "<p>No hay resultados con los filtros seleccionados.</p>";
-    return;
-  }
+        // SOLO registros aprobados
+        dataGlobal = response.data.filter(row =>
+          row.ALTA && row.ALTA.toUpperCase() === "APROBADO"
+        );
 
-  // Crear tarjetas
-  data.forEach(p=>{
-    grid.innerHTML += `
-      <div class="card">
-        <h3>${p.EMPRESA}</h3>
-        <p>${p.PAÍS} · ${p.ESTADO}</p>
-        <span class="badge">${p.SERVICIO}</span>
-        <span class="badge">${p.CERTIFICADO}</span>
-        <div class="btns">
-          <a class="btn" href="mailto:${p.CORREO}">Contactar</a>
-        </div>
-      </div>
-    `;
-  });
-}
+        cargarFiltros(dataGlobal);
+        render(dataGlobal);
+      })
+      .catch(err => console.error("Error:", err));
 
-/* =========================================================
-   CARGAR OPCIONES DE FILTROS
-   ========================================================= */
-function cargarFiltros(data){
-  const map = {
-    PAÍS: fPais,
-    ESTADO: fEstado,
-    SERVICIO: fServicio,
-    CERTIFICADO: fCertificado
-  };
+    /* ===============================
+       RENDER TARJETAS
+    =============================== */
+    function render(data) {
+      const grid = document.getElementById("grid");
+      grid.innerHTML = "";
 
-  Object.keys(map).forEach(k=>{
-    [...new Set(data.map(d => d[k]).filter(Boolean))]
-      .forEach(v => {
-        map[k].innerHTML += `<option value="${v}">${v}</option>`;
+      if (data.length === 0) {
+        grid.innerHTML = "<p>No hay resultados.</p>";
+        return;
+      }
+
+      data.forEach(d => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+          <h3>${d.EMPRESA}</h3>
+          <p><strong>País:</strong> ${d.PAÍS}</p>
+          <p><strong>Estado:</strong> ${d.ESTADO}</p>
+          <p><strong>Servicio:</strong> ${d.SERVICIO}</p>
+          <p><strong>Certificación:</strong> ${d.CERTIFICADO}</p>
+          <p><strong>Tel:</strong> ${d.TELÉFONO}</p>
+          <p><a href="mailto:${d.CORREO}">${d.CORREO}</a></p>
+        `;
+
+        grid.appendChild(card);
       });
-  });
-}
+    }
 
-/* =========================================================
-   APLICAR FILTROS
-   ========================================================= */
-function aplicarFiltros(){
-  const filtrados = dataGlobal.filter(d =>
-    (!fPais.value || d.PAÍS === fPais.value) &&
-    (!fEstado.value || d.ESTADO === fEstado.value) &&
-    (!fServicio.value || d.SERVICIO === fServicio.value) &&
-    (!fCertificado.value || d.CERTIFICADO === fCertificado.value)
-  );
-  render(filtrados);
-}
+    /* ===============================
+       FILTROS
+    =============================== */
+    function cargarFiltros(data) {
+      cargarOpciones("filtroPais", data.map(d => d.PAÍS));
+      cargarOpciones("filtroEstado", data.map(d => d.ESTADO));
+      cargarOpciones("filtroServicio", data.map(d => d.SERVICIO));
+      cargarOpciones("filtroCertificado", data.map(d => d.CERTIFICADO));
+    }
 
-/* =========================================================
-   POPUP
-   ========================================================= */
-function abrirPopupCertificados(){
-  popupCertificados.style.display = "flex";
-}
+    function cargarOpciones(id, valores) {
+      const select = document.getElementById(id);
+      [...new Set(valores)].sort().forEach(v => {
+        if (!v) return;
+        const opt = document.createElement("option");
+        opt.value = v;
+        opt.textContent = v;
+        select.appendChild(opt);
+      });
 
-// Cerrar al dar click fuera
-popupCertificados.onclick = e => {
-  if(e.target === popupCertificados){
-    popupCertificados.style.display = "none";
-  }
-};
+      select.addEventListener("change", filtrar);
+    }
 
-/* =========================================================
-   ENVÍO DE SOLICITUD
-   ========================================================= */
-function enviarSolicitud(){
+    function filtrar() {
+      const pais = filtroPais.value;
+      const estado = filtroEstado.value;
+      const servicio = filtroServicio.value;
+      const cert = filtroCertificado.value;
 
-  // Validación básica
-  if(!empresa.value || !pais.value || !estado.value || 
-     !servicio.value || !certificado.value || !correo.value){
-    alert("Completa todos los campos obligatorios");
-    return;
-  }
+      const filtrados = dataGlobal.filter(d =>
+        (!pais || d.PAÍS === pais) &&
+        (!estado || d.ESTADO === estado) &&
+        (!servicio || d.SERVICIO === servicio) &&
+        (!cert || d.CERTIFICADO === cert)
+      );
 
-  // Enviar datos al Apps Script
-  fetch(API,{
-    method:"POST",
-    body: JSON.stringify({
-      EMPRESA: empresa.value,
-      PAÍS: pais.value,
-      ESTADO: estado.value,
-      SERVICIO: servicio.value,
-      CERTIFICADO: certificado.value,
-      TELÉFONO: telefono.value,
-      CORREO: correo.value
-    })
-  }).then(()=>{
-    alert("Solicitud enviada correctamente");
-    popupCertificados.style.display="none";
-    document.querySelectorAll("#popupCertificados input").forEach(i=>i.value="");
-  });
-}
-</script>
+      render(filtrados);
+    }
+  </script>
 
 </body>
 </html>
