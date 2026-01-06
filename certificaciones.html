@@ -1,255 +1,280 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Directorio de Proveedores Certificados</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Certificados y Proveedores | FIPTRAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Tipografía -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* =====================================================
+   BASE
+===================================================== */
+body{
+  font-family:Montserrat,sans-serif;
+  background:#f4f6f8;
+  margin:0;
+}
 
-  <style>
-    /* ===============================
-       ESTILOS GENERALES
-    =============================== */
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: #f4f6f9;
-      color: #003A70;
-    }
+/* =====================================================
+   NAVBAR (NO MODIFICADO)
+===================================================== */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:999;
+  background:rgba(255,255,255,.92);
+  transition:.3s;
+}
+header.scrolled{
+  backdrop-filter:blur(6px);
+  box-shadow:0 2px 12px rgba(0,0,0,.1);
+}
+header.nav-hide{transform:translateY(-110%)}
+.nav-container{
+  max-width:1200px;margin:auto;
+  padding:5px 15px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.logo img{height:36px}
+.menu{display:flex;gap:25px}
+.menu a{text-decoration:none;color:#003A70;font-weight:600}
+.hamburger{display:none}
 
-    h1 {
-      text-align: center;
-      margin: 40px 0 20px;
-    }
+@media(max-width:850px){
+.menu{
+  position:absolute;top:72px;right:12px;
+  background:#fff;width:220px;padding:16px;
+  border-radius:12px;flex-direction:column;
+  box-shadow:0 8px 26px rgba(0,0,0,.12);
+  opacity:0;pointer-events:none;
+}
+.menu.show{opacity:1;pointer-events:auto}
+.hamburger{display:flex;flex-direction:column;gap:5px}
+.hamburger span{width:28px;height:3px;background:#003A70}
+}
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px 60px;
-    }
+/* =====================================================
+   HERO
+===================================================== */
+.hero{
+  background:linear-gradient(rgba(0,58,112,.78),rgba(0,58,112,.78));
+  padding:100px 20px 40px;
+  text-align:center;color:#fff;
+}
+.hero h1{font-size:34px;margin-bottom:10px}
+.hero p{font-size:18px}
 
-    /* ===============================
-       FILTROS
-    =============================== */
-    .filtros {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 30px;
-    }
+/* =====================================================
+   FILTROS
+===================================================== */
+.filtros{
+  background:#fff;
+  max-width:1200px;
+  margin:-40px auto 40px;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:18px;
+}
+.filtros select,.filtros button{
+  padding:12px;border-radius:12px;
+  border:1px solid #ccc;
+}
+.filtros button{
+  background:#003A70;color:#fff;border:none;cursor:pointer;
+}
 
-    .filtros select {
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 0.95rem;
-    }
+/* =====================================================
+   DIRECTORIO
+===================================================== */
+.directorio{max-width:1200px;margin:20px auto 80px;padding:20px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+.card{
+  background:#fff;border-radius:18px;padding:22px;
+  box-shadow:0 8px 22px rgba(0,0,0,.1);
+  transition:.25s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 30px rgba(0,0,0,.16);
+}
+.card h3{color:#003A70}
+.badge{
+  display:inline-block;background:#e8eef5;
+  color:#003A70;padding:6px 12px;
+  border-radius:20px;font-size:12px;margin-top:6px;
+}
+.btn{
+  display:block;text-align:center;
+  background:#003A70;color:#fff;
+  padding:10px;border-radius:10px;
+  text-decoration:none;margin-top:12px;
+}
 
-    /* ===============================
-       TARJETAS
-    =============================== */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
+/* =====================================================
+   CTA
+===================================================== */
+.cta{
+  background:#003A70;color:#fff;
+  padding:50px 20px;text-align:center;
+}
+.cta button{
+  margin-top:14px;
+  padding:14px 26px;
+  font-size:16px;border-radius:14px;
+  border:none;background:#fff;color:#003A70;
+  cursor:pointer;
+}
 
-    .card {
-      background: #fff;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      border-left: 6px solid #003A70;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-    }
-
-    .card h3 {
-      margin: 0 0 6px;
-      font-size: 1.1rem;
-    }
-
-    .card p {
-      margin: 4px 0;
-      font-size: 0.9rem;
-      color: #444;
-    }
-
-    .card a {
-      color: #003A70;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    /* ===============================
-       BOTÓN SOLICITUD
-    =============================== */
-    .solicitud {
-      margin-top: 50px;
-      text-align: center;
-    }
-
-    .solicitud button {
-      background: #003A70;
-      color: #fff;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    .solicitud button:hover {
-      background: #002a52;
-    }
-  </style>
+/* =====================================================
+   POPUP – MISMO ESTILO EVENTOS
+===================================================== */
+.popup{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(3px);
+  align-items:center;justify-content:center;
+  z-index:9999;
+}
+.popup-card{
+  background:#fff;width:92%;max-width:560px;
+  border-radius:20px;padding:32px 28px;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+  position:relative;animation:popupIn .35s ease;
+}
+@keyframes popupIn{
+  from{transform:translateY(20px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.popup h3{text-align:center;color:#003A70}
+.popup label{font-size:13px;font-weight:600;margin-top:10px;display:block}
+.popup input{
+  width:100%;padding:12px;margin-top:6px;
+  border-radius:10px;border:1px solid #ccc;
+}
+.popup input:focus{
+  outline:none;border-color:#003A70;
+  box-shadow:0 0 0 2px rgba(0,58,112,.12);
+}
+.popup button.btn{
+  width:100%;margin-top:18px;padding:12px;font-size:16px;
+}
+.close-btn{
+  position:absolute;top:14px;right:18px;
+  background:none;border:none;font-size:22px;cursor:pointer;
+}
+</style>
 </head>
 
 <body>
 
-  <h1>Directorio de Proveedores Certificados</h1>
-
-  <div class="container">
-
-    <!-- FILTROS -->
-    <div class="filtros">
-      <select id="filtroPais">
-        <option value="">País</option>
-      </select>
-
-      <select id="filtroEstado">
-        <option value="">Estado</option>
-      </select>
-
-      <select id="filtroServicio">
-        <option value="">Servicio</option>
-      </select>
-
-      <select id="filtroCertificado">
-        <option value="">Certificación</option>
-      </select>
+<!-- ================= NAVBAR ================= -->
+<header>
+  <div class="nav-container">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/images/sin fondo.png">
+      </a>
     </div>
-
-    <!-- TARJETAS -->
-    <div class="grid" id="grid"></div>
-
-    <!-- SOLICITUD -->
-    <div class="solicitud">
-      <button onclick="alert('Aquí puedes abrir un formulario de alta')">
-        Solicitar alta en el directorio
-      </button>
+    <nav class="menu" id="menu">
+      <a href="eventos.html">Eventos y Cursos</a>
+      <a href="certificaciones.html">Certificaciones</a>
+      <a href="laboratorios.html">Laboratorios</a>
+      <a href="aliados.html">Aliados Comerciales</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
     </div>
-
   </div>
+</header>
 
-  <script>
-    /* ===============================
-       CONFIGURACIÓN
-    =============================== */
-    const API_URL = "https://script.google.com/macros/s/AKfycbyWpZPgCMXExDAgGES0YpY34gvGPKOvJg7hhslvYwBIwbVNqCToT2QXe6sUTiCBGnp6/exec";
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <h1>Directorio de Proveedores Certificados</h1>
+  <p>Consulta y solicita proveedores avalados por FIPTRAC</p>
+</section>
 
-    let dataGlobal = [];
+<!-- ================= FILTROS ================= -->
+<div class="filtros">
+  <select id="fPais"><option value="">País</option></select>
+  <select id="fEstado"><option value="">Estado</option></select>
+  <select id="fServicio"><option value="">Servicio</option></select>
+  <select id="fCertificado"><option value="">Certificación</option></select>
+  <button onclick="aplicarFiltros()">Filtrar</button>
+</div>
 
-    /* ===============================
-       CARGA DE DATOS
-    =============================== */
-    fetch(API_URL)
-      .then(res => res.json())
-      .then(response => {
+<!-- ================= DIRECTORIO ================= -->
+<section class="directorio">
+  <div class="grid" id="grid"></div>
+</section>
 
-        console.log("Respuesta Apps Script:", response);
+<!-- ================= CTA ================= -->
+<section class="cta">
+  <h2>¿Eres proveedor certificado?</h2>
+  <p>Solicita tu alta para aparecer en el directorio</p>
+  <button onclick="abrirSolicitud()">Solicitar registro</button>
+</section>
 
-        // Validación correcta
-        if (!response.data) {
-          console.error("La respuesta no contiene data");
-          return;
-        }
+<!-- ================= POPUP SOLICITUD ================= -->
+<div class="popup" id="popupSolicitud">
+  <div class="popup-card">
+    <button class="close-btn" onclick="cerrarSolicitud()">✕</button>
+    <h3>Solicitud de registro</h3>
 
-        // SOLO registros aprobados
-        dataGlobal = response.data.filter(row =>
-          row.ALTA && row.ALTA.toUpperCase() === "APROBADO"
-        );
+    <form id="formSolicitud">
+      <label>Empresa</label><input name="EMPRESA" required>
+      <label>País</label><input name="PAÍS" required>
+      <label>Estado</label><input name="ESTADO" required>
+      <label>Servicio</label><input name="SERVICIO" required>
+      <label>Certificación</label><input name="CERTIFICADO" required>
+      <label>Teléfono</label><input name="TELÉFONO" required>
+      <label>Correo</label><input name="CORREO" type="email" required>
 
-        cargarFiltros(dataGlobal);
-        render(dataGlobal);
-      })
-      .catch(err => console.error("Error:", err));
+      <button class="btn" type="submit">Enviar solicitud</button>
+    </form>
+  </div>
+</div>
 
-    /* ===============================
-       RENDER TARJETAS
-    =============================== */
-    function render(data) {
-      const grid = document.getElementById("grid");
-      grid.innerHTML = "";
+<!-- ================= SCRIPTS ================= -->
+<script>
+/* HAMBURGER */
+hamburger.onclick=()=>menu.classList.toggle("show");
 
-      if (data.length === 0) {
-        grid.innerHTML = "<p>No hay resultados.</p>";
-        return;
-      }
+/* POPUP */
+const popup=document.getElementById("popupSolicitud");
+const form=document.getElementById("formSolicitud");
 
-      data.forEach(d => {
-        const card = document.createElement("div");
-        card.className = "card";
+function abrirSolicitud(){popup.style.display="flex"}
+function cerrarSolicitud(){popup.style.display="none";form.reset()}
+popup.onclick=e=>{if(e.target===popup)cerrarSolicitud()}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")cerrarSolicitud()});
 
-        card.innerHTML = `
-          <h3>${d.EMPRESA}</h3>
-          <p><strong>País:</strong> ${d.PAÍS}</p>
-          <p><strong>Estado:</strong> ${d.ESTADO}</p>
-          <p><strong>Servicio:</strong> ${d.SERVICIO}</p>
-          <p><strong>Certificación:</strong> ${d.CERTIFICADO}</p>
-          <p><strong>Tel:</strong> ${d.TELÉFONO}</p>
-          <p><a href="mailto:${d.CORREO}">${d.CORREO}</a></p>
-        `;
+/* ENVÍO */
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  const data=Object.fromEntries(new FormData(form));
+  data.ALTA="SOLICITUD";
 
-        grid.appendChild(card);
-      });
-    }
+  fetch("https://script.google.com/macros/s/AKfycbyWpZPgCMXExDAgGES0YpY34gvGPKOvJg7hhslvYwBIwbVNqCToT2QXe6sUTiCBGnp6/exec",{
+    method:"POST",
+    body:JSON.stringify(data)
+  }).then(()=>{
+    alert("Solicitud enviada correctamente");
+    cerrarSolicitud();
+  });
+});
+</script>
 
-    /* ===============================
-       FILTROS
-    =============================== */
-    function cargarFiltros(data) {
-      cargarOpciones("filtroPais", data.map(d => d.PAÍS));
-      cargarOpciones("filtroEstado", data.map(d => d.ESTADO));
-      cargarOpciones("filtroServicio", data.map(d => d.SERVICIO));
-      cargarOpciones("filtroCertificado", data.map(d => d.CERTIFICADO));
-    }
-
-    function cargarOpciones(id, valores) {
-      const select = document.getElementById(id);
-      [...new Set(valores)].sort().forEach(v => {
-        if (!v) return;
-        const opt = document.createElement("option");
-        opt.value = v;
-        opt.textContent = v;
-        select.appendChild(opt);
-      });
-
-      select.addEventListener("change", filtrar);
-    }
-
-    function filtrar() {
-      const pais = filtroPais.value;
-      const estado = filtroEstado.value;
-      const servicio = filtroServicio.value;
-      const cert = filtroCertificado.value;
-
-      const filtrados = dataGlobal.filter(d =>
-        (!pais || d.PAÍS === pais) &&
-        (!estado || d.ESTADO === estado) &&
-        (!servicio || d.SERVICIO === servicio) &&
-        (!cert || d.CERTIFICADO === cert)
-      );
-
-      render(filtrados);
-    }
-  </script>
+<!-- ================= FOOTER ================= -->
+<div id="footer-container"></div>
+<script>
+fetch("footer.html").then(r=>r.text()).then(t=>footer-container.innerHTML=t);
+</script>
 
 </body>
 </html>
