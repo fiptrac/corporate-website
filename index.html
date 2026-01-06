@@ -730,6 +730,23 @@ function mostrarTestimonio() {
   window.abrirTestimonio = () => popupTestimonio.style.display = "flex";
   window.cerrarTestimonio = () => popupTestimonio.style.display = "none";
 
+  // Cerrar popup al hacer clic fuera de la tarjeta
+document.addEventListener('click', e => {
+  const popup = document.getElementById('popupTestimonio');
+  if (popup && e.target === popup) { // clic sobre el overlay, no la tarjeta
+    popup.style.display = 'none';
+  }
+});
+
+// Cerrar popup con la tecla Esc
+document.addEventListener('keydown', e => {
+  const popup = document.getElementById('popupTestimonio');
+  if (e.key === 'Escape' && popup && popup.style.display === 'flex') {
+    popup.style.display = 'none';
+  }
+});
+
+
   formTestimonio.addEventListener("submit", e => {
     e.preventDefault();
 
