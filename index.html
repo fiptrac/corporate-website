@@ -351,9 +351,83 @@
   color:#fff;
 }
 
+  .btn-fiptrac{
+  background:#003A70;
+  color:#fff;
+  border:none;
+  padding:14px 30px;
+  border-radius:14px;
+  font-weight:600;
+  font-size:14px;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 8px 20px rgba(0,58,112,.35);
 }
+
+.btn-fiptrac:hover{
+  background:#002C55;
+  transform:translateY(-1px);
+}
+
  
 
+/* ================= POPUP FIPTRAC ================= */
+
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(6px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.popup-card{
+  background:#fff;
+  width:100%;
+  max-width:460px;
+  border-radius:20px;
+  padding:34px 30px;
+  box-shadow:0 18px 45px rgba(0,0,0,.35);
+  position:relative;
+  animation:popupIn .35s ease;
+}
+
+@keyframes popupIn{
+  from{opacity:0; transform:scale(.95) translateY(10px);}
+  to{opacity:1; transform:scale(1) translateY(0);}
+}
+
+.popup-card h3{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:20px;
+}
+
+.popup-card input,
+.popup-card textarea{
+  width:100%;
+  padding:12px 14px;
+  margin-bottom:14px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-family:inherit;
+}
+
+.close-btn{
+  position:absolute;
+  top:14px;
+  right:14px;
+  border:none;
+  background:none;
+  font-size:20px;
+  cursor:pointer;
+}
+
+
+  
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -470,9 +544,10 @@
 
   <div class="carousel" id="carousel"></div>
 
-  <button class="btn-outline" onclick="abrirTestimonio()">
+  <button class="btn-fiptrac" onclick="abrirTestimonio()">
     Enviar testimonio
   </button>
+
 
 </section>
   
@@ -554,88 +629,96 @@
 
 
 
-  <script>
-let testimonios = [];
-let index = 0;
-
-const API_TESTIMONIOS = "https://script.google.com/macros/s/AKfycbwC5pPUjZZWrzEVgBWY_Q8xEJPN8kaNAJNeVxOj2zbbQUBCHpBVBHrVKu_qmBaAFvuc/exec";
-
 /* ===== CARGA TESTIMONIOS ===== */
-fetch(API_TESTIMONIOS)
-  .then(r => r.json())
-  .then(data => {
-    testimonios = data;
-    mostrarTestimonio();
-    setInterval(siguiente, 7000);
-  });
 
-function mostrarTestimonio(){
-  if(!testimonios.length) return;
+  
+  
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
-  carousel.innerHTML = `
-    <div class="testimonio-card active">
-      <p class="testimonio-text">
-        “${testimonios[index].TESTIMONIO}”
-      </p>
-      <div class="testimonio-autor">
-        ${testimonios[index].NOMBRE}
-      </div>
-      <div class="testimonio-rol">
-        ${testimonios[index].ROL} · ${testimonios[index].EMPRESA}
-      </div>
-    </div>
-  `;
+  const carousel = document.getElementById("carousel");
+  const popupTestimonio = document.getElementById("popupTestimonio");
+  const formTestimonio = document.getElementById("formTestimonio");
 
-}
+  const nombre = document.getElementById("nombre");
+  const rol = document.getElementById("rol");
+  const empresa = document.getElementById("empresa");
+  const testimonio = document.getElementById("testimonio");
 
-function siguiente(){
-  index = (index + 1) % testimonios.length;
-  mostrarTestimonio();
-}
+  let testimonios = [];
+  let index = 0;
 
-/* ===== POPUP FORM ===== */
-function abrirTestimonio(){
-  popupTestimonio.style.display="flex";
-}
+  const API_TESTIMONIOS =
+    "https://script.google.com/macros/s/AKfycbykGeFlYf2444aqErH93EfaDUfupHBQnoKIDywy8xc8hsb-__fb3dWjIedQuLTwjT7A/exec";
 
-function cerrarTestimonio(){
-  popupTestimonio.style.display="none";
-}
-
-/* ===== SUBMIT ===== */
-formTestimonio.onsubmit = e => {
-  e.preventDefault();
-
-  fetch(API_TESTIMONIOS,{
-    method:"POST",
-    body:JSON.stringify({
-      nombre:nombre.value,
-      rol:rol.value,
-      empresa:empresa.value,
-      testimonio:testimonio.value
+  /* ===== CARGA TESTIMONIOS ===== */
+  fetch(API_TESTIMONIOS)
+    .then(r => r.json())
+    .then(data => {
+      testimonios = data;
+      if(testimonios.length){
+        mostrarTestimonio();
+        setInterval(siguiente, 7000);
+      } else {
+        carousel.innerHTML = "<p>No hay testimonios aprobados.</p>";
+      }
     })
-  }).then(()=>{
-    alert("Gracias, tu testimonio será revisado.");
-    formTestimonio.reset();
-    cerrarTestimonio();
+    .catch(() => {
+      carousel.innerHTML = "<p>Error al cargar testimonios.</p>";
+    });
+
+  function mostrarTestimonio(){
+    carousel.innerHTML = `
+      <div class="testimonio-card active">
+        <p class="testimonio-text">
+          “${testimonios[index].TESTIMONIO}”
+        </p>
+        <div class="testimonio-autor">
+          ${testimonios[index].NOMBRE}
+        </div>
+        <div class="testimonio-rol">
+          ${testimonios[index].ROL} · ${testimonios[index].EMPRESA}
+        </div>
+      </div>
+    `;
+  }
+
+  function siguiente(){
+    index = (index + 1) % testimonios.length;
+    mostrarTestimonio();
+  }
+
+  /* ===== POPUP ===== */
+  window.abrirTestimonio = () => {
+    popupTestimonio.style.display = "flex";
+  };
+
+  window.cerrarTestimonio = () => {
+    popupTestimonio.style.display = "none";
+  };
+
+  /* ===== SUBMIT ===== */
+  formTestimonio.addEventListener("submit", e => {
+    e.preventDefault();
+
+    fetch(API_TESTIMONIOS,{
+      method:"POST",
+      body:JSON.stringify({
+        nombre:nombre.value,
+        rol:rol.value,
+        empresa:empresa.value,
+        testimonio:testimonio.value
+      })
+    }).then(() => {
+      alert("Gracias, tu testimonio será revisado.");
+      formTestimonio.reset();
+      cerrarTestimonio();
+    });
   });
-};
+
+});
 </script>
 
-<div class="popup" id="popupTestimonio">
-  <div class="popup-card">
-    <button class="close-btn" onclick="cerrarTestimonio()">✕</button>
-    <h3>Enviar testimonio</h3>
-
-    <form id="formTestimonio">
-      <input id="nombre" placeholder="Nombre" required>
-      <input id="rol" placeholder="Rol" required>
-      <input id="empresa" placeholder="Empresa" required>
-      <textarea id="testimonio" placeholder="Testimonio" required></textarea>
-      <button class="btn">Enviar</button>
-    </form>
-  </div>
-</div>
 
 
   
