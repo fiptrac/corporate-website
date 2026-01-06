@@ -29,7 +29,9 @@ select,input{
   color:#e5e7eb;
   padding:12px;
   border-radius:10px;
+  transition:0.3s;
 }
+select:hover,input:hover{ border-color:#ef4444; }
 .btn{
   background:#ef4444;
   border:none;
@@ -38,6 +40,7 @@ select,input{
   border-radius:12px;
   font-weight:600;
   cursor:pointer;
+  transition:0.3s;
 }
 .btn:hover{ background:#dc2626 }
 .grid{
@@ -50,9 +53,14 @@ select,input{
   border:1px solid #1f2937;
   border-radius:18px;
   padding:22px;
+  transition:0.3s;
 }
-.card h4{margin:0 0 8px;color:#fff}
-.card p{margin:4px 0;font-size:14px;color:#9ca3af}
+.card:hover{
+  transform:translateY(-4px);
+  border-color:#ef4444;
+}
+.card h4{margin:0 0 8px;color:#fff;font-size:18px;}
+.card p{margin:4px 0;font-size:14px;color:#9ca3af;}
 .popup{
   position:fixed;
   inset:0;
@@ -71,6 +79,7 @@ select,input{
   width:100%;
   max-width:480px;
   position:relative;
+  box-shadow:0 0 20px rgba(0,0,0,0.7);
 }
 .popup-card form{display:grid;gap:14px}
 .close-btn{
@@ -82,18 +91,23 @@ select,input{
   color:#9ca3af;
   font-size:20px;
   cursor:pointer;
+  transition:0.3s;
 }
+.close-btn:hover{ color:#ef4444; }
 </style>
 </head>
 <body>
 
 <section class="certificados">
+  <!-- FILTROS -->
   <div class="filters">
     <select id="pais"><option>País</option></select>
     <select id="entidad"><option>Entidad</option></select>
     <select id="certificacion"><option>Certificado</option></select>
     <button class="btn" onclick="abrirFormulario()">Solicitar Registro</button>
   </div>
+
+  <!-- GRID -->
   <div class="grid" id="grid"></div>
 </section>
 
@@ -121,7 +135,7 @@ const API = "https://script.google.com/macros/s/AKfycbx_aGZpT1CK-XfqoxVcj1yc8c-g
 let directorio = [];
 let baseDatos = { paises:[], catalogo:{}, certificados:[] };
 
-// ===== CARGA DIRECTORIO (GRID + FILTROS) =====
+// ===== CARGAR DIRECTORIO Y FILTROS =====
 fetch(API)
   .then(r=>r.json())
   .then(data=>{
@@ -132,33 +146,42 @@ fetch(API)
 
 function cargarFiltros(){
   pais.innerHTML="<option>País</option>";
-  [...new Set(directorio.map(x=>x.PAÍS))].forEach(p=>pais.innerHTML+=`<option>${p}</option>`);
-
+  [...new Set(directorio.map(x=>x.PAÍS))].forEach(p=> pais.innerHTML+=`<option>${p}</option>`);
   entidad.innerHTML="<option>Entidad</option>";
   certificacion.innerHTML="<option>Certificado</option>";
 }
 
-pais.onchange=()=>{
+// ===== FILTROS JERÁRQUICOS =====
+pais.onchange = () => {
+  const paisSel = pais.value;
+  // Entidades dentro del país
   entidad.innerHTML="<option>Entidad</option>";
+  directorio.filter(x=>x.PAÍS===paisSel)
+           .map(x=>x.ENTIDAD)
+           .filter((v,i,a)=>a.indexOf(v)===i)
+           .forEach(e=>entidad.innerHTML+=`<option>${e}</option>`);
+  // Certificados dentro del país
   certificacion.innerHTML="<option>Certificado</option>";
-  directorio.filter(x=>x.PAÍS===pais.value)
-    .map(x=>x.ENTIDAD)
-    .filter((v,i,a)=>a.indexOf(v)===i)
-    .forEach(e=>entidad.innerHTML+=`<option>${e}</option>`);
+  directorio.filter(x=>x.PAÍS===paisSel)
+           .map(x=>x.CERTIFICADO)
+           .filter((v,i,a)=>a.indexOf(v)===i)
+           .forEach(c=>certificacion.innerHTML+=`<option>${c}</option>`);
   filtrar();
 };
 
-entidad.onchange=()=>{
+entidad.onchange = () => {
+  const paisSel = pais.value;
+  const entidadSel = entidad.value;
+  // Certificados dependientes de país+entidad
   certificacion.innerHTML="<option>Certificado</option>";
-  directorio
-    .filter(x=>(pais.value==="País"||x.PAÍS===pais.value) && x.ENTIDAD===entidad.value)
-    .map(x=>x.CERTIFICADO)
-    .filter((v,i,a)=>a.indexOf(v)===i)
-    .forEach(c=>certificacion.innerHTML+=`<option>${c}</option>`);
+  directorio.filter(x=>x.PAÍS===paisSel && x.ENTIDAD===entidadSel)
+           .map(x=>x.CERTIFICADO)
+           .filter((v,i,a)=>a.indexOf(v)===i)
+           .forEach(c=>certificacion.innerHTML+=`<option>${c}</option>`);
   filtrar();
 };
 
-certificacion.onchange=filtrar;
+certificacion.onchange = filtrar;
 
 function filtrar(){
   let r = directorio;
@@ -168,6 +191,7 @@ function filtrar(){
   pintar(r);
 }
 
+// ===== PINTAR GRID =====
 function pintar(lista){
   grid.innerHTML="";
   lista.forEach(p=>{
@@ -183,26 +207,25 @@ function pintar(lista){
   });
 }
 
-// ===== POPUP =====
+// ===== POPUP SOLICITUD =====
 function abrirFormulario(){
   popup.style.display="flex";
   fetch(API+"?catalogo=true")
     .then(r=>r.json())
     .then(cat=>{
       baseDatos = cat;
-
+      // País
       fPais.innerHTML="<option>País</option>";
       baseDatos.paises.forEach(p=> fPais.innerHTML+=`<option>${p}</option>`);
-
+      // Certificados
       fCert.innerHTML="<option>Certificado</option>";
       baseDatos.certificados.forEach(c=> fCert.innerHTML+=`<option>${c}</option>`);
       fCert.innerHTML+=`<option>OTRO</option>`;
-
       fEntidad.innerHTML="<option>Entidad</option>";
     });
 }
 
-fPais.onchange = ()=>{
+fPais.onchange = () => {
   fEntidad.innerHTML="<option>Entidad</option>";
   const paisSel = fPais.value;
   if(baseDatos.catalogo[paisSel]){
@@ -210,12 +233,13 @@ fPais.onchange = ()=>{
   }
 };
 
-fCert.onchange = e=>{
+fCert.onchange = e => {
   otroCert.style.display = e.target.value==="OTRO"?"block":"none";
 };
 
-servicio.oninput = ()=>servicio.value = servicio.value.toUpperCase();
-otroCert.oninput = ()=>otroCert.value = otroCert.value.toUpperCase();
+// Mayúsculas automáticas
+servicio.oninput = ()=> servicio.value = servicio.value.toUpperCase();
+otroCert.oninput = ()=> otroCert.value = otroCert.value.toUpperCase();
 
 // ===== SUBMIT =====
 form.onsubmit = e=>{
@@ -223,13 +247,13 @@ form.onsubmit = e=>{
   fetch(API,{
     method:"POST",
     body:JSON.stringify({
-      PAÍS:fPais.value,
-      ENTIDAD:fEntidad.value,
-      CERTIFICADO:fCert.value==="OTRO"?otroCert.value:fCert.value,
-      SERVICIO:servicio.value,
-      EMPRESA:empresa.value,
-      TELÉFONO:telefono.value,
-      CORREO:correo.value
+      PAÍS: fPais.value,
+      ENTIDAD: fEntidad.value,
+      CERTIFICADO: fCert.value==="OTRO"?otroCert.value:fCert.value,
+      SERVICIO: servicio.value,
+      EMPRESA: empresa.value,
+      TELÉFONO: telefono.value,
+      CORREO: correo.value
     })
   }).then(()=>{
     alert("Solicitud enviada correctamente");
@@ -238,6 +262,7 @@ form.onsubmit = e=>{
   });
 };
 
+// ===== POPUP UX =====
 function cerrar(){ popup.style.display="none"; }
 popup.onclick = e=>{ if(e.target===popup) cerrar(); };
 document.onkeydown = e=>{ if(e.key==="Escape") cerrar(); };
