@@ -207,6 +207,79 @@ body {
   padding:0 20px;
 }
 
+
+/* ================= INTRO DIRECTORIO ================= */
+
+.intro-directorio{
+  max-width:1000px;
+  margin:60px auto 40px;
+  padding:0 20px;
+  text-align:center;
+}
+
+.intro-directorio h2{
+  color:#003A70;
+  font-size:28px;
+  margin-bottom:14px;
+}
+
+.intro-directorio .intro-text{
+  font-size:16px;
+  color:#444;
+  line-height:1.7;
+  max-width:820px;
+  margin:0 auto 32px;
+}
+
+/* Highlights */
+.directorio-highlights{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+  margin-bottom:28px;
+}
+
+.highlight-card{
+  background:#fff;
+  padding:26px 22px;
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.highlight-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 28px rgba(0,0,0,0.14);
+}
+
+.highlight-card i{
+  font-size:32px;
+  color:#003A70;
+  margin-bottom:12px;
+}
+
+.highlight-card h4{
+  color:#003A70;
+  font-size:18px;
+  margin-bottom:8px;
+  font-weight:700;
+}
+
+.highlight-card p{
+  font-size:14.5px;
+  color:#444;
+  line-height:1.5;
+}
+
+/* Nota inferior */
+.nota-directorio{
+  font-size:14px;
+  color:#666;
+  margin-top:10px;
+}
+
+  
+
 /* ===== FILTROS ===== */
 .filters{
   display:grid;
@@ -391,6 +464,63 @@ select:focus{
   </div>
 </section>
 
+
+<!-- INTRO -->
+
+  <section class="intro-directorio">
+
+  <h2>Directorio de Empresas Certificadas</h2>
+
+  <p class="intro-text">
+    Este directorio reúne a <strong>empresas certificadas y profesionales especializados</strong>
+    que cumplen con los criterios técnicos establecidos para la correcta
+    <strong>instalación, mantenimiento y verificación</strong> de sistemas contra incendio.
+  </p>
+
+  <div class="directorio-highlights">
+
+    <div class="highlight-card">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h4>Confianza y respaldo</h4>
+      <p>
+        Todas las empresas listadas han sido
+        <strong>validadas y certificadas</strong>,
+        garantizando cumplimiento técnico y profesional.
+      </p>
+    </div>
+
+    <div class="highlight-card">
+      <i class="fa-solid fa-building"></i>
+      <h4>Empresas especializadas</h4>
+      <p>
+        Accede a un ecosistema de
+        <strong>proveedores calificados</strong>
+        con experiencia comprobada en distintos sectores y regiones.
+      </p>
+    </div>
+
+    <div class="highlight-card">
+      <i class="fa-solid fa-filter"></i>
+      <h4>Búsqueda inteligente</h4>
+      <p>
+        Utiliza los filtros por
+        <strong>país, entidad y certificación</strong>
+        para encontrar rápidamente la opción adecuada.
+      </p>
+    </div>
+
+  </div>
+
+  <p class="nota-directorio">
+    💡 Si tu empresa aún no aparece en el directorio, puedes solicitar su registro
+    para iniciar el proceso de validación y certificación.
+  </p>
+
+</section>
+
+
+
+  
 
   <!-- DIRECTORIO -->
 <section class="certificados">
