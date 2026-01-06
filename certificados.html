@@ -123,7 +123,7 @@ select:hover,input:hover{ border-color:#ef4444; }
       <input id="otroCert" placeholder="OTRO CERTIFICADO" style="display:none">
       <input id="servicio" placeholder="SERVICIO (CORTO)" required>
       <input id="empresa" placeholder="EMPRESA" required>
-      <input id="telefono" placeholder="TELÉFONO" required>
+      <input id="telefono" placeholder="TELÉFONO" required pattern="\d{10}" title="Ingresa un número de 10 dígitos">
       <input id="correo" type="email" placeholder="CORREO" required>
       <button class="btn">Enviar solicitud</button>
     </form>
