@@ -3,399 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Certificados</title>
+<title>Certificados | FIPTRAC</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* ===== BASE TIPOGRAFÍA GLOBAL ===== */
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ================== BASE ================== */
+body{
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background:#020617;
+  color:#e5e7eb;
 }
 
-  
-/*==================  NAVBAR ==================*/
-  /* ===========================
-     HEADER STICKY (compact & scroll)
-     - header.scrolled: fondo semitransparente + compact
-     - header.nav-hide: se oculta al bajar scroll
-  ============================ */
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
-    background: rgba(255,255,255,0.92);
-  }
-
-  /* Cuando el usuario baja lo volvemos más pequeño / con fondo */
-  header.scrolled {
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-  }
-
-  /* Cuando el usuario baja rápido ocultamos la barra */
-  header.nav-hide {
-    transform: translateY(-110%);
-  }
-
-  /* Contenedor del nav: aquí se controla el "grosor" de la línea.
-     Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
-  .nav-container {
-    max-width:1200px;
-    margin:auto;
-    padding:5px 15px; /* <-- AJUSTA AQUÍ el grosor vertical del header */
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    transition:padding 0.25s ease;
-  }
-
-  /* ===========================
-     LOGO (clicable) - tamaño controlable
-     Ajusta height para dejarlo a tu preferencia.
-  ============================ */
-  .logo img {
-    height: 36px; /* <-- AJUSTA AQUÍ el tamaño del logo (desktop) */
-    object-fit: contain;
-    transition: height 0.2s ease;
-    display:block;
-  }
-  @media(max-width:850px){
-    .logo img { height: 32px; } /* logo en móvil */
-  }
-
-  /* ===========================
-     MENÚ
-  ============================ */
-  .menu {
-    display:flex;
-    gap:25px;
-    align-items:center;
-  }
-  .menu a {
-    text-decoration:none;
-    font-weight:600;
-    color:#003A70;
-    padding:6px 8px;
-    border-radius:8px;
-    transition:background .18s, color .18s;
-  }
-  .menu a:hover { background: rgba(0,58,112,0.06); }
-
-  /* ====== HAMBURGER (movil) ====== */
-  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
-  .hamburger span { width:28px; height:3px; background:#003A70; border-radius:3px; display:block; }
-
-  @media(max-width:850px){
-    .menu {
-      position:absolute; top:72px; right:12px; background:white;
-      width:220px; padding:16px; border-radius:12px;
-      box-shadow:0 8px 26px rgba(0,0,0,0.12);
-      flex-direction:column; gap:12px;
-      opacity:0; pointer-events:none; transform:translateY(-6px);
-      transition:opacity .28s, transform .28s;
-    }
-    .menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
-    .hamburger { display:flex; }
-  }
-/*==================  FIN NAVBAR ==================*/
-
-
-
-/*==================  HERO ==================*/
-  .hero {
-    background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
-    background-position:center;
-    background-size:cover;
-    padding:80px 20px 20px; /* alto del hero */
-    text-align:center;
-    color:#fff;
-    position:relative;
-    overflow:hidden;
-  }
-
-  .hero-content {
-    max-width:1000px;
-    margin:auto;
-    min-height:260px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    position:relative;
-  }
-
-  .fade-item {
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    opacity:0;
-    transition:opacity 1.4s ease, transform 0.6s ease;
-    font-size:44px;
-    font-weight:700;
-    line-height:1.05;
-    max-width:92%;
-  }
-
-  .fade-item:not(:has(img)) {
-    white-space: normal;
-    text-align:center;
-  }
-
-  .fade-item.active {
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-  }
-
-  /* Texto del slider (ajústalo con .fade-item .slide-text) */
-  .fade-item .slide-text {
-    display:block;
-    font-size:38px;
-  }
-  .fade-item p { margin-top:10px; font-size:18px; font-weight:400; color:rgba(255,255,255,0.95); }
-
-  /* ===========================
-     SLIDER: IMÁGENES / CONTROL POR CLASE (TAMAÑOS INDIVIDUALES)
-     - Usa las clases .img-1, .img-2, .img-3, .img-4 en cada <img>
-     - Ajusta width / max-width / height aquí según quieras
-  ============================ */
-  .fade-item img {
-    display:block;
-    width: 320px;      /* valor por defecto si no se especifica clase */
-    max-width: 68vw;
-    height: auto;
-    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
-    transition: transform .28s ease;
-  }
-
-  /* Tamaños individuales (modifica estos valores libremente) */
-  .fade-item img.img-1 { width: 360px; }   /* imagen 1 */
-  .fade-item img.img-2 { width: 300px; }   /* imagen 2 */
-  .fade-item img.img-3 { width: 420px; }   /* imagen 3 */
-  .fade-item img.img-4 { width: 500px; }   /* imagen 4 */
-
-  /* Responsivo: reduce imágenes en móvil */
-  @media (max-width:700px){
-    .fade-item { font-size:28px; }
-    .fade-item img { width:220px; }
-    .fade-item img.img-1 { width:240px; }
-    .fade-item img.img-2 { width:200px; }
-    .fade-item img.img-3 { width:260px; }
-    .fade-item img.img-4 { width:220px; }
-  }
-
-
-.certificados {
-  max-width: 1300px;
-  margin: auto;
-  padding: 40px 20px;
+/* ================== CONTENEDOR ================== */
+.certificados{
+  max-width:1300px;
+  margin:auto;
+  padding:120px 20px 60px;
 }
 
-/* =============================
-   FILTROS
-============================= */
-.filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-  gap: 16px;
-  margin-bottom: 30px;
+/* ================== FILTROS ================== */
+.filters{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+  margin-bottom:30px;
 }
 
-select, input {
-  background: #111827;
-  border: 1px solid #1f2937;
-  color: #e5e7eb;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 14px;
+select,input{
+  background:#111827;
+  border:1px solid #1f2937;
+  color:#e5e7eb;
+  padding:12px;
+  border-radius:10px;
+  font-size:14px;
 }
 
-.btn {
-  background: #ef4444;
-  border: none;
-  color: #fff;
-  padding: 12px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
+.btn{
+  background:#ef4444;
+  border:none;
+  color:#fff;
+  padding:12px;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+.btn:hover{ background:#dc2626 }
+
+/* ================== GRID ================== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:22px;
 }
 
-.btn:hover {
-  background: #dc2626;
+.card{
+  background:linear-gradient(180deg,#111827,#020617);
+  border:1px solid #1f2937;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.card h4{
+  margin:0 0 8px;
+  font-size:17px;
+  color:#fff;
+}
+.card p{
+  margin:5px 0;
+  font-size:14px;
+  color:#9ca3af;
 }
 
-/* =============================
-   GRID PROVEEDORES
-============================= */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
-  gap: 20px;
+/* ================== POPUP ================== */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(6px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
 }
 
-.card {
-  background: linear-gradient(180deg,#111827,#020617);
-  border: 1px solid #1f2937;
-  border-radius: 16px;
-  padding: 20px;
+.popup-card{
+  background:#020617;
+  border:1px solid #1f2937;
+  border-radius:22px;
+  padding:30px;
+  width:100%;
+  max-width:480px;
+  position:relative;
 }
 
-.card h4 {
-  margin: 0 0 8px;
-  color: #fff;
+.popup-card h3{
+  margin:0 0 18px;
 }
 
-.card p {
-  margin: 4px 0;
-  font-size: 14px;
-  color: #9ca3af;
+.popup-card form{
+  display:grid;
+  gap:14px;
 }
 
-/* =============================
-   POPUP FORM
-============================= */
-.popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.75);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-
-.popup-card {
-  background: #020617;
-  border-radius: 20px;
-  padding: 30px;
-  width: 100%;
-  max-width: 480px;
-  border: 1px solid #1f2937;
-  position: relative;
-}
-
-.popup-card h3 {
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-.popup-card form {
-  display: grid;
-  gap: 14px;
-}
-
-.close-btn {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: none;
-  border: none;
-  color: #9ca3af;
-  font-size: 20px;
-  cursor: pointer;
+.close-btn{
+  position:absolute;
+  top:14px;
+  right:16px;
+  font-size:20px;
+  background:none;
+  border:none;
+  color:#9ca3af;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-
-  <!-- NAVBAR -->
-<header class="nav">
-  <div class="nav-container">
-    <!-- Logo clicable: vuelve a index.html -->
-    <div class="logo">
-      <a href="index.html" aria-label="Ir al inicio">
-        <img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
-      </a>
-    </div>
-
-    <!-- Menú (Eventos permanece incluido) -->
-    <nav class="menu" id="menu">
-      <!-- <a href="cursos.html">Cursos</a> -->
-      <a href="eventos.html">Eventos y Cursos</a>
-      <a href="certificados.html">Certificados</a>
-      <a href="laboratorios.html">Laboratorios</a>
-      <a href="aliados.html">Aliados Comerciales</a>
-      <a href="contacto.html">Contacto</a>
-    </nav>
-
-    <div class="hamburger" id="hamburger" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</header>
-
-
-<!-- HERO / SLIDER -->
-<section class="hero" aria-label="Hero">
-  <div class="hero-content">
-
-    <!-- Cada .fade-item puede ser texto o imagen. 
-         Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
-    <div class="fade-item active" id="fade1">
-      <span class="slide-text">Entrenamiento técnico avanzado con equipamiento real</span>
-    </div>
-
-    <div class="fade-item" id="fade2">
-      <span class="slide-text">Simuladores funcionales y escenarios controlados</span>
-    </div>
-
-    <div class="fade-item" id="fade3">
-      <span class="slide-text">Condiciones reales de operación en sistemas contra incendio</span>
-    </div>
-
-    <div class="fade-item" id="fade4">
-      <!-- imagen con clase individual img-4 -->
-      <img src="assets/images/sin fondo.png" alt="Logo fondo" class="img-4">
-    </div>
-
-  </div>
-</section>
-
-  
 <section class="certificados">
 
   <!-- FILTROS -->
   <div class="filters">
     <select id="pais"><option>País</option></select>
     <select id="entidad"><option>Entidad</option></select>
-    <select id="certificacion"><option>Certificación</option></select>
-    <button class="btn" onclick="abrirFormulario()">Solicitar registro</button>
+    <select id="certificacion"><option>Certificado</option></select>
+    <button class="btn" onclick="abrirFormulario()">Solicitar Registro</button>
   </div>
 
   <!-- GRID -->
   <div class="grid" id="grid"></div>
 </section>
 
-<!-- POPUP FORMULARIO -->
+<!-- POPUP -->
 <div class="popup" id="popup">
   <div class="popup-card">
     <button class="close-btn" onclick="cerrar()">✕</button>
     <h3>Solicitud de Alta</h3>
 
     <form id="form">
+      <select id="fPais" required></select>
+      <select id="fEntidad" required></select>
+
+      <select id="fCert" required></select>
+      <input id="otroCert" placeholder="OTRO CERTIFICADO" style="display:none">
+
+      <input id="servicio" placeholder="SERVICIO (CORTO)" required>
       <input name="EMPRESA" placeholder="EMPRESA" required>
-
-      <select name="PAÍS" id="fPais" required></select>
-      <select name="ENTIDAD" id="fEntidad" required></select>
-
-      <input name="SERVICIO" id="servicio"
-             placeholder="SERVICIO (CORTO)"
-             maxlength="40" required>
-
-      <select name="CERTIFICADO" id="fCert" required></select>
-      <input id="otroCert" placeholder="OTRA CERTIFICACIÓN" style="display:none">
-
       <input name="TELÉFONO" placeholder="TELÉFONO" required>
       <input name="CORREO" type="email" placeholder="CORREO" required>
 
@@ -404,132 +159,62 @@ select, input {
   </div>
 </div>
 
-
-<!-- ============================== SCRIPTS ============================== -->
-
-  
-<!--  HAMBURGER  --> 
 <script>
-  // HAMBURGER toggle (movil)
-  document.getElementById('hamburger').addEventListener('click', ()=>{
-    document.getElementById('menu').classList.toggle('show');
-  });
-</script>
-  
-
-<!--  NAVBAR  --> 
-<script>
-  // HEADER: añadir clase .scrolled + comportamiento "hide on scroll"
-  (function(){
-    const header = document.querySelector('header');
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-      const current = window.pageYOffset || document.documentElement.scrollTop;
-      // scrolled style (background + compact)
-      if (current > 30) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-
-      // hide/show on scroll direction
-      if (current > lastScroll && current > 120) {
-        // scrolling down
-        header.classList.add('nav-hide');
-      } else {
-        // scrolling up
-        header.classList.remove('nav-hide');
-      }
-      lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
-    }, { passive: true });
-  })();
-</script>
-
-
-<!--  HERO  --> 
-<script>
-  // SLIDER / TRANSICIONES
-  const items = [
-    document.getElementById("fade1"),
-    document.getElementById("fade2"),
-    document.getElementById("fade3"),
-    document.getElementById("fade4")
-  ];
-
-  let index = 0;
-  function changeSlide(){
-    items.forEach(i => i.classList.remove("active"));
-    items[index].classList.add("active");
-    index = (index + 1) % items.length;
-  }
-  // inicia intercambio (puedes cambiar 3500 a otro valor en ms)
-  let slideInterval = setInterval(changeSlide, 2500);
-
-  // si quieres controlar manualmente (ej. pausar on hover) puedes hacerlo:
-  document.querySelector('.hero').addEventListener('mouseenter', ()=> clearInterval(slideInterval));
-  document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 2500));
-</script>
-
-
-  
-<script>
-/* =============================
-   CONFIG
-============================= */
-const API = "https://script.google.com/macros/s/AKfycbzIZ3QkUzWvPjEpsmeEpreMhm8BdbxSCQej7H_ARHEqK14Ka9ucJ11XLORVselj4QV1/exec";
+/* ================= CONFIG ================= */
+const API = "TU_URL_DE_APPS_SCRIPT";
 
 let catalogo = {};
-let proveedores = [];
+let directorio = [];
 
-/* =============================
-   CATÁLOGO
-============================= */
-fetch(API + "?catalogo=true")
-  .then(r => r.json())
-  .then(data => {
-    catalogo = data;
+/* ================= LOAD ================= */
+fetch(API)
+  .then(r=>r.json())
+  .then(data=>{
+    catalogo = data.catalogo;
+    directorio = data.directorio;
     cargarPaises();
+    pintar(directorio);
   });
 
-function cargarPaises() {
-  pais.innerHTML = "<option>País</option>";
-  Object.keys(catalogo).forEach(p =>
-    pais.innerHTML += `<option>${p}</option>`
-  );
+/* ================= FILTROS ================= */
+function cargarPaises(){
+  pais.innerHTML="<option>País</option>";
+  Object.keys(catalogo).forEach(p=>pais.innerHTML+=`<option>${p}</option>`);
 }
 
-pais.onchange = () => {
-  entidad.innerHTML = "<option>Entidad</option>";
-  certificacion.innerHTML = "<option>Certificación</option>";
-
-  Object.keys(catalogo[pais.value] || {}).forEach(e =>
-    entidad.innerHTML += `<option>${e}</option>`
-  );
-  filtrar();
-};
-
-entidad.onchange = () => {
-  certificacion.innerHTML = "<option>Certificación</option>";
-  (catalogo[pais.value]?.[entidad.value] || []).forEach(c =>
-    certificacion.innerHTML += `<option>${c}</option>`
-  );
-  certificacion.innerHTML += `<option>OTRO</option>`;
-  filtrar();
-};
-
-certificacion.onchange = filtrar;
-
-/* =============================
-   DIRECTORIO
-============================= */
-fetch(API)
-  .then(r => r.json())
-  .then(data => {
-    proveedores = data.filter(p => p.ALTA !== "SOLICITUD");
-    pintar(proveedores);
+pais.onchange=()=>{
+  entidad.innerHTML="<option>Entidad</option>";
+  certificacion.innerHTML="<option>Certificado</option>";
+  Object.keys(catalogo[pais.value]||{}).forEach(e=>{
+    entidad.innerHTML+=`<option>${e}</option>`;
   });
+  filtrar();
+};
 
-function pintar(lista) {
-  grid.innerHTML = "";
-  lista.forEach(p => {
-    grid.innerHTML += `
+entidad.onchange=()=>{
+  certificacion.innerHTML="<option>Certificado</option>";
+  (catalogo[pais.value]?.[entidad.value]||[]).forEach(c=>{
+    certificacion.innerHTML+=`<option>${c}</option>`;
+  });
+  certificacion.innerHTML+=`<option>OTRO</option>`;
+  filtrar();
+};
+
+certificacion.onchange=filtrar;
+
+function filtrar(){
+  let r = directorio;
+  if(pais.value!=="País") r=r.filter(x=>x.PAÍS===pais.value);
+  if(entidad.value!=="Entidad") r=r.filter(x=>x.ENTIDAD===entidad.value);
+  if(certificacion.value!=="Certificado") r=r.filter(x=>x.CERTIFICADO===certificacion.value);
+  pintar(r);
+}
+
+/* ================= GRID ================= */
+function pintar(lista){
+  grid.innerHTML="";
+  lista.forEach(p=>{
+    grid.innerHTML+=`
       <div class="card">
         <h4>${p.EMPRESA}</h4>
         <p>${p.SERVICIO}</p>
@@ -541,100 +226,46 @@ function pintar(lista) {
   });
 }
 
-function filtrar() {
-  let r = proveedores;
-
-  if (pais.value !== "País")
-    r = r.filter(p => p.PAÍS === pais.value);
-
-  if (entidad.value !== "Entidad")
-    r = r.filter(p => p.ENTIDAD === entidad.value);
-
-  if (certificacion.value !== "Certificación")
-    r = r.filter(p => p.CERTIFICADO === certificacion.value);
-
-  pintar(r);
+/* ================= POPUP ================= */
+function abrirFormulario(){
+  popup.style.display="flex";
+  fPais.innerHTML=pais.innerHTML;
+  fEntidad.innerHTML=entidad.innerHTML;
+  fCert.innerHTML=certificacion.innerHTML;
 }
 
-/* =============================
-   FORMULARIO
-============================= */
-servicio.oninput = () => servicio.value = servicio.value.toUpperCase();
+function cerrar(){ popup.style.display="none"; }
 
-fCert.onchange = e => {
-  otroCert.style.display = e.target.value === "OTRO" ? "block" : "none";
+popup.onclick=e=>{ if(e.target===popup) cerrar(); }
+document.onkeydown=e=>{ if(e.key==="Escape") cerrar(); }
+
+servicio.oninput=()=>servicio.value=servicio.value.toUpperCase();
+otroCert.oninput=()=>otroCert.value=otroCert.value.toUpperCase();
+
+fCert.onchange=e=>{
+  otroCert.style.display = e.target.value==="OTRO"?"block":"none";
 };
 
-form.onsubmit = e => {
+/* ================= SUBMIT ================= */
+form.onsubmit=e=>{
   e.preventDefault();
-  const data = Object.fromEntries(new FormData(form));
-  if (data.CERTIFICADO === "OTRO") data.CERTIFICADO = otroCert.value;
-
-  fetch(API, {
-    method: "POST",
-    body: JSON.stringify(data)
-  }).then(() => {
+  fetch(API,{
+    method:"POST",
+    body:JSON.stringify({
+      PAÍS:fPais.value,
+      ENTIDAD:fEntidad.value,
+      CERTIFICADO:fCert.value==="OTRO"?otroCert.value:fCert.value,
+      SERVICIO:servicio.value.toUpperCase(),
+      EMPRESA:form.EMPRESA.value,
+      TELÉFONO:form.TELÉFONO.value,
+      CORREO:form.CORREO.value
+    })
+  }).then(()=>{
     alert("Solicitud enviada correctamente");
     cerrar();
     form.reset();
   });
 };
-
-function abrirFormulario() {
-  popup.style.display = "flex";
-  fPais.innerHTML = pais.innerHTML;
-  fCert.innerHTML = certificacion.innerHTML;
-}
-
-function cerrar() {
-  popup.style.display = "none";
-}
-</script>
-
-
-<script>
-/* ================= POPUPS FOOTER ================= */
-
-function abrirPopup(id){
-  const popup = document.getElementById(id);
-  if(popup) popup.style.display = 'flex';
-}
-
-function cerrarPopup(id){
-  const popup = document.getElementById(id);
-  if(popup) popup.style.display = 'none';
-}
-
-/* Cerrar con click fuera */
-document.addEventListener('click', e => {
-  if(e.target.classList.contains('fiptrac-overlay')){
-    e.target.style.display = 'none';
-  }
-});
-
-/* Cerrar con ESC */
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape'){
-    document
-      .querySelectorAll('.fiptrac-overlay')
-      .forEach(p => p.style.display = 'none');
-  }
-});
-</script>
-
-
-  
-<!--  FOOTER  --> 
-<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
-
-<div id="footer-container"></div>
-
-<script>
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer-container").innerHTML = data;
-    });
 </script>
 
 </body>
