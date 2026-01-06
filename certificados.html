@@ -2,104 +2,200 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Certificados | FIPTRAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
+/* ===== BASE ===== */
 body{
   margin:0;
   font-family:'Montserrat',sans-serif;
-  background:#020617;
-  color:#e5e7eb;
+  background:#f4f6f8;
+  color:#333;
 }
-.certificados{
-  max-width:1300px;
+
+/* ===== HEADER (MISMO QUE FIPTRAC) ===== */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(6px);
+  box-shadow:0 2px 12px rgba(0,0,0,.1);
+  z-index:999;
+}
+.nav-container{
+  max-width:1200px;
   margin:auto;
-  padding:120px 20px 60px;
+  padding:6px 15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
+.logo img{height:36px}
+.menu{display:flex;gap:24px}
+.menu a{
+  text-decoration:none;
+  color:#003A70;
+  font-weight:600;
+  padding:6px 8px;
+  border-radius:8px;
+}
+.menu a:hover{background:rgba(0,58,112,.08)}
+
+/* ===== HERO ===== */
+.hero{
+  background:linear-gradient(rgba(0,58,112,.85),rgba(0,58,112,.85));
+  color:#fff;
+  padding:120px 20px 60px;
+  text-align:center;
+}
+.hero h1{
+  font-size:38px;
+  margin-bottom:10px;
+}
+.hero p{
+  max-width:800px;
+  margin:auto;
+  font-size:18px;
+  opacity:.95;
+}
+
+/* ===== CONTENIDO ===== */
+.certificados{
+  max-width:1200px;
+  margin:40px auto 80px;
+  padding:0 20px;
+}
+
+/* ===== FILTROS ===== */
 .filters{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:16px;
   margin-bottom:30px;
 }
-select,input{
-  background:#111827;
-  border:1px solid #1f2937;
-  color:#e5e7eb;
+select{
   padding:12px;
   border-radius:10px;
-  transition:0.3s;
+  border:1px solid #ccc;
+  font-size:14px;
 }
-select:hover,input:hover{ border-color:#ef4444; }
+select:focus{
+  outline:none;
+  border-color:#003A70;
+  box-shadow:0 0 0 2px rgba(0,58,112,.15);
+}
 .btn{
-  background:#ef4444;
-  border:none;
+  background:#003A70;
   color:#fff;
-  padding:12px;
+  border:none;
   border-radius:12px;
+  padding:12px;
   font-weight:600;
   cursor:pointer;
-  transition:0.3s;
 }
-.btn:hover{ background:#dc2626 }
+.btn:hover{background:#002b55}
+
+/* ===== GRID ===== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:22px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
 }
 .card{
-  background:linear-gradient(180deg,#111827,#020617);
-  border:1px solid #1f2937;
+  background:#fff;
   border-radius:18px;
+  box-shadow:0 8px 22px rgba(0,0,0,.1);
   padding:22px;
-  transition:0.3s;
+  transition:.25s;
 }
 .card:hover{
-  transform:translateY(-4px);
-  border-color:#ef4444;
+  transform:translateY(-6px);
+  box-shadow:0 14px 30px rgba(0,0,0,.16);
 }
-.card h4{margin:0 0 8px;color:#fff;font-size:18px;}
-.card p{margin:4px 0;font-size:14px;color:#9ca3af;}
+.card h4{color:#003A70;margin-bottom:6px}
+.card p{margin:4px 0;font-size:14px}
+
+/* ===== POPUP ===== */
 .popup{
+  display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.65);
-  backdrop-filter:blur(6px);
-  display:none;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(3px);
   align-items:center;
   justify-content:center;
   z-index:9999;
 }
 .popup-card{
-  background:#020617;
-  border:1px solid #1f2937;
-  border-radius:22px;
-  padding:30px;
-  width:100%;
-  max-width:480px;
+  background:#fff;
+  width:92%;
+  max-width:560px;
+  border-radius:20px;
+  padding:32px 28px 28px;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
   position:relative;
-  box-shadow:0 0 20px rgba(0,0,0,0.7);
 }
-.popup-card form{display:grid;gap:14px}
+.popup h3{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:14px;
+}
+.popup input,
+.popup select{
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+.popup input:focus,
+.popup select:focus{
+  outline:none;
+  border-color:#003A70;
+  box-shadow:0 0 0 2px rgba(0,58,112,.15);
+}
 .close-btn{
   position:absolute;
   top:14px;
-  right:16px;
+  right:18px;
+  font-size:22px;
   background:none;
   border:none;
-  color:#9ca3af;
-  font-size:20px;
   cursor:pointer;
-  transition:0.3s;
 }
-.close-btn:hover{ color:#ef4444; }
 </style>
 </head>
+
 <body>
 
+<header>
+  <div class="nav-container">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/images/sin fondo.png">
+      </a>
+    </div>
+    <nav class="menu">
+      <a href="eventos.html">Eventos</a>
+      <a href="certificados.html">Certificados</a>
+      <a href="laboratorios.html">Laboratorios</a>
+      <a href="aliados.html">Aliados</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Directorio de Certificaciones</h1>
+  <p>Consulta proveedores certificados por país, entidad y tipo de certificación.</p>
+</section>
+
 <section class="certificados">
-  <!-- FILTROS -->
+
   <div class="filters">
     <select id="pais"><option>País</option></select>
     <select id="entidad"><option>Entidad</option></select>
@@ -107,7 +203,6 @@ select:hover,input:hover{ border-color:#ef4444; }
     <button class="btn" onclick="abrirFormulario()">Solicitar Registro</button>
   </div>
 
-  <!-- GRID -->
   <div class="grid" id="grid"></div>
 </section>
 
@@ -121,9 +216,9 @@ select:hover,input:hover{ border-color:#ef4444; }
       <select id="fEntidad" required></select>
       <select id="fCert" required></select>
       <input id="otroCert" placeholder="OTRO CERTIFICADO" style="display:none">
-      <input id="servicio" placeholder="SERVICIO (CORTO)" required>
+      <input id="servicio" placeholder="SERVICIO" required>
       <input id="empresa" placeholder="EMPRESA" required>
-      <input id="telefono" placeholder="TELÉFONO" required pattern="\d{10}" title="Ingresa un número de 10 dígitos">
+      <input id="telefono" placeholder="TELÉFONO (10 dígitos)" pattern="\d{10}" required>
       <input id="correo" type="email" placeholder="CORREO" required>
       <button class="btn">Enviar solicitud</button>
     </form>
@@ -131,67 +226,51 @@ select:hover,input:hover{ border-color:#ef4444; }
 </div>
 
 <script>
-const API = "https://script.google.com/macros/s/AKfycbx_aGZpT1CK-XfqoxVcj1yc8c-gyvFb5Z20ABll26bhq8jASrNJu0UbpazXn4Ic0jpC/exec"; // reemplaza con tu URL
-let directorio = [];
-let baseDatos = { paises:[], catalogo:{}, certificados:[] };
+const API="https://script.google.com/macros/s/AKfycbx_aGZpT1CK-XfqoxVcj1yc8c-gyvFb5Z20ABll26bhq8jASrNJu0UbpazXn4Ic0jpC/exec";
+let directorio=[],baseDatos={};
 
-// ===== CARGAR DIRECTORIO Y FILTROS =====
-fetch(API)
-  .then(r=>r.json())
-  .then(data=>{
-    directorio = data.directorio;
-    cargarFiltros();
-    pintar(directorio);
-  });
+// ===== CARGA =====
+fetch(API).then(r=>r.json()).then(d=>{
+  directorio=d.directorio;
+  cargarFiltros();
+  pintar(directorio);
+});
 
 function cargarFiltros(){
   pais.innerHTML="<option>País</option>";
-  [...new Set(directorio.map(x=>x.PAÍS))].forEach(p=> pais.innerHTML+=`<option>${p}</option>`);
-  entidad.innerHTML="<option>Entidad</option>";
-  certificacion.innerHTML="<option>Certificado</option>";
+  [...new Set(directorio.map(x=>x.PAÍS))].forEach(p=>pais.innerHTML+=`<option>${p}</option>`);
 }
 
-// ===== FILTROS JERÁRQUICOS =====
-pais.onchange = () => {
-  const paisSel = pais.value;
-  // Entidades dentro del país
+pais.onchange=()=>{
   entidad.innerHTML="<option>Entidad</option>";
-  directorio.filter(x=>x.PAÍS===paisSel)
-           .map(x=>x.ENTIDAD)
-           .filter((v,i,a)=>a.indexOf(v)===i)
-           .forEach(e=>entidad.innerHTML+=`<option>${e}</option>`);
-  // Certificados dentro del país
   certificacion.innerHTML="<option>Certificado</option>";
-  directorio.filter(x=>x.PAÍS===paisSel)
-           .map(x=>x.CERTIFICADO)
-           .filter((v,i,a)=>a.indexOf(v)===i)
-           .forEach(c=>certificacion.innerHTML+=`<option>${c}</option>`);
+  directorio.filter(x=>x.PAÍS===pais.value)
+    .map(x=>x.ENTIDAD).filter((v,i,a)=>a.indexOf(v)==i)
+    .forEach(e=>entidad.innerHTML+=`<option>${e}</option>`);
+  directorio.filter(x=>x.PAÍS===pais.value)
+    .map(x=>x.CERTIFICADO).filter((v,i,a)=>a.indexOf(v)==i)
+    .forEach(c=>certificacion.innerHTML+=`<option>${c}</option>`);
   filtrar();
 };
 
-entidad.onchange = () => {
-  const paisSel = pais.value;
-  const entidadSel = entidad.value;
-  // Certificados dependientes de país+entidad
+entidad.onchange=()=>{
   certificacion.innerHTML="<option>Certificado</option>";
-  directorio.filter(x=>x.PAÍS===paisSel && x.ENTIDAD===entidadSel)
-           .map(x=>x.CERTIFICADO)
-           .filter((v,i,a)=>a.indexOf(v)===i)
-           .forEach(c=>certificacion.innerHTML+=`<option>${c}</option>`);
+  directorio.filter(x=>x.PAÍS===pais.value && x.ENTIDAD===entidad.value)
+    .map(x=>x.CERTIFICADO).filter((v,i,a)=>a.indexOf(v)==i)
+    .forEach(c=>certificacion.innerHTML+=`<option>${c}</option>`);
   filtrar();
 };
 
-certificacion.onchange = filtrar;
+certificacion.onchange=filtrar;
 
 function filtrar(){
-  let r = directorio;
-  if(pais.value!=="País") r=r.filter(x=>x.PAÍS===pais.value);
-  if(entidad.value!=="Entidad") r=r.filter(x=>x.ENTIDAD===entidad.value);
-  if(certificacion.value!=="Certificado") r=r.filter(x=>x.CERTIFICADO===certificacion.value);
+  let r=directorio;
+  if(pais.value!="País") r=r.filter(x=>x.PAÍS===pais.value);
+  if(entidad.value!="Entidad") r=r.filter(x=>x.ENTIDAD===entidad.value);
+  if(certificacion.value!="Certificado") r=r.filter(x=>x.CERTIFICADO===certificacion.value);
   pintar(r);
 }
 
-// ===== PINTAR GRID =====
 function pintar(lista){
   grid.innerHTML="";
   lista.forEach(p=>{
@@ -199,7 +278,7 @@ function pintar(lista){
       <div class="card">
         <h4>${p.EMPRESA}</h4>
         <p>${p.SERVICIO}</p>
-        <p>${p.ENTIDAD}, ${p.PAÍS}</p>
+        <p><b>${p.ENTIDAD}</b> – ${p.PAÍS}</p>
         <p><b>${p.CERTIFICADO}</b></p>
         <p>${p.TELÉFONO}</p>
         <p>${p.CORREO}</p>
@@ -207,65 +286,44 @@ function pintar(lista){
   });
 }
 
-// ===== POPUP SOLICITUD =====
+// ===== POPUP =====
 function abrirFormulario(){
   popup.style.display="flex";
-  fetch(API+"?catalogo=true")
-    .then(r=>r.json())
-    .then(cat=>{
-      baseDatos = cat;
-      // País
-      fPais.innerHTML="<option>País</option>";
-      baseDatos.paises.forEach(p=> fPais.innerHTML+=`<option>${p}</option>`);
-      // Certificados
-      fCert.innerHTML="<option>Certificado</option>";
-      baseDatos.certificados.forEach(c=> fCert.innerHTML+=`<option>${c}</option>`);
-      fCert.innerHTML+=`<option>OTRO</option>`;
-      fEntidad.innerHTML="<option>Entidad</option>";
-    });
+  fetch(API+"?catalogo=true").then(r=>r.json()).then(c=>{
+    baseDatos=c;
+    fPais.innerHTML="<option>País</option>";
+    c.paises.forEach(p=>fPais.innerHTML+=`<option>${p}</option>`);
+    fCert.innerHTML="<option>Certificado</option>";
+    c.certificados.forEach(x=>fCert.innerHTML+=`<option>${x}</option>`);
+    fCert.innerHTML+="<option>OTRO</option>";
+  });
 }
 
-fPais.onchange = () => {
+fPais.onchange=()=>{
   fEntidad.innerHTML="<option>Entidad</option>";
-  const paisSel = fPais.value;
-  if(baseDatos.catalogo[paisSel]){
-    baseDatos.catalogo[paisSel].forEach(e=> fEntidad.innerHTML+=`<option>${e}</option>`);
-  }
+  (baseDatos.catalogo[fPais.value]||[]).forEach(e=>fEntidad.innerHTML+=`<option>${e}</option>`);
 };
 
-fCert.onchange = e => {
-  otroCert.style.display = e.target.value==="OTRO"?"block":"none";
-};
+fCert.onchange=e=>otroCert.style.display=e.target.value==="OTRO"?"block":"none";
+servicio.oninput=()=>servicio.value=servicio.value.toUpperCase();
 
-// Mayúsculas automáticas
-servicio.oninput = ()=> servicio.value = servicio.value.toUpperCase();
-otroCert.oninput = ()=> otroCert.value = otroCert.value.toUpperCase();
-
-// ===== SUBMIT =====
-form.onsubmit = e=>{
+form.onsubmit=e=>{
   e.preventDefault();
-  fetch(API,{
-    method:"POST",
-    body:JSON.stringify({
-      PAÍS: fPais.value,
-      ENTIDAD: fEntidad.value,
-      CERTIFICADO: fCert.value==="OTRO"?otroCert.value:fCert.value,
-      SERVICIO: servicio.value,
-      EMPRESA: empresa.value,
-      TELÉFONO: telefono.value,
-      CORREO: correo.value
-    })
-  }).then(()=>{
+  if(!/^\d{10}$/.test(telefono.value)) return alert("Teléfono inválido");
+  fetch(API,{method:"POST",body:JSON.stringify({
+    PAÍS:fPais.value,ENTIDAD:fEntidad.value,
+    CERTIFICADO:fCert.value==="OTRO"?otroCert.value:fCert.value,
+    SERVICIO:servicio.value,EMPRESA:empresa.value,
+    TELÉFONO:telefono.value,CORREO:correo.value
+  })}).then(()=>{
     alert("Solicitud enviada correctamente");
-    cerrar();
-    form.reset();
+    cerrar();form.reset();
   });
 };
 
-// ===== POPUP UX =====
-function cerrar(){ popup.style.display="none"; }
-popup.onclick = e=>{ if(e.target===popup) cerrar(); };
-document.onkeydown = e=>{ if(e.key==="Escape") cerrar(); };
+function cerrar(){popup.style.display="none";}
+popup.onclick=e=>{if(e.target===popup)cerrar();}
+document.onkeydown=e=>{if(e.key==="Escape")cerrar();}
 </script>
 
 </body>
