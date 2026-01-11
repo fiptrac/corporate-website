@@ -188,157 +188,7 @@
     .fade-item img.img-4 { width:220px; }
   }
 
-/* Contenedor principal */
-.aliados-container{
-  max-width:1200px;
-  margin:0 auto 80px;
-  padding:0 20px;
-}
 
-/* TÍTULOS */
-.aliados-title{
-  text-align:center;
-  color:#003A70;
-  font-size:32px;
-  margin-bottom:16px;
-}
-
-.aliados-intro{
-  text-align:center;
-  max-width:900px;
-  margin:0 auto 50px;
-  font-size:16px;
-  line-height:1.7;
-  color:#444;
-}
-
-/* ======================================================
-   CARRUSELES AUTOMÁTICOS (FLUJO CONTINUO)
-====================================================== */
-.carousel-wrapper{
-  overflow:hidden;
-  position:relative;
-  margin:40px 0;
-}
-
-.carousel-track{
-  display:flex;
-  width:max-content;
-  animation:scroll 40s linear infinite;
-}
-
-.carousel-track.slow{
-  animation-duration:60s;
-}
-
-.carousel-item{
-  flex:0 0 auto;
-  padding:0 40px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.carousel-item img{
-  height:70px;
-  max-width:160px;
-  object-fit:contain;
-  filter:grayscale(100%);
-  opacity:.85;
-  transition:.3s;
-}
-
-.carousel-item img:hover{
-  filter:grayscale(0%);
-  opacity:1;
-}
-
-/* Animación continua */
-@keyframes scroll{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(-50%); }
-}
-
-/* ======================================================
-   FRANJA EMPRESAS REPRESENTATIVAS (CON LINKS)
-====================================================== */
-.representativas{
-  background:#ffffff;
-  border-radius:18px;
-  padding:40px 30px;
-  box-shadow:0 8px 22px rgba(0,0,0,.08);
-  margin:60px 0;
-}
-
-.representativas h3{
-  text-align:center;
-  color:#003A70;
-  margin-bottom:10px;
-}
-
-.representativas p{
-  text-align:center;
-  color:#555;
-  margin-bottom:30px;
-}
-
-.representativas-logos{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:50px;
-}
-
-.representativas-logos a img{
-  height:85px;
-  max-width:120px;
-  object-fit:contain;
-  transition:.3s;
-}
-
-.representativas-logos a:hover img{
-  transform:scale(1.08);
-}
-
-/* ======================================================
-   FRANJA INSTITUCIONES CERTIFICADORAS
-====================================================== */
-.certificadoras{
-  margin-top:80px;
-}
-
-.certificadoras h3{
-  text-align:center;
-  color:#003A70;
-  margin-bottom:14px;
-}
-
-.certificadoras p{
-  text-align:center;
-  color:#555;
-  max-width:800px;
-  margin:0 auto 35px;
-}
-
-.certificadoras-logos{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:35px;
-}
-
-.certificadoras-logos img{
-  height:70px;
-  max-width:170px;
-  object-fit:contain;
-  opacity:.9;
-}
-
-/* RESPONSIVE */
-@media(max-width:700px){
-  .carousel-item{ padding:0 25px; }
-  .carousel-item img{ height:55px; }
-}
 </style>
 </head>
 
@@ -397,112 +247,22 @@
   </div>
 </section>
 
-<section class="aliados-container">
 
-  <h1 class="aliados-title">Aliados Comerciales</h1>
 
-  <p class="aliados-intro">
-    Empresas que confían en <strong>FIPTRAC</strong> para la
-    <strong>capacitación técnica especializada</strong> de sus equipos.
-    Estas organizaciones han participado, se han certificado o colaboran
-    activamente en el fortalecimiento de la
-    <strong>seguridad contra incendios en Latinoamérica</strong>.
-  </p>
 
-  <!-- ================== CARRUSEL 1 ================== -->
-  <div class="carousel-wrapper">
-    <div class="carousel-track">
-      <!-- DUPLICA LOS LOGOS PARA EFECTO INFINITO -->
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A16.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A17.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A18.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A2.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A1.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A6.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A15.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A5.png"></div>
 
-      <!-- repetidos -->
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A16.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A17.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A18.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A2.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A1.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A6.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A15.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A5.png"></div>
-    </div>
-  </div>
 
-  <!-- ================== CARRUSEL 2 (más lento) ================== -->
-  <div class="carousel-wrapper">
-    <div class="carousel-track slow">
-      <!-- DUPLICA LOS LOGOS PARA EFECTO INFINITO -->
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A4.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A9.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A14.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A13.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A20.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A3.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A21.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A11.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A19.png"></div>
 
-      <!-- repetidos -->
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A4.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A9.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A14.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A13.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A20.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A3.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A21.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A11.png"></div>
-      <div class="carousel-item"><img src="assets/images/aliados_logos/A19.png"></div>
-    </div>
-  </div>
 
-  <!-- ================== EMPRESAS REPRESENTATIVAS ================== -->
-  <div class="representativas">
-    <h3>Empresas Representativas</h3>
-    <p>
-      Organizaciones líderes del sector que colaboran de manera directa
-      y continua con FIPTRAC.
-    </p>
 
-    <div class="representativas-logos">
-      <a href="https://empresa1.com" target="_blank">
-        <img src="assets/images/aliados_logos/A8.png">
-      </a>
-      <a href="https://empresa2.com" target="_blank">
-        <img src="assets/images/aliados_logos/A10.png">
-      </a>
-      <a href="https://empresa3.com" target="_blank">
-        <img src="assets/images/aliados_logos/A12.png">
-      </a>
-      <a href="https://empresa3.com" target="_blank">
-        <img src="assets/images/aliados_logos/A7.png">
-      </a>
-    </div>
-  </div>
 
-  <!-- ================== INSTITUCIONES CERTIFICADORAS ================== -->
-  <div class="certificadoras">
-    <h3>Instituciones que respaldan nuestra formación</h3>
-    <p>
-      FIPTRAC colabora y se alinea con organismos e instituciones
-      reconocidas a nivel nacional e internacional.
-    </p>
 
-    <div class="certificadoras-logos">
-      <img src="assets/images/aliados_logos/A22.png">
-      <img src="assets/images/aliados_logos/A23.png">
-      <img src="assets/images/aliados_logos/A24.png">
-      <img src="assets/images/aliados_logos/A25.png">
-      <img src="assets/images/aliados_logos/A26.png">
-    </div>
-  </div>
 
-</section>
+
+
+
+  
+
 
 
 <!-- ============================== SCRIPTS ============================== -->
