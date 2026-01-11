@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cursos | FIPTRAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+
+<!-- ============================== STYLES ============================== -->
+
+
+<style>
+body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
+.eventos{max-width:1200px;margin:20px auto 80px;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
+.card{background:#fff;border-radius:18px;box-shadow:0 8px 22px rgba(0,0,0,.1);overflow:hidden;text-align:center;transition:transform .25s ease,box-shadow .25s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,.16)}
+.card img{width:100%;height:180px;object-fit:cover}
+.card-body{padding:22px;display:flex;flex-direction:column;align-items:center}
+.card h3{color:#003A70;margin-bottom:8px}
+.card p{margin:6px 0;color:#333}
+.btn-group{display:flex;gap:12px;margin-top:14px}
+.btn{padding:10px 18px;border-radius:10px;background:#003A70;color:#fff;text-decoration:none;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.25);background:#002b55}
+
+button.btn {
+border: none;
+outline: none;
+appearance: none;
+-webkit-appearance: none;
+background: #003A70;
+color: #fff;
+box-shadow: none;
+}
+
+.intro-eventos{
+max-width: 900px;
+margin: 0px auto 50px;
+text-align: center;
+padding: 0px 20px;
+}
+
+.intro-eventos h2{
+color:#003A70;
+font-size:28px;
+margin-bottom:-10px;
+}
+
+.intro-eventos p{
+color:#444;
+font-size:16px;
+line-height:1.7;
+margin-bottom:14px;
+}
+
+.intro-eventos .highlights{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:14px;
+margin:22px 0;
+}
+
+.intro-eventos .highlights span{
+background:#f4f6f8;
+padding:10px 16px;
+border-radius:12px;
+font-weight:600;
+color:#003A70;
+font-size:14px;
+}
+
+.intro-eventos .nota{
+font-size:14px;
+color:#666;
+margin-top:10px;
+}
+
+
+/* ================= EVENTOS – HIGHLIGHTS TIPO ENTRENAMIENTOS ================= */
+
+.eventos-highlights{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+gap:30px;
+margin:40px auto 30px;
+max-width:1000px;
+}
+
+.eventos-highlight-item{
+background:#fff;
+padding:26px 22px;
+border-radius:18px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+text-align:center;
+transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.eventos-highlight-item:hover{
+transform:translateY(-6px);
+box-shadow:0 12px 28px rgba(0,0,0,0.14);
+}
+
+.eventos-highlight-item i{
+font-size:32px;
+color:#003A70;
+margin-bottom:12px;
+}
+
+.eventos-highlight-item h4{
+color:#003A70;
+font-size:18px;
+margin-bottom:8px;
+font-weight:700;
+}
+
+.eventos-highlight-item p{
+font-size:14.5px;
+color:#444;
+line-height:1.5;
+}
+
+
+/*==================  NAVBAR ==================*/
+/* ===========================
+    HEADER STICKY (compact & scroll)
+    - header.scrolled: fondo semitransparente + compact
+    - header.nav-hide: se oculta al bajar scroll
+ ============================ */
+header {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+z-index: 999;
+transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
+background: rgba(255,255,255,0.92);
+}
+
+/* Cuando el usuario baja lo volvemos más pequeño / con fondo */
+header.scrolled {
+background: rgba(255,255,255,0.92);
+backdrop-filter: blur(6px);
+box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
+
+/* Cuando el usuario baja rápido ocultamos la barra */
+header.nav-hide {
+transform: translateY(-110%);
+}
+
+/* Contenedor del nav: aquí se controla el "grosor" de la línea.
+    Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
+.nav-container {
+max-width:1200px;
+margin:auto;
+padding:5px 15px; /* <-- AJUSTA AQUÍ el grosor vertical del header */
+display:flex;
+justify-content:space-between;
+align-items:center;
+transition:padding 0.25s ease;
+}
+
+/* ===========================
+    LOGO (clicable) - tamaño controlable
+    Ajusta height para dejarlo a tu preferencia.
+ ============================ */
+.logo img {
+height: 36px; /* <-- AJUSTA AQUÍ el tamaño del logo (desktop) */
+object-fit: contain;
+transition: height 0.2s ease;
+display:block;
+}
+@media(max-width:850px){
+.logo img { height: 32px; } /* logo en móvil */
+}
+
+/* ===========================
+    MENÚ
+ ============================ */
+.menu {
+display:flex;
+gap:25px;
+align-items:center;
+}
+.menu a {
+text-decoration:none;
+font-weight:600;
+color:#003A70;
+padding:6px 8px;
+border-radius:8px;
+transition:background .18s, color .18s;
+}
+.menu a:hover { background: rgba(0,58,112,0.06); }
+
+/* ====== HAMBURGER (movil) ====== */
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
+.hamburger span { width:28px; height:3px; background:#003A70; border-radius:3px; display:block; }
+
+@media(max-width:850px){
+.menu {
+position:absolute; top:72px; right:12px; background:white;
+width:220px; padding:16px; border-radius:12px;
+box-shadow:0 8px 26px rgba(0,0,0,0.12);
+flex-direction:column; gap:12px;
+opacity:0; pointer-events:none; transform:translateY(-6px);
+transition:opacity .28s, transform .28s;
+}
+.menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+.hamburger { display:flex; }
+}
+/*==================  FIN NAVBAR ==================*/
+
+
+/*==================  HERO ==================*/
+.hero {
+background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
+background-position:center;
+background-size:cover;
+padding:80px 20px 20px; /* alto del hero */
+text-align:center;
+color:#fff;
+position:relative;
+overflow:hidden;
+}
+
+.hero-content {
+max-width:1000px;
+margin:auto;
+min-height:260px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+position:relative;
+}
+
+.fade-item {
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+opacity:0;
+transition:opacity 1.4s ease, transform 0.6s ease;
+font-size:44px;
+font-weight:700;
+line-height:1.05;
+max-width:92%;
+}
+
+.fade-item:not(:has(img)) {
+white-space: normal;
+text-align:center;
+}
+
+.fade-item.active {
+opacity:1;
+transform:translateX(-50%) translateY(0);
+}
+
+/* Texto del slider (ajústalo con .fade-item .slide-text) */
+.fade-item .slide-text {
+display:block;
+font-size:38px;
+}
+.fade-item p { margin-top:10px; font-size:18px; font-weight:400; color:rgba(255,255,255,0.95); }
+
+/* ===========================
+    SLIDER: IMÁGENES / CONTROL POR CLASE (TAMAÑOS INDIVIDUALES)
+    - Usa las clases .img-1, .img-2, .img-3, .img-4 en cada <img>
+    - Ajusta width / max-width / height aquí según quieras
+ ============================ */
+.fade-item img {
+display:block;
+width: 320px;      /* valor por defecto si no se especifica clase */
+max-width: 68vw;
+height: auto;
+filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+transition: transform .28s ease;
+}
+
+/* Tamaños individuales (modifica estos valores libremente) */
+.fade-item img.img-1 { width: 360px; }   /* imagen 1 */
+.fade-item img.img-2 { width: 300px; }   /* imagen 2 */
+.fade-item img.img-3 { width: 420px; }   /* imagen 3 */
+.fade-item img.img-4 { width: 500px; }   /* imagen 4 */
+
+/* Responsivo: reduce imágenes en móvil */
+@media (max-width:700px){
+.fade-item { font-size:28px; }
+.fade-item img { width:220px; }
+.fade-item img.img-1 { width:240px; }
+.fade-item img.img-2 { width:200px; }
+.fade-item img.img-3 { width:260px; }
+.fade-item img.img-4 { width:220px; }
+}
+
+
+
+/* ================= POPUP ESTILO FIPTRAC ================= */
+
+.popup{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.55);
+backdrop-filter: blur(3px);
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.popup-card{
+background:#fff;
+width:92%;
+max-width:560px;
+border-radius:20px;
+padding:32px 28px 28px;
+box-shadow:0 20px 50px rgba(0,0,0,0.35);
+animation:popupIn .35s ease;
+position:relative;
+}
+
+@keyframes popupIn{
+from{transform:translateY(20px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
+
+.popup h3{
+text-align:center;
+color:#003A70;
+margin-bottom:14px;
+font-size:22px;
+}
+
+.popup label{
+font-size:13px;
+font-weight:600;
+color:#444;
+margin-top:10px;
+display:block;
+}
+
+.popup input,
+.popup select{
+width:100%;
+padding:12px;
+margin-top:6px;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+.popup input:focus,
+.popup select:focus{
+outline:none;
+border-color:#003A70;
+box-shadow:0 0 0 2px rgba(0,58,112,0.12);
+}
+
+.popup button.btn{
+margin-top:18px;
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:12px;
+}
+
+/* Botón cerrar */
+.close-btn{
+position:absolute;
+top:14px;
+right:18px;
+font-size:22px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+
+
+<!-- ============================== BODY ============================== -->
+
+
+<body>
+
+
+<!-- NAVBAR -->
+<header class="nav">
+<div class="nav-container">
+<!-- Logo clicable: vuelve a index.html -->
+<div class="logo">
+<a href="index.html" aria-label="Ir al inicio">
+<img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
+</a>
+</div>
+
+<!-- Menú (Eventos permanece incluido) -->
+<nav class="menu" id="menu">
+<!-- <a href="cursos.html">Cursos</a> -->
+<a href="cursos">Cursos</a>
+<a href="certificaciones.html">Certificaciones</a>
+<a href="eventos.html">Eventos</a>
+<a href="laboratorios.html">Laboratorios</a>
+<a href="directorio.html">Directorio</a>
+<a href="contacto.html">Contacto</a>
+</nav>
+
+<div class="hamburger" id="hamburger" aria-label="Abrir menú">
+<span></span><span></span><span></span>
+</div>
+</div>
+</header>
+
+
+<!-- HERO / SLIDER -->
+<section class="hero" aria-label="Hero">
+<div class="hero-content">
+
+<!-- Cada .fade-item puede ser texto o imagen. 
+        Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
+<div class="fade-item active" id="fade1">
+<span class="slide-text">✔ Cursos 100 % en español</span>
+</div>
+
+<div class="fade-item" id="fade2">
+<span class="slide-text">✔ Impacto directo en el desempeño profesional</span>
+</div>
+
+<div class="fade-item" id="fade3">
+<span class="slide-text">✔ Enfoque práctico y técnico</span>
+</div>
+
+<div class="fade-item" id="fade4">
+<!-- imagen con clase individual img-4 -->
+<img src="assets/images/sin fondo.png" alt="Logo fondo" class="img-4">
+</div>
+
+</div>
+</section>
+
+
+<!-- EVENOTS Y CURSOS -->
+<section class="eventos">
+
+<div class="intro-eventos">
+<h1 style="text-align:center;color:#003A70">Formación especializada que marca la diferencia</h1>
+
+<p>
+Nuestros <strong>cursos</strong> están diseñados para profesionales
+que buscan <strong>dominar la aplicación real</strong> de los sistemas contra incendio,
+no solo conocer la teoría.
+</p>
+
+<!-- BLOQUE DESTACADO TIPO ENTRENAMIENTOS (REUTILIZABLE) -->
+<div class="eventos-highlights">
+<div class="eventos-highlight-item">
+<i class="fa-solid fa-check"></i>
+<h4>Entrenamiento práctico real</h4>
+<p>Cada programa combina aproximadamente
+<strong>70 % práctica y 30 % teoría</strong>,
+con trabajo directo en equipos reales,
+simulaciones y escenarios de campo.</p>
+</div>
+
+<div class="eventos-highlight-item">
+<i class="fa-solid fa-tools"></i>
+<h4>Hands On Training</h4>
+<p>Somos el <strong>único centro en Latinoamérica</strong>
+enfocado exclusivamente en la
+<strong>formación técnica aplicada</strong>,
+ofreciendo verdaderos programas de Hands On Training.</p>
+</div>
+
+<div class="eventos-highlight-item">
+<i class="fa-solid fa-chart-line"></i>
+<h4>Reconocimiento oficial</h4>
+<p>Al finalizar cada curso se otorga una
+<strong>Constancia DC-3 avalada por la STPS</strong>,
+y programas seleccionados otorgan
+<strong>puntos CPD reconocidos por NICET</strong>.</p>
+</div>
+</div>
+<!-- FIN BLOQUE -->
+
+<h2>Consulta los cursos programados para el 2026</h2>
+</div>
+
+<div class="grid" id="grid"></div>
+</section>
+
+
+<!-- POPUP FORM -->
+<div class="popup" id="popup">
+<div class="popup-card">
+<form id="form">
+
+
+<button type="button" id="closePopup"
+style="
+       position:absolute;
+       top:14px;
+       right:18px;
+       background:none;
+       border:none;
+       font-size:22px;
+       cursor:pointer;
+     "
+aria-label="Cerrar formulario">✕</button>
+
+<h3 id="cursoTitulo"></h3>
+<input type="email" name="correo" placeholder="Correo" required>
+<input type="text" name="nombre" placeholder="NOMBRE COMPLETO" required oninput="this.value=this.value.toUpperCase()">
+<input type="text" name="puesto" placeholder="Puesto o cargo" required>
+<input type="tel" name="celular" placeholder="Celular (10 dígitos)" pattern="[0-9]{10}" required>
+
+<label>¿Cómo se enteró?</label>
+<select name="medio" required>
+<option value="Web">Búsqueda Web</option>
+<option value="Correo">Correo</option>
+<option value="Facebook">Facebook</option>
+<option value="Instagram">Instagram</option>
+<option value="LinkedIn">LinkedIn</option>
+<option value="Recomendación">Recomendación</option>
+<option value="Otro">Otro</option>
+</select>
+
+<label>Talla de playera</label>
+<select name="talla" required>
+<option>Chica</option><option>Mediana</option><option>Grande</option><option>Extra Grande</option>
+</select>
+
+<div id="costoCurso"
+style="
+          margin-top:14px;
+          padding:12px;
+          background:#f4f6f8;
+          border-radius:10px;
+          text-align:center;
+          font-size:16px;
+          color:#003A70;
+          font-weight:600;
+        ">
+</div>
+
+<p style="font-size:13px;text-align:center;color:#555;margin-top:6px">
+Después de solicitar su inscripción espere a recibir un correo con la confirmación y el enlace de pago
+para finalizar el proceso.
+</p>
+
+<button class="btn" type="submit">
+Solicitar inscripción
+</button>
+<!-- <button class="btn">Solicitar inscripción</button> -->
+</form>
+</div>
+</div>
+
+
+
+<!-- ============================== SCRIPTS ============================== -->
+
+
+<!--  HAMBURGER  --> 
+<script>
+// HAMBURGER toggle (movil)
+document.getElementById('hamburger').addEventListener('click', ()=>{
+document.getElementById('menu').classList.toggle('show');
+});
+</script>
+
+
+<!--  NAVBAR  --> 
+<script>
+// HEADER: añadir clase .scrolled + comportamiento "hide on scroll"
+(function(){
+const header = document.querySelector('header');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+const current = window.pageYOffset || document.documentElement.scrollTop;
+// scrolled style (background + compact)
+if (current > 30) header.classList.add('scrolled');
+else header.classList.remove('scrolled');
+
+// hide/show on scroll direction
+if (current > lastScroll && current > 120) {
+// scrolling down
+header.classList.add('nav-hide');
+} else {
+// scrolling up
+header.classList.remove('nav-hide');
+}
+lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
+}, { passive: true });
+})();
+</script>
+
+
+<!--  HERO  --> 
+<script>
+// SLIDER / TRANSICIONES
+const items = [
+document.getElementById("fade1"),
+document.getElementById("fade2"),
+document.getElementById("fade3"),
+document.getElementById("fade4")
+];
+
+let index = 0;
+function changeSlide(){
+items.forEach(i => i.classList.remove("active"));
+items[index].classList.add("active");
+index = (index + 1) % items.length;
+}
+// inicia intercambio (puedes cambiar 3500 a otro valor en ms)
+let slideInterval = setInterval(changeSlide, 2500);
+
+// si quieres controlar manualmente (ej. pausar on hover) puedes hacerlo:
+document.querySelector('.hero').addEventListener('mouseenter', ()=> clearInterval(slideInterval));
+document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 2500));
+</script>
+
+
+<!--  MENÚ DE TARJETAS  --> 
+<script>
+/* ================== CONFIG ================== */
+const API = "https://script.google.com/macros/s/AKfycbwleZxkMAoAe7GomTTb8raroqw3anrksUM2hueAAnlvlO3G7cHfMHa7eLUDqtwJAKnk/exec";
+let cursoActual = "";
+let costoActual = "";
+
+/* ================== CARGAR CURSOS ================== */
+fetch(API)
+.then(r => r.json())
+.then(data => {
+const grid = document.getElementById('grid');
+grid.innerHTML = ""; // limpia texto inicial
+
+data.forEach(ev => {
+
+const fecha = new Date(ev.FECHA)
+.toLocaleDateString('es-MX', { day:'2-digit', month:'long', year:'numeric' });
+
+const duracion = new Date(ev.DURACIÓN);
+const horas = duracion.getHours();
+const minutos = duracion.getMinutes();
+
+
+/*
+           OPCIONALMENTE AGREGAR EL COSTO EN LAS TARJETAS DEBAJO DE LA LÍNEA
+
+           <p><b>Duración:</b> ${horas}h ${minutos}m</p>
+
+           
+           <p style="margin-top:10px;font-size:18px;color:#003A70;">
+             <b>Costo:</b> $${ev.COSTO_MXN} MXN
+           </p>
+
+           */
+
+grid.innerHTML += `
+       <div class="card">
+         <img src="assets/images/cursos/${ev.NOMBRE}.jpg" alt="${ev.NOMBRE}">
+         <div class="card-body">
+           <h3>${ev.NOMBRE}</h3>
+           <p>${ev.DESCRIPCIÓN}</p>
+           <p><b>Fecha:</b> ${fecha}</p>
+           <p><b>Duración:</b> ${horas}h ${minutos}m</p>   
+
+           <div class="btn-group">
+             <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
+             <button class="btn"
+               onclick="inscribirse('${ev.NOMBRE}', '${ev.COSTO_MXN}')">
+               Inscribirse
+             </button>
+           </div>
+         </div>
+       </div>
+     `;
+});
+});
+
+/* ================== ABRIR POPUP ================== */
+function inscribirse(nombre, costo){
+cursoActual = nombre;
+costoActual = costo;
+
+document.getElementById('cursoTitulo').innerText = nombre;
+document.getElementById('costoCurso').innerHTML =
+`Costo del curso: <b>$${costo} MXN</b>`;
+
+document.getElementById('popup').style.display = 'flex';
+}
+
+/* ================== ENVIAR FORMULARIO ================== */
+const form = document.getElementById('form');
+
+form.addEventListener('submit', e => {
+e.preventDefault();
+
+const data = Object.fromEntries(new FormData(form));
+data.curso = cursoActual;
+data.costo = costoActual;
+data.pago = "PENDIENTE";
+
+fetch(API, {
+method: 'POST',
+body: JSON.stringify(data)
+})
+.then(() => {
+alert('Solicitud enviada correctamente, espere el correo de confirmación junto con el enlace de pago');
+form.reset();
+document.getElementById('popup').style.display = 'none';
+});
+});
+</script>
+
+
+
+<!--  CERRAR FORM  --> 
+<script>
+const popup = document.getElementById('popup');
+const closeBtn = document.getElementById('closePopup');
+
+  function cerrarPopup(){
+    popup.style.display = 'none';
+}
+
+// Click en botón ✕
+  closeBtn.addEventListener('click', cerrarPopup);
+
+// Click fuera del formulario
+popup.addEventListener('click', (e)=>{
+if(e.target === popup){
+      cerrarPopup();
+}
+});
+
+// Tecla ESC
+document.addEventListener('keydown', (e)=>{
+if(e.key === 'Escape'){
+      cerrarPopup();
+}
+});
+</script>
+
+
+<script>
+/* ================= POPUPS FOOTER ================= */
+
+function abrirPopup(id){
+const popup = document.getElementById(id);
+if(popup) popup.style.display = 'flex';
+}
+
+function cerrarPopup(id){
+const popup = document.getElementById(id);
+if(popup) popup.style.display = 'none';
+}
+
+/* Cerrar con click fuera */
+document.addEventListener('click', e => {
+if(e.target.classList.contains('fiptrac-overlay')){
+e.target.style.display = 'none';
+}
+});
+
+/* Cerrar con ESC */
+document.addEventListener('keydown', e => {
+if(e.key === 'Escape'){
+document
+.querySelectorAll('.fiptrac-overlay')
+.forEach(p => p.style.display = 'none');
+}
+});
+</script>
+
+
+
+<!--  FOOTER  --> 
+<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
+
+<div id="footer-container"></div>
+
+<script>
+fetch("footer.html")
+.then(response => response.text())
+.then(data => {
+document.getElementById("footer-container").innerHTML = data;
+});
+</script>
+
+
+</body>
+</html>
