@@ -674,14 +674,13 @@ e.preventDefault();
 
 const data = Object.fromEntries(new FormData(form));
 data.curso = cursoActual;
-data.pago = "PENDIENTE";
 
 fetch(API, {
 method: 'POST',
 body: JSON.stringify(data)
 })
 .then(() => {
-alert('Solicitud enviada correctamente, espere el correo de confirmación junto con el enlace de pago');
+alert('Solicitud enviada correctamente, espere el correo de confirmación');
 form.reset();
 document.getElementById('popup').style.display = 'none';
 });
