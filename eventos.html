@@ -633,11 +633,17 @@ const duracion = new Date(ev.DURACIÓN);
 const horas = duracion.getHours();
 const minutos = duracion.getMinutes();
 
-
+/* IF IS NECESSARY
 
 grid.innerHTML += `
        <div class="card">
          <img src="assets/images/eventos/${ev.NOMBRE}.jpg" alt="${ev.NOMBRE}">
+         <div class="card-body">
+
+         */
+
+grid.innerHTML += `
+       <div class="card">
          <div class="card-body">
            <h3>${ev.NOMBRE}</h3>
            <p>${ev.DESCRIPCIÓN}</p>
