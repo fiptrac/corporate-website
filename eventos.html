@@ -616,7 +616,6 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 /* ================== CONFIG ================== */
 const API = "https://script.google.com/macros/s/AKfycbw_LBzyaBdB7QRE4FBvAXfJfnfQ5vhmezNceEF5JCNSgUgJevp4Rbvn5KnRCkP_THCf/exec";
 let cursoActual = "";
-let costoActual = "";
 
 /* ================== CARGAR EVENTOS ================== */
 fetch(API)
@@ -635,17 +634,6 @@ const horas = duracion.getHours();
 const minutos = duracion.getMinutes();
 
 
-/*
-           OPCIONALMENTE AGREGAR EL COSTO EN LAS TARJETAS DEBAJO DE LA LÍNEA
-
-           <p><b>Duración:</b> ${horas}h ${minutos}m</p>
-
-           
-           <p style="margin-top:10px;font-size:18px;color:#003A70;">
-             <b>Costo:</b> $${ev.COSTO_MXN} MXN
-           </p>
-
-           */
 
 grid.innerHTML += `
        <div class="card">
@@ -659,7 +647,7 @@ grid.innerHTML += `
            <div class="btn-group">
              <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
              <button class="btn"
-               onclick="inscribirse('${ev.NOMBRE}', '${ev.COSTO_MXN}')">
+               onclick="inscribirse('${ev.NOMBRE}')">
                Inscribirse
              </button>
            </div>
@@ -670,13 +658,10 @@ grid.innerHTML += `
 });
 
 /* ================== ABRIR POPUP ================== */
-function inscribirse(nombre, costo){
+function inscribirse(nombre){
 cursoActual = nombre;
-costoActual = costo;
 
 document.getElementById('cursoTitulo').innerText = nombre;
-document.getElementById('costoCurso').innerHTML =
-`Costo del curso: <b>$${costo} MXN</b>`;
 
 document.getElementById('popup').style.display = 'flex';
 }
@@ -689,7 +674,6 @@ e.preventDefault();
 
 const data = Object.fromEntries(new FormData(form));
 data.curso = cursoActual;
-data.costo = costoActual;
 data.pago = "PENDIENTE";
 
 fetch(API, {
