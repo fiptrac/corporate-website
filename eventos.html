@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Eventos | FIPTRAC</title>
+<title>Eventos y Cursos | FIPTRAC</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/css/styles.css">
 
@@ -36,15 +36,15 @@ box-shadow: none;
 
 .intro-eventos{
 max-width: 900px;
-margin: 0px auto 50px;
+margin: 0 auto 50px;
 text-align: center;
-padding: 0px 20px;
+padding: 10px 20px;
 }
 
 .intro-eventos h2{
 color:#003A70;
 font-size:28px;
-margin-bottom:-10px;
+margin-bottom:16px;
 }
 
 .intro-eventos p{
@@ -399,12 +399,11 @@ cursor:pointer;
 <!-- Menú (Eventos permanece incluido) -->
 <nav class="menu" id="menu">
 <!-- <a href="cursos.html">Cursos</a> -->
-      <a href="cursos">Cursos</a>
-      <a href="certificaciones.html">Certificaciones</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="laboratorios.html">Laboratorios</a>
-      <a href="directorio.html">Directorio</a>
-      <a href="contacto.html">Contacto</a>
+<a href="eventos.html">Eventos y Cursos</a>
+<a href="certificaciones.html">Certificaciones</a>
+<a href="laboratorios.html">Laboratorios</a>
+<a href="aliados.html">Alianzas Comerciales</a>
+<a href="contacto.html">Contacto</a>
 </nav>
 
 <div class="hamburger" id="hamburger" aria-label="Abrir menú">
@@ -441,54 +440,47 @@ cursor:pointer;
 </section>
 
 
-<!-- EVENOTS -->
+<!-- EVENOTS Y CURSOS -->
 <section class="eventos">
 
 <div class="intro-eventos">
 <h1 style="text-align:center;color:#003A70">Formación especializada que marca la diferencia</h1>
 
 <p>
-Nuestros <strong>eventos gratuitos</strong> están dirigidos a profesionales del sector
-que buscan <strong>actualización, networking y contacto directo con nuevas tecnologías</strong>
-en sistemas contra incendio, mediante ponencias, demostraciones técnicas
-y actividades especializadas sin costo.
+Nuestros <strong>cursos y eventos</strong> están diseñados para profesionales
+que buscan <strong>dominar la aplicación real</strong> de los sistemas contra incendio,
+no solo conocer la teoría.
 </p>
 
-<!-- BLOQUE DESTACADO TIPO EVENTOS -->
+<!-- BLOQUE DESTACADO TIPO ENTRENAMIENTOS (REUTILIZABLE) -->
 <div class="eventos-highlights">
-
-  <div class="eventos-highlight-item">
-    <i class="fa-solid fa-check"></i>
-    <h4>Demostraciones técnicas reales</h4>
-    <p>
-      Los eventos incluyen <strong>demostraciones prácticas</strong>
-      de equipos, tecnologías y soluciones en sistemas contra incendio,
-      aplicadas a escenarios reales.
-    </p>
-  </div>
-
-  <div class="eventos-highlight-item">
-    <i class="fa-solid fa-tools"></i>
-    <h4>Enfoque práctico y aplicado</h4>
-    <p>
-      Cada evento está orientado a la <strong>aplicación práctica</strong>
-      del conocimiento, permitiendo conocer procesos,
-      buenas prácticas y nuevas tecnologías.
-    </p>
-  </div>
-
-  <div class="eventos-highlight-item">
-    <i class="fa-solid fa-users"></i>
-    <h4>Acceso gratuito y networking</h4>
-    <p>
-      Nuestros <strong>eventos son completamente gratuitos</strong>
-      y fomentan el <strong>intercambio de experiencias</strong>
-      y la conexión entre profesionales del sector.
-    </p>
-  </div>
-
+<div class="eventos-highlight-item">
+<i class="fa-solid fa-check"></i>
+<h4>Entrenamiento práctico real</h4>
+<p>Cada programa combina aproximadamente
+<strong>70 % práctica y 30 % teoría</strong>,
+con trabajo directo en equipos reales,
+simulaciones y escenarios de campo.</p>
 </div>
 
+<div class="eventos-highlight-item">
+<i class="fa-solid fa-tools"></i>
+<h4>Hands On Training</h4>
+<p>Somos el <strong>único centro en Latinoamérica</strong>
+enfocado exclusivamente en la
+<strong>formación técnica aplicada</strong>,
+ofreciendo verdaderos programas de Hands On Training.</p>
+</div>
+
+<div class="eventos-highlight-item">
+<i class="fa-solid fa-chart-line"></i>
+<h4>Reconocimiento oficial</h4>
+<p>Al finalizar cada curso se otorga una
+<strong>Constancia DC-3 avalada por la STPS</strong>,
+y programas seleccionados otorgan
+<strong>puntos CPD reconocidos por NICET</strong>.</p>
+</div>
+</div>
 <!-- FIN BLOQUE -->
 
 <h2>Consulta los eventos programados para el 2026</h2>
@@ -533,9 +525,27 @@ aria-label="Cerrar formulario">✕</button>
 <option value="Otro">Otro</option>
 </select>
 
+<label>Talla de playera</label>
+<select name="talla" required>
+<option>Chica</option><option>Mediana</option><option>Grande</option><option>Extra Grande</option>
+</select>
+
+<div id="costoCurso"
+style="
+          margin-top:14px;
+          padding:12px;
+          background:#f4f6f8;
+          border-radius:10px;
+          text-align:center;
+          font-size:16px;
+          color:#003A70;
+          font-weight:600;
+        ">
+</div>
 
 <p style="font-size:13px;text-align:center;color:#555;margin-top:6px">
-Después de solicitar su inscripción espere a recibir un correo con la confirmación para finalizar el proceso.
+Después de solicitar su inscripción espere a recibir un correo con la confirmación y el enlace de pago
+para finalizar el proceso.
 </p>
 
 <button class="btn" type="submit">
@@ -614,8 +624,9 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 <!--  MENÚ DE TARJETAS  --> 
 <script>
 /* ================== CONFIG ================== */
-const API = "https://script.google.com/macros/s/AKfycbxcL4qt5PYP7BehGUhD6q_XwQ_ucvYdWIFJnDK_TiLi0Chtak7DyFnIgTRTIyTnMvz1/exec";
+const API = "https://script.google.com/macros/s/AKfycbwleZxkMAoAe7GomTTb8raroqw3anrksUM2hueAAnlvlO3G7cHfMHa7eLUDqtwJAKnk/exec";
 let cursoActual = "";
+let costoActual = "";
 
 /* ================== CARGAR EVENTOS ================== */
 fetch(API)
@@ -633,17 +644,22 @@ const duracion = new Date(ev.DURACIÓN);
 const horas = duracion.getHours();
 const minutos = duracion.getMinutes();
 
-/* IF IS NECESSARY
+
+/*
+           OPCIONALMENTE AGREGAR EL COSTO EN LAS TARJETAS DEBAJO DE LA LÍNEA
+
+           <p><b>Duración:</b> ${horas}h ${minutos}m</p>
+
+           
+           <p style="margin-top:10px;font-size:18px;color:#003A70;">
+             <b>Costo:</b> $${ev.COSTO_MXN} MXN
+           </p>
+
+           */
 
 grid.innerHTML += `
        <div class="card">
          <img src="assets/images/eventos/${ev.NOMBRE}.jpg" alt="${ev.NOMBRE}">
-         <div class="card-body">
-
-         */
-
-grid.innerHTML += `
-       <div class="card">
          <div class="card-body">
            <h3>${ev.NOMBRE}</h3>
            <p>${ev.DESCRIPCIÓN}</p>
@@ -653,7 +669,7 @@ grid.innerHTML += `
            <div class="btn-group">
              <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
              <button class="btn"
-               onclick="inscribirse('${ev.NOMBRE}')">
+               onclick="inscribirse('${ev.NOMBRE}', '${ev.COSTO_MXN}')">
                Inscribirse
              </button>
            </div>
@@ -664,10 +680,13 @@ grid.innerHTML += `
 });
 
 /* ================== ABRIR POPUP ================== */
-function inscribirse(nombre){
+function inscribirse(nombre, costo){
 cursoActual = nombre;
+costoActual = costo;
 
 document.getElementById('cursoTitulo').innerText = nombre;
+document.getElementById('costoCurso').innerHTML =
+`Costo del curso: <b>$${costo} MXN</b>`;
 
 document.getElementById('popup').style.display = 'flex';
 }
@@ -680,13 +699,15 @@ e.preventDefault();
 
 const data = Object.fromEntries(new FormData(form));
 data.curso = cursoActual;
+data.costo = costoActual;
+data.pago = "PENDIENTE";
 
 fetch(API, {
 method: 'POST',
 body: JSON.stringify(data)
 })
 .then(() => {
-alert('Solicitud enviada correctamente, espere el correo de confirmación');
+alert('Solicitud enviada correctamente, espere el correo de confirmación junto con el enlace de pago');
 form.reset();
 document.getElementById('popup').style.display = 'none';
 });
