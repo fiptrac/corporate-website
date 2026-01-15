@@ -361,6 +361,52 @@ body {
   font-size:.95rem;
 }
 
+
+  /* ===== LINKS / BOTONES INFORMATIVOS ===== */
+.links-section{
+  max-width:1000px;
+  margin:0 auto 120px;
+  padding:0 20px;
+}
+
+.links-section h2{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:34px;
+}
+
+.links-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+}
+
+.link-card{
+  background:#fff;
+  border-radius:20px;
+  padding:34px 26px;
+  text-align:center;
+  box-shadow:0 10px 28px rgba(0,0,0,.12);
+  text-decoration:none;
+  color:#003A70;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.link-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 38px rgba(0,0,0,.18);
+}
+
+.link-card i{
+  font-size:42px;
+  margin-bottom:14px;
+}
+
+.link-card p{
+  font-size:.95rem;
+  color:#444;
+}
+
   
 
 </style>
@@ -424,6 +470,8 @@ body {
   </div>
 </section>
 
+
+<!-- ===== BOTONES ===== -->
 <section class="contact-actions">
   <div class="action-card whatsapp" onclick="abrirPopup('popup-wa')">
     <i class="fa-brands fa-whatsapp"></i>
@@ -438,6 +486,8 @@ body {
   </div>
 </section>
 
+
+ <!-- ===== INFO ===== --> 
 <section class="contact-info">
   <p><strong>Teléfono:</strong> +52 55 76 86 11 84</p>
   <p><strong>Correo:</strong> contacto@fiptrac.com”</p>
@@ -454,7 +504,7 @@ body {
 </section>
 
 
-
+<!-- ===== FAQs ===== -->
 <section class="faq-section">
   <h2>Preguntas frecuentes</h2>
 
@@ -496,6 +546,34 @@ body {
     <div class="faq-answer">
       <p>Sí, desarrollamos capacitaciones especializadas para empresas y equipos de trabajo.</p>
     </div>
+  </div>
+</section>
+
+  
+<!-- ===== POLÍTICAS ===== -->
+<section class="links-section">
+  <h2>Información adicional</h2>
+
+  <div class="links-grid">
+    
+    <a href="https://drive.google.com/file/d/1D8OAqvbMC-F6hRa6OxL-877DYU-tnc2L/view?usp=drive_link" target="_blank" class="link-card">
+      <i class="fa-solid fa-file-contract"></i>
+      <h3>Términos y condiciones</h3>
+      <p>Consulta las políticas y lineamientos de nuestros servicios.</p>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1ZTPxpC_xF4RVE5CNCF83sNPnwH7HrhlH/view?usp=drive_link" target="_blank" class="link-card">
+      <i class="fa-solid fa-hotel"></i>
+      <h3>Opciones de hospedaje 2026</h3>
+      <p>Hoteles y convenios cercanos para nuestros eventos.</p>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1POJHxduJiMgBn5IIkQFW67ajpA5H23Ev/view?usp=drive_link" target="_blank" class="link-card">
+      <i class="fa-solid fa-star"></i>
+      <h3>Programa de lealtad</h3>
+      <p>Beneficios exclusivos para participantes frecuentes.</p>
+    </a>
+
   </div>
 </section>
 
