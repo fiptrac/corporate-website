@@ -23,7 +23,7 @@ body {
 }
 
   
-/*==================  NAVBAR ==================*/
+  /*==================  NAVBAR ==================*/
   /* ===========================
      HEADER STICKY (compact & scroll)
      - header.scrolled: fondo semitransparente + compact
@@ -56,35 +56,24 @@ body {
   .nav-container {
     max-width:1200px;
     margin:auto;
-    padding:5px 15px; /* <-- AJUSTA AQUÍ el grosor vertical del header */
+    padding:10px 15px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    transition:padding 0.25s ease;
+    justify-content:center;
+    position:relative;
   }
 
-  /* ===========================
-     LOGO (clicable) - tamaño controlable
-     Ajusta height para dejarlo a tu preferencia.
-  ============================ */
-  .logo img {
-    height: 36px; /* <-- AJUSTA AQUÍ el tamaño del logo (desktop) */
-    object-fit: contain;
-    transition: height 0.2s ease;
-    display:block;
-  }
-  @media(max-width:850px){
-    .logo img { height: 32px; } /* logo en móvil */
-  }
 
   /* ===========================
      MENÚ
   ============================ */
   .menu {
-    display:flex;
-    gap:25px;
-    align-items:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:30px;
   }
+  
   .menu a {
     text-decoration:none;
     font-weight:600;
@@ -93,24 +82,62 @@ body {
     border-radius:8px;
     transition:background .18s, color .18s;
   }
-  .menu a:hover { background: rgba(0,58,112,0.06); }
+  
+  .menu a:hover {
+    background: rgba(0,58,112,0.06);
+  }
+
 
   /* ====== HAMBURGER (movil) ====== */
-  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
-  .hamburger span { width:28px; height:3px; background:#003A70; border-radius:3px; display:block; }
+  .hamburger {
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    padding:6px;
+    margin-left:auto; 
+  }
+  
+  .hamburger span {
+    width:28px;
+    height:3px;
+    background:#003A70;
+    border-radius:3px;
+    display:block;
+  }
 
+
+  /* ====== MEDIA QUERY (móvil) ====== */
   @media(max-width:850px){
     .menu {
-      position:absolute; top:72px; right:12px; background:white;
-      width:220px; padding:16px; border-radius:12px;
+      position:absolute;
+      top:100%;
+      right:12px;
+      background:white;
+      width:220px;
+      padding:16px;
+      border-radius:12px;
       box-shadow:0 8px 26px rgba(0,0,0,0.12);
-      flex-direction:column; gap:12px;
-      opacity:0; pointer-events:none; transform:translateY(-6px);
+      flex-direction:column;
+      gap:12px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(-6px);
       transition:opacity .28s, transform .28s;
     }
-    .menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
-    .hamburger { display:flex; }
+  
+    .menu.show {
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+  
+    .hamburger {
+      display:flex;
+    }
   }
+
+
 /*==================  FIN NAVBAR ==================*/
 
 
