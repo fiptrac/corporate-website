@@ -533,6 +533,18 @@ aria-label="Cerrar formulario">✕</button>
 <option value="Otro">Otro</option>
 </select>
 
+<div id="cupoEvento"
+style="
+  margin-top:14px;
+  padding:12px;
+  background:#f4f6f8;
+  border-radius:10px;
+  text-align:center;
+  font-size:16px;
+  color:#003A70;
+  font-weight:600;
+">
+</div>
 
 <p style="font-size:13px;text-align:center;color:#555;margin-top:6px">
 Después de solicitar su inscripción espere a recibir un correo con la confirmación para finalizar el proceso.
@@ -614,8 +626,10 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 <!--  MENÚ DE TARJETAS  --> 
 <script>
 /* ================== CONFIG ================== */
-const API = "https://script.google.com/macros/s/AKfycbxcL4qt5PYP7BehGUhD6q_XwQ_ucvYdWIFJnDK_TiLi0Chtak7DyFnIgTRTIyTnMvz1/exec";
+const API = "https://script.google.com/macros/s/AKfycbzM3bBa1h7hOHRK3GrcIQYWbA9Bnhr_SkQksl9NBy3fPlc2RFeD4GAnJYjE9luKNf_t/exec";
 let cursoActual = "";
+let cupoActual = 0;
+
 
 /* ================== CARGAR EVENTOS ================== */
 fetch(API)
@@ -643,34 +657,47 @@ grid.innerHTML += `
          */
 
 grid.innerHTML += `
-       <div class="card">
-         <div class="card-body">
-           <h3>${ev.NOMBRE}</h3>
-           <p>${ev.DESCRIPCIÓN}</p>
-           <p><b>Fecha:</b> ${fecha}</p>
-           <p><b>Duración:</b> ${horas}h ${minutos}m</p>   
+  <div class="card">
+    <div class="card-body">
+      <h3>${ev.NOMBRE}</h3>
+      <p>${ev.DESCRIPCIÓN}</p>
+      <p><b>Fecha:</b> ${fecha}</p>
+      <p><b>Duración:</b> ${horas}h ${minutos}m</p>
+      <p><b>Cupo disponible:</b> ${ev.CUPO_DISPONIBLE}</p>
 
-           <div class="btn-group">
-             <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
-             <button class="btn"
-               onclick="inscribirse('${ev.NOMBRE}')">
-               Inscribirse
-             </button>
-           </div>
-         </div>
-       </div>
-     `;
+      <div class="btn-group">
+        <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
+
+        <button class="btn"
+          ${ev.CUPO_DISPONIBLE === 0 ? 'disabled style="background:#999;cursor:not-allowed"' : ''}
+          onclick="inscribirse('${ev.NOMBRE}', ${ev.CUPO_DISPONIBLE})">
+          ${ev.CUPO_DISPONIBLE === 0 ? 'Cupo agotado' : 'Inscribirse'}
+        </button>
+      </div>
+    </div>
+  </div>
+`;
+
 });
 });
 
 /* ================== ABRIR POPUP ================== */
-function inscribirse(nombre){
-cursoActual = nombre;
+function inscribirse(nombre, cupo){
+  if(cupo <= 0) return;
 
-document.getElementById('cursoTitulo').innerText = nombre;
+  cursoActual = nombre;
+  cupoActual = cupo;
 
-document.getElementById('popup').style.display = 'flex';
+  document.getElementById('cursoTitulo').innerText = nombre;
+
+  document.getElementById('cupoEvento').innerHTML =
+    cupo <= 5
+      ? `⚠️ <b>Últimos ${cupo} lugares disponibles</b>`
+      : `Cupo disponible: <b>${cupo} personas</b>`;
+
+  document.getElementById('popup').style.display = 'flex';
 }
+
 
 /* ================== ENVIAR FORMULARIO ================== */
 const form = document.getElementById('form');
@@ -682,14 +709,24 @@ const data = Object.fromEntries(new FormData(form));
 data.curso = cursoActual;
 
 fetch(API, {
-method: 'POST',
-body: JSON.stringify(data)
+  method: 'POST',
+  body: JSON.stringify(data)
 })
-.then(() => {
-alert('Solicitud enviada correctamente, espere el correo de confirmación');
-form.reset();
-document.getElementById('popup').style.display = 'none';
+.then(r => r.json())
+.then(res => {
+
+  if(res.error === "CUPO_AGOTADO"){
+    alert("Este evento ya no tiene cupo disponible.");
+    document.getElementById('popup').style.display = 'none';
+    return;
+  }
+
+  alert("Inscripción registrada correctamente");
+  form.reset();
+  document.getElementById('popup').style.display = 'none';
+  location.reload();
 });
+
 });
 </script>
 
