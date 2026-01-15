@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Aliados Comerciales | FIPTRAC</title>
+<title>Estructura General | FIPTRAC</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
@@ -52,20 +52,6 @@
     justify-content:space-between;
     align-items:center;
     transition:padding 0.25s ease;
-  }
-
-  /* ===========================
-     LOGO (clicable) - tamaño controlable
-     Ajusta height para dejarlo a tu preferencia.
-  ============================ */
-  .logo img {
-    height: 36px; /* <-- AJUSTA AQUÍ el tamaño del logo (desktop) */
-    object-fit: contain;
-    transition: height 0.2s ease;
-    display:block;
-  }
-  @media(max-width:850px){
-    .logo img { height: 32px; } /* logo en móvil */
   }
 
   /* ===========================
@@ -197,16 +183,11 @@
 <!-- NAVBAR -->
 <header class="nav">
   <div class="nav-container">
-    <!-- Logo clicable: vuelve a index.html -->
-    <div class="logo">
-      <a href="index.html" aria-label="Ir al inicio">
-        <img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
-      </a>
-    </div>
 
     <!-- Menú (Eventos permanece incluido) -->
     <nav class="menu" id="menu">
-      <!-- <a href="cursos.html">Cursos</a> -->
+      <!-- <a href="cursos.html">Cursos</a>        eliminar LOGO (clicable)-->
+      <a href="index.html">Inicio</a>
       <a href="eventos.html">Eventos y Cursos</a>
       <a href="certificados.html">Certificados</a>
       <a href="laboratorios.html">Laboratorios</a>
