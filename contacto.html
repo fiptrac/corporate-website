@@ -304,6 +304,65 @@ body {
 
 .contact-info p{margin:6px 0;color:#444}
 
+
+/* ===== FAQ ===== */
+.faq-section{
+  max-width:900px;
+  margin:0 auto 100px;
+  padding:0 20px;
+}
+
+.faq-section h2{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:30px;
+}
+
+.faq-item{
+  border-radius:14px;
+  overflow:hidden;
+  margin-bottom:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+
+.faq-question{
+  width:100%;
+  background:#fff;
+  border:none;
+  padding:18px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:inherit;
+  font-size:16px;
+  font-weight:600;
+  color:#003A70;
+  cursor:pointer;
+}
+
+.faq-question i{
+  transition:transform .3s ease;
+}
+
+.faq-item.active .faq-question i{
+  transform:rotate(180deg);
+}
+
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+  background:#fafafa;
+}
+
+.faq-answer p{
+  padding:0 22px 18px;
+  color:#444;
+  font-size:.95rem;
+}
+
+  
+
 </style>
 </head>
 
@@ -393,6 +452,54 @@ body {
   </div>
 
 </section>
+
+
+
+<section class="faq-section">
+  <h2>Preguntas frecuentes</h2>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Cómo puedo inscribirme a un curso o evento?</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>Puedes inscribirte directamente desde la sección de cursos o eventos, o contactarnos vía WhatsApp o correo electrónico.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Los cursos incluyen constancia o certificado?</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>Sí, todos nuestros cursos y eventos incluyen constancia de participación avalada por FIPTRAC.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Los cursos son presenciales o en línea?</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>Ofrecemos modalidades presenciales, en línea y mixtas, dependiendo del programa.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Puedo solicitar capacitación para mi empresa?</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>Sí, desarrollamos capacitaciones especializadas para empresas y equipos de trabajo.</p>
+    </div>
+  </div>
+</section>
+
+  
 
 <!-- ===== POPUP WHATSAPP ===== -->
 <div class="popup" id="popup-wa">
@@ -489,6 +596,26 @@ body {
   document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 2500));
 </script>
 
+
+<script>
+/* ===== FAQ Acordeón ===== */
+document.querySelectorAll('.faq-question').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+
+    item.classList.toggle('active');
+
+    if(item.classList.contains('active')){
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }else{
+      answer.style.maxHeight = null;
+    }
+  });
+});
+</script>
+
+  
   
 <script>
 /* ================= POPUPS ================= */
