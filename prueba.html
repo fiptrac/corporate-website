@@ -165,6 +165,12 @@ button.btn{
   box-shadow:none;
 }
 
+#camposFactura{
+  padding:14px;
+  background:#f4f6f8;
+  border-radius:10px;
+  border:1px dashed #ccc;
+}
 
   
 </style>
@@ -290,20 +296,30 @@ button.btn{
 <input name="pais" data-uppercase>
 
 <label>Factura</label>
-<select name="factura">
-  <option>No</option>
-  <option>Sí</option>
+<select name="factura" id="factura">
+  <option value="No">No</option>
+  <option value="Sí">Sí</option>
 </select>
 
-<label>Razón social</label>
-<input name="razon_social" data-uppercase>
+<div id="camposFactura" style="display:none;margin-top:10px">
 
-<label>RFC / RUC / RNC</label>
-<input name="rfc_ruc_rnc" data-uppercase>
+  <label>Razón social</label>
+  <input name="razon_social" data-uppercase>
 
-<input name="domicilio_fiscal">
-<input name="codigo_postal">
-<input name="uso_del_comprobante_fiscal">
+  <label>RFC / RUC / RNC</label>
+  <input name="rfc_ruc_rnc" data-uppercase>
+
+  <label>Domicilio fiscal</label>
+  <input name="domicilio_fiscal">
+
+  <label>Código postal</label>
+  <input name="codigo_postal">
+
+  <label>Uso del comprobante fiscal</label>
+  <input name="uso_del_comprobante_fiscal">
+
+</div>
+
 
 
 
@@ -331,6 +347,29 @@ function validarCURP(curp){
 </script>
 
 
+
+  <script>
+const facturaSelect = document.getElementById("factura");
+const camposFactura = document.getElementById("camposFactura");
+
+const facturaInputs = camposFactura.querySelectorAll("input");
+
+function toggleFactura(){
+  const requiereFactura = facturaSelect.value === "Sí";
+
+  camposFactura.style.display = requiereFactura ? "block" : "none";
+
+  facturaInputs.forEach(input=>{
+    input.required = requiereFactura;
+    if(!requiereFactura) input.value = "";
+  });
+}
+
+facturaSelect.addEventListener("change", toggleFactura);
+</script>
+
+
+  
   
 <script>
 const API = "https://script.google.com/macros/s/AKfycbzHEuX1ORUt6PCULPowMeCNgKnNemz6oJBZgQ9HbiHuFVPseDOw80V9XJsJUrMmcyL3/exec";
