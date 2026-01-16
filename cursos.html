@@ -481,23 +481,47 @@ border-radius:8px;border:1px solid #ccc
 
 .sticky-title-container {
   position: sticky;
-  top: 0;
-  background: #f4f6f8; /* igual al fondo de tu sección */
-  padding: 12px 0;
+  top: 70px; /* ajusta según la altura de tu header */
+  background: #f4f6f8; /* mismo fondo que la sección */
+  padding: 16px 0;
+  z-index: 1000;
+  transition: all 0.5s ease;
   text-align: center;
-  z-index: 50;
-  transition: all 0.3s ease;
-  font-size: 24px;
-  font-weight: 700;
-  color: #003A70;
-  box-shadow: 0 2px 8px rgba(0,0,0,0); /* sombra al principio transparente */
 }
 
 .sticky-title-container.scrolled {
-  font-size: 20px; /* más pequeño cuando se scrollea */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 20px;
+  font-weight: 700;
+  background: #f4f6f8; /* puedes cambiar el color si quieres */
+  padding: 10px 0;
 }
 
+.sticky-title-container-wrapper {
+  height: 80px; /* espacio reservado para el sticky */
+  margin-bottom: 20px; /* opcional: separación extra con la grilla */
+}
+
+.sticky-title-container {
+  position: sticky;
+  top: 100px; /* ajusta según tu header */
+  background: #f4f6f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.25s ease;
+}
+
+.sticky-title-container h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.sticky-title-container.scrolled h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
 
   
 </style>
@@ -619,10 +643,13 @@ con práctica intensiva en escenarios reales.
 
 <!-- FIN BLOQUE -->
 
-<!-- CONTENEDOR STICKY PARA EL TÍTULO -->
-<div class="sticky-title-container">
-  <h2 id="stickyTitle">Consulta los cursos programados para el 2026</h2>
+<!-- Contenedor sticky del título -->
+<div class="sticky-title-container-wrapper">
+  <div class="sticky-title-container">
+    <h2 id="stickyTitle">Consulta los cursos programados para el 2026</h2>
+  </div>
 </div>
+
 
 <!-- GRID DE CURSOS -->
 <div class="grid" id="grid"></div>
@@ -922,17 +949,21 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 const stickyTitleContainer = document.querySelector(".sticky-title-container");
 const stickyTitle = document.getElementById("stickyTitle");
 
-window.addEventListener("scroll", () => {
-  const scrollY = window.scrollY || window.pageYOffset;
+const observer = new IntersectionObserver(
+  ([entry]) => {
+    if (!entry.isIntersecting) {
+      stickyTitle.textContent = "Cursos";
+      stickyTitleContainer.classList.add("scrolled");
+    } else {
+      stickyTitle.textContent = "Consulta los cursos programados para el 2026";
+      stickyTitleContainer.classList.remove("scrolled");
+    }
+  },
+  { threshold: 0 } // dispara cuando el contenedor desaparece del viewport
+);
 
-  if(scrollY > 150){ // ajusta este valor según necesites
-    stickyTitleContainer.classList.add("scrolled");
-    stickyTitle.textContent = "Cursos"; // versión corta
-  } else {
-    stickyTitleContainer.classList.remove("scrolled");
-    stickyTitle.textContent = "Consulta los cursos programados para el 2026"; // texto original
-  }
-});
+observer.observe(stickyTitleContainer);
+
 </script>
 
 
