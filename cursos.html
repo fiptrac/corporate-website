@@ -565,10 +565,58 @@ aria-label="Cerrar formulario">✕</button>
 <option value="Otro">Otro</option>
 </select>
 
+<label>¿Requiere factura?</label>
+<select name="requiere_factura" id="requiereFactura">
+  <option value="NO">No</option>
+  <option value="SI">Sí</option>
+</select>
+
+<div id="facturaCampos" style="display:none">
+  <input name="razon_social" placeholder="Razón Social">
+  <input name="rfc" placeholder="RFC / RUC / RNC">
+  <input name="domicilio_fiscal" placeholder="Domicilio Fiscal">
+  <input name="codigo_postal" placeholder="Código Postal">
+  <input name="pais" placeholder="País">
+
+  <label>Uso del comprobante fiscal</label>
+  <select name="uso_cfdi">
+    <option>GASTOS EN GENERAL</option>
+    <option>POR DEFINIR</option>
+  </select>
+
+  <label>Forma de pago</label>
+  <select name="forma_pago">
+    <option>Transferencia electrónica de fondos (USD o MXN)</option>
+    <option>EVO Payments (VISA / MASTERCARD)</option>
+  </select>
+</div>
+
+
+<label>¿Requiere DC-3?</label>
+<select name="dc3" id="dc3">
+  <option value="NO">No</option>
+  <option value="SI">Sí</option>
+</select>
+
+<div id="dc3Campos" style="display:none">
+  <input name="rep_legal_dc3" placeholder="Representante legal DC-3">
+  <input name="rep_trabajadores_dc3" placeholder="Representante de trabajadores DC-3">
+</div>
+
+
 <label>Talla de playera</label>
 <select name="talla" required>
 <option>Chica</option><option>Mediana</option><option>Grande</option><option>Extra Grande</option>
+
+
+<label>Servicio de traslados</label>
+<select name="traslados">
+  <option>Sin costo dentro de horarios establecidos</option>
+  <option>AICM-HOTEL-FIPTRAC-AEROPUERTO</option>
+  <option>Haré traslados por mi cuenta</option>
+  <option>Hotel-FIPTRAC-Hotel</option>
 </select>
+
 
 <div id="costoCurso"
 style="
@@ -664,9 +712,11 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 <!--  MENÚ DE TARJETAS  --> 
 <script>
 /* ================== CONFIG ================== */
-const API = "https://script.google.com/macros/s/AKfycbxiGuWIeEgHsDK8pNE2bkCvdSIN9NwIVnhXICURYaT7FPByg-e8nudQRxTBuxWLrzrh/exec";
+const API = "https://script.google.com/macros/s/AKfycbyXZpdoCZxiEbRnYDXjzGySNKhME6wO_tL36bywpzzlZ9hfOSQJ4-BeK0WQ5i8LywlX/exec";
 let cursoActual = "";
-let costoActual = "";
+let precioMXN = "";
+let precioUSD = "";
+
 
 /* ================== CARGAR CURSOS ================== */
 fetch(API)
@@ -698,36 +748,48 @@ const minutos = duracion.getMinutes();
            */
 
 grid.innerHTML += `
-       <div class="card">
-         <div class="card-body">
-           <h3>${ev.NOMBRE}</h3>
-           <p>${ev.DESCRIPCIÓN}</p>
-           <p><b>Fecha:</b> ${fecha}</p>
-           <p><b>Duración:</b> ${horas}h ${minutos}m</p>   
+  <div class="card">
+    <div class="card-body">
+      <h3>${ev.NOMBRE}</h3>
+      <p><b>Categoría:</b> ${ev.CATEGORIA}</p>
+      <p><b>Inicio:</b> ${ev["FECHA INICIO"]}</p>
+      <p><b>Término:</b> ${ev["FECHA TERMINO"]}</p>
+      <p><b>Duración:</b> ${ev.DURACIÓN}</p>
 
-           <div class="btn-group">
-             <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
-             <button class="btn"
-               onclick="inscribirse('${ev.NOMBRE}', '${ev.COSTO_MXN}')">
-               Inscribirse
-             </button>
-           </div>
-         </div>
-       </div>
-     `;
+      <p style="margin-top:10px;color:#003A70;font-size:17px">
+        <b>MXN:</b> $${ev.PRECIO_MXN} |
+        <b>USD:</b> $${ev.PRECIO_USD}
+      </p>
+
+      <div class="btn-group">
+        <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
+        <button class="btn"
+          onclick="inscribirse(
+            '${ev.NOMBRE}',
+            '${ev.PRECIO_MXN}',
+            '${ev.PRECIO_USD}'
+          )">
+          Inscribirse
+        </button>
+      </div>
+    </div>
+  </div>
+`;
+
 });
 });
 
 /* ================== ABRIR POPUP ================== */
-function inscribirse(nombre, costo){
-cursoActual = nombre;
-costoActual = costo;
+function inscribirse(nombre, mxn, usd){
+  cursoActual = nombre;
+  precioMXN = mxn;
+  precioUSD = usd;
 
-document.getElementById('cursoTitulo').innerText = nombre;
-document.getElementById('costoCurso').innerHTML =
-`Costo del curso: <b>$${costo} MXN</b>`;
+  document.getElementById('cursoTitulo').innerText = nombre;
+  document.getElementById('costoCurso').innerHTML =
+    `Costo: <b>$${mxn} MXN</b> / <b>$${usd} USD</b>`;
 
-document.getElementById('popup').style.display = 'flex';
+  document.getElementById('popup').style.display = 'flex';
 }
 
 /* ================== ENVIAR FORMULARIO ================== */
@@ -737,9 +799,19 @@ form.addEventListener('submit', e => {
 e.preventDefault();
 
 const data = Object.fromEntries(new FormData(form));
+
 data.curso = cursoActual;
-data.costo = costoActual;
+data.precio_mxn = precioMXN;
+data.precio_usd = precioUSD;
 data.pago = "PENDIENTE";
+
+// FACTURA
+if(data.requiere_factura === "SI"){
+  data.factura = "OK";
+}else{
+  data.factura = "";
+}
+
 
 fetch(API, {
 method: 'POST',
@@ -755,6 +827,22 @@ document.getElementById('popup').style.display = 'none';
 
 
 
+<script>
+/* ===== FACTURA ===== */
+document.getElementById("requiereFactura").addEventListener("change", e=>{
+  document.getElementById("facturaCampos").style.display =
+    e.target.value === "SI" ? "block" : "none";
+});
+
+/* ===== DC-3 ===== */
+document.getElementById("dc3").addEventListener("change", e=>{
+  document.getElementById("dc3Campos").style.display =
+    e.target.value === "SI" ? "block" : "none";
+});
+</script>
+
+  
+  
 <!--  CERRAR FORM  --> 
 <script>
 const popup = document.getElementById('popup');
