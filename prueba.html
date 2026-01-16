@@ -316,7 +316,12 @@ button.btn{
   <input name="codigo_postal">
 
   <label>Uso del comprobante fiscal</label>
-  <input name="uso_del_comprobante_fiscal">
+  <select name="uso_del_comprobante_fiscal" required>
+    <option value="">Selecciona una opción</option>
+    <option>GASTOS EN GENERAL</option>
+    <option>POR DEFINIR</option>
+  </select>
+
 
 </div>
 
@@ -352,7 +357,7 @@ function validarCURP(curp){
 const facturaSelect = document.getElementById("factura");
 const camposFactura = document.getElementById("camposFactura");
 
-const facturaInputs = camposFactura.querySelectorAll("input");
+const facturaInputs = camposFactura.querySelectorAll("input, select");
 
 function toggleFactura(){
   const requiereFactura = facturaSelect.value === "Sí";
@@ -366,6 +371,7 @@ function toggleFactura(){
 }
 
 facturaSelect.addEventListener("change", toggleFactura);
+    toggleFactura();
 </script>
 
 
