@@ -350,21 +350,26 @@ button.btn{
 
 <!-- Servicio de Traslados -->
 <label>Servicio de traslados</label>
-<select name="servicio_de_traslados" required>
-  <option value="">Selecciona una opción </option>
-  <option>
-    A
+<select name="traslados" required>
+  <option value="">Selecciona una opción</option>
+  <option value="A">
+    A – Este servicio es SIN NINGUN COSTO SIEMPRE Y CUANDO ESTEN DENTRO DE LOS HORARIOS Y DIAS ESTABLECIDOS, en caso de NO coincidir, los traslados corren por cuenta de los participantes.
   </option>
-  <option>
-    B
+  <option value="B">
+    B – Requiero traslados AEROPUERTO AICM-HOTEL-FIPTRAC-AEROPUERTO Y TRASLADOS HOTEL-FIPTRAC-HOTEL *SOLO APLICA EN HOTEL SUGERIDO Y HORARIOS ESTABLECIDOS POR FIPTRAC*
   </option>
-  <option>
-    C
+  <option value="C">
+    C – Haré todos los traslados por mi cuenta
   </option>
-  <option>
-    D
+  <option value="D">
+    D – Requiero solo traslados Hotel-FIPTRAC Y FIPTRAC-Hotel *SOLO APLICA PARA HUESPEDES EN HOTEL Y HORARIOS ESTABLECIDOS POR FIPTRAC*
   </option>
 </select>
+
+<small style="font-weight:400;color:#666;font-size:12px;">
+  Selecciona el tipo de traslado que necesitas. Las opciones A y B aplican solo en horarios y hoteles establecidos por FIPTRAC.
+</small>
+
 
 
 <button class="btn" type="submit">Enviar inscripción</button>
