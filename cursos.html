@@ -477,32 +477,6 @@ border-radius:8px;border:1px solid #ccc
   border:1px dashed #ccc;
 }
 
-
-
-.sticky-title-container-wrapper {
-  height: 80px; /* espacio reservado */
-  margin-bottom: 20px; /* separación del grid */
-}
-
-.sticky-title-container {
-  position: sticky;
-  top: 90px; /* altura de tu header */
-  background: #f4f6f8;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 16px 0;
-  transition: all 0.25s ease;
-}
-
-.sticky-title-container.scrolled h2 {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-
   
 </style>
 </head>
@@ -623,15 +597,14 @@ con práctica intensiva en escenarios reales.
 
 <!-- FIN BLOQUE -->
 
-<!-- Contenedor sticky del título -->
-<div class="sticky-title-container-wrapper">
-  <div class="sticky-title-container">
-    <h2 id="stickyTitle">Consulta los cursos programados para el 2026</h2>
-  </div>
+<h2>Consulta los cursos programados para el 2026</h2>
 </div>
 
+<div class="grid" id="grid"></div>
+</section>
 
-<!-- GRID DE CURSOS -->
+  
+  
 
 <section class="eventos">
 <div class="grid" id="grid"></div>
@@ -917,34 +890,6 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 </script>
 
 
-
-
-<script>
-// ------------- STICKY TITLE -------------
-const stickyTitleContainer = document.querySelector(".sticky-title-container");
-const stickyTitle = document.getElementById("stickyTitle");
-
-const observer = new IntersectionObserver(
-  ([entry]) => {
-    if (!entry.isIntersecting) {
-      stickyTitle.textContent = "Cursos";
-      stickyTitleContainer.classList.add("scrolled");
-    } else {
-      stickyTitle.textContent = "Consulta los cursos programados para el 2026";
-      stickyTitleContainer.classList.remove("scrolled");
-    }
-  },
-  { threshold: 0 }
-);
-
-observer.observe(stickyTitleContainer);
-</script>
-
-
-  
-
-
-  
 <script>
 /* ================= POPUPS FOOTER ================= */
 function abrirPopup(id){
