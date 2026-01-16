@@ -358,24 +358,6 @@ function inscribirse(nombre, precioMXN, precioUSD){
   document.getElementById("popup").style.display = "flex";
 }
 
-const paisInput = document.getElementById("pais");
-const curpInput = document.getElementById("curp");
-
-function validarCURPporPais(){
-  const pais = paisInput.value.trim().toLowerCase();
-
-  if(pais === "méxico" || pais === "mexico"){
-    curpInput.disabled = false;
-    curpInput.placeholder = "Ingresa tu CURP";
-  }else{
-    curpInput.value = "";
-    curpInput.disabled = true;
-    curpInput.placeholder = "Solo requerido para México";
-  }
-}
-
-paisInput.addEventListener("input", validarCURPporPais);
-
 
 function cerrarPopup(){
   document.getElementById("popup").style.display="none";
