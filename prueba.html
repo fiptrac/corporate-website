@@ -218,14 +218,32 @@ button.btn{
     (solo México)
   </span>
 </label>
-<input name="curp" id="curp">
+
+<input
+  name="curp"
+  id="curp"
+  maxlength="18"
+  placeholder="18 caracteres">
+
 
 
 <label>Correo</label>
-<input type="email" name="correo" required>
+<input 
+  type="email"
+  name="correo"
+  required
+  placeholder="correo@ejemplo.com">
+
 
 <label>Teléfono</label>
-<input name="telefono">
+<input
+  name="telefono"
+  inputmode="numeric"
+  pattern="[0-9]{10}"
+  maxlength="10"
+  placeholder="10 dígitos"
+  required>
+
 
 <label>País</label>
 <input name="pais">
@@ -254,6 +272,25 @@ button.btn{
 </div>
 </div>
 
+
+<script>
+function validarCorreo(correo){
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(correo);
+}
+
+function validarTelefono(tel){
+  return /^[0-9]{10}$/.test(tel);
+}
+
+function validarCURP(curp){
+  const regex = /^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$/;
+  return regex.test(curp);
+}
+</script>
+
+
+  
 <script>
 const API = "https://script.google.com/macros/s/AKfycbxVGgieJfpt_Coo5n4RnAVUF9KhrCekMSwfcHsrlOaGMfHYZqNKaMBshDqu68eEYtG1/exec";
 let cursoActual = "";
@@ -349,18 +386,33 @@ function cerrarPopup(){
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
-const data = Object.fromEntries(new FormData(e.target));
+  const data = Object.fromEntries(new FormData(e.target));
 
-// valores automáticos
-data.pago = "PENDIENTE";
+  // VALIDACIONES
+  if(!validarCorreo(data.correo)){
+    alert("Correo electrónico no válido");
+    return;
+  }
 
-// factura
-if(data.factura === "Sí"){
-  data.factura = "OK";
-}else{
-  data.factura = "";
-}
+  if(!validarTelefono(data.telefono)){
+    alert("El teléfono debe tener 10 dígitos");
+    return;
+  }
 
+  const pais = data.pais.trim().toLowerCase();
+  if((pais === "méxico" || pais === "mexico") && data.curp){
+    if(!validarCURP(data.curp.toUpperCase())){
+      alert("CURP no válida");
+      return;
+    }
+    data.curp = data.curp.toUpperCase();
+  }
+
+  // valores automáticos
+  data.pago = "PENDIENTE";
+
+  // factura
+  data.factura = data.factura === "Sí" ? "OK" : "";
 
   fetch(API,{
     method:"POST",
@@ -373,6 +425,7 @@ if(data.factura === "Sí"){
     cerrarPopup();
   });
 });
+
 
 </script>
 
