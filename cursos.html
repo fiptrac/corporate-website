@@ -477,6 +477,28 @@ border-radius:8px;border:1px solid #ccc
   border:1px dashed #ccc;
 }
 
+
+
+.sticky-title-container {
+  position: sticky;
+  top: 0;
+  background: #f4f6f8; /* igual al fondo de tu sección */
+  padding: 12px 0;
+  text-align: center;
+  z-index: 50;
+  transition: all 0.3s ease;
+  font-size: 24px;
+  font-weight: 700;
+  color: #003A70;
+  box-shadow: 0 2px 8px rgba(0,0,0,0); /* sombra al principio transparente */
+}
+
+.sticky-title-container.scrolled {
+  font-size: 20px; /* más pequeño cuando se scrollea */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
   
 </style>
 </head>
@@ -597,11 +619,14 @@ con práctica intensiva en escenarios reales.
 
 <!-- FIN BLOQUE -->
 
-<h2>Consulta los cursos programados para el 2026</h2>
+<!-- CONTENEDOR STICKY PARA EL TÍTULO -->
+<div class="sticky-title-container">
+  <h2 id="stickyTitle">Consulta los cursos programados para el 2026</h2>
 </div>
 
+<!-- GRID DE CURSOS -->
 <div class="grid" id="grid"></div>
-</section>
+
 
   
   
@@ -890,6 +915,31 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 </script>
 
 
+
+
+<script>
+// ------------- STICKY TITLE -------------
+const stickyTitleContainer = document.querySelector(".sticky-title-container");
+const stickyTitle = document.getElementById("stickyTitle");
+
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY || window.pageYOffset;
+
+  if(scrollY > 150){ // ajusta este valor según necesites
+    stickyTitleContainer.classList.add("scrolled");
+    stickyTitle.textContent = "Cursos"; // versión corta
+  } else {
+    stickyTitleContainer.classList.remove("scrolled");
+    stickyTitle.textContent = "Consulta los cursos programados para el 2026"; // texto original
+  }
+});
+</script>
+
+
+  
+
+
+  
 <script>
 /* ================= POPUPS FOOTER ================= */
 function abrirPopup(id){
