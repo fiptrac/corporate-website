@@ -603,24 +603,29 @@ con práctica intensiva en escenarios reales.
 </section>
 
 
-<!-- Sticky que aparece al hacer scroll -->
+<!-- STICKY CURSOS (mejorado estéticamente) -->
 <div id="stickyCursos" style="
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #f4f6f8;
-    color: #003A70;
+    top: 10px;              /* un poquito separado del top */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 480px;       /* no ocupa toda la pantalla */
+    width: 90%;
+    background: #003A70;    /* color corporativo */
+    color: #fff;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
-    padding: 16px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    padding: 12px 0;
+    border-radius: 12px;    /* esquinas redondeadas */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.18);
     z-index: 998;
     display: none;
+    transition: all 0.3s ease;
 ">
   CURSOS
 </div>
+
   
 
 <section class="eventos">
