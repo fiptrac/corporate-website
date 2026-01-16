@@ -477,6 +477,26 @@ border-radius:8px;border:1px solid #ccc
   border:1px dashed #ccc;
 }
 
+
+<!-- Sticky que aparece al hacer scroll -->
+<div id="stickyCursos" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #f4f6f8;
+    color: #003A70;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    padding: 16px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    z-index: 998;
+    display: none;
+">
+  CURSOS
+</div>
+
   
 </style>
 </head>
@@ -890,6 +910,27 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 </script>
 
 
+<script>
+// Sticky "CURSOS" que aparece cuando intro-eventos ya no se ve
+/* ================= Sticky "CURSOS" ================= */
+const intro = document.querySelector(".intro-eventos");
+const sticky = document.getElementById("stickyCursos");
+
+const observer = new IntersectionObserver(([entry]) => {
+  if (!entry.isIntersecting) {
+    // intro-eventos ya no se ve → mostrar sticky
+    sticky.style.display = "block";
+  } else {
+    // intro-eventos visible → ocultar sticky
+    sticky.style.display = "none";
+  }
+}, { threshold: 0 });
+
+observer.observe(intro);
+</script>
+
+
+  
 <script>
 /* ================= POPUPS FOOTER ================= */
 function abrirPopup(id){
