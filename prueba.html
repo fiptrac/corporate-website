@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cursos | FIPTRAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<style>
+body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
+.eventos{max-width:1200px;margin:20px auto 80px;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
+.card{background:#fff;border-radius:18px;box-shadow:0 8px 22px rgba(0,0,0,.1);overflow:hidden;text-align:center}
+.card-body{padding:22px}
+.card h3{color:#003A70}
+.btn{padding:10px 18px;border-radius:10px;background:#003A70;color:#fff;border:none;cursor:pointer}
+.btn:hover{background:#002b55}
+  .btn{
+  text-decoration:none;
+}
+
+
+.popup{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.55);
+backdrop-filter: blur(3px);
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.popup-card{
+  background:#fff;
+  width:92%;
+  max-width:520px;
+  max-height:90vh;      /* 👈 nunca sale de pantalla */
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+  display:flex;
+  flex-direction:column;
+  animation:popupIn .35s ease;
+  position:relative;
+}
+
+.popup-header{
+  padding:26px 26px 14px;
+  border-bottom:1px solid #eee;
+  flex-shrink:0;
+}
+
+.popup-content{
+  padding:20px 26px 26px;
+  overflow-y:auto;     /* 👈 scroll aquí */
+  flex:1;
+}
+
+
+
+@keyframes popupIn{
+from{transform:translateY(20px);opacity:0}
+to{transform:translateY(0);opacity:1}
+}
+
+.popup h3{
+text-align:center;
+color:#003A70;
+margin-bottom:14px;
+font-size:22px;
+}
+
+.popup input,
+.popup select{
+width:100%;
+padding:12px;
+margin-top:6px;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+.popup input:focus,
+.popup select:focus{
+outline:none;
+border-color:#003A70;
+box-shadow:0 0 0 2px rgba(0,58,112,0.12);
+}
+
+.popup-close{
+  position:absolute;
+  top:16px;
+  right:18px;
+  background:none;
+  border:none;
+  font-size:22px;
+  cursor:pointer;
+}
+
+
+.popup button.btn{
+margin-top:18px;
+width:100%;
+padding:12px;
+font-size:16px;
+border-radius:12px;
+}
+
+.popup label{font-size:13px;font-weight:600;margin-top:10px;display:block}
+.popup input,.popup select{
+width:100%;padding:10px;margin-top:6px;
+border-radius:8px;border:1px solid #ccc
+}
+
+
+  .card{
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 30px rgba(0,0,0,.16);
+}
+
+.card-body{
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.card p{
+  margin:6px 0;
+  color:#333;
+}
+
+.btn-group{
+  display:flex;
+  gap:12px;
+  margin-top:14px;
+}
+
+.btn{
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 18px rgba(0,0,0,.25);
+}
+
+button.btn{
+  border:none;
+  outline:none;
+  appearance:none;
+  -webkit-appearance:none;
+  box-shadow:none;
+}
+
+
+  
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Cursos profesionales especializados</h1>
+    <p>Formación técnica con aplicación real en sistemas contra incendio</p>
+  </div>
+</section>
+
+<section class="eventos">
+<div class="grid" id="grid"></div>
+</section>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="popup-card">
+
+<button class="popup-close" onclick="cerrarPopup()">✕</button>
+
+<div class="popup-header">
+  <h3 id="cursoTitulo"></h3>
+
+<div id="precioCurso"
+style="
+  margin:14px 0;
+  padding:12px;
+  background:#f4f6f8;
+  border-radius:10px;
+  text-align:center;
+  font-size:16px;
+  color:#003A70;
+  font-weight:600;
+">
+</div>
+
+
+<div id="precioCurso"
+style="
+  background:#f4f6f8;
+  border-radius:12px;
+  padding:14px;
+  margin-bottom:16px;
+  text-align:center;
+  font-size:15px;
+  color:#003A70;
+  font-weight:600;
+">
+</div>
+
+<div class="popup-content">
+<form id="form">
+
+<input type="hidden" name="curso">
+
+<label>Nombre completo</label>
+<input name="nombre" required>
+
+<label>Puesto / Cargo</label>
+<input name="puesto">
+
+<label>CURP</label>
+<input name="curp">
+
+<label>Correo</label>
+<input type="email" name="correo" required>
+
+<label>Teléfono</label>
+<input name="telefono">
+
+<label>País</label>
+<input name="pais">
+
+<label>Pago</label>
+<select name="pago">
+  <option>Efectivo</option>
+  <option>Transferencia</option>
+  <option>Tarjeta</option>
+</select>
+
+<label>Factura</label>
+<select name="factura">
+  <option>No</option>
+  <option>Sí</option>
+</select>
+
+<label>Razón social</label>
+<input name="razon_social">
+
+<label>RFC / RUC / RNC</label>
+<input name="rfc">
+
+<label>Uso del comprobante fiscal</label>
+<input name="uso_cfdi">
+
+<label>Forma de pago</label>
+<input name="forma_pago">
+
+<button class="btn" type="submit">Enviar inscripción</button>
+
+</form>
+</div>
+</div>
+
+<script>
+const API = "https://script.google.com/macros/s/AKfycbxVGgieJfpt_Coo5n4RnAVUF9KhrCekMSwfcHsrlOaGMfHYZqNKaMBshDqu68eEYtG1/exec";
+let cursoActual = "";
+
+fetch(API)
+.then(r=>r.json())
+.then(data=>{
+  const grid=document.getElementById("grid");
+  data.forEach(c=>{
+    
+    grid.innerHTML += `
+      <div class="card">
+        <div class="card-body">
+          <h3>${c.NOMBRE}</h3>
+    
+          <p><b>Categoría:</b> ${c.CATEGORIA}</p>
+          <p><b>Inicio:</b> ${formatearFecha(c.INICIO)}</p>
+          <p><b>Término:</b> ${formatearFecha(c.TERMINO)}</p>
+          <p><b>Duración:</b> ${c["DURACION"]}</p>
+
+          <div class="btn-group">
+            <a class="btn" href="${c.ENLACE}" target="_blank">
+              Ver contenido
+            </a>
+    
+            <button class="btn"
+              onclick="inscribirse(
+                '${c.NOMBRE}',
+                '${c.PRECIO_MXN}',
+                '${c.PRECIO_USD}'
+              )">
+              Inscribirse
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+
+  });
+});
+
+
+function formatearFecha(fecha){
+  if(!fecha) return "";
+  const d = new Date(fecha);
+  return d.toLocaleDateString("es-MX",{
+    day:"2-digit",
+    month:"long",
+    year:"numeric"
+  });
+}
+
+
+
+function inscribirse(nombre, precioMXN, precioUSD){
+  cursoActual = nombre;
+
+  document.getElementById("cursoTitulo").innerText = nombre;
+
+  document.getElementById("precioCurso").innerHTML = `
+    💰 Precio del curso<br>
+    <b>MXN:</b> $${precioMXN} &nbsp; | &nbsp;
+    <b>USD:</b> $${precioUSD}
+  `;
+
+  document.getElementById("popup").style.display = "flex";
+}
+
+
+
+function cerrarPopup(){
+  document.getElementById("popup").style.display="none";
+}
+
+document.getElementById("form").addEventListener("submit",e=>{
+e.preventDefault();
+const data=Object.fromEntries(new FormData(e.target));
+fetch(API,{
+  method:"POST",
+  body:JSON.stringify(data)
+})
+.then(r=>r.json())
+.then(()=>{
+  alert("Inscripción registrada");
+  e.target.reset();
+  cerrarPopup();
+});
+});
+</script>
+
+</body>
+</html>
