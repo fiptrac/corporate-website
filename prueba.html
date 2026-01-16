@@ -603,25 +603,27 @@ con práctica intensiva en escenarios reales.
 </section>
 
 
-<!-- STICKY CURSOS (ancho completo, más discreto) -->
+<!-- STICKY CURSOS -->
 <div id="stickyCursos" style="
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;             /* ancho completo */
-    background: #003A70;     /* azul corporativo */
+    width: 100%;
+    background: #003A70;
     color: #fff;
     font-weight: 600;
-    font-size: 16px;         /* más pequeño */
+    font-size: 16px;
     text-align: center;
-    padding: 8px 0;          /* menos alto */
+    padding: 8px 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.18);
     z-index: 998;
-    display: none;
-    transition: all 0.25s ease;
+    opacity: 0;              /* inicial invisible */
+    transform: translateY(-20px); /* empieza ligeramente arriba */
+    transition: opacity 0.35s ease, transform 0.35s ease;
 ">
   CURSOS
 </div>
+
 
 
   
@@ -911,7 +913,6 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 
 
 <script>
-// Sticky "CURSOS" que aparece cuando intro-eventos ya no se ve
 /* ================= Sticky "CURSOS" ================= */
 const intro = document.querySelector(".intro-eventos");
 const sticky = document.getElementById("stickyCursos");
@@ -919,14 +920,17 @@ const sticky = document.getElementById("stickyCursos");
 const observer = new IntersectionObserver(([entry]) => {
   if (!entry.isIntersecting) {
     // intro-eventos ya no se ve → mostrar sticky
-    sticky.style.display = "block";
+    sticky.style.opacity = "1";
+    sticky.style.transform = "translateY(0)";
   } else {
     // intro-eventos visible → ocultar sticky
-    sticky.style.display = "none";
+    sticky.style.opacity = "0";
+    sticky.style.transform = "translateY(-20px)";
   }
 }, { threshold: 0 });
 
 observer.observe(intro);
+
 </script>
 
 
