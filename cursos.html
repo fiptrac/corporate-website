@@ -479,49 +479,29 @@ border-radius:8px;border:1px solid #ccc
 
 
 
-.sticky-title-container {
-  position: sticky;
-  top: 70px; /* ajusta según la altura de tu header */
-  background: #f4f6f8; /* mismo fondo que la sección */
-  padding: 16px 0;
-  z-index: 1000;
-  transition: all 0.5s ease;
-  text-align: center;
-}
-
-.sticky-title-container.scrolled {
-  font-size: 20px;
-  font-weight: 700;
-  background: #f4f6f8; /* puedes cambiar el color si quieres */
-  padding: 10px 0;
-}
-
 .sticky-title-container-wrapper {
-  height: 80px; /* espacio reservado para el sticky */
-  margin-bottom: 20px; /* opcional: separación extra con la grilla */
+  height: 80px; /* espacio reservado */
+  margin-bottom: 20px; /* separación del grid */
 }
 
 .sticky-title-container {
   position: sticky;
-  top: 100px; /* ajusta según tu header */
+  top: 90px; /* altura de tu header */
   background: #f4f6f8;
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 16px 0;
   transition: all 0.25s ease;
-}
-
-.sticky-title-container h2 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 600;
 }
 
 .sticky-title-container.scrolled h2 {
   font-size: 20px;
   font-weight: 700;
 }
+
 
   
 </style>
@@ -652,11 +632,6 @@ con práctica intensiva en escenarios reales.
 
 
 <!-- GRID DE CURSOS -->
-<div class="grid" id="grid"></div>
-
-
-  
-  
 
 <section class="eventos">
 <div class="grid" id="grid"></div>
@@ -959,11 +934,10 @@ const observer = new IntersectionObserver(
       stickyTitleContainer.classList.remove("scrolled");
     }
   },
-  { threshold: 0 } // dispara cuando el contenedor desaparece del viewport
+  { threshold: 0 }
 );
 
 observer.observe(stickyTitleContainer);
-
 </script>
 
 
