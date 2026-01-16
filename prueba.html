@@ -1111,50 +1111,7 @@ document.querySelectorAll("[data-uppercase]").forEach(input => {
 </script>
 
 
-<script>
-/* ================= POPUPS FOOTER ================= */
 
-function abrirPopup(id){
-const popup = document.getElementById(id);
-if(popup) popup.style.display = 'flex';
-}
-
-function cerrarPopup(id){
-const popup = document.getElementById(id);
-if(popup) popup.style.display = 'none';
-}
-
-/* Cerrar con click fuera */
-document.addEventListener('click', e => {
-if(e.target.classList.contains('fiptrac-overlay')){
-e.target.style.display = 'none';
-}
-});
-
-/* Cerrar con ESC */
-document.addEventListener('keydown', e => {
-if(e.key === 'Escape'){
-document
-.querySelectorAll('.fiptrac-overlay')
-.forEach(p => p.style.display = 'none');
-}
-});
-</script>
-
-
-
-<!--  FOOTER  --> 
-<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
-
-<div id="footer-container"></div>
-
-<script>
-fetch("footer.html")
-.then(response => response.text())
-.then(data => {
-document.getElementById("footer-container").innerHTML = data;
-});
-</script>
 
 
 </body>
