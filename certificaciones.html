@@ -2,27 +2,27 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Certificaciones | FIPTRAC</title>
+<title>Cursos | FIPTRAC</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/css/styles.css">
 
 
 <!-- ============================== STYLES ============================== -->
 
-
 <style>
 body{font-family:Montserrat,sans-serif;background:#f4f6f8;margin:0}
 .eventos{max-width:1200px;margin:20px auto 80px;padding:20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
-.card{background:#fff;border-radius:18px;box-shadow:0 8px 22px rgba(0,0,0,.1);overflow:hidden;text-align:center;transition:transform .25s ease,box-shadow .25s ease}
-.card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,.16)}
-.card img{width:100%;height:180px;object-fit:cover}
-.card-body{padding:22px;display:flex;flex-direction:column;align-items:center}
-.card h3{color:#003A70;margin-bottom:8px}
-.card p{margin:6px 0;color:#333}
-.btn-group{display:flex;gap:12px;margin-top:14px}
-.btn{padding:10px 18px;border-radius:10px;background:#003A70;color:#fff;text-decoration:none;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
-.btn:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.25);background:#002b55}
+.card{background:#fff;border-radius:18px;box-shadow:0 8px 22px rgba(0,0,0,.1);overflow:hidden;text-align:center}
+.card-body{padding:22px}
+.card h3{color:#003A70}
+.btn{padding:10px 18px;border-radius:10px;background:#003A70;color:#fff;border:none;cursor:pointer}
+.btn:hover{background:#002b55}
+  .btn{
+  text-decoration:none;
+}
+
+
 
 button.btn {
 border: none;
@@ -239,6 +239,7 @@ line-height:1.5;
 
 /*==================  FIN NAVBAR ==================*/
 
+
 /*==================  HERO ==================*/
 .hero {
 background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
@@ -320,10 +321,9 @@ transition: transform .28s ease;
 .fade-item img.img-3 { width:260px; }
 .fade-item img.img-4 { width:220px; }
 }
+  
 
-
-
-/* ================= POPUP ESTILO FIPTRAC ================= */
+  
 
 .popup{
 display:none;
@@ -337,15 +337,31 @@ z-index:9999;
 }
 
 .popup-card{
-background:#fff;
-width:92%;
-max-width:560px;
-border-radius:20px;
-padding:32px 28px 28px;
-box-shadow:0 20px 50px rgba(0,0,0,0.35);
-animation:popupIn .35s ease;
-position:relative;
+  background:#fff;
+  width:92%;
+  max-width:520px;
+  max-height:90vh;      /* 👈 nunca sale de pantalla */
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+  display:flex;
+  flex-direction:column;
+  animation:popupIn .35s ease;
+  position:relative;
 }
+
+.popup-header{
+  padding:26px 26px 14px;
+  border-bottom:1px solid #eee;
+  flex-shrink:0;
+}
+
+.popup-content{
+  padding:20px 26px 26px;
+  overflow-y:auto;     /* 👈 scroll aquí */
+  flex:1;
+}
+
+
 
 @keyframes popupIn{
 from{transform:translateY(20px);opacity:0}
@@ -357,14 +373,6 @@ text-align:center;
 color:#003A70;
 margin-bottom:14px;
 font-size:22px;
-}
-
-.popup label{
-font-size:13px;
-font-weight:600;
-color:#444;
-margin-top:10px;
-display:block;
 }
 
 .popup input,
@@ -384,6 +392,23 @@ border-color:#003A70;
 box-shadow:0 0 0 2px rgba(0,58,112,0.12);
 }
 
+  
+[data-uppercase]{
+  text-transform: uppercase;
+}
+
+  
+.popup-close{
+  position:absolute;
+  top:16px;
+  right:18px;
+  background:none;
+  border:none;
+  font-size:22px;
+  cursor:pointer;
+}
+
+
 .popup button.btn{
 margin-top:18px;
 width:100%;
@@ -392,25 +417,74 @@ font-size:16px;
 border-radius:12px;
 }
 
-/* Botón cerrar */
-.close-btn{
-position:absolute;
-top:14px;
-right:18px;
-font-size:22px;
-cursor:pointer;
+.popup label{font-size:13px;font-weight:600;margin-top:10px;display:block}
+.popup input,.popup select{
+width:100%;padding:10px;margin-top:6px;
+border-radius:8px;border:1px solid #ccc
 }
 
+
+.card{
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 30px rgba(0,0,0,.16);
+}
+
+.card-body{
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.card p{
+  margin:6px 0;
+  color:#333;
+}
+
+.btn-group{
+  display:flex;
+  gap:12px;
+  margin-top:14px;
+}
+
+.btn{
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 18px rgba(0,0,0,.25);
+}
+
+
+#camposFactura{
+  padding:14px;
+  background:#f4f6f8;
+  border-radius:10px;
+  border:1px dashed #ccc;
+}
+
+#camposDC3{
+  padding:14px;
+  background:#f4f6f8;
+  border-radius:10px;
+  border:1px dashed #ccc;
+}
+
+  
 </style>
 </head>
 
-
-
-<!-- ============================== BODY ============================== -->
-
-
 <body>
 
+
+  
 
 <!-- NAVBAR -->
 <header class="nav">
@@ -477,42 +551,45 @@ cursor:pointer;
 <h1 style="text-align:center;color:#003A70">Formación especializada que marca la diferencia</h1>
 
 <p>
-Nuestros <strong>programas de certificación</strong> están orientados a profesionales
-que desean <strong>respaldar oficialmente sus conocimientos</strong>
-en sistemas contra incendio, cumpliendo con estándares técnicos,
-normativas vigentes y requisitos del sector industrial.
+Nuestros <strong>cursos</strong> están diseñados para profesionales
+que buscan <strong>dominar la aplicación real</strong> de los sistemas contra incendio,
+a través de formación técnica especializada que combina teoría sólida
+con práctica intensiva en escenarios reales.
 </p>
 
-<!-- BLOQUE DESTACADO TIPO CERTIFICADOS -->
+<!-- BLOQUE DESTACADO TIPO CURSOS -->
 <div class="eventos-highlights">
 
   <div class="eventos-highlight-item">
-    <i class="fa-solid fa-certificate"></i>
-    <h4>Certificación especializada</h4>
+    <i class="fa-solid fa-check"></i>
+    <h4>Entrenamiento práctico real</h4>
     <p>
-      Programas diseñados para <strong>validar conocimientos técnicos</strong>
-      en sistemas contra incendio, alineados con estándares
-      y normativas vigentes del sector.
+      Cada curso combina aproximadamente
+      <strong>70 % práctica y 30 % teoría</strong>,
+      con trabajo directo en equipos reales,
+      simulaciones y escenarios de campo.
     </p>
   </div>
 
   <div class="eventos-highlight-item">
-    <i class="fa-solid fa-clipboard-check"></i>
-    <h4>Evaluación y cumplimiento</h4>
+    <i class="fa-solid fa-tools"></i>
+    <h4>Hands On Training</h4>
     <p>
-      Cada certificación incluye <strong>evaluaciones técnicas</strong>
-      que aseguran el dominio de competencias clave
-      requeridas en el campo profesional.
+      Somos el <strong>único centro en Latinoamérica</strong>
+      enfocado exclusivamente en la
+      <strong>formación técnica aplicada</strong>,
+      ofreciendo verdaderos programas de Hands On Training.
     </p>
   </div>
 
   <div class="eventos-highlight-item">
-    <i class="fa-solid fa-award"></i>
-    <h4>Reconocimiento profesional</h4>
+    <i class="fa-solid fa-chart-line"></i>
+    <h4>Reconocimiento oficial</h4>
     <p>
-      Las certificaciones otorgan un <strong>respaldo formal</strong>
-      a tu experiencia, fortaleciendo tu perfil profesional
-      dentro del sector de protección contra incendio.
+      Al finalizar cada curso se otorga una
+      <strong>Constancia DC-3 avalada por la STPS</strong>,
+      y programas seleccionados otorgan
+      <strong>puntos CPD reconocidos por NICET</strong>.
     </p>
   </div>
 
@@ -526,73 +603,228 @@ normativas vigentes y requisitos del sector industrial.
 <div class="grid" id="grid"></div>
 </section>
 
+  
+  
 
-<!-- POPUP FORM -->
+<section class="eventos">
+<div class="grid" id="grid"></div>
+</section>
+
+<!-- POPUP -->
 <div class="popup" id="popup">
 <div class="popup-card">
-<form id="form">
+
+<button class="popup-close" onclick="cerrarPopup()">✕</button>
+
+<div class="popup-header">
+  <h3 id="cursoTitulo"></h3>
+
+  <div id="precioCurso"
+    style="
+      margin:14px 0;
+      padding:12px;
+      background:#f4f6f8;
+      border-radius:10px;
+      text-align:center;
+      font-size:16px;
+      color:#003A70;
+      font-weight:600;
+    ">
+  </div>
+</div> 
+
+<div class="popup-content">
+  <form id="form" method="POST" onsubmit="return false;">
+
+<input type="hidden" name="curso">
+
+<label>Nombre completo</label>
+<input name="nombre" data-uppercase required>
+
+<label>Puesto / Cargo</label>
+<input name="puesto_cargo">
+
+<label>
+  CURP
+  <span style="font-weight:400;color:#666;font-size:12px">
+    (solo México)
+  </span>
+</label>
+
+<input name="curp" id="curp" maxlength="18" data-uppercase>
 
 
-<button type="button" id="closePopup"
-style="
-       position:absolute;
-       top:14px;
-       right:18px;
-       background:none;
-       border:none;
-       font-size:22px;
-       cursor:pointer;
-     "
-aria-label="Cerrar formulario">✕</button>
 
-<h3 id="cursoTitulo"></h3>
-<input type="email" name="correo" placeholder="Correo" required>
-<input type="text" name="nombre" placeholder="NOMBRE COMPLETO" required oninput="this.value=this.value.toUpperCase()">
-<input type="text" name="puesto" placeholder="Puesto o cargo" required>
-<input type="tel" name="celular" placeholder="Celular (10 dígitos)" pattern="[0-9]{10}" required>
 
+
+<label>Correo</label>
+<input 
+  type="email"
+  name="correo"
+  required
+  placeholder="correo@ejemplo.com">
+
+
+<label>Teléfono</label>
+<input
+  name="telefono"
+  inputmode="numeric"
+  pattern="[0-9]{10}"
+  maxlength="10"
+  placeholder="10 dígitos"
+  required>
+
+
+    <!-- ¿Cómo se enteró? -->
 <label>¿Cómo se enteró?</label>
-<select name="medio" required>
-<option value="Web">Búsqueda Web</option>
-<option value="Correo">Correo</option>
-<option value="Facebook">Facebook</option>
-<option value="Instagram">Instagram</option>
-<option value="LinkedIn">LinkedIn</option>
-<option value="Recomendación">Recomendación</option>
-<option value="Otro">Otro</option>
+<select name="vinculacion" required>
+  <option value="">Selecciona una opción</option>
+  <option>Búsqueda Web</option>
+  <option>Correo</option>
+  <option>Facebook</option>
+  <option>Instagram</option>
+  <option>LinkedIn</option>
+  <option>Recomendación</option>
+  <option>Otro</option>
 </select>
 
+<!-- Talla de playera -->
 <label>Talla de playera</label>
 <select name="talla" required>
-<option>Chica</option><option>Mediana</option><option>Grande</option><option>Extra Grande</option>
+  <option value="">Selecciona una talla</option>
+  <option>Chica</option>
+  <option>Mediana</option>
+  <option>Grande</option>
+  <option>Extra Grande</option>
 </select>
 
-<div id="costoCurso"
-style="
-          margin-top:14px;
-          padding:12px;
-          background:#f4f6f8;
-          border-radius:10px;
-          text-align:center;
-          font-size:16px;
-          color:#003A70;
-          font-weight:600;
-        ">
+<!-- Forma de pago -->
+<label>Forma de pago</label>
+<select name="forma_de_pago" required>
+  <option value="">Selecciona forma de pago</option>
+  <option>
+    Transferencia electrónica de fondos (USD o MXN)
+  </option>
+  <option>
+    EVO Payments (Tarjeta de crédito o débito VISA o MASTERCARD)
+  </option>
+</select>
+
+
+
+<label>País</label>
+<input name="pais" data-uppercase>
+
+<label>Factura</label>
+<select name="factura" id="factura">
+  <option value="No">No</option>
+  <option value="Sí">Sí</option>
+</select>
+
+<div id="camposFactura" style="display:none;margin-top:10px">
+
+  <label>Razón social</label>
+  <input name="razon_social" data-uppercase>
+
+  <label>RFC / RUC / RNC</label>
+  <input name="rfc_ruc_rnc" data-uppercase>
+
+  <label>Domicilio fiscal</label>
+  <input name="domicilio_fiscal">
+
+  <label>Código postal</label>
+  <input name="codigo_postal">
+
+  <label>Uso del comprobante fiscal</label>
+  <select name="uso_del_comprobante_fiscal" required>
+    <option value="">Selecciona una opción</option>
+    <option>GASTOS EN GENERAL</option>
+    <option>POR DEFINIR</option>
+  </select>
 </div>
 
-<p style="font-size:13px;text-align:center;color:#555;margin-top:6px">
-Después de solicitar su inscripción espere a recibir un correo con la confirmación y el enlace de pago
-para finalizar el proceso.
-</p>
+    <label>¿Requiere emisión de DC-3?</label>
+<select name="dc3" id="dc3">
+  <option value="No">No</option>
+  <option value="Sí">Sí</option>
+</select>
+    
+<small style="font-weight:400;color:#666;font-size:12px;">
+  Escriba los nombres solo si aplica
+</small>
 
-<button class="btn" type="submit">
-Solicitar inscripción
-</button>
-<!-- <button class="btn">Solicitar inscripción</button> -->
+<div id="camposDC3" style="display:none;margin-top:10px">
+  <label>Representante legal (DC-3)</label>
+  <input name="representante_legal_dc3" data-uppercase>
+
+  <label>Representante de los trabajadores (DC-3)</label>
+  <input name="representante_trabajadores_dc3" data-uppercase>
+</div>
+
+<!-- Servicio de Traslados -->
+<label>Servicio de traslados</label>
+<input type="text" name="traslados" id="trasladosInput" placeholder="Selecciona una opción" readonly style="cursor:pointer;">
+
+<!-- POPUP DE SELECCIÓN ESTÉTICO -->
+<div id="popupTraslados" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    backdrop-filter:blur(3px);
+    align-items:center;
+    justify-content:center;
+    z-index:10000;
+">
+  <div style="
+      background:#fff;
+      border-radius:20px;
+      max-width:500px;
+      width:90%;
+      padding:20px;
+      max-height:80vh;
+      overflow-y:auto;
+      box-shadow:0 20px 50px rgba(0,0,0,0.35);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+  ">
+    <h3 style="text-align:center; color:#003A70; margin-bottom:14px;">Selecciona el servicio de traslados</h3>
+
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <button type="button" class="btnOpcion" data-value="A" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+        <b>A –</b> Este servicio es SIN NINGUN COSTO SIEMPRE Y CUANDO ESTEN DENTRO DE LOS HORARIOS Y DIAS ESTABLECIDOS, en caso de NO coincidir, los traslados corren por cuenta de los participantes.
+      </button>
+      <button type="button" class="btnOpcion" data-value="B" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+        <b>B –</b> Requiero traslados AEROPUERTO AICM-HOTEL-FIPTRAC-AEROPUERTO Y TRASLADOS HOTEL-FIPTRAC-HOTEL <i>*SOLO APLICA EN HOTEL SUGERIDO Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
+      </button>
+      <button type="button" class="btnOpcion" data-value="C" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+        <b>C –</b> Haré todos los traslados por mi cuenta
+      </button>
+      <button type="button" class="btnOpcion" data-value="D" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+        <b>D –</b> Requiero solo traslados Hotel-FIPTRAC Y FIPTRAC-Hotel <i>*SOLO APLICA PARA HUESPEDES EN HOTEL Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
+      </button>
+    </div>
+
+    <button type="button" onclick="cerrarPopupTraslados()" style="margin-top:16px; width:100%; padding:12px; border:none; border-radius:12px; background:#003A70; color:#fff; font-weight:600; cursor:pointer;">Cancelar</button>
+  </div>
+</div>
+
+
+
+
+<small style="font-weight:400;color:#666;font-size:12px;">
+  Selecciona el tipo de traslado que necesitas. Las opciones A y B aplican solo en horarios y hoteles establecidos por FIPTRAC.
+</small>
+
+
+
+<button class="btn" type="submit">Enviar inscripción</button>
+
 </form>
 </div>
 </div>
-
+</div>
 
 
 <!-- ============================== SCRIPTS ============================== -->
@@ -658,159 +890,34 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 </script>
 
 
-<!--  MENÚ DE TARJETAS  --> 
-<script>
-/* ================== CONFIG ================== */
-const API = "https://script.google.com/macros/s/AKfycbxdT6ILbrdcpUGdTmVn6e2is0jABcyr1X_QsR0REZAh1hWMkeJE8yBeTkEcZA_QN8P5/exec";
-let cursoActual = "";
-let costoActual = "";
-
-/* ================== CARGAR CURSOS ================== */
-fetch(API)
-.then(r => r.json())
-.then(data => {
-const grid = document.getElementById('grid');
-grid.innerHTML = ""; // limpia texto inicial
-
-data.forEach(ev => {
-
-const fecha = new Date(ev.FECHA)
-.toLocaleDateString('es-MX', { day:'2-digit', month:'long', year:'numeric' });
-
-const duracion = new Date(ev.DURACIÓN);
-const horas = duracion.getHours();
-const minutos = duracion.getMinutes();
-
-
-/*
-           OPCIONALMENTE AGREGAR EL COSTO EN LAS TARJETAS DEBAJO DE LA LÍNEA
-
-           <p><b>Duración:</b> ${horas}h ${minutos}m</p>
-
-           
-           <p style="margin-top:10px;font-size:18px;color:#003A70;">
-             <b>Costo:</b> $${ev.COSTO_MXN} MXN
-           </p>
-
-           */
-
-grid.innerHTML += `
-       <div class="card">
-         <div class="card-body">
-           <h3>${ev.NOMBRE}</h3>
-           <p>${ev.DESCRIPCIÓN}</p>
-           <p><b>Fecha:</b> ${fecha}</p>
-           <p><b>Duración:</b> ${horas}h ${minutos}m</p>   
-
-           <div class="btn-group">
-             <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
-             <button class="btn"
-               onclick="inscribirse('${ev.NOMBRE}', '${ev.COSTO_MXN}')">
-               Inscribirse
-             </button>
-           </div>
-         </div>
-       </div>
-     `;
-});
-});
-
-/* ================== ABRIR POPUP ================== */
-function inscribirse(nombre, costo){
-cursoActual = nombre;
-costoActual = costo;
-
-document.getElementById('cursoTitulo').innerText = nombre;
-document.getElementById('costoCurso').innerHTML =
-`Costo del curso: <b>$${costo} MXN</b>`;
-
-document.getElementById('popup').style.display = 'flex';
-}
-
-/* ================== ENVIAR FORMULARIO ================== */
-const form = document.getElementById('form');
-
-form.addEventListener('submit', e => {
-e.preventDefault();
-
-const data = Object.fromEntries(new FormData(form));
-data.curso = cursoActual;
-data.costo = costoActual;
-data.pago = "PENDIENTE";
-
-fetch(API, {
-method: 'POST',
-body: JSON.stringify(data)
-})
-.then(() => {
-alert('Solicitud enviada correctamente, espere el correo de confirmación junto con el enlace de pago');
-form.reset();
-document.getElementById('popup').style.display = 'none';
-});
-});
-</script>
-
-
-
-<!--  CERRAR FORM  --> 
-<script>
-const popup = document.getElementById('popup');
-const closeBtn = document.getElementById('closePopup');
-
-  function cerrarPopup(){
-    popup.style.display = 'none';
-}
-
-// Click en botón ✕
-  closeBtn.addEventListener('click', cerrarPopup);
-
-// Click fuera del formulario
-popup.addEventListener('click', (e)=>{
-if(e.target === popup){
-      cerrarPopup();
-}
-});
-
-// Tecla ESC
-document.addEventListener('keydown', (e)=>{
-if(e.key === 'Escape'){
-      cerrarPopup();
-}
-});
-</script>
-
-
 <script>
 /* ================= POPUPS FOOTER ================= */
-
 function abrirPopup(id){
-const popup = document.getElementById(id);
-if(popup) popup.style.display = 'flex';
+  const popup = document.getElementById(id);
+  if(popup) popup.style.display = 'flex';
 }
 
 function cerrarPopup(id){
-const popup = document.getElementById(id);
-if(popup) popup.style.display = 'none';
+  const popup = document.getElementById(id);
+  if(popup) popup.style.display = 'none';
 }
 
 /* Cerrar con click fuera */
 document.addEventListener('click', e => {
-if(e.target.classList.contains('fiptrac-overlay')){
-e.target.style.display = 'none';
-}
+  if(e.target.classList.contains('fiptrac-overlay')){
+    e.target.style.display = 'none';
+  }
 });
 
 /* Cerrar con ESC */
 document.addEventListener('keydown', e => {
-if(e.key === 'Escape'){
-document
-.querySelectorAll('.fiptrac-overlay')
-.forEach(p => p.style.display = 'none');
-}
+  if(e.key === 'Escape'){
+    document
+      .querySelectorAll('.fiptrac-overlay')
+      .forEach(p => p.style.display = 'none');
+  }
 });
 </script>
-
-
 
 <!--  FOOTER  --> 
 <script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
@@ -819,12 +926,249 @@ document
 
 <script>
 fetch("footer.html")
-.then(response => response.text())
-.then(data => {
-document.getElementById("footer-container").innerHTML = data;
+  .then(response => response.text())
+  .then(data => {
+    const footerContainer = document.getElementById("footer-container");
+    footerContainer.innerHTML = data;
+
+    // Reasignar onclick del botón de cierre del popup
+    const btnCerrar = footerContainer.querySelector(".fiptrac-close");
+    const popup = footerContainer.querySelector(".fiptrac-overlay");
+    if(btnCerrar && popup){
+      btnCerrar.addEventListener("click", ()=>{
+        popup.style.display = "none";
+        popup.setAttribute('aria-hidden','true');
+      });
+    }
+  });
+</script>
+
+
+
+
+
+
+  
+  
+<script>
+function validarCorreo(correo){
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(correo);
+}
+
+function validarTelefono(tel){
+  return /^[0-9]{10}$/.test(tel);
+}
+
+function validarCURP(curp){
+  const regex = /^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$/;
+  return regex.test(curp);
+}
+</script>
+
+
+
+  <script>
+const facturaSelect = document.getElementById("factura");
+const camposFactura = document.getElementById("camposFactura");
+
+const facturaInputs = camposFactura.querySelectorAll("input, select");
+
+function toggleFactura(){
+  const requiereFactura = facturaSelect.value === "Sí";
+
+  camposFactura.style.display = requiereFactura ? "block" : "none";
+
+  facturaInputs.forEach(input=>{
+    input.required = requiereFactura;
+    if(!requiereFactura) input.value = "";
+  });
+}
+
+facturaSelect.addEventListener("change", toggleFactura);
+    toggleFactura();
+</script>
+
+
+  <script>
+const dc3Select = document.getElementById("dc3");
+const camposDC3 = document.getElementById("camposDC3");
+const dc3Inputs = camposDC3.querySelectorAll("input");
+
+function toggleDC3(){
+  const requiereDC3 = dc3Select.value === "Sí";
+
+  camposDC3.style.display = requiereDC3 ? "block" : "none";
+
+  dc3Inputs.forEach(input=>{
+    if(!requiereDC3) input.value = "";
+  });
+}
+
+dc3Select.addEventListener("change", toggleDC3);
+toggleDC3(); // estado inicial
+</script>
+
+
+
+  
+<script>
+
+const trasladosInput = document.getElementById("trasladosInput");
+const popupTraslados = document.getElementById("popupTraslados");
+
+// Abrir popup al hacer clic en el input
+trasladosInput.addEventListener("click", () => {
+  popupTraslados.style.display = "flex";
+});
+
+// Cerrar popup
+function cerrarPopupTraslados(){
+  popupTraslados.style.display = "none";
+}
+
+// Seleccionar opción
+document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
+  btn.addEventListener("click", () => {
+    trasladosInput.value = btn.dataset.value;
+    cerrarPopupTraslados();
+  });
 });
 </script>
 
+
+  
+  
+<script>
+const API = "https://script.google.com/macros/s/AKfycbzHEuX1ORUt6PCULPowMeCNgKnNemz6oJBZgQ9HbiHuFVPseDOw80V9XJsJUrMmcyL3/exec";
+let cursoActual = "";
+
+fetch(API)
+.then(r=>r.json())
+.then(data=>{
+  const grid=document.getElementById("grid");
+  data.forEach(c=>{
+    
+    grid.innerHTML += `
+      <div class="card">
+        <div class="card-body">
+          <h3>${c.NOMBRE}</h3>
+    
+          <p><b>Categoría:</b> ${c.CATEGORIA}</p>
+          <p><b>Inicio:</b> ${formatearFecha(c.INICIO)}</p>
+          <p><b>Término:</b> ${formatearFecha(c.TERMINO)}</p>
+          <p><b>Duración:</b> ${c["DURACION"]} hrs</p>
+
+
+          <div class="btn-group">
+            <a class="btn" href="${c.ENLACE}" target="_blank">
+              Ver contenido
+            </a>
+    
+            <button class="btn"
+              onclick="inscribirse(
+                '${c.NOMBRE}',
+                '${c.PRECIO_MXN}',
+                '${c.PRECIO_USD}'
+              )">
+              Inscribirse
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+
+  });
+});
+
+
+function formatearFecha(fecha){
+  if(!fecha) return "";
+  const d = new Date(fecha);
+  return d.toLocaleDateString("es-MX",{
+    day:"2-digit",
+    month:"long",
+    year:"numeric"
+  });
+}
+
+
+
+function inscribirse(nombre, precioMXN, precioUSD){
+  cursoActual = nombre;
+
+  document.getElementById("cursoTitulo").innerText = nombre;
+  document.querySelector('input[name="curso"]').value = nombre;
+
+
+  document.getElementById("precioCurso").innerHTML = `
+    💰 Precio del curso<br>
+    <b>MXN:</b> $${precioMXN} &nbsp; | &nbsp;
+    <b>USD:</b> $${precioUSD}
+  `;
+
+  document.getElementById("popup").style.display = "flex";
+}
+
+
+function cerrarPopup(){
+  document.getElementById("popup").style.display="none";
+}
+
+document.getElementById("form").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(e.target));
+
+  // 🔒 VALIDACIONES
+  if(!validarCorreo(data.correo)){
+    alert("Correo electrónico no válido");
+    return;
+  }
+
+  if(!validarTelefono(data.telefono)){
+    alert("El teléfono debe tener 10 dígitos");
+    return;
+  }
+
+  // CURP opcional
+  if(data.curp){
+    const curp = data.curp.toUpperCase();
+    if(!validarCURP(curp)){
+      alert("CURP no válida (formato incorrecto)");
+      return;
+    }
+    data.curp = curp;
+  }
+
+  // valores automáticos
+  data.pago = "PENDIENTE";
+
+  // factura
+  data.factura = data.factura === "Sí" ? "OK" : "";
+
+  fetch(API,{
+    method:"POST",
+    body:JSON.stringify(data)
+  })
+  .then(r=>r.json())
+  .then(()=>{
+    alert("Inscripción registrada");
+    e.target.reset();
+    cerrarPopup();
+  });
+});
+
+</script>
+
+<script>
+document.querySelectorAll("[data-uppercase]").forEach(input => {
+  input.addEventListener("input", () => {
+    input.value = input.value.toUpperCase();
+  });
+});
+</script>
 
 </body>
 </html>
