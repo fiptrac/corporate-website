@@ -352,7 +352,7 @@ button.btn{
 <label>Servicio de traslados</label>
 <input type="text" name="traslados" id="trasladosInput" placeholder="Selecciona una opción" readonly style="cursor:pointer;">
 
-<!-- POPUP DE SELECCIÓN -->
+<!-- POPUP DE SELECCIÓN ESTÉTICO -->
 <div id="popupTraslados" style="
     display:none;
     position:fixed;
@@ -365,34 +365,38 @@ button.btn{
 ">
   <div style="
       background:#fff;
-      border-radius:12px;
+      border-radius:20px;
       max-width:500px;
       width:90%;
       padding:20px;
       max-height:80vh;
       overflow-y:auto;
       box-shadow:0 20px 50px rgba(0,0,0,0.35);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
   ">
-    <h3 style="text-align:center; color:#003A70; margin-bottom:12px;">Selecciona el servicio de traslados</h3>
+    <h3 style="text-align:center; color:#003A70; margin-bottom:14px;">Selecciona el servicio de traslados</h3>
 
     <div style="display:flex; flex-direction:column; gap:10px;">
-      <button type="button" class="btnOpcion" data-value="A">
-        A – Este servicio es SIN NINGUN COSTO SIEMPRE Y CUANDO ESTEN DENTRO DE LOS HORARIOS Y DIAS ESTABLECIDOS, en caso de NO coincidir, los traslados corren por cuenta de los participantes.
+      <button type="button" class="btnOpcion" data-value="A" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+        <b>A –</b> Este servicio es SIN NINGUN COSTO SIEMPRE Y CUANDO ESTEN DENTRO DE LOS HORARIOS Y DIAS ESTABLECIDOS, en caso de NO coincidir, los traslados corren por cuenta de los participantes.
       </button>
-      <button type="button" class="btnOpcion" data-value="B">
-        B – Requiero traslados AEROPUERTO AICM-HOTEL-FIPTRAC-AEROPUERTO Y TRASLADOS HOTEL-FIPTRAC-HOTEL *SOLO APLICA EN HOTEL SUGERIDO Y HORARIOS ESTABLECIDOS POR FIPTRAC*
+      <button type="button" class="btnOpcion" data-value="B" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+        <b>B –</b> Requiero traslados AEROPUERTO AICM-HOTEL-FIPTRAC-AEROPUERTO Y TRASLADOS HOTEL-FIPTRAC-HOTEL <i>*SOLO APLICA EN HOTEL SUGERIDO Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
       </button>
-      <button type="button" class="btnOpcion" data-value="C">
-        C – Haré todos los traslados por mi cuenta
+      <button type="button" class="btnOpcion" data-value="C" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+        <b>C –</b> Haré todos los traslados por mi cuenta
       </button>
-      <button type="button" class="btnOpcion" data-value="D">
-        D – Requiero solo traslados Hotel-FIPTRAC Y FIPTRAC-Hotel *SOLO APLICA PARA HUESPEDES EN HOTEL Y HORARIOS ESTABLECIDOS POR FIPTRAC*
+      <button type="button" class="btnOpcion" data-value="D" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+        <b>D –</b> Requiero solo traslados Hotel-FIPTRAC Y FIPTRAC-Hotel <i>*SOLO APLICA PARA HUESPEDES EN HOTEL Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
       </button>
     </div>
 
-    <button type="button" onclick="cerrarPopupTraslados()" style="margin-top:14px; width:100%;" class="btn">Cancelar</button>
+    <button type="button" onclick="cerrarPopupTraslados()" style="margin-top:16px; width:100%; padding:12px; border:none; border-radius:12px; background:#003A70; color:#fff; font-weight:600; cursor:pointer;">Cancelar</button>
   </div>
 </div>
+
 
 
 
