@@ -535,36 +535,44 @@ con práctica intensiva en escenarios reales.
 <div class="popup-card">
 <form id="form">
 
-
-<button type="button" id="closePopup"
-style="
-       position:absolute;
-       top:14px;
-       right:18px;
-       background:none;
-       border:none;
-       font-size:22px;
-       cursor:pointer;
-     "
-aria-label="Cerrar formulario">✕</button>
+<button type="button" id="closePopup" class="close-btn">✕</button>
 
 <h3 id="cursoTitulo"></h3>
-<input type="email" name="correo" placeholder="Correo" required>
-<input type="text" name="nombre" placeholder="NOMBRE COMPLETO" required oninput="this.value=this.value.toUpperCase()">
-<input type="text" name="puesto" placeholder="Puesto o cargo" required>
-<input type="tel" name="celular" placeholder="Celular (10 dígitos)" pattern="[0-9]{10}" required>
+
+<input type="email" name="correo" placeholder="Correo electrónico" required>
+
+<input type="text" name="nombre" placeholder="NOMBRE COMPLETO"
+required oninput="this.value=this.value.toUpperCase()">
+
+<input type="text" name="curp" placeholder="CURP"
+required oninput="this.value=this.value.toUpperCase()">
+
+<input type="text" name="puesto" placeholder="Puesto o cargo"
+required oninput="this.value=this.value.toUpperCase()">
+
+<input type="tel" name="celular" placeholder="Celular (10 dígitos)"
+pattern="[0-9]{10}" required>
 
 <label>¿Cómo se enteró?</label>
 <select name="medio" required>
-<option value="Web">Búsqueda Web</option>
-<option value="Correo">Correo</option>
-<option value="Facebook">Facebook</option>
-<option value="Instagram">Instagram</option>
-<option value="LinkedIn">LinkedIn</option>
-<option value="Recomendación">Recomendación</option>
-<option value="Otro">Otro</option>
+  <option value="Web">Búsqueda Web</option>
+  <option value="Correo">Correo</option>
+  <option value="Facebook">Facebook</option>
+  <option value="Instagram">Instagram</option>
+  <option value="LinkedIn">LinkedIn</option>
+  <option value="Recomendación">Recomendación</option>
+  <option value="Otro">Otro</option>
 </select>
 
+<label>Talla de playera</label>
+<select name="talla" required>
+  <option>Chica</option>
+  <option>Mediana</option>
+  <option>Grande</option>
+  <option>Extra Grande</option>
+</select>
+
+<!-- FACTURA -->
 <label>¿Requiere factura?</label>
 <select name="requiere_factura" id="requiereFactura">
   <option value="NO">No</option>
@@ -572,26 +580,36 @@ aria-label="Cerrar formulario">✕</button>
 </select>
 
 <div id="facturaCampos" style="display:none">
-  <input name="razon_social" placeholder="Razón Social">
-  <input name="rfc" placeholder="RFC / RUC / RNC">
-  <input name="domicilio_fiscal" placeholder="Domicilio Fiscal">
-  <input name="codigo_postal" placeholder="Código Postal">
-  <input name="pais" placeholder="País">
+  <input name="razon_social" placeholder="Razón social"
+    oninput="this.value=this.value.toUpperCase()">
+
+  <input name="rfc" placeholder="RFC / RUC / RNC"
+    oninput="this.value=this.value.toUpperCase()">
+
+  <input name="domicilio_fiscal" placeholder="Domicilio fiscal"
+    oninput="this.value=this.value.toUpperCase()">
+
+  <input name="codigo_postal" placeholder="Código postal">
+
+  <input name="pais" placeholder="País"
+    oninput="this.value=this.value.toUpperCase()">
 
   <label>Uso del comprobante fiscal</label>
-  <select name="uso_cfdi">
-    <option>GASTOS EN GENERAL</option>
-    <option>POR DEFINIR</option>
-  </select>
-
-  <label>Forma de pago</label>
-  <select name="forma_pago">
-    <option>Transferencia electrónica de fondos (USD o MXN)</option>
-    <option>EVO Payments (VISA / MASTERCARD)</option>
+  <select name="uso_cfdi" id="usoCFDI">
+    <option value="">---</option>
+    <option value="GASTOS EN GENERAL">Gastos en general</option>
+    <option value="POR DEFINIR">Por definir</option>
   </select>
 </div>
 
+<!-- FORMA DE PAGO (SIEMPRE) -->
+<label>Forma de pago</label>
+<select name="forma_pago" required>
+  <option value="TRANSFERENCIA">Transferencia electrónica</option>
+  <option value="TARJETA">EVO Payments (VISA / MASTERCARD)</option>
+</select>
 
+<!-- DC-3 -->
 <label>¿Requiere DC-3?</label>
 <select name="dc3" id="dc3">
   <option value="NO">No</option>
@@ -599,47 +617,26 @@ aria-label="Cerrar formulario">✕</button>
 </select>
 
 <div id="dc3Campos" style="display:none">
-  <input name="rep_legal_dc3" placeholder="Representante legal DC-3">
-  <input name="rep_trabajadores_dc3" placeholder="Representante de trabajadores DC-3">
+  <input name="rep_legal_dc3" placeholder="Representante legal"
+    oninput="this.value=this.value.toUpperCase()">
+
+  <input name="rep_trabajadores_dc3" placeholder="Representante de trabajadores"
+    oninput="this.value=this.value.toUpperCase()">
 </div>
 
-
-<label>Talla de playera</label>
-<select name="talla" required>
-<option>Chica</option><option>Mediana</option><option>Grande</option><option>Extra Grande</option>
-
-
+<!-- TRASLADOS -->
 <label>Servicio de traslados</label>
-<select name="traslados">
-  <option>Sin costo dentro de horarios establecidos</option>
-  <option>AICM-HOTEL-FIPTRAC-AEROPUERTO</option>
-  <option>Haré traslados por mi cuenta</option>
-  <option>Hotel-FIPTRAC-Hotel</option>
+<select name="traslados" required>
+  <option value="A">A – Sin costo dentro de horarios establecidos</option>
+  <option value="B">B – AICM ⇄ Hotel ⇄ FIPTRAC ⇄ Aeropuerto</option>
+  <option value="C">C – Haré traslados por mi cuenta</option>
+  <option value="D">D – Hotel ⇄ FIPTRAC ⇄ Hotel</option>
 </select>
 
+<div id="costoCurso"></div>
 
-<div id="costoCurso"
-style="
-          margin-top:14px;
-          padding:12px;
-          background:#f4f6f8;
-          border-radius:10px;
-          text-align:center;
-          font-size:16px;
-          color:#003A70;
-          font-weight:600;
-        ">
-</div>
+<button class="btn" type="submit">Solicitar inscripción</button>
 
-<p style="font-size:13px;text-align:center;color:#555;margin-top:6px">
-Después de solicitar su inscripción espere a recibir un correo con la confirmación y el enlace de pago
-para finalizar el proceso.
-</p>
-
-<button class="btn" type="submit">
-Solicitar inscripción
-</button>
-<!-- <button class="btn">Solicitar inscripción</button> -->
 </form>
 </div>
 </div>
@@ -828,18 +825,22 @@ document.getElementById('popup').style.display = 'none';
 
 
 <script>
-/* ===== FACTURA ===== */
+/* FACTURA */
 document.getElementById("requiereFactura").addEventListener("change", e=>{
-  document.getElementById("facturaCampos").style.display =
-    e.target.value === "SI" ? "block" : "none";
+  const mostrar = e.target.value === "SI";
+  document.getElementById("facturaCampos").style.display = mostrar ? "block" : "none";
+  if(!mostrar){
+    document.getElementById("usoCFDI").value = "";
+  }
 });
 
-/* ===== DC-3 ===== */
+/* DC-3 */
 document.getElementById("dc3").addEventListener("change", e=>{
   document.getElementById("dc3Campos").style.display =
     e.target.value === "SI" ? "block" : "none";
 });
 </script>
+
 
   
   
