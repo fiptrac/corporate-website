@@ -476,7 +476,6 @@ border-radius:8px;border:1px solid #ccc
   border-radius:10px;
   border:1px dashed #ccc;
 }
-
   
 </style>
 </head>
@@ -603,7 +602,30 @@ con práctica intensiva en escenarios reales.
 <div class="grid" id="grid"></div>
 </section>
 
-  
+
+<!-- STICKY CURSOS -->
+<div id="stickyCursos" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #003A70;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    padding: 8px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    z-index: 998;
+    opacity: 0;              /* inicial invisible */
+    transform: translateY(-20px); /* empieza ligeramente arriba */
+    transition: opacity 0.35s ease, transform 0.35s ease;
+">
+  CURSOS
+</div>
+
+
+
   
 
 <section class="eventos">
@@ -890,6 +912,29 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 </script>
 
 
+<script>
+/* ================= Sticky "CURSOS" ================= */
+const intro = document.querySelector(".intro-eventos");
+const sticky = document.getElementById("stickyCursos");
+
+const observer = new IntersectionObserver(([entry]) => {
+  if (!entry.isIntersecting) {
+    // intro-eventos ya no se ve → mostrar sticky
+    sticky.style.opacity = "1";
+    sticky.style.transform = "translateY(0)";
+  } else {
+    // intro-eventos visible → ocultar sticky
+    sticky.style.opacity = "0";
+    sticky.style.transform = "translateY(-20px)";
+  }
+}, { threshold: 0 });
+
+observer.observe(intro);
+
+</script>
+
+
+  
 <script>
 /* ================= POPUPS FOOTER ================= */
 function abrirPopup(id){
