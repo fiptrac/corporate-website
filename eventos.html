@@ -673,9 +673,6 @@ data.forEach(ev => {
 const fecha = new Date(ev.FECHA)
 .toLocaleDateString('es-MX', { day:'2-digit', month:'long', year:'numeric' });
 
-const duracion = new Date(ev.DURACIÓN);
-const horas = duracion.getHours();
-const minutos = duracion.getMinutes();
 
 /* IF IS NECESSARY
 
@@ -692,7 +689,7 @@ grid.innerHTML += `
       <h3>${ev.NOMBRE}</h3>
       <p>${ev.DESCRIPCIÓN}</p>
       <p><b>Fecha:</b> ${fecha}</p>
-      <p><b>Duración:</b> ${horas}h ${minutos}m</p>
+      <p><b>Duración:</b> ${c["DURACION"]} hrs</p>
       <p><b>Cupo disponible:</b> ${ev.CUPO_DISPONIBLE}</p>
 
       <div class="btn-group">
