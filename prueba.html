@@ -227,6 +227,7 @@ button.btn{
 
 
 
+
 <label>Correo</label>
 <input 
   type="email"
@@ -388,7 +389,7 @@ document.getElementById("form").addEventListener("submit", e => {
 
   const data = Object.fromEntries(new FormData(e.target));
 
-  // VALIDACIONES
+  // 🔒 VALIDACIONES
   if(!validarCorreo(data.correo)){
     alert("Correo electrónico no válido");
     return;
@@ -399,13 +400,14 @@ document.getElementById("form").addEventListener("submit", e => {
     return;
   }
 
-  const pais = data.pais.trim().toLowerCase();
-  if((pais === "méxico" || pais === "mexico") && data.curp){
-    if(!validarCURP(data.curp.toUpperCase())){
-      alert("CURP no válida");
+  // CURP opcional
+  if(data.curp){
+    const curp = data.curp.toUpperCase();
+    if(!validarCURP(curp)){
+      alert("CURP no válida (formato incorrecto)");
       return;
     }
-    data.curp = data.curp.toUpperCase();
+    data.curp = curp;
   }
 
   // valores automáticos
@@ -425,6 +427,7 @@ document.getElementById("form").addEventListener("submit", e => {
     cerrarPopup();
   });
 });
+
 
 
 </script>
