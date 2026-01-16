@@ -172,6 +172,13 @@ button.btn{
   border:1px dashed #ccc;
 }
 
+#camposDC3{
+  padding:14px;
+  background:#f4f6f8;
+  border-radius:10px;
+  border:1px dashed #ccc;
+}
+
   
 </style>
 </head>
@@ -328,6 +335,10 @@ button.btn{
   <option value="No">No</option>
   <option value="Sí">Sí</option>
 </select>
+    
+<small style="font-weight:400;color:#666;font-size:12px;">
+  Escriba los nombres solo si aplica
+</small>
 
 <div id="camposDC3" style="display:none;margin-top:10px">
   <label>Representante legal (DC-3)</label>
@@ -337,7 +348,23 @@ button.btn{
   <input name="representante_trabajadores_dc3" data-uppercase>
 </div>
 
-
+<!-- Servicio de Traslados -->
+<label>Servicio de traslados</label>
+<select name="servicio_de_traslados" required>
+  <option value="">Selecciona una opción </option>
+  <option>
+    A
+  </option>
+  <option>
+    B
+  </option>
+  <option>
+    C
+  </option>
+  <option>
+    D
+  </option>
+</select>
 
 
 <button class="btn" type="submit">Enviar inscripción</button>
@@ -398,7 +425,6 @@ function toggleDC3(){
   camposDC3.style.display = requiereDC3 ? "block" : "none";
 
   dc3Inputs.forEach(input=>{
-    input.required = requiereDC3;
     if(!requiereDC3) input.value = "";
   });
 }
