@@ -321,8 +321,20 @@ button.btn{
     <option>GASTOS EN GENERAL</option>
     <option>POR DEFINIR</option>
   </select>
+</div>
 
+    <label>¿Requiere emisión de DC-3?</label>
+<select name="dc3" id="dc3">
+  <option value="No">No</option>
+  <option value="Sí">Sí</option>
+</select>
 
+<div id="camposDC3" style="display:none;margin-top:10px">
+  <label>Representante legal (DC-3)</label>
+  <input name="representante_legal_dc3" data-uppercase>
+
+  <label>Representante de los trabajadores (DC-3)</label>
+  <input name="representante_trabajadores_dc3" data-uppercase>
 </div>
 
 
@@ -374,6 +386,26 @@ facturaSelect.addEventListener("change", toggleFactura);
     toggleFactura();
 </script>
 
+
+  <script>
+const dc3Select = document.getElementById("dc3");
+const camposDC3 = document.getElementById("camposDC3");
+const dc3Inputs = camposDC3.querySelectorAll("input");
+
+function toggleDC3(){
+  const requiereDC3 = dc3Select.value === "Sí";
+
+  camposDC3.style.display = requiereDC3 ? "block" : "none";
+
+  dc3Inputs.forEach(input=>{
+    input.required = requiereDC3;
+    if(!requiereDC3) input.value = "";
+  });
+}
+
+dc3Select.addEventListener("change", toggleDC3);
+toggleDC3(); // estado inicial
+</script>
 
   
   
