@@ -87,6 +87,12 @@ border-color:#003A70;
 box-shadow:0 0 0 2px rgba(0,58,112,0.12);
 }
 
+  
+[data-uppercase]{
+  text-transform: uppercase;
+}
+
+  
 .popup-close{
   position:absolute;
   top:16px;
@@ -408,6 +414,15 @@ document.getElementById("form").addEventListener("submit", e => {
 });
 
 </script>
+
+<script>
+document.querySelectorAll("[data-uppercase]").forEach(input => {
+  input.addEventListener("input", () => {
+    input.value = input.value.toUpperCase();
+  });
+});
+</script>
+
 
 </body>
 </html>
