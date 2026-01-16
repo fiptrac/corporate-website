@@ -430,6 +430,8 @@ function inscribirse(nombre, precioMXN, precioUSD){
   cursoActual = nombre;
 
   document.getElementById("cursoTitulo").innerText = nombre;
+  document.querySelector('input[name="curso"]').value = nombre;
+
 
   document.getElementById("precioCurso").innerHTML = `
     💰 Precio del curso<br>
