@@ -709,7 +709,7 @@ document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterva
 <!--  MENÚ DE TARJETAS  --> 
 <script>
 /* ================== CONFIG ================== */
-const API = "https://script.google.com/macros/s/AKfycbyXZpdoCZxiEbRnYDXjzGySNKhME6wO_tL36bywpzzlZ9hfOSQJ4-BeK0WQ5i8LywlX/exec";
+const API = "https://script.google.com/macros/s/AKfycbyk9pRj1JLatJCkZmVb8BkP1e0UGUvkRCOBhZbK-P3aPVDybZUBVJq3hdw2dlNucqvR/exec";
 let cursoActual = "";
 let precioMXN = "";
 let precioUSD = "";
@@ -748,6 +748,7 @@ grid.innerHTML += `
   <div class="card">
     <div class="card-body">
       <h3>${ev.NOMBRE}</h3>
+
       <p><b>Categoría:</b> ${ev.CATEGORIA}</p>
       <p><b>Inicio:</b> ${ev["FECHA INICIO"]}</p>
       <p><b>Término:</b> ${ev["FECHA TERMINO"]}</p>
@@ -760,18 +761,18 @@ grid.innerHTML += `
 
       <div class="btn-group">
         <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
-        <button class="btn"
-          onclick="inscribirse(
-            '${ev.NOMBRE}',
-            '${ev.PRECIO_MXN}',
-            '${ev.PRECIO_USD}'
-          )">
+
+        <button class="btn btn-inscribirse"
+          data-nombre="${ev.NOMBRE}"
+          data-mxn="${ev.PRECIO_MXN}"
+          data-usd="${ev.PRECIO_USD}">
           Inscribirse
         </button>
       </div>
     </div>
   </div>
 `;
+
 
 });
 });
