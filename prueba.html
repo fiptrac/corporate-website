@@ -350,31 +350,51 @@ button.btn{
 
 <!-- Servicio de Traslados -->
 <label>Servicio de traslados</label>
-<div id="camposTraslados" style="
-    padding:14px;
-    background:#f4f6f8;
-    border-radius:10px;
-    border:1px dashed #ccc;
-    margin-top:6px;
-    max-height:200px;   /* altura máxima */
-    overflow-y:auto;    /* scroll vertical si excede */
+<input type="text" name="traslados" id="trasladosInput" placeholder="Selecciona una opción" readonly style="cursor:pointer;">
+
+<!-- POPUP DE SELECCIÓN -->
+<div id="popupTraslados" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    backdrop-filter:blur(3px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:10000;
 ">
-  <select name="traslados" required style="width:100%;">
-    <option value="">Selecciona una opción</option>
-    <option value="A">
-      A – Este servicio es SIN NINGUN COSTO SIEMPRE Y CUANDO ESTEN DENTRO DE LOS HORARIOS Y DIAS ESTABLECIDOS, en caso de NO coincidir, los traslados corren por cuenta de los participantes.
-    </option>
-    <option value="B">
-      B – Requiero traslados AEROPUERTO AICM-HOTEL-FIPTRAC-AEROPUERTO Y TRASLADOS HOTEL-FIPTRAC-HOTEL *SOLO APLICA EN HOTEL SUGERIDO Y HORARIOS ESTABLECIDOS POR FIPTRAC*
-    </option>
-    <option value="C">
-      C – Haré todos los traslados por mi cuenta
-    </option>
-    <option value="D">
-      D – Requiero solo traslados Hotel-FIPTRAC Y FIPTRAC-Hotel *SOLO APLICA PARA HUESPEDES EN HOTEL Y HORARIOS ESTABLECIDOS POR FIPTRAC*
-    </option>
-  </select>
+  <div style="
+      background:#fff;
+      border-radius:12px;
+      max-width:500px;
+      width:90%;
+      padding:20px;
+      max-height:80vh;
+      overflow-y:auto;
+      box-shadow:0 20px 50px rgba(0,0,0,0.35);
+  ">
+    <h3 style="text-align:center; color:#003A70; margin-bottom:12px;">Selecciona el servicio de traslados</h3>
+
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <button type="button" class="btnOpcion" data-value="A">
+        A – Este servicio es SIN NINGUN COSTO SIEMPRE Y CUANDO ESTEN DENTRO DE LOS HORARIOS Y DIAS ESTABLECIDOS, en caso de NO coincidir, los traslados corren por cuenta de los participantes.
+      </button>
+      <button type="button" class="btnOpcion" data-value="B">
+        B – Requiero traslados AEROPUERTO AICM-HOTEL-FIPTRAC-AEROPUERTO Y TRASLADOS HOTEL-FIPTRAC-HOTEL *SOLO APLICA EN HOTEL SUGERIDO Y HORARIOS ESTABLECIDOS POR FIPTRAC*
+      </button>
+      <button type="button" class="btnOpcion" data-value="C">
+        C – Haré todos los traslados por mi cuenta
+      </button>
+      <button type="button" class="btnOpcion" data-value="D">
+        D – Requiero solo traslados Hotel-FIPTRAC Y FIPTRAC-Hotel *SOLO APLICA PARA HUESPEDES EN HOTEL Y HORARIOS ESTABLECIDOS POR FIPTRAC*
+      </button>
+    </div>
+
+    <button type="button" onclick="cerrarPopupTraslados()" style="margin-top:14px; width:100%;" class="btn">Cancelar</button>
+  </div>
 </div>
+
 
 
 <small style="font-weight:400;color:#666;font-size:12px;">
@@ -448,6 +468,34 @@ function toggleDC3(){
 dc3Select.addEventListener("change", toggleDC3);
 toggleDC3(); // estado inicial
 </script>
+
+
+
+  
+<script>
+
+const trasladosInput = document.getElementById("trasladosInput");
+const popupTraslados = document.getElementById("popupTraslados");
+
+// Abrir popup al hacer clic en el input
+trasladosInput.addEventListener("click", () => {
+  popupTraslados.style.display = "flex";
+});
+
+// Cerrar popup
+function cerrarPopupTraslados(){
+  popupTraslados.style.display = "none";
+}
+
+// Seleccionar opción
+document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
+  btn.addEventListener("click", () => {
+    trasladosInput.value = btn.dataset.value;
+    cerrarPopupTraslados();
+  });
+});
+</script>
+
 
   
   
