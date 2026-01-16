@@ -207,7 +207,7 @@ button.btn{
 <input type="hidden" name="curso">
 
 <label>Nombre completo</label>
-<input name="nombre" required>
+<input name="nombre" data-uppercase required>
 
 <label>Puesto / Cargo</label>
 <input name="puesto">
@@ -219,11 +219,8 @@ button.btn{
   </span>
 </label>
 
-<input
-  name="curp"
-  id="curp"
-  maxlength="18"
-  placeholder="18 caracteres">
+<input name="curp" id="curp" maxlength="18" data-uppercase>
+
 
 
 
@@ -247,7 +244,7 @@ button.btn{
 
 
 <label>País</label>
-<input name="pais">
+<input name="pais" data-uppercase>
 
 <label>Factura</label>
 <select name="factura">
@@ -256,10 +253,10 @@ button.btn{
 </select>
 
 <label>Razón social</label>
-<input name="razon_social">
+<input name="razon_social" data-uppercase>
 
 <label>RFC / RUC / RNC</label>
-<input name="rfc">
+<input name="rfc" data-uppercase>
 
 <label>Uso del comprobante fiscal</label>
 <input name="uso_cfdi">
@@ -274,7 +271,21 @@ button.btn{
 </div>
 
 
+<script>
+function validarCorreo(correo){
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(correo);
+}
 
+function validarTelefono(tel){
+  return /^[0-9]{10}$/.test(tel);
+}
+
+function validarCURP(curp){
+  const regex = /^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$/;
+  return regex.test(curp);
+}
+</script>
 
 
   
@@ -413,8 +424,6 @@ document.getElementById("form").addEventListener("submit", e => {
     cerrarPopup();
   });
 });
-
-
 
 </script>
 
