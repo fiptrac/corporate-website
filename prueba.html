@@ -212,8 +212,14 @@ button.btn{
 <label>Puesto / Cargo</label>
 <input name="puesto">
 
-<label>CURP</label>
-<input name="curp">
+<label>
+  CURP
+  <span style="font-weight:400;color:#666;font-size:12px">
+    (solo México)
+  </span>
+</label>
+<input name="curp" id="curp">
+
 
 <label>Correo</label>
 <input type="email" name="correo" required>
@@ -223,13 +229,6 @@ button.btn{
 
 <label>País</label>
 <input name="pais">
-
-<label>Pago</label>
-<select name="pago">
-  <option>Efectivo</option>
-  <option>Transferencia</option>
-  <option>Tarjeta</option>
-</select>
 
 <label>Factura</label>
 <select name="factura">
@@ -324,26 +323,57 @@ function inscribirse(nombre, precioMXN, precioUSD){
   document.getElementById("popup").style.display = "flex";
 }
 
+const paisInput = document.getElementById("pais");
+const curpInput = document.getElementById("curp");
+
+function validarCURPporPais(){
+  const pais = paisInput.value.trim().toLowerCase();
+
+  if(pais === "méxico" || pais === "mexico"){
+    curpInput.disabled = false;
+    curpInput.placeholder = "Ingresa tu CURP";
+  }else{
+    curpInput.value = "";
+    curpInput.disabled = true;
+    curpInput.placeholder = "Solo requerido para México";
+  }
+}
+
+paisInput.addEventListener("input", validarCURPporPais);
 
 
 function cerrarPopup(){
   document.getElementById("popup").style.display="none";
 }
 
-document.getElementById("form").addEventListener("submit",e=>{
-e.preventDefault();
-const data=Object.fromEntries(new FormData(e.target));
-fetch(API,{
-  method:"POST",
-  body:JSON.stringify(data)
-})
-.then(r=>r.json())
-.then(()=>{
-  alert("Inscripción registrada");
-  e.target.reset();
-  cerrarPopup();
+document.getElementById("form").addEventListener("submit", e => {
+  e.preventDefault();
+
+const data = Object.fromEntries(new FormData(e.target));
+
+// valores automáticos
+data.pago = "PENDIENTE";
+
+// factura
+if(data.factura === "Sí"){
+  data.factura = "OK";
+}else{
+  data.factura = "";
+}
+
+
+  fetch(API,{
+    method:"POST",
+    body:JSON.stringify(data)
+  })
+  .then(r=>r.json())
+  .then(()=>{
+    alert("Inscripción registrada");
+    e.target.reset();
+    cerrarPopup();
+  });
 });
-});
+
 </script>
 
 </body>
