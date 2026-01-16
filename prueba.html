@@ -925,12 +925,24 @@ document.addEventListener('keydown', e => {
 <div id="footer-container"></div>
 
 <script>
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer-container").innerHTML = data;
-    });
+fetch("footer.html")
+  .then(response => response.text())
+  .then(data => {
+    const footerContainer = document.getElementById("footer-container");
+    footerContainer.innerHTML = data;
+
+    // Reasignar onclick del botón de cierre del popup
+    const btnCerrar = footerContainer.querySelector(".fiptrac-close");
+    const popup = footerContainer.querySelector(".fiptrac-overlay");
+    if(btnCerrar && popup){
+      btnCerrar.addEventListener("click", ()=>{
+        popup.style.display = "none";
+        popup.setAttribute('aria-hidden','true');
+      });
+    }
+  });
 </script>
+
 
 
 
