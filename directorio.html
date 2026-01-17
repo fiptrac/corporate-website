@@ -559,7 +559,6 @@ select:focus{
   <div class="filters">
     <select id="pais"><option>País</option></select>
     <select id="entidad"><option>Entidad</option></select>
-    <select id="certificacion"><option>Certificado</option></select>
     <button class="btn" onclick="abrirFormulario()">Solicitar Registro</button>
   </div>
 
@@ -571,17 +570,14 @@ select:focus{
   <div class="popup-card">
     <button class="close-btn" onclick="cerrar()">✕</button>
     <h3>Solicitud de Alta</h3>
-    <form id="form">
-      <select id="fPais" required></select>
-      <select id="fEntidad" required></select>
-      <select id="fCert" required></select>
-      <input id="otroCert" placeholder="OTRO CERTIFICADO" style="display:none">
-      <input id="servicio" placeholder="SERVICIO" required>
-      <input id="empresa" placeholder="EMPRESA" required>
-      <input id="telefono" placeholder="TELÉFONO (10 dígitos)" pattern="\d{10}" required>
-      <input id="correo" type="email" placeholder="CORREO" required>
-      <button class="btn">Enviar solicitud</button>
-    </form>
+      <form id="form">
+        <select id="fPais" required></select>
+        <select id="fEntidad" required></select>
+        <input id="empresa" placeholder="EMPRESA" required>
+        <input id="telefono" placeholder="TELÉFONO (10 dígitos)" pattern="\d{10}" required>
+        <input id="correo" type="email" placeholder="CORREO" required>
+        <button class="btn">Enviar solicitud</button>
+      </form>
   </div>
 </div>
 
@@ -665,38 +661,29 @@ fetch(API).then(r=>r.json()).then(d=>{
 
 function cargarFiltros(){
   pais.innerHTML="<option>País</option>";
-  [...new Set(directorio.map(x=>x.PAÍS))].forEach(p=>pais.innerHTML+=`<option>${p}</option>`);
+  [...new Set(directorio.map(x=>x.PAÍS))]
+    .forEach(p=>pais.innerHTML+=`<option>${p}</option>`);
 }
 
 pais.onchange=()=>{
   entidad.innerHTML="<option>Entidad</option>";
-  certificacion.innerHTML="<option>Certificado</option>";
-  directorio.filter(x=>x.PAÍS===pais.value)
-    .map(x=>x.ENTIDAD).filter((v,i,a)=>a.indexOf(v)==i)
+  directorio
+    .filter(x=>x.PAÍS===pais.value)
+    .map(x=>x.ENTIDAD)
+    .filter((v,i,a)=>a.indexOf(v)==i)
     .forEach(e=>entidad.innerHTML+=`<option>${e}</option>`);
-  directorio.filter(x=>x.PAÍS===pais.value)
-    .map(x=>x.CERTIFICADO).filter((v,i,a)=>a.indexOf(v)==i)
-    .forEach(c=>certificacion.innerHTML+=`<option>${c}</option>`);
   filtrar();
 };
 
-entidad.onchange=()=>{
-  certificacion.innerHTML="<option>Certificado</option>";
-  directorio.filter(x=>x.PAÍS===pais.value && x.ENTIDAD===entidad.value)
-    .map(x=>x.CERTIFICADO).filter((v,i,a)=>a.indexOf(v)==i)
-    .forEach(c=>certificacion.innerHTML+=`<option>${c}</option>`);
-  filtrar();
-};
-
-certificacion.onchange=filtrar;
+entidad.onchange=filtrar;
 
 function filtrar(){
   let r=directorio;
-  if(pais.value!="País") r=r.filter(x=>x.PAÍS===pais.value);
-  if(entidad.value!="Entidad") r=r.filter(x=>x.ENTIDAD===entidad.value);
-  if(certificacion.value!="Certificado") r=r.filter(x=>x.CERTIFICADO===certificacion.value);
+  if(pais.value!=="País") r=r.filter(x=>x.PAÍS===pais.value);
+  if(entidad.value!=="Entidad") r=r.filter(x=>x.ENTIDAD===entidad.value);
   pintar(r);
 }
+
 
 function pintar(lista){
   grid.innerHTML="";
@@ -706,7 +693,6 @@ function pintar(lista){
         <h4>${p.EMPRESA}</h4>
         <p>${p.SERVICIO}</p>
         <p><b>${p.ENTIDAD}</b> – ${p.PAÍS}</p>
-        <p><b>${p.CERTIFICADO}</b></p>
         <p>${p.TELÉFONO}</p>
         <p>${p.CORREO}</p>
       </div>`;
@@ -720,33 +706,34 @@ function abrirFormulario(){
     baseDatos=c;
     fPais.innerHTML="<option>País</option>";
     c.paises.forEach(p=>fPais.innerHTML+=`<option>${p}</option>`);
-    fCert.innerHTML="<option>Certificado</option>";
-    c.certificados.forEach(x=>fCert.innerHTML+=`<option>${x}</option>`);
-    fCert.innerHTML+="<option>OTRO</option>";
   });
 }
 
 fPais.onchange=()=>{
   fEntidad.innerHTML="<option>Entidad</option>";
-  (baseDatos.catalogo[fPais.value]||[]).forEach(e=>fEntidad.innerHTML+=`<option>${e}</option>`);
+  (baseDatos.catalogo[fPais.value]||[])
+    .forEach(e=>fEntidad.innerHTML+=`<option>${e}</option>`);
 };
-
-fCert.onchange=e=>otroCert.style.display=e.target.value==="OTRO"?"block":"none";
-servicio.oninput=()=>servicio.value=servicio.value.toUpperCase();
 
 form.onsubmit=e=>{
   e.preventDefault();
   if(!/^\d{10}$/.test(telefono.value)) return alert("Teléfono inválido");
-  fetch(API,{method:"POST",body:JSON.stringify({
-    PAÍS:fPais.value,ENTIDAD:fEntidad.value,
-    CERTIFICADO:fCert.value==="OTRO"?otroCert.value:fCert.value,
-    SERVICIO:servicio.value,EMPRESA:empresa.value,
-    TELÉFONO:telefono.value,CORREO:correo.value
-  })}).then(()=>{
+
+  fetch(API,{
+    method:"POST",
+    body:JSON.stringify({
+      PAÍS:fPais.value,
+      ENTIDAD:fEntidad.value,
+      EMPRESA:empresa.value,
+      TELÉFONO:telefono.value,
+      CORREO:correo.value
+    })
+  }).then(()=>{
     alert("Solicitud enviada correctamente");
-    cerrar();form.reset();
+    cerrar(); form.reset();
   });
 };
+
 
 function cerrar(){popup.style.display="none";}
 popup.onclick=e=>{if(e.target===popup)cerrar();}
