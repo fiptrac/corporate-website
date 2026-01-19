@@ -1,262 +1,151 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Footer FIPTRAC</title>
+<!-- FOOTER FIPTRAC — versión para include (sin <html>/<head>/<body>) -->
 
-<!-- FUENTE GLOBAL -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<!-- ICONOS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* ======================== */
-/* ESTILOS DEL FOOTER */
-/* ======================== */
-
-.footer {
-  background:#00294d;
-  color:white;
-  padding:50px 25px;
-  font-family:'Montserrat', sans-serif;
+:root{
+  --fiptrac-bg:#00294d;
+  --fiptrac-accent:#75c7ff;
+  --fiptrac-primary:#003A70;
 }
 
-.footer-container {
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:40px;
+.footer{
+  background:var(--fiptrac-bg);
+  color:#fff;
+  padding:0px 24px 28px;
+  font-family:'Montserrat',sans-serif;
 }
 
-/* LOGO CENTRAL */
-.footer-logo {
-  width:100%;
-  text-align:center;
-  margin-bottom:25px;
+.footer-container{
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
 }
 
-.footer-logo img {
-  width:100px;
-  height:auto;
-  filter:drop-shadow(0 0 4px rgba(255,255,255,0.5));
-}
-
-/* COLUMNA IZQUIERDA */
-.footer-left {
+/* Columna izquierda */
+.footer-left{
   display:flex;
   flex-direction:column;
-  gap:20px;
-  text-align:center;
   align-items:center;
+  gap:16px;
+  padding-top:35px; /* ajusta según necesites */
 }
 
-/* Íconos redes */
-.footer-social {
+
+.footer-social{
   display:flex;
   gap:18px;
-  justify-content:center;
 }
 
-.footer-social a {
-  color:white;
-  font-size:26px;
-  transition:0.3s;
+.footer-social a{
+  color:#fff;
+  font-size:24px;
+  transition:.25s ease;
 }
 
-.footer-social a:hover {
-  color:#1da1f2;
-  transform:scale(1.15);
-}
+.footer-social a:hover{ color:#1da1f2; transform:translateY(-2px) scale(1.1); }
 
-/* CONTACTO */
-.footer-contact div {
-  margin:6px 0;
+.footer-contact{
   font-size:15px;
 }
 
-.footer-contact i {
-  margin-right:8px;
-}
+.footer-contact i{ margin-right:8px; }
 
-/* COLUMNA DERECHA */
-.footer-right {
+/* Columna derecha */
+.footer-right{
   text-align:center;
   font-size:15px;
-  align-items:center;
-  white-space:pre-line;        /* ← Mantiene los saltos de línea */
+  white-space:pre-line;
 }
 
-.footer-right a {
-  color:#75c7ff;
+.footer-right a{
+  color:var(--fiptrac-accent);
   cursor:pointer;
   text-decoration:underline;
 }
 
-.footer-bottom {
-  margin-top:35px;
+.footer-bottom{
+  margin-top:28px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.15);
   text-align:center;
   font-size:13px;
-  opacity:0.8;
+  opacity:.85;
+}
+
+  .footer-privacy a {
+  color: var(--fiptrac-accent);
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.25s ease;
+}
+
+.footer-privacy a:hover {
+  color: #75e0ff; /* ligero cambio al pasar el mouse */
 }
 
 
-
-/* ===========================================
-   POPUP UNIFICADO PREMIUM 
-=========================================== */
-
-.fiptrac-overlay {
-  position: fixed;
-  top:0; left:0; right:0; bottom:0;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(4px);
+/* ================= POPUP ================= */
+.fiptrac-overlay{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(4px);
   display:none;
-  align-items:center;
-  justify-content:center;
+  align-items:center; justify-content:center;
   z-index:9999;
 }
 
-.fiptrac-popup {
+.fiptrac-popup{
   background:#fff;
-  max-width:550px;
-  width:92%;
-  padding:30px 35px;
+  max-width:560px; width:92%;
+  padding:30px 34px;
   border-radius:16px;
-  box-shadow:0 8px 28px rgba(0,0,0,0.18);
+  box-shadow:0 8px 28px rgba(0,0,0,.18);
   animation:popupEnter .35s ease;
-  font-family:'Montserrat', sans-serif;
   position:relative;
 }
 
-@keyframes popupEnter {
-  from { transform:scale(.85); opacity:0; }
-  to   { transform:scale(1); opacity:1; }
+@keyframes popupEnter{ from{transform:scale(.9);opacity:0} to{transform:scale(1);opacity:1} }
+
+.fiptrac-popup h2{
+  margin:0 0 12px;
+  color:var(--fiptrac-primary);
+  font-size:22px; font-weight:700; text-align:center;
 }
 
-.fiptrac-popup h2 {
-  margin-bottom:14px;
-  color:#003A70;
-  font-size:24px;
-  font-weight:700;
-  text-align:center;
+.fiptrac-popup p{ color:#333; line-height:1.55; }
+
+.fiptrac-close{
+  position:absolute; top:14px; right:18px;
+  font-size:22px; color:var(--fiptrac-primary);
+  cursor:pointer; transition:.25s;
 }
 
-.fiptrac-popup p {
-  margin-top:8px;
-  line-height:1.55;
-  color:#333;
-}
+.fiptrac-close:hover{ color:#0074D9; transform:scale(1.1); }
 
-.fiptrac-close {
-  position:absolute;
-  top:18px;
-  right:22px;
-  font-size:22px;
-  color:#003A70;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.fiptrac-close:hover {
-  color:#0074D9;
-  transform:scale(1.15);
-}
-
-/* FORMULARIO */
-
-.fiptrac-form-group { margin-top:10px; }
-
-.fiptrac-form-group input,
-.fiptrac-form-group textarea {
-  width:100%;
-  padding:12px 14px;
-  border-radius:10px;
-  border:1px solid #CCC;
-  font-size:15px;
-  margin-top:6px;
-  outline:none;
-  transition:.3s;
-}
-
-.fiptrac-form-group input:focus,
-.fiptrac-form-group textarea:focus {
-  border-color:#003A70;
-}
-
-.fiptrac-btn {
-  display:block;
-  width:100%;
-  margin-top:22px;
-  padding:13px;
-  background:#003A70;
-  color:#fff;
-  font-weight:700;
-  border-radius:10px;
-  border:none;
-  cursor:pointer;
-  transition:.3s;
-  font-size:16px;
-}
-
-.fiptrac-btn:hover {
-  background:#005A9C;
-}
-
-
-/* RESPONSIVE */
+/* Responsive */
 @media(max-width:700px){
-  .footer-container {
-    text-align:center;
-    flex-direction:column;
-    align-items:center;
-  }
-  .footer-right {
-    text-align:center;
-  }
+  .footer-container{ grid-template-columns:1fr; text-align:center; }
 }
 </style>
 
-</head>
-<body>
-
-<!-- ==================================== -->
-<!-- FOOTER -->
-<!-- ==================================== -->
-
 <footer class="footer">
-
-  <!-- LOGO CENTRADO -->
-  <div class="footer-logo">
-    <img src="sin fondo.png" alt="FIPTRAC">
-  </div>
-
   <div class="footer-container">
 
     <!-- IZQUIERDA -->
     <div class="footer-left">
-
-      <div class="footer-social">
-        <a href="https://www.facebook.com/fiptrac/" target="_blank"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.instagram.com/fiptracmx" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/company/fiptracmx/" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://www.youtube.com/channel/UC2ha_K6AIBIjV_fGwbmXFmw/featured" target="_blank"><i class="fab fa-youtube"></i></a>
-
-        <a href="https://wa.me/525576861184?text=Hola%20FIPTRAC,%20solicito%20información" target="_blank">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-
-        <a onclick="abrirPopup('popup-contacto')" style="cursor:pointer;">
-          <i class="fa-solid fa-envelope"></i>
-        </a>
+      <div class="footer-social" aria-label="Redes sociales">
+        <a href="https://www.facebook.com/fiptrac/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/fiptracmx" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/fiptracmx/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.youtube.com/channel/UC2ha_K6AIBIjV_fGwbmXFmw/featured" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
       </div>
-
-      <div class="footer-contact">
-        <div><i class="fa-solid fa-phone"></i> +52 55 7686 1184</div>
-      </div>
-
+      <div class="footer-contact"><i class="fa-solid fa-phone"></i> +52 55 7686 1184</div>
+      <div class="footer-contact"><i class="fa-solid fa-envelope"></i> contacto@fiptrac.com</div>
     </div>
 
     <!-- DERECHA -->
@@ -264,135 +153,44 @@
       <div>
 Fraccionamiento Plutarco Elías Calles  
 Lote 10, Tepojaco 43823  
-Corredor Industrial Huitzila Tepojaco, Hidalgo.
-      </div>
-
-      <div style="margin-top:10px;">
-        <a onclick="abrirPopup('popup-privacidad')">Política de privacidad</a>
+Corredor Industrial Huitzila Tepojaco
+Tizayuca, Hidalgo, México.
       </div>
     </div>
 
   </div>
 
-  <div class="footer-bottom">
-    © 2025 FIPTRAC - Fire Protection Training Center - Todos los derechos reservados
+  <!-- ENLACE PRIVACIDAD CENTRADO -->
+  <div class="footer-privacy" style="text-align:center; margin:16px 0;">
+    <a role="button" tabindex="0" onclick="abrirPopup('popup-privacidad')">Política de privacidad</a>
   </div>
+
+  <div class="footer-bottom">© 2025 FIPTRAC, SC ® — Fire Protection Training Center. Todos los derechos reservados.</div>
 </footer>
 
 
-
-<!-- ==================================== -->
-<!-- POPUP — POLÍTICA DE PRIVACIDAD -->
-<!-- ==================================== -->
-
-<div id="popup-privacidad" class="fiptrac-overlay">
-  <div class="fiptrac-popup">
-    <span class="fiptrac-close" onclick="cerrarPopup('popup-privacidad')">&times;</span>
+<!-- POPUP PRIVACIDAD -->
+<div id="popup-privacidad" class="fiptrac-overlay" aria-hidden="true">
+  <div class="fiptrac-popup" role="dialog" aria-modal="true">
+    <span class="fiptrac-close" onclick="cerrarPopup('popup-privacidad')">✕</span>
     <h2>Política de Privacidad</h2>
     <p>
-      De acuerdo a la Ley Federal de Protección de Datos Personales, Fire Protection Training Center FIPTRAC SC® es responsable del uso y tratamiento de los datos personales proporcionados.  
+      De acuerdo a la Ley Federal de Protección de Datos Personales, Fire Protection Training Center FIPTRAC, SC® es responsable del uso y tratamiento de los datos personales proporcionados.
       <br><br>
-      La información proporcionada será utilizada únicamente con fines de contacto, seguimiento, envío de información o finalidades compatibles.  
+      La información se utiliza exclusivamente para fines de contacto, seguimiento y envío de información relacionada.
       <br><br>
-      Usted puede ejercer sus derechos ARCO o solicitar baja de nuestra base de datos enviando un correo a contacto@fiptrac.com o llamando al 55 7686 1184.  
+      Puede ejercer sus derechos ARCO escribiendo a contacto@fiptrac.com o llamando al 55 7686 1184.
       <br><br>
-      Este aviso podrá ser modificado y publicado en www.fiptrac.com.
+      Este aviso puede modificarse y publicarse en www.fiptrac.com.
     </p>
   </div>
 </div>
 
-
-
-<!-- ==================================== -->
-<!-- POPUP — FORMULARIO DE CONTACTO -->
-<!-- ==================================== -->
-
-<div id="popup-contacto" class="fiptrac-overlay">
-  <div class="fiptrac-popup">
-    <span class="fiptrac-close" onclick="cerrarPopup('popup-contacto')">&times;</span>
-    <h2>Solicitar Información</h2>
-
-    <div class="fiptrac-form-group">
-      <label>Nombre completo *</label>
-      <input id="c-nombre" type="text">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Cargo / Área *</label>
-      <input id="c-cargo" type="text">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Empresa *</label>
-      <input id="c-empresa" type="text">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Estado o País *</label>
-      <input id="c-ubicacion" type="text">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Teléfono *</label>
-      <input id="c-telefono" type="text">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Correo electrónico *</label>
-      <input id="c-email" type="email">
-    </div>
-
-    <div class="fiptrac-form-group">
-      <label>Mensaje *</label>
-      <textarea id="c-mensaje" rows="4"></textarea>
-    </div>
-
-    <button class="fiptrac-btn" onclick="enviarCorreo()">Enviar solicitud</button>
-  </div>
-</div>
-
-
-
-<!-- ==================================== -->
-<!-- SCRIPTS -->
-<!-- ==================================== -->
-
 <script>
-function abrirPopup(id){
-  document.getElementById(id).style.display = "flex";
-}
-
-function cerrarPopup(id){
-  document.getElementById(id).style.display = "none";
-}
-
-function enviarCorreo() {
-  const campos = {
-    nombre: document.getElementById("c-nombre").value.trim(),
-    cargo: document.getElementById("c-cargo").value.trim(),
-    empresa: document.getElementById("c-empresa").value.trim(),
-    ubicacion: document.getElementById("c-ubicacion").value.trim(),
-    telefono: document.getElementById("c-telefono").value.trim(),
-    email: document.getElementById("c-email").value.trim(),
-    mensaje: document.getElementById("c-mensaje").value.trim(),
-  };
-
-  for (const key in campos) {
-    if (!campos[key]) {
-      alert("Por favor completa todos los campos obligatorios.");
-      return;
-    }
-  }
-
-  const subject = encodeURIComponent("SOLICITUD DE CONTACTO - FIPTRAC");
-  const body = encodeURIComponent(
-    `Nombre: ${campos.nombre}\nCargo: ${campos.cargo}\nEmpresa: ${campos.empresa}\nUbicación: ${campos.ubicacion}\nTeléfono: ${campos.telefono}\nCorreo: ${campos.email}\n\nMensaje:\n${campos.mensaje}`
-  );
-
-  window.location.href = `mailto:fiptrac.platform@gmail.com?subject=${subject}&body=${body}`;
-  cerrarPopup('popup-contacto');
-}
+function abrirPopup(id){ const p=document.getElementById(id); if(p){ p.style.display='flex'; p.setAttribute('aria-hidden','false'); }}
+function cerrarPopup(id){ const p=document.getElementById(id); if(p){ p.style.display='none'; p.setAttribute('aria-hidden','true'); }}
+// cerrar al hacer click fuera
+document.addEventListener('click',e=>{ if(e.target.classList.contains('fiptrac-overlay')) e.target.style.display='none'; });
+// cerrar con ESC
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.fiptrac-overlay').forEach(p=>p.style.display='none'); });
 </script>
-
-</body>
-</html>

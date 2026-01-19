@@ -1,221 +1,894 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto | FIPTRAC</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto | FIPTRAC</title>
 
-    <!-- Estilos globales -->
-    <link rel="stylesheet" href="assets/css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
 
-    <!-- Ícono -->
-    <link rel="icon" href="assets/img/logo/favicon.png" type="image/png">
+<style>
 
-    <style>
-        /* ---------------------------
-           ESTILOS LOCALES DE CONTACTO
-        ----------------------------*/
-        .contact-hero {
-            background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)),
-                        url('assets/img/header/contacto-bg.jpg') center/cover;
-            padding: 120px 20px;
-            text-align: center;
-            color: #fff;
-        }
+/* ===== BASE TIPOGRAFÍA GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-        .contact-hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
+  /*==================  NAVBAR ==================*/
+  /* ===========================
+     HEADER STICKY (compact & scroll)
+     - header.scrolled: fondo semitransparente + compact
+     - header.nav-hide: se oculta al bajar scroll
+  ============================ */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
+    background: rgba(255,255,255,0.92);
+  }
 
-        .contact-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 30px;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 4px 14px rgba(0,0,0,.12);
-        }
+  /* Cuando el usuario baja lo volvemos más pequeño / con fondo */
+  header.scrolled {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  }
 
-        .contact-container h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
+  /* Cuando el usuario baja rápido ocultamos la barra */
+  header.nav-hide {
+    transform: translateY(-110%);
+  }
 
-        form input, form textarea {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 18px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            background: #fafafa;
-            font-size: 16px;
-        }
+  /* Contenedor del nav: aquí se controla el "grosor" de la línea.
+     Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
+  .nav-container {
+    max-width:1200px;
+    margin:auto;
+    padding:10px 15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
 
-        form textarea {
-            height: 150px;
-            resize: none;
-        }
 
-        .btn-primary {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: var(--color-primario);
-            color: #fff;
-            border: none;
-            font-size: 1.2rem;
-            border-radius: 10px;
-            cursor: pointer;
-        }
+  /* ===========================
+     MENÚ
+  ============================ */
+  .menu {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:30px;
+  }
+  
+  .menu a {
+    text-decoration:none;
+    font-weight:600;
+    color:#003A70;
+    padding:6px 8px;
+    border-radius:8px;
+    transition:background .18s, color .18s;
+  }
+  
+  .menu a:hover {
+    background: rgba(0,58,112,0.06);
+  }
 
-        .btn-whatsapp {
-            background: #25D366;
-            margin-top: 10px;
-        }
 
-        .info-box {
-            margin-top: 40px;
-            padding: 25px;
-            background: var(--color-fondo);
-            border-radius: 12px;
-        }
-    </style>
+  /* ====== HAMBURGER (movil) ====== */
+  .hamburger {
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    padding:6px;
+    margin-left:auto; 
+  }
+  
+  .hamburger span {
+    width:28px;
+    height:3px;
+    background:#003A70;
+    border-radius:3px;
+    display:block;
+  }
+
+
+  /* ====== MEDIA QUERY (móvil) ====== */
+  @media(max-width:850px){
+    .menu {
+      position:absolute;
+      top:100%;
+      right:12px;
+      background:white;
+      width:220px;
+      padding:16px;
+      border-radius:12px;
+      box-shadow:0 8px 26px rgba(0,0,0,0.12);
+      flex-direction:column;
+      gap:12px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(-6px);
+      transition:opacity .28s, transform .28s;
+    }
+  
+    .menu.show {
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+  
+    .hamburger {
+      display:flex;
+    }
+  }
+
+
+/*==================  FIN NAVBAR ==================*/
+
+
+/*==================  HERO ==================*/
+  .hero {
+    background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
+    background-position:center;
+    background-size:cover;
+    padding:80px 20px 20px; /* alto del hero */
+    text-align:center;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero-content {
+    max-width:1000px;
+    margin:auto;
+    min-height:260px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+  }
+
+  .fade-item {
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:0;
+    transition:opacity 1.4s ease, transform 0.6s ease;
+    font-size:44px;
+    font-weight:700;
+    line-height:1.05;
+    max-width:92%;
+  }
+
+  .fade-item:not(:has(img)) {
+    white-space: normal;
+    text-align:center;
+  }
+
+  .fade-item.active {
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+  /* Texto del slider (ajústalo con .fade-item .slide-text) */
+  .fade-item .slide-text {
+    display:block;
+    font-size:38px;
+  }
+  .fade-item p { margin-top:10px; font-size:18px; font-weight:400; color:rgba(255,255,255,0.95); }
+
+  /* ===========================
+     SLIDER: IMÁGENES / CONTROL POR CLASE (TAMAÑOS INDIVIDUALES)
+     - Usa las clases .img-1, .img-2, .img-3, .img-4 en cada <img>
+     - Ajusta width / max-width / height aquí según quieras
+  ============================ */
+  .fade-item img {
+    display:block;
+    width: 320px;      /* valor por defecto si no se especifica clase */
+    max-width: 68vw;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+    transition: transform .28s ease;
+  }
+
+  /* Tamaños individuales (modifica estos valores libremente) */
+  .fade-item img.img-1 { width: 360px; }   /* imagen 1 */
+  .fade-item img.img-2 { width: 300px; }   /* imagen 2 */
+  .fade-item img.img-3 { width: 420px; }   /* imagen 3 */
+  .fade-item img.img-4 { width: 500px; }   /* imagen 4 */
+
+  /* Responsivo: reduce imágenes en móvil */
+  @media (max-width:700px){
+    .fade-item { font-size:28px; }
+    .fade-item img { width:220px; }
+    .fade-item img.img-1 { width:240px; }
+    .fade-item img.img-2 { width:200px; }
+    .fade-item img.img-3 { width:260px; }
+    .fade-item img.img-4 { width:220px; }
+  }
+
+
+/* ===== BOTONES PRINCIPALES ===== */
+.contact-actions{
+  max-width:900px;
+  margin: 40px auto 80px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+  padding:0 20px;
+}
+
+/* ===========================
+   ACTION CARDS = BOTONES
+=========================== */
+.action-card{
+  background: linear-gradient(135deg, #003A70, #0059A8);
+  border-radius:20px;
+  padding:34px 26px;
+  text-align:center;
+  color:#fff;
+  box-shadow:0 12px 30px rgba(0,58,112,.35);
+  cursor:pointer;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.action-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(0,58,112,.45);
+  background: linear-gradient(135deg, #002F5E, #004B90);
+}
+
+/* ÍCONOS */
+.action-card i{
+  font-size:46px;
+  margin-bottom:14px;
+  color:#fff;
+}
+
+/* TÍTULO Y TEXTO */
+.action-card h3{
+  margin-bottom:8px;
+  color:#fff;
+}
+
+.action-card p{
+  font-size:.95rem;
+  color:rgba(255,255,255,.95);
+}
+
+/* ETIQUETA DE ACCIÓN (UX) */
+.action-card::after{
+  content:"Haz clic";
+  display:inline-block;
+  margin-top:14px;
+  font-size:12px;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  opacity:.85;
+}
+
+/* VARIANTES (si en el futuro las necesitas) */
+.action-card.whatsapp{
+  background: linear-gradient(135deg, #1DA851, #25D366);
+}
+
+.action-card.whatsapp:hover{
+  background: linear-gradient(135deg, #178A43, #1FB85C);
+}
+
+.action-card.mail{
+  background: linear-gradient(135deg, #003A70, #0059A8);
+}
+
+
+/* ===== POPUPS ===== */
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter: blur(3px);
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.popup-content{
+  background:#fff;
+  width:100%;
+  max-width:520px;
+  border-radius:18px;
+  padding:30px;
+  position:relative;
+}
+
+.popup h3{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:14px;
+  font-size:22px;
+}
+
+.popup-content h2{margin-bottom:16px}
+
+.close-btn{
+  position:absolute;
+  top:14px;
+  right:18px;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* ===== FORM ===== */
+.popup-content form{
+  display:grid;
+  gap:14px;
+}
+
+.popup-content input,
+.popup-content textarea{
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-family:inherit;
+}
+
+.popup-content textarea{resize:none;min-height:90px}
+
+.popup-content button{
+  margin-top:6px;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.btn-mail{background:#003A70;color:#fff}
+.btn-wa{background:#25D366;color:#fff}
+
+/* ===== INFO FIJA ===== */
+.contact-info{
+  max-width:900px;
+  margin:0 auto 80px;
+  padding:0 20px;
+  text-align:center;
+}
+
+.contact-info p{margin:6px 0;color:#444}
+
+
+/* ===== FAQ ===== */
+.faq-section{
+  max-width:900px;
+  margin:0 auto 100px;
+  padding:0 20px;
+}
+
+.faq-section h2{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:30px;
+}
+
+.faq-item{
+  border-radius:14px;
+  overflow:hidden;
+  margin-bottom:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+
+.faq-question{
+  width:100%;
+  background:#fff;
+  border:none;
+  padding:18px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:inherit;
+  font-size:16px;
+  font-weight:600;
+  color:#003A70;
+  cursor:pointer;
+}
+
+.faq-question i{
+  transition:transform .3s ease;
+}
+
+.faq-item.active .faq-question i{
+  transform:rotate(180deg);
+}
+
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+  background:#fafafa;
+}
+
+.faq-answer p{
+  padding:0 22px 18px;
+  color:#444;
+  font-size:.95rem;
+}
+
+
+/* ===== LINKS / BOTONES INFORMATIVOS ===== */
+.links-section{
+  max-width:1000px;
+  margin:0 auto 120px;
+  padding:0 20px;
+}
+
+.links-section h2{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:34px;
+}
+
+.links-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+}
+
+/* TARJETAS AZULES (MISMO ESTILO, SOLO COLOR) */
+.link-card{
+  background:#003A70;
+  border-radius:20px;
+  padding:34px 26px;
+  text-align:center;
+  text-decoration:none;
+  color:#fff;
+  box-shadow:0 10px 28px rgba(0,58,112,.35);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.link-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 38px rgba(0,58,112,.45);
+}
+
+/* ÍCONO */
+.link-card i{
+  font-size:42px;
+  margin-bottom:14px;
+  color:#fff;
+}
+
+/* TEXTO */
+.link-card p{
+  font-size:.95rem;
+  color:rgba(255,255,255,.95);
+}
+
+
+  
+
+</style>
 </head>
 
+  
 <body>
 
-    <!-- NAVBAR (opcional si ya lo tienes modular) -->
-    <header class="navbar">
-        <div class="navbar-container">
-            <a href="index.html" class="logo">
-                <img src="assets/img/logo/logo.png" alt="FIPTRAC">
-            </a>
-            <nav class="nav-links">
-                <a href="index.html">Inicio</a>
-                <a href="cursos.html">Cursos</a>
-                <a href="eventos.html">Eventos</a>
-                <a href="laboratorios.html">Laboratorios</a>
-                <a href="aliados.html">Aliados</a>
-                <a href="contacto.html" class="active">Contacto</a>
-            </nav>
-        </div>
-    </header>
 
-    <!-- HERO -->
-    <section class="contact-hero">
-        <h1>Contáctanos</h1>
-        <p>Estamos aquí para ayudarte. Escríbenos y nos pondremos en contacto.</p>
-    </section>
+<!-- NAVBAR -->
+<header class="nav">
+  <div class="nav-container">
 
-    <!-- FORMULARIO -->
-    <section class="contact-container">
-        <h2>Envíanos un mensaje</h2>
+    <!-- Logo clicable: vuelve a index.html 
+<div class="logo">
+<a href="index.html" aria-label="Ir al inicio">
+<img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
+</a>
+</div>
+    -->
 
-        <form id="contactForm">
-            <!-- Nombre válido -->
-            <input 
-                type="text" 
-                name="nombre" 
-                placeholder="Nombre Completo" 
-                required 
-                pattern="[A-Za-zÀ-ÿ\s]{3,50}"
-                title="Solo letras, mínimo 3 caracteres">
+    <!-- Menú (Eventos permanece incluido) -->
+    <nav class="menu" id="menu">
+      <!-- <a href="cursos.html">Cursos</a>        eliminar LOGO (clicable)-->
+      <a href="index.html">Inicio</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="certificaciones.html">Certificaciones</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="laboratorios.html">Laboratorios</a>
+      <a href="directorio.html">Capacitados</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
 
-            <!-- Email válido -->
-            <input 
-                type="email" 
-                name="email" 
-                placeholder="Correo Electrónico" 
-                required 
-                title="Ingresa un correo válido">
+    <div class="hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
 
-            <!-- Teléfono internacional -->
-            <input 
-                type="tel"
-                name="telefono"
-                placeholder="Teléfono (con código internacional, ej: +52)"
-                required
-                pattern="^\+[0-9]{6,15}$"
-                title="Debe iniciar con + y contener entre 6 y 15 dígitos">
 
-            <textarea 
-                name="mensaje"
-                placeholder="¿Cómo podemos ayudarte?"
-                required></textarea>
+<!-- HERO / SLIDER -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-content">
 
-            <button class="btn-primary" type="submit">Enviar por correo</button>
+    <!-- Cada .fade-item puede ser texto o imagen. 
+         Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
+    <div class="fade-item active" id="fade1">
+      <span class="slide-text">✔ Cursos 100 % en español</span>
+    </div>
 
-            <button type="button" class="btn-primary btn-whatsapp" id="btnWhatsapp">
-                Enviar por WhatsApp
-            </button>
-        </form>
+    <div class="fade-item" id="fade2">
+      <span class="slide-text">✔ Impacto directo en el desempeño profesional</span>
+    </div>
 
-        <!-- Información adicional -->
-        <div class="info-box">
-            <h3>Datos de contacto</h3>
-            <p><strong>Teléfono:</strong> +52 55 76 86 11 84</p>
-            <p><strong>Correo:</strong> fiptrac.platform@gmail.com</p>
-            <p><strong>Dirección:</strong> Tepojaco, Tizayuca, Hidalgo, México.</p>
-            <p><strong>Horario:</strong> Lunes a Viernes — 08:30 a 16:00</p>
-        </div>
-    </section>
+    <div class="fade-item" id="fade3">
+      <span class="slide-text">✔ Enfoque práctico y técnico</span>
+    </div>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <p>© 2025 FIPTRAC — Todos los derechos reservados.</p>
-    </footer>
+    <div class="fade-item" id="fade4">
+      <!-- imagen con clase individual img-4 -->
+      <img src="assets/images/sin fondo.png" alt="Logo fondo" class="img-4">
+    </div>
 
-    <!-- SCRIPT DE ENVÍO -->
-    <script>
-        // --------------------------
-        // ENVÍO A CORREO (Apps Script)
-        // --------------------------
-        document.getElementById("contactForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
+  </div>
+</section>
 
-            const datos = {
-                nombre: this.nombre.value,
-                email: this.email.value,
-                telefono: this.telefono.value,
-                mensaje: this.mensaje.value
-            };
 
-            // URL del Apps Script Web App
-            const endpoint = "URL_DE_TU_WEB_APP_AQUI";
+<!-- ===== BOTONES ===== -->
+<section class="contact-actions">
+  <div class="action-card whatsapp" onclick="abrirPopup('popup-wa')">
+    <i class="fa-brands fa-whatsapp"></i>
+    <h3>WhatsApp</h3>
+    <p>Comunicación directa y rápida con nuestro equipo.</p>
+  </div>
 
-            const res = await fetch(endpoint, {
-                method: "POST",
-                body: JSON.stringify(datos),
-                headers: { "Content-Type": "application/json" }
-            });
+  <div class="action-card mail" onclick="abrirPopup('popup-mail')">
+    <i class="fa-solid fa-envelope"></i>
+    <h3>Correo electrónico</h3>
+    <p>Envíanos los detalles de tu solicitud o proyecto.</p>
+  </div>
+</section>
 
-            if (res.ok) {
-                alert("Mensaje enviado correctamente. ¡Gracias por contactarnos!");
-                this.reset();
-            } else {
-                alert("Hubo un problema al enviar el mensaje.");
-            }
-        });
 
-        // -----------------------------------
-        // ENVÍO POR WHATSAPP
-        // -----------------------------------
-        document.getElementById("btnWhatsapp").addEventListener("click", function () {
-            const nombre = document.querySelector("[name='nombre']").value;
-            const telefono = document.querySelector("[name='telefono']").value;
-            const mensaje = document.querySelector("[name='mensaje']").value;
+ <!-- ===== INFO ===== --> 
+<section class="contact-info">
+  <p><strong>Teléfono:</strong> +52 55 76 86 11 84</p>
+  <p><strong>Correo:</strong> contacto@fiptrac.com”</p>
+  <p><strong>Horario:</strong> L–V | 08:30 – 16:00</p>
+  
+  <div style="text-align:center; margin-top:10px;">
+    <a href="https://www.google.com/maps/place/FIPTRAC+Fire+Protection+Training+Center/@19.8363392,-98.9369315,17z/data=!3m1!4b1!4m6!3m5!1s0x85d19132b7dff3c7:0x2cc2a19a87defa2f!8m2!3d19.8363342!4d-98.9343566!16s%2Fg%2F11h3g734tq?entry=ttu&g_ep=EgoyMDI2MDExMS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D"
+       target="_blank"
+       class="btn-map">
+       <i class="fa-solid fa-location-dot" style="color:#003A70; margin-right:8px;"></i>Ver ubicación
+    </a>
+  </div>
 
-            const texto = encodeURIComponent(
-                `Hola FIPTRAC, mi nombre es ${nombre}.  
-Mi teléfono es ${telefono}.  
-Quiero solicitar más información:  
-${mensaje}`
-            );
+</section>
 
-            window.open("https://wa.me/5215576861184?text=" + texto, "_blank");
-        });
-    </script>
+
+<!-- ===== FAQs ===== -->
+<section class="faq-section">
+  <h2>Preguntas frecuentes</h2>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Cómo puedo inscribirme a un curso o evento?</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>Puedes inscribirte directamente desde la sección de cursos o eventos, o contactarnos vía WhatsApp o correo electrónico.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Los cursos incluyen constancia o certificado?</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>Sí, todos nuestros cursos y eventos incluyen constancia de participación avalada por FIPTRAC.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Los cursos son presenciales o en línea?</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>Ofrecemos modalidades presenciales, en línea y mixtas, dependiendo del programa.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Puedo solicitar capacitación para mi empresa?</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+    <div class="faq-answer">
+      <p>Sí, desarrollamos capacitaciones especializadas para empresas y equipos de trabajo.</p>
+    </div>
+  </div>
+</section>
+
+  
+<!-- ===== POLÍTICAS ===== -->
+<section class="links-section">
+  <h2>Información adicional</h2>
+
+  <div class="links-grid">
+    
+    <a href="https://drive.google.com/file/d/1D8OAqvbMC-F6hRa6OxL-877DYU-tnc2L/view?usp=drive_link" target="_blank" class="link-card">
+      <i class="fa-solid fa-file-contract"></i>
+      <h3>Términos y condiciones</h3>
+      <p>Consulta las políticas y lineamientos de nuestros servicios.</p>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1ZTPxpC_xF4RVE5CNCF83sNPnwH7HrhlH/view?usp=drive_link" target="_blank" class="link-card">
+      <i class="fa-solid fa-hotel"></i>
+      <h3>Opciones de hospedaje 2026</h3>
+      <p>Hoteles y convenios cercanos para nuestros eventos.</p>
+    </a>
+
+    <a href="https://drive.google.com/file/d/1POJHxduJiMgBn5IIkQFW67ajpA5H23Ev/view?usp=drive_link" target="_blank" class="link-card">
+      <i class="fa-solid fa-star"></i>
+      <h3>Programa de lealtad</h3>
+      <p>Beneficios exclusivos para participantes frecuentes.</p>
+    </a>
+
+  </div>
+</section>
+
+  
+
+<!-- ===== POPUP WHATSAPP ===== -->
+<div class="popup" id="popup-wa">
+  <div class="popup-content">
+    <span class="close-btn" onclick="cerrarPopup('popup-wa')">✕</span>
+    <h3>Mensaje por WhatsApp</h3>
+    <form onsubmit="enviarWhatsApp(event)">
+      <input id="wa-nombre" placeholder="Nombre completo" required>
+      <input id="wa-telefono" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
+      <textarea id="wa-mensaje" placeholder="Escribe tu mensaje" required></textarea>
+      <button class="btn-wa" type="submit">Enviar WhatsApp</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== POPUP CORREO ===== -->
+<div class="popup" id="popup-mail">
+  <div class="popup-content">
+    <span class="close-btn" onclick="cerrarPopup('popup-mail')">✕</span>
+    <h3>Enviar correo</h3>
+    <form onsubmit="enviarCorreo(event)">
+      <input id="c-nombre" placeholder="Nombre completo" required>
+      <input id="c-cargo" placeholder="Cargo" required>
+      <input id="c-empresa" placeholder="Empresa" required>
+      <input id="c-ubicacion" placeholder="Ubicación" required>
+      <input id="c-telefono" placeholder="Teléfono (10 dígitos)" pattern="[0-9]{10}" required>
+      <input id="c-email" type="email" placeholder="Correo electrónico" required>
+      <textarea id="c-mensaje" placeholder="Mensaje" required></textarea>
+      <button class="btn-mail" type="submit">Enviar correo</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- ============================== SCRIPTS ============================== -->
+
+  
+<!--  HAMBURGER  --> 
+<script>
+  // HAMBURGER toggle (movil)
+  document.getElementById('hamburger').addEventListener('click', ()=>{
+    document.getElementById('menu').classList.toggle('show');
+  });
+</script>
+  
+
+<!--  NAVBAR  --> 
+<script>
+  // HEADER: añadir clase .scrolled + comportamiento "hide on scroll"
+  (function(){
+    const header = document.querySelector('header');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const current = window.pageYOffset || document.documentElement.scrollTop;
+      // scrolled style (background + compact)
+      if (current > 30) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+
+      // hide/show on scroll direction
+      if (current > lastScroll && current > 120) {
+        // scrolling down
+        header.classList.add('nav-hide');
+      } else {
+        // scrolling up
+        header.classList.remove('nav-hide');
+      }
+      lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
+    }, { passive: true });
+  })();
+</script>
+
+
+<!--  HERO  --> 
+<script>
+  // SLIDER / TRANSICIONES
+  const items = [
+    document.getElementById("fade1"),
+    document.getElementById("fade2"),
+    document.getElementById("fade3"),
+    document.getElementById("fade4")
+  ];
+
+  let index = 0;
+  function changeSlide(){
+    items.forEach(i => i.classList.remove("active"));
+    items[index].classList.add("active");
+    index = (index + 1) % items.length;
+  }
+  // inicia intercambio (puedes cambiar 3500 a otro valor en ms)
+  let slideInterval = setInterval(changeSlide, 2500);
+
+  // si quieres controlar manualmente (ej. pausar on hover) puedes hacerlo:
+  document.querySelector('.hero').addEventListener('mouseenter', ()=> clearInterval(slideInterval));
+  document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 2500));
+</script>
+
+
+<script>
+/* ===== FAQ Acordeón ===== */
+document.querySelectorAll('.faq-question').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+
+    item.classList.toggle('active');
+
+    if(item.classList.contains('active')){
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }else{
+      answer.style.maxHeight = null;
+    }
+  });
+});
+</script>
+
+  
+  
+<script>
+/* ================= POPUPS ================= */
+
+// Abrir popup
+function abrirPopup(id){
+  document.getElementById(id).style.display = 'flex';
+}
+
+// Cerrar popup específico
+function cerrarPopup(id){
+  document.getElementById(id).style.display = 'none';
+}
+
+// Cerrar todos los popups (ESC / click fuera)
+function cerrarTodosLosPopups(){
+  document.querySelectorAll('.popup').forEach(popup=>{
+    popup.style.display = 'none';
+  });
+}
+
+// Click fuera del contenido
+document.querySelectorAll('.popup').forEach(popup=>{
+  popup.addEventListener('click', e=>{
+    if(e.target === popup){
+      popup.style.display = 'none';
+    }
+  });
+});
+
+// Tecla ESC
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape'){
+    cerrarTodosLosPopups();
+  }
+});
+
+/* ================= ENVÍOS ================= */
+
+function enviarWhatsApp(e){
+  e.preventDefault();
+  const nombre = document.getElementById('wa-nombre').value;
+  const tel    = document.getElementById('wa-telefono').value;
+  const msg    = document.getElementById('wa-mensaje').value;
+
+  const texto = encodeURIComponent(
+    `Nombre: ${nombre}\nTeléfono: ${tel}\nMensaje: ${msg}`
+  );
+
+  window.open(`https://wa.me/525576861184?text=${texto}`, '_blank');
+  cerrarPopup('popup-wa');
+}
+
+function enviarCorreo(e){
+  e.preventDefault();
+
+  const body = encodeURIComponent(
+    `Nombre: ${document.getElementById('c-nombre').value}
+Cargo: ${document.getElementById('c-cargo').value}
+Empresa: ${document.getElementById('c-empresa').value}
+Ubicación: ${document.getElementById('c-ubicacion').value}
+Teléfono: ${document.getElementById('c-telefono').value}
+Correo: ${document.getElementById('c-email').value}
+
+Mensaje:
+${document.getElementById('c-mensaje').value}`
+  );
+
+  window.location.href =
+    `mailto:fiptrac.platform@gmail.com?subject=SOLICITUD%20DE%20CONTACTO%20-%20FIPTRAC&body=${body}`;
+
+  cerrarPopup('popup-mail');
+}
+</script>
+
+
+<script>
+/* ================= POPUPS FOOTER ================= */
+
+function abrirPopup(id){
+  const popup = document.getElementById(id);
+  if(popup) popup.style.display = 'flex';
+}
+
+function cerrarPopup(id){
+  const popup = document.getElementById(id);
+  if(popup) popup.style.display = 'none';
+}
+
+/* Cerrar con click fuera */
+document.addEventListener('click', e => {
+  if(e.target.classList.contains('fiptrac-overlay')){
+    e.target.style.display = 'none';
+  }
+});
+
+/* Cerrar con ESC */
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    document
+      .querySelectorAll('.fiptrac-overlay')
+      .forEach(p => p.style.display = 'none');
+  }
+});
+</script>
+
+
+
+<!--  FOOTER  --> 
+<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
+
+<div id="footer-container"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-container").innerHTML = data;
+    });
+</script>
 
 </body>
 </html>

@@ -1,93 +1,647 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aliados Comerciales | FIPTRAC</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    .aliados-container {max-width:1200px;margin:40px auto;padding:20px;text-align:center;color:var(--texto);}    
-    .aliados-container h1{font-size:2rem;margin-bottom:14px;}
-    .aliados-container p{max-width:760px;margin:0 auto 30px;color:#dcdcdc;font-size:1.05rem;}
+<meta charset="UTF-8">
+<title>Aliados Comerciales | FIPTRAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    /* Carrusel */
-    .aliados-carousel {position:relative;width:100%;overflow:hidden;padding:20px 0;}
-    .aliados-track {display:flex;gap:40px;align-items:center;transition:transform .45s ease;}
-    .aliado-item {min-width:160px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.04);border-radius:12px;padding:14px;box-shadow:0 4px 12px rgba(0,0,0,0.15);}
-    .aliado-item img {max-width:120px;max-height:60px;object-fit:contain;filter:brightness(1.0);}
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
 
-    .aliado-btn {position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);border:none;color:#fff;padding:10px 14px;font-size:1.3rem;border-radius:50%;cursor:pointer;}
-    .aliado-btn:hover{background:rgba(0,0,0,0.65);}    
-    .prev {left:10px;}    
-    .next {right:10px;}    
+<style>
+  /* ===========================
+     BASE / TIPOGRAFÍA
+  ============================ */
+  body { margin:0; font-family: 'Montserrat', sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
 
-    /* Grid alternativa */
-    .aliados-grid {margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;}
-    .aliado-card {background:rgba(255,255,255,0.04);padding:14px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,0.2);}    
-    .aliado-card img {max-height:70px;object-fit:contain;filter:brightness(1.0);}    
-  </style>
+  /*==================  NAVBAR ==================*/
+  /* ===========================
+     HEADER STICKY (compact & scroll)
+     - header.scrolled: fondo semitransparente + compact
+     - header.nav-hide: se oculta al bajar scroll
+  ============================ */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
+    background: rgba(255,255,255,0.92);
+  }
+
+  /* Cuando el usuario baja lo volvemos más pequeño / con fondo */
+  header.scrolled {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  }
+
+  /* Cuando el usuario baja rápido ocultamos la barra */
+  header.nav-hide {
+    transform: translateY(-110%);
+  }
+
+  /* Contenedor del nav: aquí se controla el "grosor" de la línea.
+     Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
+  .nav-container {
+    max-width:1200px;
+    margin:auto;
+    padding:10px 15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+
+
+  /* ===========================
+     MENÚ
+  ============================ */
+  .menu {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:30px;
+  }
+  
+  .menu a {
+    text-decoration:none;
+    font-weight:600;
+    color:#003A70;
+    padding:6px 8px;
+    border-radius:8px;
+    transition:background .18s, color .18s;
+  }
+  
+  .menu a:hover {
+    background: rgba(0,58,112,0.06);
+  }
+
+
+  /* ====== HAMBURGER (movil) ====== */
+  .hamburger {
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    padding:6px;
+    margin-left:auto; 
+  }
+  
+  .hamburger span {
+    width:28px;
+    height:3px;
+    background:#003A70;
+    border-radius:3px;
+    display:block;
+  }
+
+
+  /* ====== MEDIA QUERY (móvil) ====== */
+  @media(max-width:850px){
+    .menu {
+      position:absolute;
+      top:100%;
+      right:12px;
+      background:white;
+      width:220px;
+      padding:16px;
+      border-radius:12px;
+      box-shadow:0 8px 26px rgba(0,0,0,0.12);
+      flex-direction:column;
+      gap:12px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(-6px);
+      transition:opacity .28s, transform .28s;
+    }
+  
+    .menu.show {
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+  
+    .hamburger {
+      display:flex;
+    }
+  }
+
+
+/*==================  FIN NAVBAR ==================*/
+
+
+/*==================  HERO ==================*/
+  .hero {
+    background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
+    background-position:center;
+    background-size:cover;
+    padding:80px 20px 20px; /* alto del hero */
+    text-align:center;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero-content {
+    max-width:1000px;
+    margin:auto;
+    min-height:260px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+  }
+
+  .fade-item {
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:0;
+    transition:opacity 1.4s ease, transform 0.6s ease;
+    font-size:44px;
+    font-weight:700;
+    line-height:1.05;
+    max-width:92%;
+  }
+
+  .fade-item:not(:has(img)) {
+    white-space: normal;
+    text-align:center;
+  }
+
+  .fade-item.active {
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+  /* Texto del slider (ajústalo con .fade-item .slide-text) */
+  .fade-item .slide-text {
+    display:block;
+    font-size:38px;
+  }
+  .fade-item p { margin-top:10px; font-size:18px; font-weight:400; color:rgba(255,255,255,0.95); }
+
+  /* ===========================
+     SLIDER: IMÁGENES / CONTROL POR CLASE (TAMAÑOS INDIVIDUALES)
+     - Usa las clases .img-1, .img-2, .img-3, .img-4 en cada <img>
+     - Ajusta width / max-width / height aquí según quieras
+  ============================ */
+  .fade-item img {
+    display:block;
+    width: 320px;      /* valor por defecto si no se especifica clase */
+    max-width: 68vw;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+    transition: transform .28s ease;
+  }
+
+  /* Tamaños individuales (modifica estos valores libremente) */
+  .fade-item img.img-1 { width: 360px; }   /* imagen 1 */
+  .fade-item img.img-2 { width: 300px; }   /* imagen 2 */
+  .fade-item img.img-3 { width: 420px; }   /* imagen 3 */
+  .fade-item img.img-4 { width: 500px; }   /* imagen 4 */
+
+  /* Responsivo: reduce imágenes en móvil */
+  @media (max-width:700px){
+    .fade-item { font-size:28px; }
+    .fade-item img { width:220px; }
+    .fade-item img.img-1 { width:240px; }
+    .fade-item img.img-2 { width:200px; }
+    .fade-item img.img-3 { width:260px; }
+    .fade-item img.img-4 { width:220px; }
+  }
+
+/* Contenedor principal */
+.aliados-container{
+  max-width:1200px;
+  margin:0 auto 80px;
+  padding:0 1200px;
+}
+
+/* TÍTULOS */
+.aliados-title{
+  text-align:center;
+  color:#003A70;
+  font-size:32px;
+  margin-bottom:16px;
+}
+
+.aliados-intro{
+  text-align:center;
+  max-width:900px;
+  margin:0 auto 50px;
+  font-size:16px;
+  line-height:1.7;
+  color:#444;
+}
+
+/* ======================================================
+   CARRUSELES AUTOMÁTICOS (FLUJO CONTINUO)
+====================================================== */
+.carousel-wrapper{
+  overflow:hidden;
+  position:relative;
+  margin:40px 0;
+}
+
+.carousel-track{
+  display:flex;
+  width:max-content;
+  animation:scroll 40s linear infinite;
+}
+
+.carousel-track.slow{
+  animation-duration:60s;
+}
+
+.carousel-item{
+  flex:0 0 auto;
+  padding:0 40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.carousel-item img{
+  height:70px;
+  max-width:160px;
+  object-fit:contain;
+  filter:grayscale(100%);
+  opacity:.85;
+  transition:.3s;
+}
+
+.carousel-item img:hover{
+  filter:grayscale(0%);
+  opacity:1;
+}
+
+/* Animación continua */
+@keyframes scroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+/* ======================================================
+   FRANJA EMPRESAS REPRESENTATIVAS (CON LINKS)
+====================================================== */
+.representativas{
+  background:#ffffff;
+  border-radius:18px;
+  padding:40px 30px;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+  margin:60px 0;
+}
+
+.representativas h3{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:10px;
+}
+
+.representativas p{
+  text-align:center;
+  color:#555;
+  margin-bottom:30px;
+}
+
+.representativas-logos{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:30px;
+}
+
+.representativas-logos a img{
+  height:65px;
+  max-width:160px;
+  object-fit:contain;
+  transition:.3s;
+}
+
+.representativas-logos a:hover img{
+  transform:scale(1.08);
+}
+
+/* ======================================================
+   FRANJA INSTITUCIONES CERTIFICADORAS
+====================================================== */
+.certificadoras{
+  margin-top:80px;
+}
+
+.certificadoras h3{
+  text-align:center;
+  color:#003A70;
+  margin-bottom:14px;
+}
+
+.certificadoras p{
+  text-align:center;
+  color:#555;
+  max-width:800px;
+  margin:0 auto 35px;
+}
+
+.certificadoras-logos{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:35px;
+}
+
+.certificadoras-logos img{
+  height:70px;
+  max-width:170px;
+  object-fit:contain;
+  opacity:.9;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .carousel-item{ padding:0 25px; }
+  .carousel-item img{ height:55px; }
+}
+</style>
 </head>
-<body>
-  <header>
-    <nav class="navbar">
-      <a href="index.html" class="logo"><img src="assets/logo.png" alt="Logo FIPTRAC"/></a>
-      <ul class="nav-links">
-        <li><a href="cursos.html">Cursos</a></li>
-        <li><a href="eventos.html">Eventos</a></li>
-        <li><a href="certificaciones.html">Certificaciones</a></li>
-        <li><a href="laboratorios.html">Laboratorios</a></li>
-        <li><a href="aliados.html" class="active">Aliados</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main class="aliados-container">
-    <h1>Aliados Comerciales</h1>
+<body>
+
+<!-- NAVBAR -->
+<header class="nav">
+  <div class="nav-container">
+
+    <!-- Logo clicable: vuelve a index.html 
+<div class="logo">
+<a href="index.html" aria-label="Ir al inicio">
+<img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
+</a>
+</div>
+    -->
+
+    <!-- Menú (Eventos permanece incluido) -->
+    <nav class="menu" id="menu">
+      <!-- <a href="cursos.html">Cursos</a>        eliminar LOGO (clicable)-->
+      <a href="index.html">Inicio</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="certificaciones.html">Certificaciones</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="laboratorios.html">Laboratorios</a>
+      <a href="directorio.html">Empresas capacitadas</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+
+<!-- HERO / SLIDER -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-content">
+
+    <!-- Cada .fade-item puede ser texto o imagen. 
+         Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
+      <div class="fade-item" id="fade2">
+      <span class="slide-text">✔ Impacto directo en el desempeño profesional</span>
+    </div>
+
+    <div class="fade-item" id="fade3">
+      <span class="slide-text">✔ Enfoque práctico y técnico</span>
+    </div>
+
+    <div class="fade-item" id="fade4">
+      <!-- imagen con clase individual img-4 -->
+      <img src="assets/images/sin fondo.png" alt="Logo fondo" class="img-4">
+    </div>
+
+    <div class="fade-item active" id="fade1">
+      <span class="slide-text">✔ Cursos 100 % en español</span>
+    </div>
+
+  </div>
+</section>
+
+<section class="aliados-container">
+
+  <h1 class="aliados-title">Aliados Comerciales</h1>
+
+  <p class="aliados-intro">
+    Empresas que confían en <strong>FIPTRAC</strong> para la
+    <strong>capacitación técnica especializada</strong> de sus equipos.
+    Estas organizaciones han participado, se han certificado o colaboran
+    activamente en el fortalecimiento de la
+    <strong>seguridad contra incendios en Latinoamérica</strong>.
+  </p>
+
+  <!-- ================== CARRUSEL 1 ================== -->
+  <div class="carousel-wrapper">
+    <div class="carousel-track">
+      <!-- DUPLICA LOS LOGOS PARA EFECTO INFINITO -->
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A1.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A2.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A3.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A4.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A5.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A6.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A7.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A8.png"></div>
+
+      <!-- repetidos -->
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A1.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A2.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A3.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A4.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A5.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A6.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A7.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A8.png"></div>
+    </div>
+  </div>
+
+  <!-- ================== CARRUSEL 2 (más lento) ================== -->
+  <div class="carousel-wrapper">
+    <div class="carousel-track slow">
+      <!-- DUPLICA LOS LOGOS PARA EFECTO INFINITO -->
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A9.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A10.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A11.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A12.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A13.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A14.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A15.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A16.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A17.png"></div>
+
+      <!-- repetidos -->
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A9.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A10.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A11.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A12.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A13.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A14.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A15.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A16.png"></div>
+      <div class="carousel-item"><img src="assets/images/aliados_logos/A17.png"></div>
+    </div>
+  </div>
+
+  <!-- ================== EMPRESAS REPRESENTATIVAS ================== -->
+  <div class="representativas">
+    <h3>Empresas Representativas</h3>
     <p>
-      Empresas que confían en FIPTRAC para la capacitación técnica de sus equipos.
-      Estas organizaciones han participado, se han certificado o colaboran de manera activa
-      en el fortalecimiento de la seguridad contra incendios en Latinoamérica.
+      Organizaciones líderes del sector que colaboran de manera directa
+      y continua con FIPTRAC.
     </p>
 
-    <!-- Carrusel -->
-    <div class="aliados-carousel">
-      <button class="aliado-btn prev">❮</button>
-      <div class="aliados-track">
-        <div class="aliado-item"><img src="assets/aliados/aliado1.png" alt="Aliado 1" /></div>
-        <div class="aliado-item"><img src="assets/aliados/aliado2.png" alt="Aliado 2" /></div>
-        <div class="aliado-item"><img src="assets/aliados/aliado3.png" alt="Aliado 3" /></div>
-        <div class="aliado-item"><img src="assets/aliados/aliado4.png" alt="Aliado 4" /></div>
-        <div class="aliado-item"><img src="assets/aliados/aliado5.png" alt="Aliado 5" /></div>
-        <div class="aliado-item"><img src="assets/aliados/aliado6.png" alt="Aliado 6" /></div>
-      </div>
-      <button class="aliado-btn next">❯</button>
+    <div class="representativas-logos">
+      <a href="https://empresa1.com" target="_blank">
+        <img src="assets/images/aliados_logos/A18.png">
+      </a>
+      <a href="https://empresa2.com" target="_blank">
+        <img src="assets/images/aliados_logos/A19.png">
+      </a>
+      <a href="https://empresa3.com" target="_blank">
+        <img src="assets/images/aliados_logos/A20.png">
+      </a>
+      <a href="https://empresa3.com" target="_blank">
+        <img src="assets/images/aliados_logos/A21.png">
+      </a>
     </div>
+  </div>
 
-    <h2 style="margin-top:50px;color:var(--texto);">Todos los Aliados</h2>
-    <div class="aliados-grid">
-      <div class="aliado-card"><img src="assets/aliados/aliado1.png"/></div>
-      <div class="aliado-card"><img src="assets/aliados/aliado2.png"/></div>
-      <div class="aliado-card"><img src="assets/aliados/aliado3.png"/></div>
-      <div class="aliado-card"><img src="assets/aliados/aliado4.png"/></div>
-      <div class="aliado-card"><img src="assets/aliados/aliado5.png"/></div>
-      <div class="aliado-card"><img src="assets/aliados/aliado6.png"/></div>
+  <!-- ================== INSTITUCIONES CERTIFICADORAS ================== -->
+  <div class="certificadoras">
+    <h3>Instituciones que respaldan nuestra formación</h3>
+    <p>
+      FIPTRAC colabora y se alinea con organismos e instituciones
+      reconocidas a nivel nacional e internacional.
+    </p>
+
+    <div class="certificadoras-logos">
+      <img src="assets/images/aliados_logos/A22.png">
+      <img src="assets/images/aliados_logos/A23.png">
+      <img src="assets/images/aliados_logos/A24.png">
+      <img src="assets/images/aliados_logos/A25.png">
+      <img src="assets/images/aliados_logos/A26.png">
     </div>
-  </main>
+  </div>
 
-  <script>
-    const track = document.querySelector('.aliados-track');
-    const items = Array.from(track.children);
-    const nextBtn = document.querySelector('.next');
-    const prevBtn = document.querySelector('.prev');
-    let index = 0;
+</section>
 
-    function move() {
-      track.style.transform = `translateX(-${index * 200}px)`;
-    }
 
-    nextBtn.onclick = () => { index = (index + 1) % items.length; move(); };
-    prevBtn.onclick = () => { index = (index - 1 + items.length) % items.length; move(); };
-  </script>
+<!-- ============================== SCRIPTS ============================== -->
+
+  
+<!--  HAMBURGER  --> 
+<script>
+  // HAMBURGER toggle (movil)
+  document.getElementById('hamburger').addEventListener('click', ()=>{
+    document.getElementById('menu').classList.toggle('show');
+  });
+</script>
+  
+
+<!--  NAVBAR  --> 
+<script>
+  // HEADER: añadir clase .scrolled + comportamiento "hide on scroll"
+  (function(){
+    const header = document.querySelector('header');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const current = window.pageYOffset || document.documentElement.scrollTop;
+      // scrolled style (background + compact)
+      if (current > 30) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+
+      // hide/show on scroll direction
+      if (current > lastScroll && current > 120) {
+        // scrolling down
+        header.classList.add('nav-hide');
+      } else {
+        // scrolling up
+        header.classList.remove('nav-hide');
+      }
+      lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
+    }, { passive: true });
+  })();
+</script>
+
+
+<!--  HERO  --> 
+<script>
+  // SLIDER / TRANSICIONES
+  const items = [
+    document.getElementById("fade1"),
+    document.getElementById("fade2"),
+    document.getElementById("fade3"),
+    document.getElementById("fade4")
+  ];
+
+  let index = 0;
+  function changeSlide(){
+    items.forEach(i => i.classList.remove("active"));
+    items[index].classList.add("active");
+    index = (index + 1) % items.length;
+  }
+  // inicia intercambio (puedes cambiar 3500 a otro valor en ms)
+  let slideInterval = setInterval(changeSlide, 2500);
+
+  // si quieres controlar manualmente (ej. pausar on hover) puedes hacerlo:
+  document.querySelector('.hero').addEventListener('mouseenter', ()=> clearInterval(slideInterval));
+  document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 2500));
+</script>
+
+
+<script>
+/* ================= POPUPS FOOTER ================= */
+
+function abrirPopup(id){
+  const popup = document.getElementById(id);
+  if(popup) popup.style.display = 'flex';
+}
+
+function cerrarPopup(id){
+  const popup = document.getElementById(id);
+  if(popup) popup.style.display = 'none';
+}
+
+/* Cerrar con click fuera */
+document.addEventListener('click', e => {
+  if(e.target.classList.contains('fiptrac-overlay')){
+    e.target.style.display = 'none';
+  }
+});
+
+/* Cerrar con ESC */
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    document
+      .querySelectorAll('.fiptrac-overlay')
+      .forEach(p => p.style.display = 'none');
+  }
+});
+</script>
+
+
+
+<!--  FOOTER  --> 
+<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
+
+<div id="footer-container"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-container").innerHTML = data;
+    });
+</script>
+
 </body>
 </html>

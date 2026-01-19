@@ -2,8 +2,12 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laboratorios | FIPTRAC</title>
+<title>Capacitados | FIPTRAC</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css">
@@ -135,7 +139,9 @@ body {
 
 
 /*==================  FIN NAVBAR ==================*/
-  
+
+
+
 /*==================  HERO ==================*/
   .hero {
     background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
@@ -219,167 +225,214 @@ body {
   }
 
 
-/* ================= LABORATORIOS ================= */
+  
 
-.labs-hero{
-  background:linear-gradient(rgba(0,58,112,.75),rgba(0,58,112,.75)),
-             url("assets/labs/lab1.jpg") center/cover;
-  color:#fff;
-  padding:110px 20px 90px;
+/* ===== CONTENIDO ===== */
+.certificados{
+  max-width:1200px;
+  margin:40px auto 80px;
+  padding:0 20px;
+}
+
+
+/* ================= INTRO DIRECTORIO ================= */
+
+.intro-directorio{
+  max-width:1000px;
+  margin:60px auto 40px;
+  padding:0 20px;
   text-align:center;
 }
 
-.labs-hero h1{
-  font-size:2.6rem;
+.intro-directorio h2{
+  color:#003A70;
+  font-size:28px;
   margin-bottom:14px;
 }
 
-.labs-hero p{
-  max-width:850px;
-  margin:auto;
-  font-size:1.1rem;
+.intro-directorio .intro-text{
+  font-size:16px;
+  color:#444;
   line-height:1.7;
-  opacity:.95;
+  max-width:820px;
+  margin:0 auto 32px;
 }
 
-/* CONTENEDOR */
-.labs-container{
-  max-width:1200px;
-  margin:70px auto;
-  padding:20px;
+/* Highlights */
+.directorio-highlights{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+  margin-bottom:28px;
 }
 
-/* BLOQUE DESCRIPTIVO */
-.labs-intro{
-  text-align:center;
-  max-width:900px;
-  margin:0 auto 60px;
+.highlight-card{
+  background:#fff;
+  padding:26px 22px;
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 
-.labs-intro h2{
+.highlight-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 28px rgba(0,0,0,0.14);
+}
+
+.highlight-card i{
+  font-size:32px;
   color:#003A70;
   margin-bottom:12px;
 }
 
-.labs-intro p{
-  font-size:1.05rem;
-  line-height:1.7;
+.highlight-card h4{
+  color:#003A70;
+  font-size:18px;
+  margin-bottom:8px;
+  font-weight:700;
+}
+
+.highlight-card p{
+  font-size:14.5px;
   color:#444;
+  line-height:1.5;
 }
 
-/* ===== CAROUSEL ===== */
-.carousel{
-  position:relative;
-  height:420px;
-  overflow:hidden;
-  border-radius:20px;
-  box-shadow:0 12px 30px rgba(0,0,0,.2);
+/* Nota inferior */
+.nota-directorio{
+  font-size:14px;
+  color:#666;
+  margin-top:10px;
 }
 
-.carousel-track{
-  display:flex;
-  height:100%;
-  transition:transform .5s ease;
-}
+  
 
-.carousel-slide{
-  min-width:100%;
-}
-
-.carousel-slide img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.carousel-btn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,.5);
-  border:none;
-  color:#fff;
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  cursor:pointer;
-  font-size:1.4rem;
-}
-
-.carousel-btn:hover{background:rgba(0,0,0,.75)}
-.prev{left:16px}
-.next{right:16px}
-
-/* ===== CAPACIDADES ===== */
-.capabilities{
-  margin:80px 0;
+/* ===== FILTROS ===== */
+.filters{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+  margin-bottom:30px;
+}
+select{
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+select:focus{
+  outline:none;
+  border-color:#003A70;
+  box-shadow:0 0 0 2px rgba(0,58,112,.15);
+}
+.btn{
+  background:#003A70;
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  padding:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+.btn:hover{background:#002b55}
+
+
+  /* ===== BOTÓN PRINCIPAL FORMULARIOS (FIPTRAC) ===== */
+.popup button.btn{
+  width:100%;
+  padding:14px 18px;
+  font-size:16px;
+  font-weight:600;
+  border-radius:14px;
+  margin-top:20px;
 }
 
-.cap-card{
+.popup button.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 22px rgba(0,0,0,.28);
+  background:#002b55;
+}
+
+
+/* ===== GRID ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+.card{
+  text-align: center;
   background:#fff;
-  padding:26px;
   border-radius:18px;
-  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  box-shadow:0 8px 22px rgba(0,0,0,.1);
+  padding:26px 22px;
+  transition:.25s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 30px rgba(0,0,0,.16);
+}
+.card h4{
+  color:#003A70;
+  margin-bottom:6px;
   text-align:center;
 }
 
-  .cap-card i{
-  font-size:34px;
+.card p{
+  margin:6px 0;
+  font-size:14px;
+  text-align:center;
+}
+
+
+/* ===== POPUP ===== */
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(3px);
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.popup-card{
+  background:#fff;
+  width:92%;
+  max-width:560px;
+  border-radius:20px;
+  padding:32px 28px 28px;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+  position:relative;
+}
+.popup h3{
+  text-align:center;
   color:#003A70;
   margin-bottom:14px;
 }
-
-
-.cap-card h3{
-  color:#003A70;
-  margin-bottom:10px;
-}
-
-  .cap-card{
-  transition:transform .25s ease, box-shadow .25s ease;
-}
-
-.cap-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 12px 28px rgba(0,0,0,.16);
-}
-
-
-.cap-card p{
-  font-size:.95rem;
-  color:#444;
-}
-
-/* ===== GALERÍA ===== */
-.gallery-title{
-  text-align:center;
-  margin-bottom:26px;
-  color:#003A70;
-}
-
-.gallery-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:18px;
-}
-
-.gallery-grid img{
+.popup input,
+.popup select{
   width:100%;
-  height:190px;
-  object-fit:cover;
-  border-radius:14px;
+  padding:12px;
+  margin-top:8px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+.popup input:focus,
+.popup select:focus{
+  outline:none;
+  border-color:#003A70;
+  box-shadow:0 0 0 2px rgba(0,58,112,.15);
+}
+.close-btn{
+  position:absolute;
+  top:14px;
+  right:18px;
+  font-size:22px;
+  background:none;
+  border:none;
   cursor:pointer;
-  transition:.3s;
 }
-
-.gallery-grid img:hover{
-  transform:scale(1.04);
-  box-shadow:0 10px 26px rgba(0,0,0,.25);
-}
-  
 </style>
 </head>
 
@@ -423,15 +476,15 @@ body {
     <!-- Cada .fade-item puede ser texto o imagen. 
          Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
     <div class="fade-item active" id="fade1">
-      <span class="slide-text">Entrenamiento técnico avanzado con equipamiento real</span>
+      <span class="slide-text">✔ Cursos 100 % en español</span>
     </div>
 
     <div class="fade-item" id="fade2">
-      <span class="slide-text">Simuladores funcionales y escenarios controlados</span>
+      <span class="slide-text">✔ Impacto directo en el desempeño profesional</span>
     </div>
 
     <div class="fade-item" id="fade3">
-      <span class="slide-text">Condiciones reales de operación en sistemas contra incendio</span>
+      <span class="slide-text">✔ Enfoque práctico y técnico</span>
     </div>
 
     <div class="fade-item" id="fade4">
@@ -443,62 +496,91 @@ body {
 </section>
 
 
-<main class="labs-container">
+<!-- INTRO -->
 
-  <!-- CARRUSEL -->
-  <div class="carousel">
-    <div class="carousel-track">
-      <div class="carousel-slide"><img src="assets/labs/lab1.jpg"></div>
-      <div class="carousel-slide"><img src="assets/labs/lab2.jpg"></div>
-      <div class="carousel-slide"><img src="assets/labs/lab3.jpg"></div>
-      <div class="carousel-slide"><img src="assets/labs/lab4.jpg"></div>
+  <section class="intro-directorio">
+
+  <h2>Directorio de Empresas Certificadas</h2>
+
+  <p class="intro-text">
+    Este directorio reúne a <strong>empresas certificadas y profesionales especializados</strong>
+    que cumplen con los criterios técnicos establecidos para la correcta
+    <strong>instalación, mantenimiento y verificación</strong> de sistemas contra incendio.
+  </p>
+
+  <div class="directorio-highlights">
+
+    <div class="highlight-card">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h4>Confianza y respaldo</h4>
+      <p>
+        Todas las empresas listadas han sido
+        <strong>validadas y certificadas</strong>,
+        garantizando cumplimiento técnico y profesional.
+      </p>
     </div>
-    <button class="carousel-btn prev">❮</button>
-    <button class="carousel-btn next">❯</button>
+
+    <div class="highlight-card">
+      <i class="fa-solid fa-building"></i>
+      <h4>Empresas especializadas</h4>
+      <p>
+        Accede a un ecosistema de
+        <strong>proveedores calificados</strong>
+        con experiencia comprobada en distintos sectores y regiones.
+      </p>
+    </div>
+
+    <div class="highlight-card">
+      <i class="fa-solid fa-filter"></i>
+      <h4>Búsqueda inteligente</h4>
+      <p>
+        Utiliza los filtros por
+        <strong>país, entidad y certificación</strong>
+        para encontrar rápidamente la opción adecuada.
+      </p>
+    </div>
+
   </div>
 
-  <!-- CAPACIDADES -->
-  <section class="capabilities">
-    <div class="cap-card">
-      <i class="fa-solid fa-gears"></i>
-      <h3>Sistemas de Bombeo</h3>
-      <p>Pruebas hidráulicas, arranque, curvas, fallas y mantenimiento.</p>
-    </div>
-  
-    <div class="cap-card">
-      <i class="fa-solid fa-people-roof"></i>
-      <h3>Aulas Especializadas</h3>
-      <p>Espacios dedicados a la formación teórica y al refuerzo conceptual.</p>
-    </div>
-  
-    <div class="cap-card">
-      <i class="fa-solid fa-flask"></i>
-      <h3>Supresión Especial</h3>
-      <p>Agentes limpios, CO₂, espuma y sistemas especiales.</p>
-    </div>
-  
-    <div class="cap-card">
-      <i class="fa-solid fa-bell"></i>
-      <h3>Detección y Alarmas</h3>
-      <p>Configuración, pruebas, diagnóstico y fallas reales.</p>
-    </div>
-  </section>
+  <p class="nota-directorio">
+    💡 Si tu empresa aún no aparece en el directorio, puedes solicitar su registro
+    para iniciar el proceso de validación y certificación.
+  </p>
+
+</section>
 
 
-  <!-- GALERÍA -->
-  <h2 class="gallery-title">Galería de instalaciones</h2>
-  <div class="gallery-grid">
-    <img src="assets/labs/lab1.jpg">
-    <img src="assets/labs/lab2.jpg">
-    <img src="assets/labs/lab3.jpg">
-    <img src="assets/labs/lab4.jpg">
-    <img src="assets/labs/lab5.jpg">
-    <img src="assets/labs/lab6.jpg">
-    <img src="assets/labs/lab7.jpg">
-    <img src="assets/labs/lab8.jpg">
+
+  
+
+  <!-- DIRECTORIO -->
+<section class="certificados">
+
+  <div class="filters">
+    <select id="pais"><option>País</option></select>
+    <select id="entidad"><option>Entidad</option></select>
+    <button class="btn" onclick="abrirFormulario()">Solicitar Registro</button>
   </div>
 
-</main>
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-card">
+    <button class="close-btn" onclick="cerrar()">✕</button>
+    <h3>Solicitud de Alta</h3>
+      <form id="form">
+        <select id="fPais" required></select>
+        <select id="fEntidad" required></select>
+        <input id="empresa" placeholder="EMPRESA" required>
+        <input id="telefono" placeholder="TELÉFONO (10 dígitos)" pattern="\d{10}" required>
+        <input id="correo" type="email" placeholder="CORREO" required>
+        <button class="btn">Enviar solicitud</button>
+      </form>
+  </div>
+</div>
+
 
 
 <!-- ============================== SCRIPTS ============================== -->
@@ -563,23 +645,100 @@ body {
   document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 2500));
 </script>
 
+
+
   
-<!-- CARRUSEL SCRIPT -->
 <script>
-const track=document.querySelector('.carousel-track');
-const slides=[...track.children];
-let index=0;
+const API="https://script.google.com/macros/s/AKfycbzlxKnl-YN6f5U54bsEWlwKVZz-DeHRkAeyVJnzY9L_b_DqqXwCzR-yo5R0sMw_y7r6/exec";
+let directorio=[],baseDatos={};
 
-document.querySelector('.next').onclick=()=>{
-  index=(index+1)%slides.length;
-  track.style.transform=`translateX(-${index*100}%)`;
+// ===== CARGA =====
+fetch(API).then(r=>r.json()).then(d=>{
+  directorio=d.directorio;
+  cargarFiltros();
+  pintar(directorio);
+});
+
+function cargarFiltros(){
+  pais.innerHTML="<option>País</option>";
+  [...new Set(directorio.map(x=>x.PAÍS))]
+    .forEach(p=>pais.innerHTML+=`<option>${p}</option>`);
+}
+
+pais.onchange=()=>{
+  entidad.innerHTML="<option>Entidad</option>";
+  directorio
+    .filter(x=>x.PAÍS===pais.value)
+    .map(x=>x.ENTIDAD)
+    .filter((v,i,a)=>a.indexOf(v)==i)
+    .forEach(e=>entidad.innerHTML+=`<option>${e}</option>`);
+  filtrar();
 };
 
-document.querySelector('.prev').onclick=()=>{
-  index=(index-1+slides.length)%slides.length;
-  track.style.transform=`translateX(-${index*100}%)`;
+entidad.onchange=filtrar;
+
+function filtrar(){
+  let r=directorio;
+  if(pais.value!=="País") r=r.filter(x=>x.PAÍS===pais.value);
+  if(entidad.value!=="Entidad") r=r.filter(x=>x.ENTIDAD===entidad.value);
+  pintar(r);
+}
+
+
+function pintar(lista){
+  grid.innerHTML="";
+  lista.forEach(p=>{
+    grid.innerHTML+=`
+      <div class="card">
+        <h4>${p.EMPRESA}</h4>
+        <p><b>${p.ENTIDAD}</b> – ${p.PAÍS}</p>
+        <p>${p.TELÉFONO}</p>
+        <p>${p.CORREO}</p>
+      </div>`;
+  });
+}
+
+// ===== POPUP =====
+function abrirFormulario(){
+  popup.style.display="flex";
+  fetch(API+"?catalogo=true").then(r=>r.json()).then(c=>{
+    baseDatos=c;
+    fPais.innerHTML="<option>País</option>";
+    c.paises.forEach(p=>fPais.innerHTML+=`<option>${p}</option>`);
+  });
+}
+
+fPais.onchange=()=>{
+  fEntidad.innerHTML="<option>Entidad</option>";
+  (baseDatos.catalogo[fPais.value]||[])
+    .forEach(e=>fEntidad.innerHTML+=`<option>${e}</option>`);
 };
+
+form.onsubmit=e=>{
+  e.preventDefault();
+  if(!/^\d{10}$/.test(telefono.value)) return alert("Teléfono inválido");
+
+  fetch(API,{
+    method:"POST",
+    body:JSON.stringify({
+      PAÍS:fPais.value,
+      ENTIDAD:fEntidad.value,
+      EMPRESA:empresa.value,
+      TELÉFONO:telefono.value,
+      CORREO:correo.value
+    })
+  }).then(()=>{
+    alert("Solicitud enviada correctamente");
+    cerrar(); form.reset();
+  });
+};
+
+
+function cerrar(){popup.style.display="none";}
+popup.onclick=e=>{if(e.target===popup)cerrar();}
+document.onkeydown=e=>{if(e.key==="Escape")cerrar();}
 </script>
+
 
 
 <script>
@@ -626,7 +785,6 @@ document.addEventListener('keydown', e => {
       document.getElementById("footer-container").innerHTML = data;
     });
 </script>
-  
 
 </body>
 </html>
