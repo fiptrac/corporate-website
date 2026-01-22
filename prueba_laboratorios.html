@@ -612,6 +612,9 @@ document.querySelector('.prev').onclick = () => {
 
 
   
+<div class="image-viewer" id="imageViewer">
+  <img id="viewerImg">
+</div>
 
 <!-- GALERÍA SCRIPT -->
 <script>
@@ -627,22 +630,22 @@ function openImage(src){
   clearTimeout(viewerTimeout);
   viewerTimeout = setTimeout(() => {
     viewer.style.display = "none";
-  }, 5000);
+  }, 4000); // ⏱ 4 segundos
 }
 
-// cerrar manual
-viewer.onclick = () => viewer.style.display = "none";
+// cerrar al hacer clic
+viewer.addEventListener('click', () => {
+  viewer.style.display = "none";
+});
 
 // GALERÍA
 document.querySelectorAll('.gallery-grid img').forEach(img=>{
-  img.addEventListener('click', ()=> openImage(img.src));
-});
-
-// CARRUSEL
-document.querySelectorAll('.carousel-slide img').forEach(img=>{
-  img.addEventListener('click', ()=> openImage(img.src));
+  img.addEventListener('click', ()=>{
+    openImage(img.src);
+  });
 });
 </script>
+
 
 
 
@@ -691,12 +694,6 @@ document.addEventListener('keydown', e => {
       document.getElementById("footer-container").innerHTML = data;
     });
 </script>
-
-
-  <div class="image-viewer" id="imageViewer">
-  <img id="viewerImg">
-</div>
-
 
 </body>
 </html>
