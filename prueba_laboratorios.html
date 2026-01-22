@@ -406,7 +406,49 @@ body {
   to{transform:scale(1);opacity:1}
 }
 
-  
+
+
+/* ======================================================
+   EXPERIENCIA DE ALUMNOS – CARRUSELES INFINITOS
+====================================================== */
+
+.exp-carousel-wrapper{
+  overflow:hidden;
+  position:relative;
+  margin:50px 0;
+}
+
+.exp-carousel-track{
+  display:flex;
+  width:max-content;
+  animation:exp-scroll 45s linear infinite;
+}
+
+.exp-carousel-track.slow{
+  animation-duration:70s;
+}
+
+.exp-carousel-item{
+  flex:0 0 auto;
+  padding:0 26px;
+}
+
+.exp-carousel-item img{
+  height:220px;              /* 🔥 imágenes grandes */
+  width:auto;
+  border-radius:18px;
+  object-fit:cover;
+  box-shadow:0 12px 28px rgba(0,0,0,.25);
+  transition:transform .3s ease;
+}
+
+.exp-carousel-item img:hover{
+  transform:scale(1.05);
+}
+
+/* animación infinita */
+@keyframes exp-
+
   
   
 </style>
@@ -528,6 +570,50 @@ body {
     <img src="assets/images/sin fondo.png">
   </div>
 
+<!-- ================= EXPERIENCIA DE ALUMNOS ================= -->
+
+  <h2 class="gallery-title" style="margin-top:80px;">
+    Experiencia de nuestros alumnos
+  </h2>
+  
+  <!-- ===== CARRUSEL 1 ===== -->
+  <div class="exp-carousel-wrapper">
+    <div class="exp-carousel-track">
+      <!-- duplicadas para efecto infinito -->
+      <div class="exp-carousel-item"><img src="assets/images/fondo blanco.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/icono.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/sin fondo.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/nombre.png"></div>
+      <div class="exp-carousel-item"><img src="assets/experiencia/e5.jpg"></div>
+  
+      <!-- repetidas -->
+      <div class="exp-carousel-item"><img src="assets/images/fondo blanco.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/icono.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/sin fondo.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/nombre.png"></div>
+      <div class="exp-carousel-item"><img src="assets/experiencia/e5.jpg"></div>
+    </div>
+  </div>
+  
+  <!-- ===== CARRUSEL 2 (más lento) ===== -->
+  <div class="exp-carousel-wrapper">
+    <div class="exp-carousel-track slow">
+      <div class="exp-carousel-item"><img src="assets/experiencia/e6.jpg"></div>
+      <div class="exp-carousel-item"><img src="assets/experiencia/e7.jpg"></div>
+      <div class="exp-carousel-item"><img src="assets/experiencia/e8.jpg"></div>
+      <div class="exp-carousel-item"><img src="assets/experiencia/e9.jpg"></div>
+      <div class="exp-carousel-item"><img src="assets/experiencia/e10.jpg"></div>
+  
+      <!-- repetidas -->
+      <div class="exp-carousel-item"><img src="assets/experiencia/e6.jpg"></div>
+      <div class="exp-carousel-item"><img src="assets/experiencia/e7.jpg"></div>
+      <div class="exp-carousel-item"><img src="assets/experiencia/e8.jpg"></div>
+      <div class="exp-carousel-item"><img src="assets/experiencia/e9.jpg"></div>
+      <div class="exp-carousel-item"><img src="assets/experiencia/e10.jpg"></div>
+    </div>
+  </div>
+
+  
 </main>
 
 
