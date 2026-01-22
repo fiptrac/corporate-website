@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratorios | FIPTRAC</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<style>
+
+/* ===== BASE TIPOGRAFÍA GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+  
+  /*==================  NAVBAR ==================*/
+  /* ===========================
+     HEADER STICKY (compact & scroll)
+     - header.scrolled: fondo semitransparente + compact
+     - header.nav-hide: se oculta al bajar scroll
+  ============================ */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
+    background: rgba(255,255,255,0.92);
+  }
+
+  /* Cuando el usuario baja lo volvemos más pequeño / con fondo */
+  header.scrolled {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  }
+
+  /* Cuando el usuario baja rápido ocultamos la barra */
+  header.nav-hide {
+    transform: translateY(-110%);
+  }
+
+  /* Contenedor del nav: aquí se controla el "grosor" de la línea.
+     Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
+  .nav-container {
+    max-width:1200px;
+    margin:auto;
+    padding:10px 15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+
+
+  /* ===========================
+     MENÚ
+  ============================ */
+  .menu {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:30px;
+  }
+  
+  .menu a {
+    text-decoration:none;
+    font-weight:600;
+    color:#003A70;
+    padding:6px 8px;
+    border-radius:8px;
+    transition:background .18s, color .18s;
+  }
+  
+  .menu a:hover {
+    background: rgba(0,58,112,0.06);
+  }
+
+
+  /* ====== HAMBURGER (movil) ====== */
+  .hamburger {
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+    padding:6px;
+    margin-left:auto; 
+  }
+  
+  .hamburger span {
+    width:28px;
+    height:3px;
+    background:#003A70;
+    border-radius:3px;
+    display:block;
+  }
+
+
+  /* ====== MEDIA QUERY (móvil) ====== */
+  @media(max-width:850px){
+    .menu {
+      position:absolute;
+      top:100%;
+      right:12px;
+      background:white;
+      width:220px;
+      padding:16px;
+      border-radius:12px;
+      box-shadow:0 8px 26px rgba(0,0,0,0.12);
+      flex-direction:column;
+      gap:12px;
+      opacity:0;
+      pointer-events:none;
+      transform:translateY(-6px);
+      transition:opacity .28s, transform .28s;
+    }
+  
+    .menu.show {
+      opacity:1;
+      pointer-events:auto;
+      transform:translateY(0);
+    }
+  
+    .hamburger {
+      display:flex;
+    }
+  }
+
+
+/*==================  FIN NAVBAR ==================*/
+  
+/*==================  HERO ==================*/
+  .hero {
+    background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
+    background-position:center;
+    background-size:cover;
+    padding:80px 20px 20px; /* alto del hero */
+    text-align:center;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero-content {
+    max-width:1000px;
+    margin:auto;
+    min-height:260px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+  }
+
+  .fade-item {
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:0;
+    transition:opacity 1.4s ease, transform 0.6s ease;
+    font-size:44px;
+    font-weight:700;
+    line-height:1.05;
+    max-width:92%;
+  }
+
+  .fade-item:not(:has(img)) {
+    white-space: normal;
+    text-align:center;
+  }
+
+  .fade-item.active {
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+  /* Texto del slider (ajústalo con .fade-item .slide-text) */
+  .fade-item .slide-text {
+    display:block;
+    font-size:38px;
+  }
+  .fade-item p { margin-top:10px; font-size:18px; font-weight:400; color:rgba(255,255,255,0.95); }
+
+  /* ===========================
+     SLIDER: IMÁGENES / CONTROL POR CLASE (TAMAÑOS INDIVIDUALES)
+     - Usa las clases .img-1, .img-2, .img-3, .img-4 en cada <img>
+     - Ajusta width / max-width / height aquí según quieras
+  ============================ */
+  .fade-item img {
+    display:block;
+    width: 320px;      /* valor por defecto si no se especifica clase */
+    max-width: 68vw;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+    transition: transform .28s ease;
+  }
+
+  /* Tamaños individuales (modifica estos valores libremente) */
+  .fade-item img.img-1 { width: 360px; }   /* imagen 1 */
+  .fade-item img.img-2 { width: 300px; }   /* imagen 2 */
+  .fade-item img.img-3 { width: 420px; }   /* imagen 3 */
+  .fade-item img.img-4 { width: 500px; }   /* imagen 4 */
+
+  /* Responsivo: reduce imágenes en móvil */
+  @media (max-width:700px){
+    .fade-item { font-size:28px; }
+    .fade-item img { width:220px; }
+    .fade-item img.img-1 { width:240px; }
+    .fade-item img.img-2 { width:200px; }
+    .fade-item img.img-3 { width:260px; }
+    .fade-item img.img-4 { width:220px; }
+  }
+
+
+/* ================= LABORATORIOS ================= */
+
+.labs-hero{
+  background:linear-gradient(rgba(0,58,112,.75),rgba(0,58,112,.75)),
+             url("assets/labs/lab1.jpg") center/cover;
+  color:#fff;
+  padding:110px 20px 90px;
+  text-align:center;
+}
+
+.labs-hero h1{
+  font-size:2.6rem;
+  margin-bottom:14px;
+}
+
+.labs-hero p{
+  max-width:850px;
+  margin:auto;
+  font-size:1.1rem;
+  line-height:1.7;
+  opacity:.95;
+}
+
+/* CONTENEDOR */
+.labs-container{
+  max-width:1200px;
+  margin:70px auto;
+  padding:20px;
+}
+
+/* BLOQUE DESCRIPTIVO */
+.labs-intro{
+  text-align:center;
+  max-width:900px;
+  margin:0 auto 60px;
+}
+
+.labs-intro h2{
+  color:#003A70;
+  margin-bottom:12px;
+}
+
+.labs-intro p{
+  font-size:1.05rem;
+  line-height:1.7;
+  color:#444;
+}
+
+/* ===== CAROUSEL ===== */
+.carousel{
+  position:relative;
+  height:420px;
+  overflow:hidden;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.2);
+}
+
+.carousel-track{
+  display:flex;
+  height:100%;
+  transition:transform .5s ease;
+}
+
+.carousel-slide{
+  min-width:100%;
+}
+
+.carousel-slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.carousel-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,.5);
+  border:none;
+  color:#fff;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:1.4rem;
+}
+
+.carousel-btn:hover{background:rgba(0,0,0,.75)}
+.prev{left:16px}
+.next{right:16px}
+
+/* ===== CAPACIDADES ===== */
+.capabilities{
+  margin:80px 0;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
+
+.cap-card{
+  background:#fff;
+  padding:26px;
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+  text-align:center;
+}
+
+  .cap-card i{
+  font-size:34px;
+  color:#003A70;
+  margin-bottom:14px;
+}
+
+
+.cap-card h3{
+  color:#003A70;
+  margin-bottom:10px;
+}
+
+  .cap-card{
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.cap-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 28px rgba(0,0,0,.16);
+}
+
+
+.cap-card p{
+  font-size:.95rem;
+  color:#444;
+}
+
+/* ===== GALERÍA ===== */
+.gallery-title{
+  text-align:center;
+  margin-bottom:26px;
+  color:#003A70;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+
+.gallery-grid img{
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  border-radius:14px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.gallery-grid img:hover{
+  transform:scale(1.04);
+  box-shadow:0 10px 26px rgba(0,0,0,.25);
+}
+  
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="nav">
+  <div class="nav-container">
+
+    <!-- Logo clicable: vuelve a index.html 
+<div class="logo">
+<a href="index.html" aria-label="Ir al inicio">
+<img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
+</a>
+</div>
+    -->
+
+    <!-- Menú (Eventos permanece incluido) -->
+    <nav class="menu" id="menu">
+      <!-- <a href="cursos.html">Cursos</a>        eliminar LOGO (clicable)-->
+      <a href="index.html">Inicio</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="certificaciones.html">Certificaciones</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="laboratorios.html">Laboratorios</a>
+      <a href="directorio.html">Empresas</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+
+<!-- HERO / SLIDER -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-content">
+
+    <!-- Cada .fade-item puede ser texto o imagen. 
+         Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
+    <div class="fade-item active" id="fade1">
+      <span class="slide-text">Entrenamiento técnico avanzado con equipamiento real</span>
+    </div>
+
+    <div class="fade-item" id="fade2">
+      <span class="slide-text">Simuladores funcionales y escenarios controlados</span>
+    </div>
+
+    <div class="fade-item" id="fade3">
+      <span class="slide-text">Condiciones reales de operación en sistemas contra incendio</span>
+    </div>
+
+    <div class="fade-item" id="fade4">
+      <!-- imagen con clase individual img-4 -->
+      <img src="assets/images/sin fondo.png" alt="Logo fondo" class="img-4">
+    </div>
+
+  </div>
+</section>
+
+
+<main class="labs-container">
+
+  <!-- CARRUSEL -->
+  <div class="carousel">
+    <div class="carousel-track">
+      <div class="carousel-slide"><img src="assets/labs/lab1.jpg"></div>
+      <div class="carousel-slide"><img src="assets/labs/lab2.jpg"></div>
+      <div class="carousel-slide"><img src="assets/labs/lab3.jpg"></div>
+      <div class="carousel-slide"><img src="assets/labs/lab4.jpg"></div>
+    </div>
+    <button class="carousel-btn prev">❮</button>
+    <button class="carousel-btn next">❯</button>
+  </div>
+
+  <!-- CAPACIDADES -->
+  <section class="capabilities">
+    <div class="cap-card">
+      <i class="fa-solid fa-gears"></i>
+      <h3>Sistemas de Bombeo</h3>
+      <p>Pruebas hidráulicas, arranque, curvas, fallas y mantenimiento.</p>
+    </div>
+  
+    <div class="cap-card">
+      <i class="fa-solid fa-people-roof"></i>
+      <h3>Aulas Especializadas</h3>
+      <p>Espacios dedicados a la formación teórica y al refuerzo conceptual.</p>
+    </div>
+  
+    <div class="cap-card">
+      <i class="fa-solid fa-flask"></i>
+      <h3>Supresión Especial</h3>
+      <p>Agentes limpios, CO₂, espuma y sistemas especiales.</p>
+    </div>
+  
+    <div class="cap-card">
+      <i class="fa-solid fa-bell"></i>
+      <h3>Detección y Alarmas</h3>
+      <p>Configuración, pruebas, diagnóstico y fallas reales.</p>
+    </div>
+  </section>
+
+
+  <!-- GALERÍA -->
+  <h2 class="gallery-title">Galería de instalaciones</h2>
+  <div class="gallery-grid">
+    <img src="assets/labs/lab1.jpg">
+    <img src="assets/labs/lab2.jpg">
+    <img src="assets/labs/lab3.jpg">
+    <img src="assets/labs/lab4.jpg">
+    <img src="assets/labs/lab5.jpg">
+    <img src="assets/labs/lab6.jpg">
+    <img src="assets/labs/lab7.jpg">
+    <img src="assets/labs/lab8.jpg">
+  </div>
+
+</main>
+
+
+<!-- ============================== SCRIPTS ============================== -->
+
+  
+<!--  HAMBURGER  --> 
+<script>
+  // HAMBURGER toggle (movil)
+  document.getElementById('hamburger').addEventListener('click', ()=>{
+    document.getElementById('menu').classList.toggle('show');
+  });
+</script>
+  
+
+<!--  NAVBAR  --> 
+<script>
+  // HEADER: añadir clase .scrolled + comportamiento "hide on scroll"
+  (function(){
+    const header = document.querySelector('header');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const current = window.pageYOffset || document.documentElement.scrollTop;
+      // scrolled style (background + compact)
+      if (current > 30) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+
+      // hide/show on scroll direction
+      if (current > lastScroll && current > 120) {
+        // scrolling down
+        header.classList.add('nav-hide');
+      } else {
+        // scrolling up
+        header.classList.remove('nav-hide');
+      }
+      lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
+    }, { passive: true });
+  })();
+</script>
+
+
+<!--  HERO  --> 
+<script>
+  // SLIDER / TRANSICIONES
+  const items = [
+    document.getElementById("fade1"),
+    document.getElementById("fade2"),
+    document.getElementById("fade3"),
+    document.getElementById("fade4")
+  ];
+
+  let index = 0;
+  function changeSlide(){
+    items.forEach(i => i.classList.remove("active"));
+    items[index].classList.add("active");
+    index = (index + 1) % items.length;
+  }
+  // inicia intercambio (puedes cambiar 3500 a otro valor en ms)
+  let slideInterval = setInterval(changeSlide, 2500);
+
+  // si quieres controlar manualmente (ej. pausar on hover) puedes hacerlo:
+  document.querySelector('.hero').addEventListener('mouseenter', ()=> clearInterval(slideInterval));
+  document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 2500));
+</script>
+
+  
+<!-- CARRUSEL SCRIPT -->
+<script>
+const track=document.querySelector('.carousel-track');
+const slides=[...track.children];
+let index=0;
+
+document.querySelector('.next').onclick=()=>{
+  index=(index+1)%slides.length;
+  track.style.transform=`translateX(-${index*100}%)`;
+};
+
+document.querySelector('.prev').onclick=()=>{
+  index=(index-1+slides.length)%slides.length;
+  track.style.transform=`translateX(-${index*100}%)`;
+};
+</script>
+
+
+<script>
+/* ================= POPUPS FOOTER ================= */
+
+function abrirPopup(id){
+  const popup = document.getElementById(id);
+  if(popup) popup.style.display = 'flex';
+}
+
+function cerrarPopup(id){
+  const popup = document.getElementById(id);
+  if(popup) popup.style.display = 'none';
+}
+
+/* Cerrar con click fuera */
+document.addEventListener('click', e => {
+  if(e.target.classList.contains('fiptrac-overlay')){
+    e.target.style.display = 'none';
+  }
+});
+
+/* Cerrar con ESC */
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    document
+      .querySelectorAll('.fiptrac-overlay')
+      .forEach(p => p.style.display = 'none');
+  }
+});
+</script>
+
+
+  
+<!--  FOOTER  --> 
+<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
+
+<div id="footer-container"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-container").innerHTML = data;
+    });
+</script>
+  
+
+</body>
+</html>
