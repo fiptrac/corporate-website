@@ -421,20 +421,20 @@ body {
 .exp-carousel-track{
   display:flex;
   width:max-content;
-  animation:exp-scroll 45s linear infinite;
+  animation:exp-scroll 40s linear infinite;
 }
 
 .exp-carousel-track.slow{
-  animation-duration:70s;
+  animation-duration:65s;
 }
 
 .exp-carousel-item{
   flex:0 0 auto;
-  padding:0 26px;
+  padding:0 28px;
 }
 
 .exp-carousel-item img{
-  height:220px;              /* 🔥 imágenes grandes */
+  height:220px;
   width:auto;
   border-radius:18px;
   object-fit:cover;
@@ -446,8 +446,30 @@ body {
   transform:scale(1.05);
 }
 
-/* animación infinita */
-@keyframes exp-
+/* 🔥 ANIMACIÓN CONTINUA REAL */
+@keyframes exp-scroll{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-50%);
+  }
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .exp-carousel-item img{
+    height:160px;
+  }
+}
+
+  .exp-carousel-wrapper:hover .exp-carousel-track{
+  animation-play-state: paused;
+}
+
+.exp-carousel-track.reverse{
+  animation-direction: reverse;
+}
 
   
   
@@ -596,7 +618,7 @@ body {
   
   <!-- ===== CARRUSEL 2 (más lento) ===== -->
   <div class="exp-carousel-wrapper">
-    <div class="exp-carousel-track slow">
+    <div class="exp-carousel-track slow reverse">
       <div class="exp-carousel-item"><img src="assets/experiencia/e6.jpg"></div>
       <div class="exp-carousel-item"><img src="assets/experiencia/e7.jpg"></div>
       <div class="exp-carousel-item"><img src="assets/experiencia/e8.jpg"></div>
