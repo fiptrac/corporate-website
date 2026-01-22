@@ -438,7 +438,7 @@ body {
   width:auto;
   border-radius:18px;
   object-fit:cover;
-  box-shadow:0 12px 28px rgba(0,0,0,.25);
+  filter: drop-shadow(0 12px 22px rgba(0,0,0,.25));
   transition:transform .3s ease;
 }
 
@@ -466,6 +466,28 @@ body {
   .exp-carousel-wrapper:hover .exp-carousel-track{
   animation-play-state: paused;
 }
+
+.exp-carousel-wrapper::before,
+.exp-carousel-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  width:80px;
+  height:100%;
+  z-index:2;
+  pointer-events:none;
+}
+
+.exp-carousel-wrapper::before{
+  left:0;
+  background:linear-gradient(to right, #fff 0%, transparent 100%);
+}
+
+.exp-carousel-wrapper::after{
+  right:0;
+  background:linear-gradient(to left, #fff 0%, transparent 100%);
+}
+
 
 .exp-carousel-track.reverse{
   animation-direction: reverse;
