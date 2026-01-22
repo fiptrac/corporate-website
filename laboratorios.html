@@ -379,6 +379,121 @@ body {
   transform:scale(1.04);
   box-shadow:0 10px 26px rgba(0,0,0,.25);
 }
+
+
+
+/* ===== VISOR DE IMAGEN ===== */
+.image-viewer{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+}
+
+.image-viewer img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+  animation:zoomIn .4s ease;
+}
+
+@keyframes zoomIn{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+
+
+/* ======================================================
+   EXPERIENCIA DE ALUMNOS – CARRUSELES INFINITOS
+====================================================== */
+
+.exp-carousel-wrapper{
+  overflow:hidden;
+  position:relative;
+  margin:50px 0;
+}
+
+.exp-carousel-track{
+  display:flex;
+  width:max-content;
+  animation:exp-scroll 40s linear infinite;
+}
+
+.exp-carousel-track.slow{
+  animation-duration:65s;
+}
+
+.exp-carousel-item{
+  flex:0 0 auto;
+  padding:0 28px;
+}
+
+.exp-carousel-item img{
+  height:220px;
+  width:auto;
+  border-radius:18px;
+  object-fit:cover;
+  filter: drop-shadow(0 12px 22px rgba(0,0,0,.25));
+  transition:transform .3s ease;
+}
+
+.exp-carousel-item img:hover{
+  transform:scale(1.05);
+}
+
+/* 🔥 ANIMACIÓN CONTINUA REAL */
+@keyframes exp-scroll{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(-50%);
+  }
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .exp-carousel-item img{
+    height:160px;
+  }
+}
+
+  .exp-carousel-wrapper:hover .exp-carousel-track{
+  animation-play-state: paused;
+}
+
+.exp-carousel-wrapper::before,
+.exp-carousel-wrapper::after{
+  content:"";
+  position:absolute;
+  top:0;
+  width:80px;
+  height:100%;
+  z-index:2;
+  pointer-events:none;
+}
+
+.exp-carousel-wrapper::before{
+  left:0;
+  background:linear-gradient(to right, #fff 0%, transparent 100%);
+}
+
+.exp-carousel-wrapper::after{
+  right:0;
+  background:linear-gradient(to left, #fff 0%, transparent 100%);
+}
+
+
+.exp-carousel-track.reverse{
+  animation-direction: reverse;
+}
+
+  
   
 </style>
 </head>
@@ -448,10 +563,10 @@ body {
   <!-- CARRUSEL -->
   <div class="carousel">
     <div class="carousel-track">
-      <div class="carousel-slide"><img src="assets/labs/lab1.jpg"></div>
-      <div class="carousel-slide"><img src="assets/labs/lab2.jpg"></div>
-      <div class="carousel-slide"><img src="assets/labs/lab3.jpg"></div>
-      <div class="carousel-slide"><img src="assets/labs/lab4.jpg"></div>
+      <div class="carousel-slide"><img src="assets/images/fondo blanco.png"></div>
+      <div class="carousel-slide"><img src="assets/images/icono.png"></div>
+      <div class="carousel-slide"><img src="assets/images/nombre.png"></div>
+      <div class="carousel-slide"><img src="assets/images/sin fondo.png"></div>
     </div>
     <button class="carousel-btn prev">❮</button>
     <button class="carousel-btn next">❯</button>
@@ -488,16 +603,56 @@ body {
   <!-- GALERÍA -->
   <h2 class="gallery-title">Galería de instalaciones</h2>
   <div class="gallery-grid">
-    <img src="assets/labs/lab1.jpg">
-    <img src="assets/labs/lab2.jpg">
-    <img src="assets/labs/lab3.jpg">
-    <img src="assets/labs/lab4.jpg">
-    <img src="assets/labs/lab5.jpg">
-    <img src="assets/labs/lab6.jpg">
-    <img src="assets/labs/lab7.jpg">
-    <img src="assets/labs/lab8.jpg">
+    <img src="assets/images/fondo blanco.png">
+    <img src="assets/images/icono.png">
+    <img src="assets/images/sin fondo.png">
+    <img src="assets/images/fondo blanco.png">
+    <img src="assets/images/icono.png">
+    <img src="assets/images/sin fondo.png">
+    <img src="assets/images/fondo blanco.png">
+    <img src="assets/images/icono.png">
   </div>
 
+<!-- ================= EXPERIENCIA DE ALUMNOS ================= -->
+
+  <h2 class="gallery-title" style="margin-top:80px;">
+    Experiencia de nuestros alumnos
+  </h2>
+  
+  <!-- ===== CARRUSEL 1 ===== -->
+  <div class="exp-carousel-wrapper">
+    <div class="exp-carousel-track">
+      <!-- duplicadas para efecto infinito -->
+      <div class="exp-carousel-item"><img src="assets/images/fondo blanco.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/icono.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/sin fondo.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/nombre.png"></div>
+  
+      <!-- repetidas -->
+      <div class="exp-carousel-item"><img src="assets/images/fondo blanco.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/icono.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/sin fondo.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/nombre.png"></div>
+    </div>
+  </div>
+  
+  <!-- ===== CARRUSEL 2 (más lento) ===== -->
+  <div class="exp-carousel-wrapper">
+    <div class="exp-carousel-track slow reverse">
+      <div class="exp-carousel-item"><img src="assets/images/fondo blanco.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/icono.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/sin fondo.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/nombre.png"></div>
+  
+      <!-- repetidas -->
+      <div class="exp-carousel-item"><img src="assets/images/fondo blanco.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/icono.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/sin fondo.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/nombre.png"></div>
+    </div>
+  </div>
+
+  
 </main>
 
 
@@ -566,20 +721,59 @@ body {
   
 <!-- CARRUSEL SCRIPT -->
 <script>
-const track=document.querySelector('.carousel-track');
-const slides=[...track.children];
-let index=0;
+const track = document.querySelector('.carousel-track');
+const slides = [...track.children];
+let carouselIndex = 0;
 
-document.querySelector('.next').onclick=()=>{
-  index=(index+1)%slides.length;
-  track.style.transform=`translateX(-${index*100}%)`;
+document.querySelector('.next').onclick = () => {
+  carouselIndex = (carouselIndex + 1) % slides.length;
+  track.style.transform = `translateX(-${carouselIndex * 100}%)`;
 };
 
-document.querySelector('.prev').onclick=()=>{
-  index=(index-1+slides.length)%slides.length;
-  track.style.transform=`translateX(-${index*100}%)`;
+document.querySelector('.prev').onclick = () => {
+  carouselIndex = (carouselIndex - 1 + slides.length) % slides.length;
+  track.style.transform = `translateX(-${carouselIndex * 100}%)`;
 };
 </script>
+
+
+  
+<div class="image-viewer" id="imageViewer">
+  <img id="viewerImg">
+</div>
+
+<!-- GALERÍA SCRIPT -->
+<script>
+const viewer = document.getElementById("imageViewer");
+const viewerImg = document.getElementById("viewerImg");
+let viewerTimeout;
+
+// abrir imagen grande
+function openImage(src){
+  viewerImg.src = src;
+  viewer.style.display = "flex";
+
+  clearTimeout(viewerTimeout);
+  viewerTimeout = setTimeout(() => {
+    viewer.style.display = "none";
+  }, 4000); // ⏱ 4 segundos
+}
+
+// cerrar al hacer clic
+viewer.addEventListener('click', () => {
+  viewer.style.display = "none";
+});
+
+// GALERÍA
+document.querySelectorAll('.gallery-grid img').forEach(img=>{
+  img.addEventListener('click', ()=>{
+    openImage(img.src);
+  });
+});
+</script>
+
+
+
 
 
 <script>
@@ -626,7 +820,6 @@ document.addEventListener('keydown', e => {
       document.getElementById("footer-container").innerHTML = data;
     });
 </script>
-  
 
 </body>
 </html>
