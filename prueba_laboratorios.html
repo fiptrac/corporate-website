@@ -379,6 +379,35 @@ body {
   transform:scale(1.04);
   box-shadow:0 10px 26px rgba(0,0,0,.25);
 }
+
+
+
+/* ===== VISOR DE IMAGEN ===== */
+.image-viewer{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+}
+
+.image-viewer img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+  animation:zoomIn .4s ease;
+}
+
+@keyframes zoomIn{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+  
+  
   
 </style>
 </head>
@@ -566,20 +595,56 @@ body {
   
 <!-- CARRUSEL SCRIPT -->
 <script>
-const track=document.querySelector('.carousel-track');
-const slides=[...track.children];
-let index=0;
+const track = document.querySelector('.carousel-track');
+const slides = [...track.children];
+let carouselIndex = 0;
 
-document.querySelector('.next').onclick=()=>{
-  index=(index+1)%slides.length;
-  track.style.transform=`translateX(-${index*100}%)`;
+document.querySelector('.next').onclick = () => {
+  carouselIndex = (carouselIndex + 1) % slides.length;
+  track.style.transform = `translateX(-${carouselIndex * 100}%)`;
 };
 
-document.querySelector('.prev').onclick=()=>{
-  index=(index-1+slides.length)%slides.length;
-  track.style.transform=`translateX(-${index*100}%)`;
+document.querySelector('.prev').onclick = () => {
+  carouselIndex = (carouselIndex - 1 + slides.length) % slides.length;
+  track.style.transform = `translateX(-${carouselIndex * 100}%)`;
 };
 </script>
+
+
+  
+
+<!-- GALERÍA SCRIPT -->
+<script>
+const viewer = document.getElementById("imageViewer");
+const viewerImg = document.getElementById("viewerImg");
+let viewerTimeout;
+
+// abrir imagen grande
+function openImage(src){
+  viewerImg.src = src;
+  viewer.style.display = "flex";
+
+  clearTimeout(viewerTimeout);
+  viewerTimeout = setTimeout(() => {
+    viewer.style.display = "none";
+  }, 5000);
+}
+
+// cerrar manual
+viewer.onclick = () => viewer.style.display = "none";
+
+// GALERÍA
+document.querySelectorAll('.gallery-grid img').forEach(img=>{
+  img.addEventListener('click', ()=> openImage(img.src));
+});
+
+// CARRUSEL
+document.querySelectorAll('.carousel-slide img').forEach(img=>{
+  img.addEventListener('click', ()=> openImage(img.src));
+});
+</script>
+
+
 
 
 <script>
@@ -626,7 +691,12 @@ document.addEventListener('keydown', e => {
       document.getElementById("footer-container").innerHTML = data;
     });
 </script>
-  
+
+
+  <div class="image-viewer" id="imageViewer">
+  <img id="viewerImg">
+</div>
+
 
 </body>
 </html>
