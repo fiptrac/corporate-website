@@ -846,7 +846,7 @@ normativas vigentes y requisitos del sector industrial.
 
 
 
-<button class="btn" type="submit">Enviar inscripción</button>
+<button id="btnEnviar" type="submit">Enviar inscripción</button>
 
 </form>
 </div>
@@ -1092,28 +1092,35 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
 const API = "https://script.google.com/macros/s/AKfycbxsgtmSvW3WPaM5USvD28NmXAesPIG5hgl_NFlD6kfi2iZCw-yt-ccqqghds3N2yOnj/exec";
 let cursoActual = "";
 
+const grid = document.getElementById("grid");
+
+// 🔹 FEEDBACK INMEDIATO (evita espacio blanco)
+grid.innerHTML = `
+  <div class="card"><div class="card-body">Cargando cursos…</div></div>
+  <div class="card"><div class="card-body">Cargando cursos…</div></div>
+  <div class="card"><div class="card-body">Cargando cursos…</div></div>
+`;
+
 fetch(API)
 .then(r=>r.json())
 .then(data=>{
-  const grid=document.getElementById("grid");
+  const grid = document.getElementById("grid");
+  grid.innerHTML = ""; // 🔹 quita el "Cargando..."
+
   data.forEach(c=>{
-    
     grid.innerHTML += `
       <div class="card">
         <div class="card-body">
           <h3>${c.NOMBRE}</h3>
-    
           <p><b>Categoría:</b> ${c.CATEGORIA}</p>
           <p><b>Inicio:</b> ${formatearFecha(c.INICIO)}</p>
           <p><b>Término:</b> ${formatearFecha(c.TERMINO)}</p>
           <p><b>Duración:</b> ${c["DURACION"]} hrs</p>
 
-
           <div class="btn-group">
             <a class="btn" href="${c.ENLACE}" target="_blank">
               Ver contenido
             </a>
-    
             <button class="btn"
               onclick="inscribirse(
                 '${c.NOMBRE}',
@@ -1126,10 +1133,9 @@ fetch(API)
         </div>
       </div>
     `;
-
-
   });
 });
+
 
 
 function formatearFecha(fecha){
@@ -1168,33 +1174,36 @@ function cerrarPopup(){
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
+  const btn = document.getElementById("btnEnviar");
+  btn.innerText = "Enviando inscripción…";
+  btn.disabled = true;
+
   const data = Object.fromEntries(new FormData(e.target));
 
   // 🔒 VALIDACIONES
   if(!validarCorreo(data.correo)){
     alert("Correo electrónico no válido");
+    resetBoton();
     return;
   }
 
   if(!validarTelefono(data.telefono)){
     alert("El teléfono debe tener 10 dígitos");
+    resetBoton();
     return;
   }
 
-  // CURP opcional
   if(data.curp){
     const curp = data.curp.toUpperCase();
     if(!validarCURP(curp)){
       alert("CURP no válida (formato incorrecto)");
+      resetBoton();
       return;
     }
     data.curp = curp;
   }
 
-  // valores automáticos
   data.pago = "PENDIENTE";
-
-  // factura
   data.factura = data.factura === "Sí" ? "OK" : "";
 
   fetch(API,{
@@ -1206,8 +1215,19 @@ document.getElementById("form").addEventListener("submit", e => {
     alert("Inscripción registrada");
     e.target.reset();
     cerrarPopup();
+    resetBoton();
+  })
+  .catch(()=>{
+    alert("Error al enviar la inscripción");
+    resetBoton();
   });
+
+  function resetBoton(){
+    btn.innerText = "Enviar inscripción";
+    btn.disabled = false;
+  }
 });
+
 
 </script>
 
