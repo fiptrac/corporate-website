@@ -633,9 +633,6 @@ normativas vigentes y requisitos del sector industrial.
 </div>
   
 
-<section class="eventos">
-<div class="grid" id="grid"></div>
-</section>
 
 <!-- POPUP -->
 <div class="popup" id="popup">
@@ -1090,7 +1087,6 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
   
 <script>
 const API = "https://script.google.com/macros/s/AKfycbxsgtmSvW3WPaM5USvD28NmXAesPIG5hgl_NFlD6kfi2iZCw-yt-ccqqghds3N2yOnj/exec";
-let cursoActual = "";
 
 const grid = document.getElementById("grid");
 
@@ -1101,7 +1097,7 @@ grid.innerHTML = `
   <div class="card"><div class="card-body">Cargando cursos…</div></div>
 `;
 
-fetch(API)
+fetch(`${API}?t=${Date.now()}`)
 .then(r=>r.json())
 .then(data=>{
   const grid = document.getElementById("grid");
