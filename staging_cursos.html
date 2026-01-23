@@ -1015,16 +1015,13 @@ function validarCURP(curp){
 </script>
 
 
-
-  <script>
+<script>
 const facturaSelect = document.getElementById("factura");
 const camposFactura = document.getElementById("camposFactura");
-
 const facturaInputs = camposFactura.querySelectorAll("input, select");
 
 function toggleFactura(){
   const requiereFactura = facturaSelect.value === "Sí";
-
   camposFactura.style.display = requiereFactura ? "block" : "none";
 
   facturaInputs.forEach(input=>{
@@ -1034,18 +1031,17 @@ function toggleFactura(){
 }
 
 facturaSelect.addEventListener("change", toggleFactura);
-    toggleFactura();
+toggleFactura();
 </script>
 
 
-  <script>
+<script>
 const dc3Select = document.getElementById("dc3");
 const camposDC3 = document.getElementById("camposDC3");
 const dc3Inputs = camposDC3.querySelectorAll("input");
 
 function toggleDC3(){
   const requiereDC3 = dc3Select.value === "Sí";
-
   camposDC3.style.display = requiereDC3 ? "block" : "none";
 
   dc3Inputs.forEach(input=>{
@@ -1054,28 +1050,22 @@ function toggleDC3(){
 }
 
 dc3Select.addEventListener("change", toggleDC3);
-toggleDC3(); // estado inicial
+toggleDC3();
 </script>
 
 
-
-  
 <script>
-
 const trasladosInput = document.getElementById("trasladosInput");
 const popupTraslados = document.getElementById("popupTraslados");
 
-// Abrir popup al hacer clic en el input
 trasladosInput.addEventListener("click", () => {
   popupTraslados.style.display = "flex";
 });
 
-// Cerrar popup
 function cerrarPopupTraslados(){
   popupTraslados.style.display = "none";
 }
 
-// Seleccionar opción
 document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
   btn.addEventListener("click", () => {
     trasladosInput.value = btn.dataset.value;
@@ -1085,21 +1075,19 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
 </script>
 
 
-  
-  
 <script>
 const API = "https://script.google.com/macros/s/AKfycbzHEuX1ORUt6PCULPowMeCNgKnNemz6oJBZgQ9HbiHuFVPseDOw80V9XJsJUrMmcyL3/exec";
 const grid = document.getElementById("grid");
 let cursoActual = "";
 
-// 🔹 Skeleton inmediato
+// Skeleton
 grid.innerHTML = `
   <div class="card"><div class="card-body">Cargando cursos…</div></div>
   <div class="card"><div class="card-body">Cargando cursos…</div></div>
   <div class="card"><div class="card-body">Cargando cursos…</div></div>
 `;
 
-// 🔹 INTENTA CACHE
+// Cache
 const cacheCursos = sessionStorage.getItem("cursos_fiptrac");
 
 if (cacheCursos) {
@@ -1113,7 +1101,6 @@ if (cacheCursos) {
     });
 }
 
-// 🔹 Render único
 function renderCursos(data){
   grid.innerHTML = "";
 
@@ -1142,7 +1129,7 @@ function renderCursos(data){
       </div>
     `;
   });
-  }
+}
 
 function formatearFecha(fecha){
   if(!fecha) return "";
@@ -1154,14 +1141,11 @@ function formatearFecha(fecha){
   });
 }
 
-
-
 function inscribirse(nombre, precioMXN, precioUSD){
   cursoActual = nombre;
 
   document.getElementById("cursoTitulo").innerText = nombre;
   document.querySelector('input[name="curso"]').value = nombre;
-
 
   document.getElementById("precioCurso").innerHTML = `
     💰 Precio del curso<br>
@@ -1172,45 +1156,47 @@ function inscribirse(nombre, precioMXN, precioUSD){
   document.getElementById("popup").style.display = "flex";
 }
 
-
 function cerrarPopup(){
   document.getElementById("popup").style.display="none";
 }
 
 document.getElementById("form").addEventListener("submit", e => {
-  const btn = document.getElementById("btnEnviar");
-btn.innerText = "Enviando inscripción…";
-btn.disabled = true;
-
   e.preventDefault();
+
+  const btn = document.getElementById("btnEnviar");
+  btn.innerText = "Enviando inscripción…";
+  btn.disabled = true;
+
+  function resetBoton(){
+    btn.innerText = "Enviar inscripción";
+    btn.disabled = false;
+  }
 
   const data = Object.fromEntries(new FormData(e.target));
 
-  // 🔒 VALIDACIONES
   if(!validarCorreo(data.correo)){
     alert("Correo electrónico no válido");
+    resetBoton();
     return;
   }
 
   if(!validarTelefono(data.telefono)){
     alert("El teléfono debe tener 10 dígitos");
+    resetBoton();
     return;
   }
 
-  // CURP opcional
   if(data.curp){
     const curp = data.curp.toUpperCase();
     if(!validarCURP(curp)){
       alert("CURP no válida (formato incorrecto)");
+      resetBoton();
       return;
     }
     data.curp = curp;
   }
 
-  // valores automáticos
   data.pago = "PENDIENTE";
-
-  // factura
   data.factura = data.factura === "Sí" ? "OK" : "";
 
   fetch(API,{
@@ -1218,17 +1204,13 @@ btn.disabled = true;
     body:JSON.stringify(data)
   })
   .then(r=>r.json())
- .then(()=>{
-  alert("Inscripción registrada");
-  e.target.reset();
-  cerrarPopup();
-
-  btn.innerText = "Enviar inscripción";
-  btn.disabled = false;
+  .then(()=>{
+    alert("Inscripción registrada");
+    e.target.reset();
+    cerrarPopup();
+    resetBoton();
+  });
 });
-
-});
-
 </script>
 
 <script>
@@ -1238,6 +1220,7 @@ document.querySelectorAll("[data-uppercase]").forEach(input => {
   });
 });
 </script>
+
 
 
 
