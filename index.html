@@ -294,42 +294,38 @@
   }
   
 
-/* ---------------------------------------------------- MAPA */
+/* ================= MAPA ALCANCE ================= */
 
 .alcance-full {
-  width: auto;
-  height: auto;
-  padding: 0px 0px 0px 0px;
-  overflow: hidden; /* CLAVE */
+  width: 100%;
+  padding: 0 16px;
 }
 
 .alcance-full iframe {
   width: 100%;
-  height: 510px;
+  height: 650px;
   border: none;
   display: block;
-
-  /* 🔥 ESCALADO */
-  /*transform: scale(1);          /* ← ajusta aquí */
-  transform-origin: top center;    /* ← mantiene centrado */
 }
 
 /* Tablet */
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .alcance-full iframe {
-    height: 900px;
-    transform: scale(0.9);
+    height: 720px;
   }
 }
 
 /* Móvil */
 @media (max-width: 600px) {
+  .alcance-full {
+    padding: 0px 0px;
+  }
+
   .alcance-full iframe {
-    height: 400px;
-    padding: 0px 0px 0px 19px;
-    transform: scale(0.95);
+    height: 650px;
   }
 }
+
 
 
 /* ---------------------------------------------------- MAPA */
@@ -724,7 +720,7 @@
 <section class="alcance-full">
     <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">Nuestro Alcance</h2>
   <iframe
-    src="https://script.google.com/macros/s/AKfycbypyf65R8oXci20L2wCGH1reT_7T7_45-uUsFST2OpmLrHP585mk7MuxHW9A0vB6dynqA/exec"
+    src="https://script.google.com/macros/s/AKfycbwtDr1c1PPlg7-WIXbek41Z_4RzhTPCm1aHfynSQmd5XOxG0z9qkWu6RnFIrt465r3bpw/exec"
     loading="lazy">
   </iframe>
 </section>
