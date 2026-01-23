@@ -633,13 +633,6 @@ con práctica intensiva en escenarios reales.
 </div>
 
 
-
-  
-
-<section class="eventos">
-<div class="grid" id="grid"></div>
-</section>
-
 <!-- POPUP -->
 <div class="popup" id="popup">
 <div class="popup-card">
@@ -849,7 +842,9 @@ con práctica intensiva en escenarios reales.
 
 
 
-<button class="btn" type="submit">Enviar inscripción</button>
+<button class="btn" type="submit" id="btnEnviar">
+  Enviar inscripción
+</button>
 
 </form>
 </div>
@@ -1094,30 +1089,46 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
   
 <script>
 const API = "https://script.google.com/macros/s/AKfycbzHEuX1ORUt6PCULPowMeCNgKnNemz6oJBZgQ9HbiHuFVPseDOw80V9XJsJUrMmcyL3/exec";
+const grid = document.getElementById("grid");
 let cursoActual = "";
 
-fetch(API)
-.then(r=>r.json())
-.then(data=>{
-  const grid=document.getElementById("grid");
+// 🔹 Skeleton inmediato
+grid.innerHTML = `
+  <div class="card"><div class="card-body">Cargando cursos…</div></div>
+  <div class="card"><div class="card-body">Cargando cursos…</div></div>
+  <div class="card"><div class="card-body">Cargando cursos…</div></div>
+`;
+
+// 🔹 INTENTA CACHE
+const cacheCursos = sessionStorage.getItem("cursos_fiptrac");
+
+if (cacheCursos) {
+  renderCursos(JSON.parse(cacheCursos));
+} else {
+  fetch(API)
+    .then(r => r.json())
+    .then(data => {
+      sessionStorage.setItem("cursos_fiptrac", JSON.stringify(data));
+      renderCursos(data);
+    });
+}
+
+// 🔹 Render único
+function renderCursos(data){
+  grid.innerHTML = "";
+
   data.forEach(c=>{
-    
     grid.innerHTML += `
       <div class="card">
         <div class="card-body">
           <h3>${c.NOMBRE}</h3>
-    
           <p><b>Categoría:</b> ${c.CATEGORIA}</p>
           <p><b>Inicio:</b> ${formatearFecha(c.INICIO)}</p>
           <p><b>Término:</b> ${formatearFecha(c.TERMINO)}</p>
-          <p><b>Duración:</b> ${c["DURACION"]} hrs</p>
-
+          <p><b>Duración:</b> ${c.DURACION} hrs</p>
 
           <div class="btn-group">
-            <a class="btn" href="${c.ENLACE}" target="_blank">
-              Ver contenido
-            </a>
-    
+            <a class="btn" href="${c.ENLACE}" target="_blank">Ver contenido</a>
             <button class="btn"
               onclick="inscribirse(
                 '${c.NOMBRE}',
@@ -1130,10 +1141,7 @@ fetch(API)
         </div>
       </div>
     `;
-
-
   });
-});
 
 
 function formatearFecha(fecha){
@@ -1170,6 +1178,10 @@ function cerrarPopup(){
 }
 
 document.getElementById("form").addEventListener("submit", e => {
+  const btn = document.getElementById("btnEnviar");
+btn.innerText = "Enviando inscripción…";
+btn.disabled = true;
+
   e.preventDefault();
 
   const data = Object.fromEntries(new FormData(e.target));
@@ -1206,11 +1218,15 @@ document.getElementById("form").addEventListener("submit", e => {
     body:JSON.stringify(data)
   })
   .then(r=>r.json())
-  .then(()=>{
-    alert("Inscripción registrada");
-    e.target.reset();
-    cerrarPopup();
-  });
+ .then(()=>{
+  alert("Inscripción registrada");
+  e.target.reset();
+  cerrarPopup();
+
+  btn.innerText = "Enviar inscripción";
+  btn.disabled = false;
+});
+
 });
 
 </script>
@@ -1222,6 +1238,19 @@ document.querySelectorAll("[data-uppercase]").forEach(input => {
   });
 });
 </script>
+
+
+  <script>
+const grid = document.getElementById("grid");
+
+// 🔹 Skeleton inmediato (no se ve vacío)
+grid.innerHTML = `
+  <div class="card"><div class="card-body">Cargando cursos…</div></div>
+  <div class="card"><div class="card-body">Cargando cursos…</div></div>
+  <div class="card"><div class="card-body">Cargando cursos…</div></div>
+`;
+</script>
+
 
 </body>
 </html>
