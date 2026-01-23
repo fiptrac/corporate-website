@@ -1093,7 +1093,7 @@ const cacheCursos = sessionStorage.getItem("cursos_fiptrac");
 if (cacheCursos) {
   renderCursos(JSON.parse(cacheCursos));
 } else {
-  fetch(API)
+  fetch(`${API}?t=${Date.now()}`)
     .then(r => r.json())
     .then(data => {
       sessionStorage.setItem("cursos_fiptrac", JSON.stringify(data));
