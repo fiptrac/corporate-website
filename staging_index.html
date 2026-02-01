@@ -222,6 +222,43 @@
     .fade-item img.img-4 { max-width: 83vw; }
   }
 
+    /* ===========================
+     LOGOS DE ALIADOS (HERO)
+  =========================== */
+  .aliados-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: nowrap;
+  }
+  
+  .aliados-logos img {
+    height: 80px;        /* controla el tamaño */
+    width: auto;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  
+  /* efecto sutil */
+  .aliados-logos img:hover {
+    transform: scale(1.05);
+    opacity: 0.95;
+  }
+  
+  /* Responsive */
+  @media (max-width: 700px) {
+    .aliados-logos {
+      gap: 16px;
+      flex-wrap: wrap;   /* en móvil pueden bajar a 2x2 */
+    }
+  
+    .aliados-logos img {
+      height: 55px;
+    }
+  }
+
+
   /* CONTADORES */
   .contador-wrapper {
     display:flex;
@@ -651,10 +688,15 @@
       <p>Instructores certificados NFPA, DC-3 y acreditaciones internacionales.</p>
     </div>
 
-    <div class="fade-item" id="fade3">
-      <!-- imagen con clase individual img-2 -->
-      <img src="assets/images/icono.png" alt="Icono" class="img-2">
+    <div class="fade-item" id="fade4">
+      <div class="aliados-logos">
+        <img src="assets/images/aliados_logos/A14.png" alt="Aliado 1">
+        <img src="assets/images/aliados_logos/A24.png" alt="Aliado 2">
+        <img src="assets/images/aliados_logos/A5.png" alt="Aliado 3">
+        <img src="assets/images/aliados_logos/A4.png" alt="Aliado 4">
+      </div>
     </div>
+
 
     <div class="fade-item" id="fade4">
       <span class="slide-text">Formación Profesional de Alto Nivel</span>
