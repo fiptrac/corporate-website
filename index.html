@@ -222,6 +222,42 @@
     .fade-item img.img-4 { max-width: 83vw; }
   }
 
+      /* ===========================
+     LOGOS DE ALIADOS (HERO)
+  =========================== */
+  .aliados-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: nowrap;
+  }
+  
+  .aliados-logos img {
+    height: 120px;        /* controla el tamaño */
+    width: auto;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  
+  /* efecto sutil */
+  .aliados-logos img:hover {
+    transform: scale(1.05);
+    opacity: 0.95;
+  }
+  
+  /* Responsive */
+  @media (max-width: 700px) {
+    .aliados-logos {
+      gap: 16px;
+      flex-wrap: wrap;   /* en móvil pueden bajar a 2x2 */
+    }
+  
+    .aliados-logos img {
+      height: 55px;
+    }
+  }
+
   /* CONTADORES */
   .contador-wrapper {
     display:flex;
