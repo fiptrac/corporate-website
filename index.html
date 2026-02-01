@@ -331,15 +331,40 @@
 /* ---------------------------------------------------- MAPA */
   
  
-  /* ENTRENAMIENTOS */
-  .entrenamientos { background:#f4f4f4; padding:80px 40px; border-radius:20px; max-width:1200px; margin:40px auto; }
-  .ent-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:30px; margin-top:40px; }
-  .ent-item { background:white; padding:25px; border-radius:16px; box-shadow:0 4px 16px rgba(0,0,0,0.08); }
-  .ent-item h3 { color:#003A70; margin-bottom:10px; }
-  .ent-item h3,
-  .ent-item p {
-    text-align: center;
+/* ENTRENAMIENTOS */
+.entrenamientos {
+  background:#f4f4f4;
+  padding:80px 40px;
+  border-radius:20px;
+  max-width:1200px;
+  margin:40px auto;
+}
+
+.ent-grid {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:30px;
+  margin-top:40px;
+}
+
+.ent-img {
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.ent-img img {
+  width:100%;
+  height:100%;
+  object-fit:contain; /* usa cover si quieres recorte */
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ent-grid {
+    grid-template-columns:1fr;
   }
+}
+
 
 
 /* ================= TESTIMONIOS (FIPTRAC STYLE) ================= */
@@ -709,15 +734,23 @@
   
 <!-- ENTRENAMIENTOS -->
 <section class="entrenamientos">
-  <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">Entrenamientos Especializados</h2>
-  <p style="text-align:center; max-width:800px; margin:auto; margin-top:10px; color:#333;">Programas certificados impartidos por instructores autorizados y tecnología de alto rendimiento.</p>
+  <h2 class="titulo-seccion" style="text-align:center; color:#003A70; font-size:32px;">
+    Somos centro autorizado para cursos oficiales de:
+  </h2>
 
   <div class="ent-grid">
-    <div class="ent-item"><h3>Simulador 360°</h3><p>Experiencias inmersivas para desarrollar habilidades reales en un entorno seguro.</p></div>
-    <div class="ent-item"><h3>Laboratorios Especializados</h3><p>Entrenamientos prácticos con certificación avalada por estándares internacionales.</p></div>
-    <div class="ent-item"><h3>Evaluación de Competencias</h3><p>Diagnóstico profesional de habilidades técnicas con reportes detallados.</p></div>
+    <div class="ent-img">
+      <img src="assets/images/sin fondo.png" alt="Honeywell">
+    </div>
+    <div class="ent-img">
+      <img src="assets/images/sin fondo.png" alt="NFPA">
+    </div>
+    <div class="ent-img">
+      <img src="assets/images/sin fondo.png" alt="TEEX">
+    </div>
   </div>
 </section>
+
 
   
 
