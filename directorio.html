@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Empresas | FIPTRAC</title>
-  
+
 <link rel="icon" type="image/png" href="assets/images/icono.png?v=2">
 
 <link rel="apple-touch-icon" href="assets/images/icono.png">
@@ -582,7 +582,7 @@ select:focus{
         <select id="fEntidad" required></select>
         <input id="empresa" placeholder="EMPRESA" required>
         <input id="telefono" placeholder="TELÉFONO (10 dígitos)" pattern="\d{10}" required>
-        <input id="correo" type="email" placeholder="CORREO" required>
+        <input id="web" type="url" placeholder="WEB" required>
         <button class="btn">Enviar solicitud</button>
       </form>
   </div>
@@ -656,7 +656,7 @@ select:focus{
 
   
 <script>
-const API="https://script.google.com/macros/s/AKfycbzlxKnl-YN6f5U54bsEWlwKVZz-DeHRkAeyVJnzY9L_b_DqqXwCzR-yo5R0sMw_y7r6/exec";
+const API="https://script.google.com/macros/s/AKfycbxlFgFNGp2DY7EUjwPDw7byonmCmTGieTxUepC-nfdIPLM6pebbtzFzObE6kmIjhgdR/exec";
 let directorio=[],baseDatos={};
 
 // ===== CARGA =====
@@ -695,15 +695,26 @@ function filtrar(){
 function pintar(lista){
   grid.innerHTML="";
   lista.forEach(p=>{
-    grid.innerHTML+=`
+
+    const url = p.WEB?.startsWith("http")
+      ? p.WEB
+      : "https://" + p.WEB;
+
+    grid.innerHTML += `
       <div class="card">
         <h4>${p.EMPRESA}</h4>
         <p><b>${p.ENTIDAD}</b> – ${p.PAÍS}</p>
         <p>${p.TELÉFONO}</p>
-        <p>${p.CORREO}</p>
+        <p>
+          <a href="${url}" target="_blank" rel="noopener"
+             style="color:#003A70;font-weight:600;text-decoration:none;">
+            🌐 Visitar sitio web
+          </a>
+        </p>
       </div>`;
   });
 }
+
 
 // ===== POPUP =====
 function abrirFormulario(){
@@ -732,7 +743,7 @@ form.onsubmit=e=>{
       ENTIDAD:fEntidad.value,
       EMPRESA:empresa.value,
       TELÉFONO:telefono.value,
-      CORREO:correo.value
+      WEB:web.value
     })
   }).then(()=>{
     alert("Solicitud enviada correctamente");
