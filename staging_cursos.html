@@ -571,10 +571,12 @@ con práctica intensiva en escenarios reales.
     <i class="fa-solid fa-check"></i>
     <h4>Entrenamiento práctico real</h4>
     <p>
-      Cada curso combina aproximadamente
-      <strong>70 % práctica y 30 % teoría</strong>,
-      con trabajo directo en equipos reales,
-      simulaciones y escenarios de campo.
+      Cada curso combina el
+      <strong>70% de practica y 30%
+      teoria</strong>. Con trabajo directo
+      en equipos reales,
+      simulaciones y escenarios
+      de campo.
     </p>
   </div>
 
@@ -632,6 +634,24 @@ con práctica intensiva en escenarios reales.
   CURSOS
 </div>
 
+
+<div id="loaderCursos" style="
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:60px 20px;
+  font-size:18px;
+  font-weight:600;
+  color:#003A70;
+">
+  ⏳ Cargando cursos disponibles…
+</div>
+
+  
+
+<section class="eventos">
+<div class="grid" id="grid"></div>
+</section>
 
 <!-- POPUP -->
 <div class="popup" id="popup">
@@ -842,9 +862,7 @@ con práctica intensiva en escenarios reales.
 
 
 
-<button class="btn" type="submit" id="btnEnviar">
-  Enviar inscripción
-</button>
+<button class="btn" type="submit">Enviar inscripción</button>
 
 </form>
 </div>
@@ -1015,13 +1033,16 @@ function validarCURP(curp){
 </script>
 
 
-<script>
+
+  <script>
 const facturaSelect = document.getElementById("factura");
 const camposFactura = document.getElementById("camposFactura");
+
 const facturaInputs = camposFactura.querySelectorAll("input, select");
 
 function toggleFactura(){
   const requiereFactura = facturaSelect.value === "Sí";
+
   camposFactura.style.display = requiereFactura ? "block" : "none";
 
   facturaInputs.forEach(input=>{
@@ -1031,17 +1052,18 @@ function toggleFactura(){
 }
 
 facturaSelect.addEventListener("change", toggleFactura);
-toggleFactura();
+    toggleFactura();
 </script>
 
 
-<script>
+  <script>
 const dc3Select = document.getElementById("dc3");
 const camposDC3 = document.getElementById("camposDC3");
 const dc3Inputs = camposDC3.querySelectorAll("input");
 
 function toggleDC3(){
   const requiereDC3 = dc3Select.value === "Sí";
+
   camposDC3.style.display = requiereDC3 ? "block" : "none";
 
   dc3Inputs.forEach(input=>{
@@ -1050,22 +1072,28 @@ function toggleDC3(){
 }
 
 dc3Select.addEventListener("change", toggleDC3);
-toggleDC3();
+toggleDC3(); // estado inicial
 </script>
 
 
+
+  
 <script>
+
 const trasladosInput = document.getElementById("trasladosInput");
 const popupTraslados = document.getElementById("popupTraslados");
 
+// Abrir popup al hacer clic en el input
 trasladosInput.addEventListener("click", () => {
   popupTraslados.style.display = "flex";
 });
 
+// Cerrar popup
 function cerrarPopupTraslados(){
   popupTraslados.style.display = "none";
 }
 
+// Seleccionar opción
 document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
   btn.addEventListener("click", () => {
     trasladosInput.value = btn.dataset.value;
@@ -1075,47 +1103,37 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
 </script>
 
 
+  
+  
 <script>
-const API = "https://script.google.com/macros/s/AKfycbxAqDbXBogNltieiFyrzOooYTtgri0DZhpyu6YlQLK-hGyvKZVrk20XrzFFlLnReOlK/exec";
-const grid = document.getElementById("grid");
+const API = "https://script.google.com/macros/s/AKfycbzHEuX1ORUt6PCULPowMeCNgKnNemz6oJBZgQ9HbiHuFVPseDOw80V9XJsJUrMmcyL3/exec";
 let cursoActual = "";
 
-// Skeleton
-grid.innerHTML = `
-  <div class="card"><div class="card-body">Cargando cursos…</div></div>
-  <div class="card"><div class="card-body">Cargando cursos…</div></div>
-  <div class="card"><div class="card-body">Cargando cursos…</div></div>
-`;
+const loaderCursos = document.getElementById("loaderCursos");
 
-// Cache
-const cacheCursos = sessionStorage.getItem("cursos_fiptrac");
+fetch(API)
+.then(r => r.json())
+.then(data => {
+  const grid = document.getElementById("grid");
 
-if (cacheCursos) {
-  renderCursos(JSON.parse(cacheCursos));
-} else {
-  fetch(`${API}?t=${Date.now()}`)
-    .then(r => r.json())
-    .then(data => {
-      sessionStorage.setItem("cursos_fiptrac", JSON.stringify(data));
-      renderCursos(data);
-    });
-}
+  loaderCursos.style.display = "none"; // 👈 ocultar loader
 
-function renderCursos(data){
-  grid.innerHTML = "";
-
-  data.forEach(c=>{
+  data.forEach(c => {
     grid.innerHTML += `
       <div class="card">
         <div class="card-body">
           <h3>${c.NOMBRE}</h3>
+
           <p><b>Categoría:</b> ${c.CATEGORIA}</p>
           <p><b>Inicio:</b> ${formatearFecha(c.INICIO)}</p>
           <p><b>Término:</b> ${formatearFecha(c.TERMINO)}</p>
-          <p><b>Duración:</b> ${c.DURACION} hrs</p>
+          <p><b>Duración:</b> ${c["DURACION"]} hrs</p>
 
           <div class="btn-group">
-            <a class="btn" href="${c.ENLACE}" target="_blank">Ver contenido</a>
+            <a class="btn" href="${c.ENLACE}" target="_blank">
+              Ver contenido
+            </a>
+
             <button class="btn"
               onclick="inscribirse(
                 '${c.NOMBRE}',
@@ -1129,7 +1147,9 @@ function renderCursos(data){
       </div>
     `;
   });
-}
+});
+
+
 
 function formatearFecha(fecha){
   if(!fecha) return "";
@@ -1141,11 +1161,14 @@ function formatearFecha(fecha){
   });
 }
 
+
+
 function inscribirse(nombre, precioMXN, precioUSD){
   cursoActual = nombre;
 
   document.getElementById("cursoTitulo").innerText = nombre;
   document.querySelector('input[name="curso"]').value = nombre;
+
 
   document.getElementById("precioCurso").innerHTML = `
     💰 Precio del curso<br>
@@ -1156,6 +1179,7 @@ function inscribirse(nombre, precioMXN, precioUSD){
   document.getElementById("popup").style.display = "flex";
 }
 
+
 function cerrarPopup(){
   document.getElementById("popup").style.display="none";
 }
@@ -1163,40 +1187,33 @@ function cerrarPopup(){
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
-  const btn = document.getElementById("btnEnviar");
-  btn.innerText = "Enviando inscripción…";
-  btn.disabled = true;
-
-  function resetBoton(){
-    btn.innerText = "Enviar inscripción";
-    btn.disabled = false;
-  }
-
   const data = Object.fromEntries(new FormData(e.target));
 
+  // 🔒 VALIDACIONES
   if(!validarCorreo(data.correo)){
     alert("Correo electrónico no válido");
-    resetBoton();
     return;
   }
 
   if(!validarTelefono(data.telefono)){
     alert("El teléfono debe tener 10 dígitos");
-    resetBoton();
     return;
   }
 
+  // CURP opcional
   if(data.curp){
     const curp = data.curp.toUpperCase();
     if(!validarCURP(curp)){
       alert("CURP no válida (formato incorrecto)");
-      resetBoton();
       return;
     }
     data.curp = curp;
   }
 
+  // valores automáticos
   data.pago = "PENDIENTE";
+
+  // factura
   data.factura = data.factura === "Sí" ? "OK" : "";
 
   fetch(API,{
@@ -1208,9 +1225,9 @@ document.getElementById("form").addEventListener("submit", e => {
     alert("Inscripción registrada");
     e.target.reset();
     cerrarPopup();
-    resetBoton();
   });
 });
+
 </script>
 
 <script>
@@ -1220,9 +1237,6 @@ document.querySelectorAll("[data-uppercase]").forEach(input => {
   });
 });
 </script>
-
-
-
 
 </body>
 </html>
