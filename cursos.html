@@ -484,6 +484,15 @@ border-radius:8px;border:1px solid #ccc
   border-radius:10px;
   border:1px dashed #ccc;
 }
+
+ .btn.loading {
+  background:#999 !important;
+  cursor:not-allowed;
+  pointer-events:none;
+  transform:none !important;
+  box-shadow:none !important;
+}
+ 
   
 </style>
 </head>
@@ -609,6 +618,18 @@ con práctica intensiva en escenarios reales.
 <h2>Consulta los cursos programados para el 2026</h2>
 </div>
 
+<div id="loaderCursos" style="
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1px 20px;
+  font-size:18px;
+  font-weight:600;
+  color:#003A70;
+">
+  ⏳ Cargando cursos disponibles…
+</div>
+  
 <div class="grid" id="grid"></div>
 </section>
 
@@ -634,13 +655,7 @@ con práctica intensiva en escenarios reales.
   CURSOS
 </div>
 
-
-
   
-
-<section class="eventos">
-<div class="grid" id="grid"></div>
-</section>
 
 <!-- POPUP -->
 <div class="popup" id="popup">
@@ -1098,28 +1113,31 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
 const API = "https://script.google.com/macros/s/AKfycbzHEuX1ORUt6PCULPowMeCNgKnNemz6oJBZgQ9HbiHuFVPseDOw80V9XJsJUrMmcyL3/exec";
 let cursoActual = "";
 
+const loaderCursos = document.getElementById("loaderCursos");
+
 fetch(API)
-.then(r=>r.json())
-.then(data=>{
-  const grid=document.getElementById("grid");
-  data.forEach(c=>{
-    
+.then(r => r.json())
+.then(data => {
+  const grid = document.getElementById("grid");
+
+  loaderCursos.style.display = "none"; // 👈 ocultar loader
+
+  data.forEach(c => {
     grid.innerHTML += `
       <div class="card">
         <div class="card-body">
           <h3>${c.NOMBRE}</h3>
-    
+
           <p><b>Categoría:</b> ${c.CATEGORIA}</p>
           <p><b>Inicio:</b> ${formatearFecha(c.INICIO)}</p>
           <p><b>Término:</b> ${formatearFecha(c.TERMINO)}</p>
           <p><b>Duración:</b> ${c["DURACION"]} hrs</p>
 
-
           <div class="btn-group">
             <a class="btn" href="${c.ENLACE}" target="_blank">
               Ver contenido
             </a>
-    
+
             <button class="btn"
               onclick="inscribirse(
                 '${c.NOMBRE}',
@@ -1132,10 +1150,9 @@ fetch(API)
         </div>
       </div>
     `;
-
-
   });
 });
+
 
 
 function formatearFecha(fecha){
@@ -1174,9 +1191,15 @@ function cerrarPopup(){
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
-  const data = Object.fromEntries(new FormData(e.target));
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
 
-  // 🔒 VALIDACIONES
+  // 🚫 Evitar doble envío
+  if (submitBtn.classList.contains("loading")) return;
+
+  const data = Object.fromEntries(new FormData(form));
+
+  // VALIDACIONES
   if(!validarCorreo(data.correo)){
     alert("Correo electrónico no válido");
     return;
@@ -1187,7 +1210,6 @@ document.getElementById("form").addEventListener("submit", e => {
     return;
   }
 
-  // CURP opcional
   if(data.curp){
     const curp = data.curp.toUpperCase();
     if(!validarCURP(curp)){
@@ -1199,21 +1221,32 @@ document.getElementById("form").addEventListener("submit", e => {
 
   // valores automáticos
   data.pago = "PENDIENTE";
-
-  // factura
   data.factura = data.factura === "Sí" ? "OK" : "";
+
+  // 🔒 BLOQUEAR BOTÓN + MENSAJE
+  submitBtn.classList.add("loading");
+  submitBtn.innerText = "Enviando inscripción…";
 
   fetch(API,{
     method:"POST",
     body:JSON.stringify(data)
   })
-  .then(r=>r.json())
-  .then(()=>{
-    alert("Inscripción registrada");
-    e.target.reset();
+  .then(r => r.json())
+  .then(() => {
+    alert("Inscripción registrada correctamente");
+    form.reset();
     cerrarPopup();
+  })
+  .catch(() => {
+    alert("Ocurrió un error, intenta nuevamente");
+  })
+  .finally(() => {
+    // 🔓 REHABILITAR
+    submitBtn.classList.remove("loading");
+    submitBtn.innerText = "Enviar inscripción";
   });
 });
+
 
 </script>
 
