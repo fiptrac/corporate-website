@@ -440,6 +440,15 @@ select:focus{
   border:none;
   cursor:pointer;
 }
+
+.btn.loading{
+  background:#999 !important;
+  cursor:not-allowed;
+  pointer-events:none;
+  box-shadow:none !important;
+  transform:none !important;
+}
+
 </style>
 </head>
 
@@ -569,6 +578,19 @@ select:focus{
     <button class="btn" onclick="abrirFormulario()">Solicitar Registro</button>
   </div>
 
+<div id="loaderDirectorio" style="
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:1px 20px;
+  font-size:18px;
+  font-weight:600;
+  color:#003A70;
+">
+  ⏳ Cargando empresas certificadas…
+</div>
+
+  
   <div class="grid" id="grid"></div>
 </section>
 
@@ -660,11 +682,24 @@ const API="https://script.google.com/macros/s/AKfycbxlFgFNGp2DY7EUjwPDw7byonmCmT
 let directorio=[],baseDatos={};
 
 // ===== CARGA =====
-fetch(API).then(r=>r.json()).then(d=>{
-  directorio=d.directorio;
+const loaderDirectorio = document.getElementById("loaderDirectorio");
+
+// ===== CARGA =====
+fetch(API)
+.then(r => r.json())
+.then(d => {
+  directorio = d.directorio || [];
+
+  loaderDirectorio.style.display = "none"; // 👈 ocultar loader
+  grid.innerHTML = "";                     // 👈 evita duplicados
+
   cargarFiltros();
   pintar(directorio);
+})
+.catch(()=>{
+  loaderDirectorio.innerText = "⚠️ No se pudo cargar el directorio";
 });
+
 
 function cargarFiltros(){
   pais.innerHTML="<option>País</option>";
@@ -732,9 +767,21 @@ fPais.onchange=()=>{
     .forEach(e=>fEntidad.innerHTML+=`<option>${e}</option>`);
 };
 
-form.onsubmit=e=>{
+form.onsubmit = e => {
   e.preventDefault();
-  if(!/^\d{10}$/.test(telefono.value)) return alert("Teléfono inválido");
+
+  const submitBtn = form.querySelector("button");
+
+  // 🚫 evitar doble envío
+  if(submitBtn.classList.contains("loading")) return;
+
+  if(!/^\d{10}$/.test(telefono.value)){
+    alert("Teléfono inválido");
+    return;
+  }
+
+  submitBtn.classList.add("loading");
+  submitBtn.innerText = "Enviando solicitud…";
 
   fetch(API,{
     method:"POST",
@@ -745,11 +792,21 @@ form.onsubmit=e=>{
       TELÉFONO:telefono.value,
       WEB:web.value
     })
-  }).then(()=>{
+  })
+  .then(()=>{
     alert("Solicitud enviada correctamente");
-    cerrar(); form.reset();
+    cerrar();
+    form.reset();
+  })
+  .catch(()=>{
+    alert("Ocurrió un error, intenta nuevamente");
+  })
+  .finally(()=>{
+    submitBtn.classList.remove("loading");
+    submitBtn.innerText = "Enviar solicitud";
   });
 };
+
 
 
 function cerrar(){popup.style.display="none";}
