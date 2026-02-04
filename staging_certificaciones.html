@@ -594,8 +594,8 @@ normativas vigentes y requisitos del sector industrial.
     <i class="fa-solid fa-award"></i>
     <h4>Reconocimiento profesional</h4>
     <p>
-      Las certificaciones otorgan un <strong>respaldo formal</strong>
-      a tu experiencia, fortaleciendo tu perfil profesional
+      Certificaciones oficiales emitidas
+      por las marcas de fabrica.
     </p>
   </div>
 
@@ -603,9 +603,22 @@ normativas vigentes y requisitos del sector industrial.
 
 <!-- FIN BLOQUE -->
 
-<h2>Consulta las certificaciones programados para el 2026</h2>
+<h2>Consulta las certificaciones programadas para el 2026</h2>
 </div>
 
+<div id="loaderCertificaciones" style="
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:1px 20px;
+  font-size:18px;
+  font-weight:600;
+  color:#003A70;
+">
+  ⏳ Cargando certificaciones disponibles…
+</div>
+
+  
 <div class="grid" id="grid"></div>
 </section>
 
@@ -632,7 +645,6 @@ normativas vigentes y requisitos del sector industrial.
   CERTIFICACIONES
 </div>
   
-
 
 <!-- POPUP -->
 <div class="popup" id="popup">
@@ -843,7 +855,7 @@ normativas vigentes y requisitos del sector industrial.
 
 
 
-<button id="btnEnviar" type="submit">Enviar inscripción</button>
+<button class="btn" type="submit">Enviar inscripción</button>
 
 </form>
 </div>
@@ -1087,27 +1099,24 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
   
 <script>
 const API = "https://script.google.com/macros/s/AKfycbxsgtmSvW3WPaM5USvD28NmXAesPIG5hgl_NFlD6kfi2iZCw-yt-ccqqghds3N2yOnj/exec";
+let cursoActual = "";
 
-const grid = document.getElementById("grid");
+const loader = document.getElementById("loaderCertificaciones");
 
-// 🔹 FEEDBACK INMEDIATO (evita espacio blanco)
-grid.innerHTML = `
-  <div class="card"><div class="card-body">Cargando cursos…</div></div>
-  <div class="card"><div class="card-body">Cargando cursos…</div></div>
-  <div class="card"><div class="card-body">Cargando cursos…</div></div>
-`;
-
-fetch(`${API}?t=${Date.now()}`)
-.then(r=>r.json())
-.then(data=>{
+fetch(API)
+.then(r => r.json())
+.then(data => {
   const grid = document.getElementById("grid");
-  grid.innerHTML = ""; // 🔹 quita el "Cargando..."
 
-  data.forEach(c=>{
+  loader.style.display = "none";   // 👈 ocultar loader
+  grid.innerHTML = "";             // 👈 evita duplicados
+
+  data.forEach(c => {
     grid.innerHTML += `
       <div class="card">
         <div class="card-body">
           <h3>${c.NOMBRE}</h3>
+
           <p><b>Categoría:</b> ${c.CATEGORIA}</p>
           <p><b>Inicio:</b> ${formatearFecha(c.INICIO)}</p>
           <p><b>Término:</b> ${formatearFecha(c.TERMINO)}</p>
@@ -1117,6 +1126,7 @@ fetch(`${API}?t=${Date.now()}`)
             <a class="btn" href="${c.ENLACE}" target="_blank">
               Ver contenido
             </a>
+
             <button class="btn"
               onclick="inscribirse(
                 '${c.NOMBRE}',
@@ -1130,6 +1140,9 @@ fetch(`${API}?t=${Date.now()}`)
       </div>
     `;
   });
+})
+.catch(()=>{
+  loader.innerText = "⚠️ No se pudieron cargar las certificaciones";
 });
 
 
@@ -1170,36 +1183,33 @@ function cerrarPopup(){
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
-  const btn = document.getElementById("btnEnviar");
-  btn.innerText = "Enviando inscripción…";
-  btn.disabled = true;
-
   const data = Object.fromEntries(new FormData(e.target));
 
   // 🔒 VALIDACIONES
   if(!validarCorreo(data.correo)){
     alert("Correo electrónico no válido");
-    resetBoton();
     return;
   }
 
   if(!validarTelefono(data.telefono)){
     alert("El teléfono debe tener 10 dígitos");
-    resetBoton();
     return;
   }
 
+  // CURP opcional
   if(data.curp){
     const curp = data.curp.toUpperCase();
     if(!validarCURP(curp)){
       alert("CURP no válida (formato incorrecto)");
-      resetBoton();
       return;
     }
     data.curp = curp;
   }
 
+  // valores automáticos
   data.pago = "PENDIENTE";
+
+  // factura
   data.factura = data.factura === "Sí" ? "OK" : "";
 
   fetch(API,{
@@ -1211,19 +1221,8 @@ document.getElementById("form").addEventListener("submit", e => {
     alert("Inscripción registrada");
     e.target.reset();
     cerrarPopup();
-    resetBoton();
-  })
-  .catch(()=>{
-    alert("Error al enviar la inscripción");
-    resetBoton();
   });
-
-  function resetBoton(){
-    btn.innerText = "Enviar inscripción";
-    btn.disabled = false;
-  }
 });
-
 
 </script>
 
