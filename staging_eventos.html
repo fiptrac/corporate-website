@@ -410,6 +410,14 @@ font-size:22px;
 cursor:pointer;
 }
 
+.btn.loading{
+  background:#999 !important;
+  cursor:not-allowed;
+  pointer-events:none;
+  box-shadow:none !important;
+  transform:none !important;
+}
+  
 </style>
 </head>
 
@@ -532,6 +540,18 @@ y actividades especializadas sin costo.
 <!-- FIN BLOQUE -->
 
 <h2>Consulta los eventos programados para el 2026</h2>
+</div>
+
+<div id="loaderEventos" style="
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:1px 20px;
+  font-size:18px;
+  font-weight:600;
+  color:#003A70;
+">
+  ⏳ Cargando eventos disponibles…
 </div>
 
 <div class="grid" id="grid"></div>
@@ -718,51 +738,56 @@ let cupoActual = 0;
 
 
 /* ================== CARGAR EVENTOS ================== */
+const loaderEventos = document.getElementById("loaderEventos");
+
 fetch(API)
 .then(r => r.json())
 .then(data => {
-const grid = document.getElementById('grid');
-grid.innerHTML = ""; // limpia texto inicial
+  const grid = document.getElementById('grid');
 
-data.forEach(ev => {
+  loaderEventos.style.display = "none"; // 👈 ocultar loader
+  grid.innerHTML = "";                  // 👈 evita duplicados
 
-const fecha = new Date(ev.FECHA)
-.toLocaleDateString('es-MX', { day:'2-digit', month:'long', year:'numeric' });
+  data.forEach(ev => {
 
+    const fecha = new Date(ev.FECHA)
+      .toLocaleDateString('es-MX', {
+        day:'2-digit',
+        month:'long',
+        year:'numeric'
+      });
 
-/* IF IS NECESSARY
+    grid.innerHTML += `
+      <div class="card">
+        <div class="card-body">
+          <h3>${ev.NOMBRE}</h3>
+          <p>${ev.DESCRIPCIÓN}</p>
+          <p><b>Fecha:</b> ${fecha}</p>
+          <p><b>Duración:</b> ${ev.DURACION} hrs</p>
+          <p><b>Cupo disponible:</b> ${ev.CUPO_DISPONIBLE}</p>
 
-grid.innerHTML += `
-       <div class="card">
-         <img src="assets/images/eventos/${ev.NOMBRE}.jpg" alt="${ev.NOMBRE}">
-         <div class="card-body">
+          <div class="btn-group">
+            <a class="btn" href="${ev.ENLACE}" target="_blank">
+              Ver contenido
+            </a>
 
-         */
-
-grid.innerHTML += `
-  <div class="card">
-    <div class="card-body">
-      <h3>${ev.NOMBRE}</h3>
-      <p>${ev.DESCRIPCIÓN}</p>
-      <p><b>Fecha:</b> ${fecha}</p>
-      <p><b>Duración:</b> ${ev.DURACION} hrs</p>
-      <p><b>Cupo disponible:</b> ${ev.CUPO_DISPONIBLE}</p>
-
-      <div class="btn-group">
-        <a class="btn" href="${ev.ENLACE}" target="_blank">Ver contenido</a>
-
-        <button class="btn"
-          ${ev.CUPO_DISPONIBLE === 0 ? 'disabled style="background:#999;cursor:not-allowed"' : ''}
-          onclick="inscribirse('${ev.NOMBRE}', ${ev.CUPO_DISPONIBLE})">
-          ${ev.CUPO_DISPONIBLE === 0 ? 'Cupo agotado' : 'Inscribirse'}
-        </button>
+            <button class="btn"
+              ${ev.CUPO_DISPONIBLE === 0
+                ? 'disabled style="background:#999;cursor:not-allowed"'
+                : ''}
+              onclick="inscribirse('${ev.NOMBRE}', ${ev.CUPO_DISPONIBLE})">
+              ${ev.CUPO_DISPONIBLE === 0 ? 'Cupo agotado' : 'Inscribirse'}
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-`;
+    `;
+  });
+})
+.catch(()=>{
+  loaderEventos.innerText = "⚠️ No se pudieron cargar los eventos";
+});
 
-});
-});
 
 /* ================== ABRIR POPUP ================== */
 function inscribirse(nombre, cupo){
@@ -786,31 +811,47 @@ function inscribirse(nombre, cupo){
 const form = document.getElementById('form');
 
 form.addEventListener('submit', e => {
-e.preventDefault();
+  e.preventDefault();
 
-const data = Object.fromEntries(new FormData(form));
-data.curso = cursoActual;
+  const submitBtn = form.querySelector('button[type="submit"]');
 
-fetch(API, {
-  method: 'POST',
-  body: JSON.stringify(data)
-})
-.then(r => r.json())
-.then(res => {
+  // 🚫 evitar doble envío
+  if (submitBtn.classList.contains("loading")) return;
 
-  if(res.error === "CUPO_AGOTADO"){
-    alert("Este evento ya no tiene cupo disponible.");
-    document.getElementById('popup').style.display = 'none';
-    return;
-  }
+  const data = Object.fromEntries(new FormData(form));
+  data.curso = cursoActual;
 
-  alert("Inscripción registrada correctamente");
-  form.reset();
-  document.getElementById('popup').style.display = 'none';
-  location.reload();
+  // 🔒 bloquear botón
+  submitBtn.classList.add("loading");
+  submitBtn.innerText = "Enviando inscripción…";
+
+  fetch(API, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+  .then(r => r.json())
+  .then(res => {
+
+    if(res.error === "CUPO_AGOTADO"){
+      alert("Este evento ya no tiene cupo disponible.");
+      cerrarPopup();
+      return;
+    }
+
+    alert("Inscripción registrada correctamente");
+    form.reset();
+    cerrarPopup();
+    location.reload();
+  })
+  .catch(()=>{
+    alert("Ocurrió un error, intenta nuevamente");
+  })
+  .finally(()=>{
+    submitBtn.classList.remove("loading");
+    submitBtn.innerText = "Solicitar inscripción";
+  });
 });
 
-});
 </script>
 
 
