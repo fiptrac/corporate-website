@@ -485,6 +485,13 @@ border-radius:8px;border:1px solid #ccc
   border:1px dashed #ccc;
 }
 
+.btn.loading{
+  background:#999 !important;
+  cursor:not-allowed;
+  pointer-events:none;
+  box-shadow:none !important;
+  transform:none !important;
+} 
   
 </style>
 </head>
@@ -606,6 +613,19 @@ normativas vigentes y requisitos del sector industrial.
 <h2>Consulta las certificaciones programadas para el 2026</h2>
 </div>
 
+<div id="loaderCertificaciones" style="
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:1px 20px;
+  font-size:18px;
+  font-weight:600;
+  color:#003A70;
+">
+  ⏳ Cargando certificaciones disponibles…
+</div>
+
+  
 <div class="grid" id="grid"></div>
 </section>
 
@@ -632,10 +652,6 @@ normativas vigentes y requisitos del sector industrial.
   CERTIFICACIONES
 </div>
   
-
-<section class="eventos">
-<div class="grid" id="grid"></div>
-</section>
 
 <!-- POPUP -->
 <div class="popup" id="popup">
@@ -1092,28 +1108,32 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
 const API = "https://script.google.com/macros/s/AKfycbxsgtmSvW3WPaM5USvD28NmXAesPIG5hgl_NFlD6kfi2iZCw-yt-ccqqghds3N2yOnj/exec";
 let cursoActual = "";
 
+const loader = document.getElementById("loaderCertificaciones");
+
 fetch(API)
-.then(r=>r.json())
-.then(data=>{
-  const grid=document.getElementById("grid");
-  data.forEach(c=>{
-    
+.then(r => r.json())
+.then(data => {
+  const grid = document.getElementById("grid");
+
+  loader.style.display = "none";   // 👈 ocultar loader
+  grid.innerHTML = "";             // 👈 evita duplicados
+
+  data.forEach(c => {
     grid.innerHTML += `
       <div class="card">
         <div class="card-body">
           <h3>${c.NOMBRE}</h3>
-    
+
           <p><b>Categoría:</b> ${c.CATEGORIA}</p>
           <p><b>Inicio:</b> ${formatearFecha(c.INICIO)}</p>
           <p><b>Término:</b> ${formatearFecha(c.TERMINO)}</p>
           <p><b>Duración:</b> ${c["DURACION"]} hrs</p>
 
-
           <div class="btn-group">
             <a class="btn" href="${c.ENLACE}" target="_blank">
               Ver contenido
             </a>
-    
+
             <button class="btn"
               onclick="inscribirse(
                 '${c.NOMBRE}',
@@ -1126,10 +1146,12 @@ fetch(API)
         </div>
       </div>
     `;
-
-
   });
+})
+.catch(()=>{
+  loader.innerText = "⚠️ No se pudieron cargar las certificaciones";
 });
+
 
 
 function formatearFecha(fecha){
@@ -1168,9 +1190,15 @@ function cerrarPopup(){
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
-  const data = Object.fromEntries(new FormData(e.target));
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
 
-  // 🔒 VALIDACIONES
+  // 🚫 evitar doble envío
+  if (submitBtn.classList.contains("loading")) return;
+
+  const data = Object.fromEntries(new FormData(form));
+
+  // VALIDACIONES
   if(!validarCorreo(data.correo)){
     alert("Correo electrónico no válido");
     return;
@@ -1181,11 +1209,10 @@ document.getElementById("form").addEventListener("submit", e => {
     return;
   }
 
-  // CURP opcional
   if(data.curp){
     const curp = data.curp.toUpperCase();
     if(!validarCURP(curp)){
-      alert("CURP no válida (formato incorrecto)");
+      alert("CURP no válida");
       return;
     }
     data.curp = curp;
@@ -1193,21 +1220,31 @@ document.getElementById("form").addEventListener("submit", e => {
 
   // valores automáticos
   data.pago = "PENDIENTE";
-
-  // factura
   data.factura = data.factura === "Sí" ? "OK" : "";
+
+  // 🔒 bloquear botón
+  submitBtn.classList.add("loading");
+  submitBtn.innerText = "Enviando inscripción…";
 
   fetch(API,{
     method:"POST",
     body:JSON.stringify(data)
   })
-  .then(r=>r.json())
-  .then(()=>{
-    alert("Inscripción registrada");
-    e.target.reset();
+  .then(r => r.json())
+  .then(() => {
+    alert("Inscripción registrada correctamente");
+    form.reset();
     cerrarPopup();
+  })
+  .catch(() => {
+    alert("Ocurrió un error, intenta nuevamente");
+  })
+  .finally(() => {
+    submitBtn.classList.remove("loading");
+    submitBtn.innerText = "Enviar inscripción";
   });
 });
+
 
 </script>
 
