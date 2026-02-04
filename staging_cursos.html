@@ -484,6 +484,15 @@ border-radius:8px;border:1px solid #ccc
   border-radius:10px;
   border:1px dashed #ccc;
 }
+
+ .btn.loading {
+  background:#999 !important;
+  cursor:not-allowed;
+  pointer-events:none;
+  transform:none !important;
+  box-shadow:none !important;
+}
+ 
   
 </style>
 </head>
@@ -1187,9 +1196,15 @@ function cerrarPopup(){
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
-  const data = Object.fromEntries(new FormData(e.target));
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
 
-  // 🔒 VALIDACIONES
+  // 🚫 Evitar doble envío
+  if (submitBtn.classList.contains("loading")) return;
+
+  const data = Object.fromEntries(new FormData(form));
+
+  // VALIDACIONES
   if(!validarCorreo(data.correo)){
     alert("Correo electrónico no válido");
     return;
@@ -1200,7 +1215,6 @@ document.getElementById("form").addEventListener("submit", e => {
     return;
   }
 
-  // CURP opcional
   if(data.curp){
     const curp = data.curp.toUpperCase();
     if(!validarCURP(curp)){
@@ -1212,21 +1226,32 @@ document.getElementById("form").addEventListener("submit", e => {
 
   // valores automáticos
   data.pago = "PENDIENTE";
-
-  // factura
   data.factura = data.factura === "Sí" ? "OK" : "";
+
+  // 🔒 BLOQUEAR BOTÓN + MENSAJE
+  submitBtn.classList.add("loading");
+  submitBtn.innerText = "⏳ Enviando inscripción…";
 
   fetch(API,{
     method:"POST",
     body:JSON.stringify(data)
   })
-  .then(r=>r.json())
-  .then(()=>{
-    alert("Inscripción registrada");
-    e.target.reset();
+  .then(r => r.json())
+  .then(() => {
+    alert("Inscripción registrada correctamente");
+    form.reset();
     cerrarPopup();
+  })
+  .catch(() => {
+    alert("Ocurrió un error, intenta nuevamente");
+  })
+  .finally(() => {
+    // 🔓 REHABILITAR
+    submitBtn.classList.remove("loading");
+    submitBtn.innerText = "Enviar inscripción";
   });
 });
+
 
 </script>
 
