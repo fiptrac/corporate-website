@@ -519,6 +519,14 @@
   transform:translateY(-1px);
 }
 
+.btn-fiptrac.loading{
+  background:#999 !important;
+  cursor:not-allowed;
+  pointer-events:none;
+  box-shadow:none !important;
+  transform:none !important;
+}
+
 
 /* ================= POPUP FIPTRAC ================= */
 
@@ -1079,23 +1087,40 @@ document.addEventListener('keydown', e => {
 });
 
 
-  formTestimonio.addEventListener("submit", e => {
-    e.preventDefault();
+formTestimonio.addEventListener("submit", e => {
+  e.preventDefault();
 
-    fetch(API_TESTIMONIOS,{
-      method:"POST",
-      body:JSON.stringify({
-        nombre:nombre.value,
-        rol:rol.value,
-        empresa:empresa.value,
-        testimonio:testimonio.value
-      })
-    }).then(() => {
-      alert("Gracias, tu testimonio será revisado.");
-      formTestimonio.reset();
-      cerrarTestimonio();
-    });
+  const submitBtn = formTestimonio.querySelector('button[type="submit"]');
+
+  // 🚫 evita doble envío
+  if(submitBtn.classList.contains("loading")) return;
+
+  submitBtn.classList.add("loading");
+  submitBtn.innerText = "Enviando testimonio…";
+
+  fetch(API_TESTIMONIOS,{
+    method:"POST",
+    body:JSON.stringify({
+      nombre: nombre.value.trim(),
+      rol: rol.value.trim(),
+      empresa: empresa.value.trim(),
+      testimonio: testimonio.value.trim()
+    })
+  })
+  .then(() => {
+    alert("Gracias, tu testimonio será revisado antes de publicarse.");
+    formTestimonio.reset();
+    cerrarTestimonio();
+  })
+  .catch(() => {
+    alert("Ocurrió un error, intenta nuevamente.");
+  })
+  .finally(() => {
+    submitBtn.classList.remove("loading");
+    submitBtn.innerText = "Enviar testimonio";
   });
+});
+
 
 });
 </script>
