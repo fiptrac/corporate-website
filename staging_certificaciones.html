@@ -526,6 +526,9 @@ border-radius:8px;border:1px solid #ccc
   box-shadow:0 8px 18px rgba(0,0,0,.25);
 }
 
+
+
+
 #camposDC3{
   padding:14px;
   background:#f4f6f8;
@@ -728,6 +731,8 @@ normativas vigentes y requisitos del sector industrial.
   <form id="form" method="POST" onsubmit="return false;">
 
 <input type="hidden" name="curso">
+<input type="hidden" name="factura" value="Sí">
+
 
 <label>Nombre completo</label>
 <input name="nombre" data-uppercase required>
@@ -805,6 +810,31 @@ normativas vigentes y requisitos del sector industrial.
 
 <label>País</label>
 <input name="pais" data-uppercase>
+
+
+
+<div id="camposFactura" style="margin-top:10px">
+
+  <label>Razón social</label>
+  <input name="razon_social" data-uppercase required>
+
+  <label>RFC</label>
+  <input name="rfc_ruc_rnc" data-uppercase required>
+
+  <label>Domicilio fiscal</label>
+  <input name="domicilio_fiscal" required>
+
+  <label>Código postal</label>
+  <input name="codigo_postal" required>
+
+  <label>Uso del comprobante fiscal</label>
+  <select name="uso_del_comprobante_fiscal" required>
+    <option value="">Selecciona una opción</option>
+    <option>GASTOS EN GENERAL</option>
+    <option>POR DEFINIR</option>
+  </select>
+
+</div>
 
 
     <label>¿Requiere emisión de DC-3?</label>
@@ -1176,7 +1206,7 @@ function inscribirse(nombre, precioMXN, precioUSD){
 
 
   document.getElementById("precioCurso").innerHTML = `
-    💰 Precio del curso + iva<br>
+    💰 Precio del curso<br>
     <b>MXN:</b> $${precioMXN} &nbsp; | &nbsp;
     <b>USD:</b> $${precioUSD}
   `;
@@ -1222,6 +1252,7 @@ document.getElementById("form").addEventListener("submit", e => {
 
   // valores automáticos
   data.pago = "PENDIENTE";
+  data.factura = "OK";
 
   // 🔒 bloquear botón
   submitBtn.classList.add("loading");
