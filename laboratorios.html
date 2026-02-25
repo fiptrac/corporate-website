@@ -673,6 +673,9 @@ body {
       <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen23.png" loading="lazy" decoding="async"></div>
       <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen24.png" loading="lazy" decoding="async"></div>
       <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen25.png" loading="lazy" decoding="async"></div>
+        </div>
+</div>
+
     
   <!-- ===== CARRUSEL 2 (más lento) ===== -->
   <div class="exp-carousel-wrapper">
@@ -898,8 +901,9 @@ document.addEventListener('keydown', e => {
 </script>
 
   <script>
-    const track = document.querySelector('.exp-carousel-track');
-    track.innerHTML += track.innerHTML;
+    document.querySelectorAll('.exp-carousel-track').forEach(expTrack => {
+    expTrack.innerHTML += expTrack.innerHTML;
+  });
   </script>
 
 </body>
