@@ -12,8 +12,15 @@
 <link rel="icon" sizes="192x192" href="assets/images/icono.png">
 <link rel="icon" sizes="512x512" href="assets/images/icono.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
 
 <style>
 
@@ -576,10 +583,10 @@ body {
   <!-- CARRUSEL -->
   <div class="carousel">
     <div class="carousel-track">
-      <div class="carousel-slide"><img src="assets/images/fotos/LABS/LAB1.jpg"></div>
-      <div class="carousel-slide"><img src="assets/images/fotos/LABS/LAB2.jpg"></div>
-      <div class="carousel-slide"><img src="assets/images/fotos/LABS/LAB3.jpg"></div>
-      <div class="carousel-slide"><img src="assets/images/fotos/LABS/LAB4.jpg"></div>
+      <div class="carousel-slide"><img src="assets/images/fotos/LABS/LAB1.jpg" fetchpriority="high" decoding="async"></div>
+      <div class="carousel-slide"><img src="assets/images/fotos/LABS/LAB2.jpg" loading="lazy" decoding="async"></div>
+      <div class="carousel-slide"><img src="assets/images/fotos/LABS/LAB3.jpg" loading="lazy" decoding="async"></div>
+      <div class="carousel-slide"><img src="assets/images/fotos/LABS/LAB4.jpg" loading="lazy" decoding="async"></div>
     </div>
     <button class="carousel-btn prev">❮</button>
     <button class="carousel-btn next">❯</button>
@@ -640,120 +647,62 @@ body {
   <div class="exp-carousel-wrapper">
     <div class="exp-carousel-track">
       <!-- duplicadas para efecto infinito -->
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen1.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen2.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen3.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen4.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen5.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen6.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen7.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen8.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen9.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen10.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen11.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen10.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen12.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen13.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen14.jpg"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen15.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen16.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen17.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen18.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen19.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen20.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen21.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen22.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen23.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen24.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen25.png"></div>
-  
-      <!-- repetidas -->
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen1.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen2.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen3.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen4.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen5.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen6.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen7.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen8.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen9.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen10.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen11.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen10.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen12.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen13.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen14.jpg"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen15.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen16.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen17.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen18.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen19.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen20.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen21.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen22.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen23.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen24.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen25.png"></div>
-    </div>
-  </div>
-  
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen1.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen2.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen3.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen4.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen5.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen6.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen7.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen8.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen9.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen10.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen11.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen10.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen12.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen13.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen14.jpg" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen15.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen16.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen17.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen18.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen19.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen20.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen21.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen22.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen23.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen24.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen25.png" loading="lazy" decoding="async"></div>
+    
   <!-- ===== CARRUSEL 2 (más lento) ===== -->
   <div class="exp-carousel-wrapper">
     <div class="exp-carousel-track slow reverse">
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen26.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen27.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen28.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen29.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen30.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen31.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen30.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen32.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen33.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen34.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen35.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen36.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen37.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen38.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen39.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen40.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen41.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen42.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen44.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen45.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen46.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen47.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen48.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen49.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen50.png"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen26.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen27.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen28.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen29.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen30.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen31.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen30.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen32.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen33.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen34.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen35.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen36.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen37.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen38.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen39.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen40.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen41.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen42.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen44.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen45.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen46.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen47.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen48.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen49.png" loading="lazy" decoding="async"></div>
+      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen50.png" loading="lazy" decoding="async"></div>
       
-      <!-- repetidas -->
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen26.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen27.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen28.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen29.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen30.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen31.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen30.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen32.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen33.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen34.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen35.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen36.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen37.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen38.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen39.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen40.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen41.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen42.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen44.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen45.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen46.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen47.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen48.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen49.png"></div>
-      <div class="exp-carousel-item"><img src="assets/images/fotos/CURSOS/Imagen50.png"></div>
-    </div>
-  </div>
 
 <!-- ================= EXPERIENCIA DE ALUMNOS ================= -->
 
@@ -762,22 +711,22 @@ body {
   </h2>
 
   <div class="gallery-grid">
-    <img src="assets/images/fotos/LABS/Imagen8.png">
-    <img src="assets/images/fotos/LABS/Imagen9.png">
-    <img src="assets/images/fotos/LABS/Imagen12.png">
-    <img src="assets/images/fotos/LABS/Imagen13.jpg">
-    <img src="assets/images/fotos/LABS/Imagen14.png">
-    <img src="assets/images/fotos/LABS/Imagen15.png">
-    <img src="assets/images/fotos/LABS/Imagen16.jpg">
-    <img src="assets/images/fotos/LABS/Imagen17.jpg">
-    <img src="assets/images/fotos/LABS/Imagen29.png">
-    <img src="assets/images/fotos/LABS/Imagen33.png">
-    <img src="assets/images/fotos/LABS/Imagen34.png">
-    <img src="assets/images/fotos/LABS/Imagen35.png">
-    <img src="assets/images/fotos/LABS/Imagen39.png">
-    <img src="assets/images/fotos/LABS/Imagen42.jpg">
-    <img src="assets/images/fotos/LABS/Imagen20.png">
-    <img src="assets/images/fotos/LABS/Imagen23.png">
+    <img src="assets/images/fotos/LABS/Imagen8.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen9.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen12.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen13.jpg" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen14.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen15.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen16.jpg" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen17.jpg" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen29.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen33.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen34.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen35.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen39.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen42.jpg" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen20.png" loading="lazy" decoding="async">
+    <img src="assets/images/fotos/LABS/Imagen23.png" loading="lazy" decoding="async">
   </div>
   
 </main>
@@ -947,6 +896,11 @@ document.addEventListener('keydown', e => {
       document.getElementById("footer-container").innerHTML = data;
     });
 </script>
+
+  <script>
+    const track = document.querySelector('.exp-carousel-track');
+    track.innerHTML += track.innerHTML;
+  </script>
 
 </body>
 </html>
