@@ -892,6 +892,8 @@ function inscribirse(nombre, cupo){
       : `Cupo disponible: <b>${cupo} personas</b>`;
 
   document.getElementById('popup').style.display = 'flex';
+document.body.style.overflow = 'hidden';
+
 }
 
 
@@ -949,9 +951,11 @@ form.addEventListener('submit', e => {
 const popup = document.getElementById('popup');
 const closeBtn = document.getElementById('closePopup');
 
-  function cerrarPopup(){
-    popup.style.display = 'none';
+function cerrarPopup(){
+  popup.style.display = 'none';
+  document.body.style.overflow = 'auto';
 }
+
 
 // Click en botón ✕
   closeBtn.addEventListener('click', cerrarPopup);
