@@ -732,6 +732,7 @@ normativas vigentes y requisitos del sector industrial.
 
 <input type="hidden" name="curso">
 <input type="hidden" name="factura" value="Sí">
+<input type="hidden" name="dc3" value="Sí">
 
 
 <label>Nombre completo</label>
@@ -837,17 +838,12 @@ normativas vigentes y requisitos del sector industrial.
 </div>
 
 
-    <label>¿Requiere emisión de DC-3?</label>
-<select name="dc3" id="dc3">
-  <option value="No">No</option>
-  <option value="Sí">Sí</option>
-</select>
     
 <small style="font-weight:400;color:#666;font-size:12px;">
   Escriba los nombres solo si aplica
 </small>
 
-<div id="camposDC3" style="display:none;margin-top:10px">
+<div id="camposDC3" style="margin-top:10px">
   <label>Representante legal (DC-3)</label>
   <input name="representante_legal_dc3" data-uppercase>
 
@@ -1087,24 +1083,7 @@ function validarCURP(curp){
 
 
 
-  <script>
-const dc3Select = document.getElementById("dc3");
-const camposDC3 = document.getElementById("camposDC3");
-const dc3Inputs = camposDC3.querySelectorAll("input");
 
-function toggleDC3(){
-  const requiereDC3 = dc3Select.value === "Sí";
-
-  camposDC3.style.display = requiereDC3 ? "block" : "none";
-
-  dc3Inputs.forEach(input=>{
-    if(!requiereDC3) input.value = "";
-  });
-}
-
-dc3Select.addEventListener("change", toggleDC3);
-toggleDC3(); // estado inicial
-</script>
 
 
 
@@ -1253,6 +1232,8 @@ document.getElementById("form").addEventListener("submit", e => {
   // valores automáticos
   data.pago = "PENDIENTE";
   data.factura = "OK";
+  data.dc3 = "OK";
+
 
   // 🔒 bloquear botón
   submitBtn.classList.add("loading");
