@@ -386,7 +386,13 @@ z-index:9999;
   flex:1;
 }
 
+  
+body.popup-open{
+  overflow:hidden;
+  height:100vh;
+}
 
+  
 
 @keyframes popupIn{
 from{transform:translateY(20px);opacity:0}
@@ -1158,12 +1164,16 @@ function inscribirse(nombre, precioMXN, precioUSD){
   `;
 
   document.getElementById("popup").style.display = "flex";
+document.body.classList.add("popup-open");
+
 }
 
 
 function cerrarPopup(){
   document.getElementById("popup").style.display="none";
+  document.body.classList.remove("popup-open");
 }
+
 
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
