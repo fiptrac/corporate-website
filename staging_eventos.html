@@ -364,6 +364,19 @@ transition: transform .28s ease;
 
 /* ================= POPUP ESTILO FIPTRAC ================= */
 
+.popup-card{
+  display:flex;
+  flex-direction:column;
+  max-height:90vh;
+  overflow:hidden;
+}
+
+.popup-body{
+  overflow-y:auto;
+  padding-right:4px;
+}
+
+  
 .popup{
 display:none;
 position:fixed;
@@ -644,6 +657,8 @@ style="
 aria-label="Cerrar formulario">✕</button>
 
 <h3 id="cursoTitulo"></h3>
+  <div class="popup-body">
+
 <input type="email" name="correo" placeholder="Correo" required>
 <input type="text" name="nombre" placeholder="NOMBRE COMPLETO" required oninput="this.value=this.value.toUpperCase()">
 <input type="text" name="puesto" placeholder="Puesto o cargo" required>
@@ -719,6 +734,8 @@ style="
 <p style="font-size:13px;text-align:center;color:#555;margin-top:6px">
 Después de solicitar su inscripción espere a recibir un correo con la confirmación para finalizar el proceso.
 </p>
+
+</div>
 
 <button class="btn" type="submit">
 Solicitar inscripción
