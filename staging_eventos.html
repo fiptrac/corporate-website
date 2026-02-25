@@ -364,13 +364,6 @@ transition: transform .28s ease;
 
 /* ================= POPUP ESTILO FIPTRAC ================= */
 
-.popup-card{
-  display:flex;
-  flex-direction:column;
-  max-height:90vh;
-  overflow:hidden;
-}
-
 .popup-body{
   overflow-y:auto;
   padding-right:4px;
@@ -392,17 +385,20 @@ padding:20px 10px;
 
 
 .popup-card{
-background:#fff;
-width:92%;
-max-width:560px;
-border-radius:20px;
-padding:32px 28px 28px;
-box-shadow:0 20px 50px rgba(0,0,0,0.35);
-animation:popupIn .35s ease;
-position:relative;
-max-height:90vh;
-overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+  width:92%;
+  max-width:560px;
+  border-radius:20px;
+  padding:32px 28px 28px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+  animation:popupIn .35s ease;
+  position:relative;
+  max-height:90vh;
+  overflow:hidden;   /* ← SOLO ESTO */
 }
+
 
 
 @keyframes popupIn{
