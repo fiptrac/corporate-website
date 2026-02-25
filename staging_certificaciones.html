@@ -526,14 +526,6 @@ border-radius:8px;border:1px solid #ccc
   box-shadow:0 8px 18px rgba(0,0,0,.25);
 }
 
-
-#camposFactura{
-  padding:14px;
-  background:#f4f6f8;
-  border-radius:10px;
-  border:1px dashed #ccc;
-}
-
 #camposDC3{
   padding:14px;
   background:#f4f6f8;
@@ -814,33 +806,6 @@ normativas vigentes y requisitos del sector industrial.
 <label>País</label>
 <input name="pais" data-uppercase>
 
-<label>Factura</label>
-<select name="factura" id="factura">
-  <option value="No">No</option>
-  <option value="Sí">Sí</option>
-</select>
-
-<div id="camposFactura" style="display:none;margin-top:10px">
-
-  <label>Razón social</label>
-  <input name="razon_social" data-uppercase>
-
-  <label>RFC / RUC / RNC</label>
-  <input name="rfc_ruc_rnc" data-uppercase>
-
-  <label>Domicilio fiscal</label>
-  <input name="domicilio_fiscal">
-
-  <label>Código postal</label>
-  <input name="codigo_postal">
-
-  <label>Uso del comprobante fiscal</label>
-  <select name="uso_del_comprobante_fiscal" required>
-    <option value="">Selecciona una opción</option>
-    <option>GASTOS EN GENERAL</option>
-    <option>POR DEFINIR</option>
-  </select>
-</div>
 
     <label>¿Requiere emisión de DC-3?</label>
 <select name="dc3" id="dc3">
@@ -1089,26 +1054,7 @@ function validarCURP(curp){
 
 
 
-  <script>
-const facturaSelect = document.getElementById("factura");
-const camposFactura = document.getElementById("camposFactura");
 
-const facturaInputs = camposFactura.querySelectorAll("input, select");
-
-function toggleFactura(){
-  const requiereFactura = facturaSelect.value === "Sí";
-
-  camposFactura.style.display = requiereFactura ? "block" : "none";
-
-  facturaInputs.forEach(input=>{
-    input.required = requiereFactura;
-    if(!requiereFactura) input.value = "";
-  });
-}
-
-facturaSelect.addEventListener("change", toggleFactura);
-    toggleFactura();
-</script>
 
 
   <script>
@@ -1276,7 +1222,6 @@ document.getElementById("form").addEventListener("submit", e => {
 
   // valores automáticos
   data.pago = "PENDIENTE";
-  data.factura = data.factura === "Sí" ? "OK" : "";
 
   // 🔒 bloquear botón
   submitBtn.classList.add("loading");
