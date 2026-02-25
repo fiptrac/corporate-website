@@ -447,6 +447,14 @@ cursor:pointer;
   box-shadow:none !important;
   transform:none !important;
 }
+
+  #camposFactura {
+    padding: 14px;
+    background: #f4f6f8;
+    border-radius: 10px;
+    border: 1px dashed #ccc;
+    margin: 10px 0px;
+}
   
 </style>
 </head>
@@ -614,6 +622,7 @@ y actividades especializadas sin costo.
 <div class="popup" id="popup">
 <div class="popup-card">
 <form id="form">
+  <input type="hidden" name="factura" value="Sí">
 
 
 <button type="button" id="closePopup"
@@ -644,6 +653,49 @@ aria-label="Cerrar formulario">✕</button>
 <option value="Recomendación">Recomendación</option>
 <option value="Otro">Otro</option>
 </select>
+
+
+  <!-- Forma de pago -->
+<label>Forma de pago</label>
+<select name="forma_de_pago" required>
+  <option value="">Selecciona forma de pago</option>
+  <option>
+    Transferencia electrónica de fondos (USD o MXN)
+  </option>
+  <option>
+    EVO Payments (Tarjeta de crédito o débito VISA o MASTERCARD)
+  </option>
+</select>
+
+
+
+<label>País</label>
+<input name="pais" data-uppercase>
+
+<label>Datos fiscales</label>
+
+<div id="camposFactura" style="margin-top:10px">
+
+  <label>Razón social</label>
+  <input name="razon_social" data-uppercase required>
+
+  <label>RFC</label>
+  <input name="rfc_ruc_rnc" data-uppercase required>
+
+  <label>Domicilio fiscal</label>
+  <input name="domicilio_fiscal" required>
+
+  <label>Código postal</label>
+  <input name="codigo_postal" required>
+
+  <label>Uso del comprobante fiscal</label>
+  <select name="uso_del_comprobante_fiscal" required>
+    <option value="">Selecciona una opción</option>
+    <option>GASTOS EN GENERAL</option>
+    <option>POR DEFINIR</option>
+  </select>
+
+</div>
 
 <div id="cupoEvento"
 style="
