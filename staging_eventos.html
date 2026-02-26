@@ -846,9 +846,11 @@ observer.observe(intro);
 <!--  MENÚ DE TARJETAS  --> 
 <script>
 /* ================== CONFIG ================== */
-const API = "https://script.google.com/macros/s/AKfycbzY5NVZc9wIcRTCLFi8Y53DMgCBcp_4x4eN5XwdwMfWCwNEagEc82hr-y3xKQ1z09fL/exec";
+const API = "https://script.google.com/macros/s/AKfycbxG_aSJyFD-r46vWvPobB8O6XOSWvoSi9K5wQuEzo6UImprvTWXxDw67E23sk0LcvLk/exec";
 let cursoActual = "";
+let fechaActual = "";
 let cupoActual = 0;
+
 
 
 /* ================== CARGAR EVENTOS ================== */
@@ -889,7 +891,7 @@ fetch(API)
               ${ev.CUPO_DISPONIBLE === 0
                 ? 'disabled style="background:#999;cursor:not-allowed"'
                 : ''}
-              onclick="inscribirse('${ev.NOMBRE}', ${ev.CUPO_DISPONIBLE})">
+              onclick="inscribirse('${ev.NOMBRE}', '${ev.FECHA}', ${ev.CUPO_DISPONIBLE})">
               ${ev.CUPO_DISPONIBLE === 0 ? 'Cupo agotado' : 'Inscribirse'}
             </button>
           </div>
@@ -904,10 +906,11 @@ fetch(API)
 
 
 /* ================== ABRIR POPUP ================== */
-function inscribirse(nombre, cupo){
+function inscribirse(nombre, fecha, cupo){
   if(cupo <= 0) return;
 
   cursoActual = nombre;
+  fechaActual = fecha;
   cupoActual = cupo;
 
   document.getElementById('cursoTitulo').innerText = nombre;
@@ -918,8 +921,6 @@ function inscribirse(nombre, cupo){
       : `Cupo disponible: <b>${cupo} personas</b>`;
 
   document.getElementById('popup').style.display = 'flex';
-document.body.style.overflow = 'hidden';
-
 }
 
 
@@ -936,6 +937,8 @@ form.addEventListener('submit', e => {
 
   const data = Object.fromEntries(new FormData(form));
   data.curso = cursoActual;
+  data.fecha = fechaActual;
+
 
   // 🔒 bloquear botón
   submitBtn.classList.add("loading");
