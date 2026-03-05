@@ -423,6 +423,11 @@ z-index:9999;
   flex:1;
 }
 
+body.popup-open{
+  overflow:hidden;
+  height:100vh;
+}
+
 
 
 @keyframes popupIn{
@@ -526,12 +531,12 @@ border-radius:8px;border:1px solid #ccc
   box-shadow:0 8px 18px rgba(0,0,0,.25);
 }
 
-
-#camposFactura{
-  padding:14px;
-  background:#f4f6f8;
-  border-radius:10px;
-  border:1px dashed #ccc;
+#camposFactura {
+    padding: 14px;
+    background: #f4f6f8;
+    border-radius: 10px;
+    border: 1px dashed #ccc;
+    margin: 10px 0px;
 }
 
 #camposDC3{
@@ -736,6 +741,9 @@ normativas vigentes y requisitos del sector industrial.
   <form id="form" method="POST" onsubmit="return false;">
 
 <input type="hidden" name="curso">
+<input type="hidden" name="factura" value="Sí">
+<input type="hidden" name="dc3" value="Sí">
+
 
 <label>Nombre completo</label>
 <input name="nombre" data-uppercase required>
@@ -814,25 +822,21 @@ normativas vigentes y requisitos del sector industrial.
 <label>País</label>
 <input name="pais" data-uppercase>
 
-<label>Factura</label>
-<select name="factura" id="factura">
-  <option value="No">No</option>
-  <option value="Sí">Sí</option>
-</select>
+<label>Datos fiscales</label>
 
-<div id="camposFactura" style="display:none;margin-top:10px">
+<div id="camposFactura" style="margin-top:10px">
 
   <label>Razón social</label>
-  <input name="razon_social" data-uppercase>
+  <input name="razon_social" data-uppercase required>
 
-  <label>RFC / RUC / RNC</label>
-  <input name="rfc_ruc_rnc" data-uppercase>
+  <label>RFC</label>
+  <input name="rfc_ruc_rnc" data-uppercase required>
 
   <label>Domicilio fiscal</label>
-  <input name="domicilio_fiscal">
+  <input name="domicilio_fiscal" required>
 
   <label>Código postal</label>
-  <input name="codigo_postal">
+  <input name="codigo_postal" required>
 
   <label>Uso del comprobante fiscal</label>
   <select name="uso_del_comprobante_fiscal" required>
@@ -840,19 +844,16 @@ normativas vigentes y requisitos del sector industrial.
     <option>GASTOS EN GENERAL</option>
     <option>POR DEFINIR</option>
   </select>
+
 </div>
 
-    <label>¿Requiere emisión de DC-3?</label>
-<select name="dc3" id="dc3">
-  <option value="No">No</option>
-  <option value="Sí">Sí</option>
-</select>
+
     
 <small style="font-weight:400;color:#666;font-size:12px;">
   Escriba los nombres solo si aplica
 </small>
 
-<div id="camposDC3" style="display:none;margin-top:10px">
+<div id="camposDC3" style="margin-top:10px">
   <label>Representante legal (DC-3)</label>
   <input name="representante_legal_dc3" data-uppercase>
 
@@ -890,18 +891,19 @@ normativas vigentes y requisitos del sector industrial.
   ">
     <h3 style="text-align:center; color:#003A70; margin-bottom:14px;">Selecciona el servicio de traslados</h3>
 
+    <small style="font-weight:400;color:#666;font-size:12px;">
+      Este servicio es SIN NINGUN COSTO SIEMPRE Y CUANDO ESTEN DENTRO DE LOS HORARIOS Y DIAS ESTABLECIDOS, en caso de NO coincidir, los traslados corren por cuenta de los participantes.
+    </small>
+
     <div style="display:flex; flex-direction:column; gap:10px;">
-      <button type="button" class="btnOpcion" data-value="A" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
-        <b>A –</b> Este servicio es SIN NINGUN COSTO SIEMPRE Y CUANDO ESTEN DENTRO DE LOS HORARIOS Y DIAS ESTABLECIDOS, en caso de NO coincidir, los traslados corren por cuenta de los participantes.
-      </button>
       <button type="button" class="btnOpcion" data-value="B" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
-        <b>B –</b> Requiero traslados AEROPUERTO AICM-HOTEL-FIPTRAC-AEROPUERTO Y TRASLADOS HOTEL-FIPTRAC-HOTEL <i>*SOLO APLICA EN HOTEL SUGERIDO Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
+        <b>A –</b> Requiero traslados AEROPUERTO AICM-HOTEL-FIPTRAC-AEROPUERTO Y TRASLADOS HOTEL-FIPTRAC-HOTEL <i>*SOLO APLICA EN HOTEL SUGERIDO Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
       </button>
       <button type="button" class="btnOpcion" data-value="C" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
-        <b>C –</b> Haré todos los traslados por mi cuenta
+        <b>B –</b> Haré todos los traslados por mi cuenta
       </button>
       <button type="button" class="btnOpcion" data-value="D" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
-        <b>D –</b> Requiero solo traslados Hotel-FIPTRAC Y FIPTRAC-Hotel <i>*SOLO APLICA PARA HUESPEDES EN HOTEL Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
+        <b>C –</b> Requiero solo traslados Hotel-FIPTRAC Y FIPTRAC-Hotel <i>*SOLO APLICA PARA HUESPEDES EN HOTEL Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
       </button>
     </div>
 
@@ -1089,46 +1091,10 @@ function validarCURP(curp){
 
 
 
-  <script>
-const facturaSelect = document.getElementById("factura");
-const camposFactura = document.getElementById("camposFactura");
-
-const facturaInputs = camposFactura.querySelectorAll("input, select");
-
-function toggleFactura(){
-  const requiereFactura = facturaSelect.value === "Sí";
-
-  camposFactura.style.display = requiereFactura ? "block" : "none";
-
-  facturaInputs.forEach(input=>{
-    input.required = requiereFactura;
-    if(!requiereFactura) input.value = "";
-  });
-}
-
-facturaSelect.addEventListener("change", toggleFactura);
-    toggleFactura();
-</script>
 
 
-  <script>
-const dc3Select = document.getElementById("dc3");
-const camposDC3 = document.getElementById("camposDC3");
-const dc3Inputs = camposDC3.querySelectorAll("input");
 
-function toggleDC3(){
-  const requiereDC3 = dc3Select.value === "Sí";
 
-  camposDC3.style.display = requiereDC3 ? "block" : "none";
-
-  dc3Inputs.forEach(input=>{
-    if(!requiereDC3) input.value = "";
-  });
-}
-
-dc3Select.addEventListener("change", toggleDC3);
-toggleDC3(); // estado inicial
-</script>
 
 
 
@@ -1161,7 +1127,7 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
   
   
 <script>
-const API = "https://script.google.com/macros/s/AKfycbyLiSD4dHRUd4djugqglNC-b6BOvFQi8j5He5nOXrrMxCEzoe9STj-AWWsRXBb-EafE/exec";
+const API = "https://script.google.com/macros/s/AKfycbzsuoFj8YMi3NnJ9a6jPFuy5ln34lJ_CoUgGK0bXFNvvd7Hu57w5eeilWWhc0S-6MGD/exec";
 let cursoActual = "";
 
 const loader = document.getElementById("loaderCertificaciones");
@@ -1230,18 +1196,22 @@ function inscribirse(nombre, precioMXN, precioUSD){
 
 
   document.getElementById("precioCurso").innerHTML = `
-    💰 Precio del curso<br>
+    💰 Precio del curso + IVA<br>
     <b>MXN:</b> $${precioMXN} &nbsp; | &nbsp;
     <b>USD:</b> $${precioUSD}
   `;
 
   document.getElementById("popup").style.display = "flex";
+document.body.classList.add("popup-open");
+
 }
 
 
 function cerrarPopup(){
   document.getElementById("popup").style.display="none";
+  document.body.classList.remove("popup-open");
 }
+
 
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
@@ -1276,7 +1246,9 @@ document.getElementById("form").addEventListener("submit", e => {
 
   // valores automáticos
   data.pago = "PENDIENTE";
-  data.factura = data.factura === "Sí" ? "OK" : "";
+  data.factura = "OK";
+  data.dc3 = "OK";
+
 
   // 🔒 bloquear botón
   submitBtn.classList.add("loading");
