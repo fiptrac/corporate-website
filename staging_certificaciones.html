@@ -742,7 +742,6 @@ normativas vigentes y requisitos del sector industrial.
 
 <input type="hidden" name="curso">
 <input type="hidden" name="factura" value="Sí">
-<input type="hidden" name="dc3" value="Sí">
 
 
 <label>Nombre completo</label>
@@ -1100,7 +1099,7 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
   
   
 <script>
-const API = "https://script.google.com/macros/s/AKfycbzsuoFj8YMi3NnJ9a6jPFuy5ln34lJ_CoUgGK0bXFNvvd7Hu57w5eeilWWhc0S-6MGD/exec";
+const API = "https://script.google.com/macros/s/AKfycbyz-A3j7xNJNVxoR8C69xnQO6UxyfmoWcO5Dd1yJIjVe-qybaPX2VgpHaPOyFtkkS_5/exec";
 let cursoActual = "";
 
 const loader = document.getElementById("loaderCertificaciones");
@@ -1212,7 +1211,6 @@ document.getElementById("form").addEventListener("submit", e => {
   // valores automáticos
   data.pago = "PENDIENTE";
   data.factura = "OK";
-  data.dc3 = "OK";
 
 
   // 🔒 bloquear botón
