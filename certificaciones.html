@@ -742,7 +742,6 @@ normativas vigentes y requisitos del sector industrial.
 
 <input type="hidden" name="curso">
 <input type="hidden" name="factura" value="Sí">
-<input type="hidden" name="dc3" value="Sí">
 
 
 <label>Nombre completo</label>
@@ -750,16 +749,6 @@ normativas vigentes y requisitos del sector industrial.
 
 <label>Puesto / Cargo</label>
 <input name="puesto_cargo">
-
-<label>
-  CURP
-  <span style="font-weight:400;color:#666;font-size:12px">
-    (solo México)
-  </span>
-</label>
-
-<input name="curp" id="curp" maxlength="18" data-uppercase>
-
 
 
 
@@ -848,18 +837,6 @@ normativas vigentes y requisitos del sector industrial.
 </div>
 
 
-    
-<small style="font-weight:400;color:#666;font-size:12px;">
-  Escriba los nombres solo si aplica
-</small>
-
-<div id="camposDC3" style="margin-top:10px">
-  <label>Representante legal (DC-3)</label>
-  <input name="representante_legal_dc3" data-uppercase>
-
-  <label>Representante de los trabajadores (DC-3)</label>
-  <input name="representante_trabajadores_dc3" data-uppercase>
-</div>
 
 <!-- Servicio de Traslados -->
 <label>Servicio de traslados</label>
@@ -896,13 +873,13 @@ normativas vigentes y requisitos del sector industrial.
     </small>
 
     <div style="display:flex; flex-direction:column; gap:10px;">
-      <button type="button" class="btnOpcion" data-value="B" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+      <button type="button" class="btnOpcion" data-value="A – Traslado completo" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
         <b>A –</b> Requiero traslados AEROPUERTO AICM-HOTEL-FIPTRAC-AEROPUERTO Y TRASLADOS HOTEL-FIPTRAC-HOTEL <i>*SOLO APLICA EN HOTEL SUGERIDO Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
       </button>
-      <button type="button" class="btnOpcion" data-value="C" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+      <button type="button" class="btnOpcion" data-value="B – Sin traslado" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
         <b>B –</b> Haré todos los traslados por mi cuenta
       </button>
-      <button type="button" class="btnOpcion" data-value="D" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+      <button type="button" class="btnOpcion" data-value="C – Traslado hotel–FIPTRAC" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
         <b>C –</b> Requiero solo traslados Hotel-FIPTRAC Y FIPTRAC-Hotel <i>*SOLO APLICA PARA HUESPEDES EN HOTEL Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
       </button>
     </div>
@@ -1082,11 +1059,6 @@ function validarCorreo(correo){
 function validarTelefono(tel){
   return /^[0-9]{10}$/.test(tel);
 }
-
-function validarCURP(curp){
-  const regex = /^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$/;
-  return regex.test(curp);
-}
 </script>
 
 
@@ -1127,7 +1099,7 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
   
   
 <script>
-const API = "https://script.google.com/macros/s/AKfycbwjgHuoMMbFIKe6MCyiKhs4IB3npRx15ovdqoEobuJ3bSECPEMOrKlyLh-xRlcQCxSH/exec";
+const API = "https://script.google.com/macros/s/AKfycbyz-A3j7xNJNVxoR8C69xnQO6UxyfmoWcO5Dd1yJIjVe-qybaPX2VgpHaPOyFtkkS_5/exec";
 let cursoActual = "";
 
 const loader = document.getElementById("loaderCertificaciones");
@@ -1235,19 +1207,10 @@ document.getElementById("form").addEventListener("submit", e => {
     return;
   }
 
-  if(data.curp){
-    const curp = data.curp.toUpperCase();
-    if(!validarCURP(curp)){
-      alert("CURP no válida");
-      return;
-    }
-    data.curp = curp;
-  }
-
+ 
   // valores automáticos
   data.pago = "PENDIENTE";
   data.factura = "OK";
-  data.dc3 = "OK";
 
 
   // 🔒 bloquear botón
