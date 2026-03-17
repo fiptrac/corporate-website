@@ -748,7 +748,7 @@ normativas vigentes y requisitos del sector industrial.
 <input name="nombre" data-uppercase required>
 
 <label>Puesto / Cargo</label>
-<input name="puesto_cargo">
+<input name="puesto_cargo" required>
 
 
 
@@ -809,7 +809,7 @@ normativas vigentes y requisitos del sector industrial.
 
 
 <label>País</label>
-<input name="pais" data-uppercase>
+<input name="pais" data-uppercase required>
 
 <label>Datos fiscales</label>
 
@@ -840,7 +840,7 @@ normativas vigentes y requisitos del sector industrial.
 
 <!-- Servicio de Traslados -->
 <label>Servicio de traslados</label>
-<input type="text" name="traslados" id="trasladosInput" placeholder="Selecciona una opción" readonly style="cursor:pointer;">
+<input type="text" name="traslados" id="trasladosInput" placeholder="Selecciona una opción" readonly  required style="cursor:pointer;">
 
 <!-- POPUP DE SELECCIÓN ESTÉTICO -->
 <div id="popupTraslados" style="
@@ -1189,6 +1189,14 @@ document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
   const form = e.target;
+
+// VALIDACIÓN HTML5
+if (!form.checkValidity()) {
+  form.reportValidity();
+  return;
+}
+
+  
   const submitBtn = form.querySelector('button[type="submit"]');
 
   // 🚫 evitar doble envío
@@ -1206,6 +1214,11 @@ document.getElementById("form").addEventListener("submit", e => {
     alert("El teléfono debe tener 10 dígitos");
     return;
   }
+
+  if (!data.traslados) {
+  alert("Selecciona el servicio de traslados");
+  return;
+}
 
  
   // valores automáticos
