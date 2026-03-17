@@ -218,8 +218,6 @@ header.nav-hide { transform: translateY(-110%); }
   color: #7a9ab8;
 }
 
-.ei-icon { font-size: 54px; margin-bottom: 14px; display: block; }
-
 .estado-inicial p {
   font-size: 14px;
   line-height: 1.7;
@@ -450,26 +448,42 @@ header.nav-hide { transform: translateY(-110%); }
    SECCIÓN INFORMATIVA
 =========================== */
 .info-section {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto 60px;
   padding: 0 16px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 30px;
 }
 
 .info-card {
   background: #fff;
-  border-radius: 14px;
-  padding: 24px 20px;
+  border-radius: 18px;
+  padding: 26px 22px;
   text-align: center;
-  box-shadow: 0 4px 14px rgba(0,58,112,.07);
+  box-shadow: 0 8px 22px rgba(0,0,0,.10);
   border-top: 3px solid #003A70;
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 
-.info-card .ic-icon { font-size: 32px; margin-bottom: 10px; display: block; }
-.info-card h3 { font-size: 14px; font-weight: 700; color: #003A70; margin-bottom: 6px; }
-.info-card p  { font-size: 12px; color: #666; line-height: 1.6; margin: 0; }
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0,0,0,.16);
+}
+
+.info-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #003A70;
+  margin-bottom: 8px;
+}
+
+.info-card p {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+}
 
 @media(max-width:700px){
   .info-section { grid-template-columns: 1fr; }
@@ -541,7 +555,6 @@ header.nav-hide { transform: translateY(-110%); }
 
   <!-- Estado inicial -->
   <div class="estado-inicial" id="estadoInicial">
-    <span class="ei-icon">🔍</span>
     <p>Ingresa el número de constancia que aparece en el documento o escanea el código QR para verificar su validez en tiempo real.</p>
   </div>
 
@@ -600,19 +613,19 @@ header.nav-hide { transform: translateY(-110%); }
 <div class="info-section">
 
   <div class="info-card">
-    <span class="ic-icon">🔐</span>
+    <i class="fa-solid fa-lock" style="font-size:32px;color:#003A70;margin-bottom:12px;display:block;"></i>
     <h3>Registro oficial</h3>
     <p>Cada constancia emitida queda registrada de forma permanente en nuestra base de datos con un ID único e irrepetible.</p>
   </div>
 
   <div class="info-card">
-    <span class="ic-icon">📱</span>
+    <i class="fa-solid fa-qrcode" style="font-size:32px;color:#003A70;margin-bottom:12px;display:block;"></i>
     <h3>Verificación por QR</h3>
     <p>Escanea el código QR del documento físico o digital para acceder directamente a esta página de validación.</p>
   </div>
 
   <div class="info-card">
-    <span class="ic-icon">✅</span>
+    <i class="fa-solid fa-circle-check" style="font-size:32px;color:#003A70;margin-bottom:12px;display:block;"></i>
     <h3>Validez garantizada</h3>
     <p>Las constancias FIPTRAC son emitidas por instructores certificados bajo estándares NFPA y acreditaciones internacionales.</p>
   </div>
