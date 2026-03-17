@@ -1179,6 +1179,13 @@ document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
   const form = e.target;
+
+  if (!form.checkValidity()) {
+  form.reportValidity();
+  return;
+}
+
+  
   const submitBtn = form.querySelector('button[type="submit"]');
 
   // 🚫 Evitar doble envío
