@@ -831,7 +831,7 @@ con práctica intensiva en escenarios reales.
 
 <!-- Servicio de Traslados -->
 <label>Servicio de traslados</label>
-<input type="text" name="traslados" id="trasladosInput" placeholder="Selecciona una opción" readonly style="cursor:pointer;">
+<input type="text" name="traslados" id="trasladosInput" placeholder="Selecciona una opción" readonly required style="cursor:pointer;">
 
 <!-- POPUP DE SELECCIÓN ESTÉTICO -->
 <div id="popupTraslados" style="
@@ -1205,6 +1205,11 @@ document.getElementById("form").addEventListener("submit", e => {
     }
     data.curp = curp;
   }
+
+      if (!data.traslados) {
+  alert("Selecciona el servicio de traslados");
+  return;
+}
 
   // valores automáticos
   data.pago = "PENDIENTE";
