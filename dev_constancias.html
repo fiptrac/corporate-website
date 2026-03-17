@@ -254,6 +254,28 @@ header.nav-hide { transform: translateY(-110%); }
   margin: 0;
 }
 
+.btn-generar-constancia {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 12px 28px;
+  background: #fff;
+  color: #003A70;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.btn-generar-constancia:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+}
+
 /* ===========================
    TARJETA DE CONSTANCIA
 =========================== */
@@ -352,7 +374,8 @@ header.nav-hide { transform: translateY(-110%); }
   gap: 18px 20px;
 }
 
-.cert-field {}
+.cert-field { grid-column: 1 / -1; }
+   
 .cert-field.full { grid-column: 1 / -1; }
 
 .cf-label {
@@ -529,9 +552,15 @@ header.nav-hide { transform: translateY(-110%); }
 ══════════════════════════════════════════ -->
 <section class="hero-const">
   <h1>Validación de Constancias</h1>
-  <p>Ingresa el número de constancia para verificar su autenticidad en el registro oficial de FIPTRAC.</p>
-</section>
+  <p>Verifica la autenticidad de nuestras constancias emitidas en el registro oficial de FIPTRAC.</p>
 
+  <a href="https://script.google.com/macros/s/AKfycbxM9A-rCyODtwE33t1f2oeljFcplnUiOWk-F15K4sgdrWZJIdSbGNdGjnhzxqxPxxA/exec"
+     target="_blank"
+     class="btn-generar-constancia">
+    <i class="fa-solid fa-plus" style="margin-right:8px;"></i>
+    Generar nueva constancia
+  </a>
+</section>
 
 <!-- ══════════════════════════════════════════
      BUSCADOR
