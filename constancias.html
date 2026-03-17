@@ -2,248 +2,498 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Constancias | FIPTRAC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Validación de Constancias | FIPTRAC</title>
 
 <link rel="icon" type="image/png" href="assets/images/icono.png?v=2">
-
 <link rel="apple-touch-icon" href="assets/images/icono.png">
-
 <link rel="icon" sizes="192x192" href="assets/images/icono.png">
 <link rel="icon" sizes="512x512" href="assets/images/icono.png">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Verifica la autenticidad de constancias y certificaciones emitidas por FIPTRAC, SC.">
+<meta name="theme-color" content="#003A70">
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/styles.css">
 
 <style>
-  /* ===========================
-     BASE / TIPOGRAFÍA
-  ============================ */
-  body { margin:0; font-family: 'Montserrat', sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+/* ===========================
+   BASE
+=========================== */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #eef2f8;
+}
 
-  /*==================  NAVBAR ==================*/
-  /* ===========================
-     HEADER STICKY (compact & scroll)
-     - header.scrolled: fondo semitransparente + compact
-     - header.nav-hide: se oculta al bajar scroll
-  ============================ */
-  header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    transition: transform 0.28s ease, padding 0.25s ease, background 0.35s ease, box-shadow 0.35s ease;
-    background: rgba(255,255,255,0.92);
-  }
+/* ===========================
+   NAVBAR (idéntico al sitio)
+=========================== */
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 999;
+  transition: transform 0.28s ease, padding 0.25s ease,
+              background 0.35s ease, box-shadow 0.35s ease;
+  background: rgba(255,255,255,0.92);
+}
 
-  /* Cuando el usuario baja lo volvemos más pequeño / con fondo */
-  header.scrolled {
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-  }
+header.scrolled {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
 
-  /* Cuando el usuario baja rápido ocultamos la barra */
-  header.nav-hide {
-    transform: translateY(-110%);
-  }
+header.nav-hide { transform: translateY(-110%); }
 
-  /* Contenedor del nav: aquí se controla el "grosor" de la línea.
-     Cambia padding (ej. 6px, 8px, 12px) para dejar la barra más delgada o gruesa. */
-  .nav-container {
-    max-width:1200px;
-    margin:auto;
-    padding:10px 15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-  }
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
 
-  /* ===========================
-     MENÚ
-  ============================ */
+.menu a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #003A70;
+  padding: 6px 8px;
+  border-radius: 8px;
+  transition: background .18s, color .18s;
+}
+
+.menu a:hover          { background: rgba(0,58,112,0.06); }
+.menu a.active         { color: #ef4444; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: auto;
+}
+
+.hamburger span {
+  width: 28px; height: 3px;
+  background: #003A70;
+  border-radius: 3px;
+  display: block;
+}
+
+@media(max-width:850px){
   .menu {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:30px;
+    position: absolute;
+    top: 100%; right: 12px;
+    background: white;
+    width: 220px;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 8px 26px rgba(0,0,0,0.12);
+    flex-direction: column;
+    gap: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity .28s, transform .28s;
   }
-  
-  .menu a {
-    text-decoration:none;
-    font-weight:600;
-    color:#003A70;
-    padding:6px 8px;
-    border-radius:8px;
-    transition:background .18s, color .18s;
-  }
-  
-  .menu a:hover {
-    background: rgba(0,58,112,0.06);
-  }
+  .menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+  .hamburger { display:flex; }
+}
 
+/* ===========================
+   HERO
+=========================== */
+.hero-const {
+  background: linear-gradient(rgba(0,58,112,0.88), rgba(0,58,112,0.88));
+  padding: 110px 20px 56px;
+  text-align: center;
+  color: #fff;
+}
 
-  /* ====== HAMBURGER (movil) ====== */
-  .hamburger {
-    display:none;
-    flex-direction:column;
-    gap:5px;
-    cursor:pointer;
-    padding:6px;
-    margin-left:auto; 
-  }
-  
-  .hamburger span {
-    width:28px;
-    height:3px;
-    background:#003A70;
-    border-radius:3px;
-    display:block;
-  }
+.hero-const h1 {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  margin-bottom: 10px;
+  line-height: 1.15;
+}
 
+.hero-const p {
+  font-size: 15px;
+  font-weight: 300;
+  opacity: .85;
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
 
-  /* ====== MEDIA QUERY (móvil) ====== */
-  @media(max-width:850px){
-    .menu {
-      position:absolute;
-      top:100%;
-      right:12px;
-      background:white;
-      width:220px;
-      padding:16px;
-      border-radius:12px;
-      box-shadow:0 8px 26px rgba(0,0,0,0.12);
-      flex-direction:column;
-      gap:12px;
-      opacity:0;
-      pointer-events:none;
-      transform:translateY(-6px);
-      transition:opacity .28s, transform .28s;
-    }
-  
-    .menu.show {
-      opacity:1;
-      pointer-events:auto;
-      transform:translateY(0);
-    }
-  
-    .hamburger {
-      display:flex;
-    }
-  }
+/* ===========================
+   BUSCADOR
+=========================== */
+.search-wrap {
+  max-width: 520px;
+  margin: -26px auto 44px;
+  padding: 0 16px;
+  position: relative;
+  z-index: 10;
+}
 
+.search-box {
+  display: flex;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,58,112,.18);
+  overflow: hidden;
+  border: 1.5px solid #d6e0ec;
+}
 
-/*==================  FIN NAVBAR ==================*/
+.search-box input {
+  flex: 1;
+  padding: 15px 18px;
+  border: none;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #1a2a3a;
+  background: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
+.search-box input::placeholder {
+  text-transform: none;
+  letter-spacing: 0;
+  color: #aab4c4;
+  font-weight: 400;
+}
 
-/*==================  HERO ==================*/
-  .hero {
-    background: linear-gradient(rgba(0,58,112,0.78), rgba(0,58,112,0.78));
-    background-position:center;
-    background-size:cover;
-    padding:80px 20px 20px; /* alto del hero */
-    margin-bottom: 50px; /* espacio debajo del Hero */
-    text-align:center;
-    color:#fff;
-    position:relative;
-    overflow:hidden;
-  }
+.search-box button {
+  padding: 15px 24px;
+  background: #003A70;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background .2s;
+  white-space: nowrap;
+}
 
-  .hero-content {
-    max-width:1000px;
-    margin:auto;
-    min-height:260px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    position:relative;
-  }
+.search-box button:hover { background: #002C55; }
 
-  .fade-item {
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    opacity:0;
-    transition:opacity 1.4s ease, transform 0.6s ease;
-    font-size:44px;
-    font-weight:700;
-    line-height:1.05;
-    max-width:92%;
-  }
+/* ===========================
+   ÁREA DE RESULTADO
+=========================== */
+.result-area {
+  max-width: 620px;
+  margin: 0 auto 80px;
+  padding: 0 16px;
+}
 
-  .fade-item:not(:has(img)) {
-    white-space: normal;
-    text-align:center;
-  }
+/* Estado inicial */
+.estado-inicial {
+  text-align: center;
+  padding: 50px 20px;
+  color: #7a9ab8;
+}
 
-  .fade-item.active {
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-  }
+.ei-icon { font-size: 54px; margin-bottom: 14px; display: block; }
 
-  /* Texto del slider (ajústalo con .fade-item .slide-text) */
-  .fade-item .slide-text {
-    display:block;
-    font-size:38px;
-  }
-  .fade-item p { margin-top:10px; font-size:18px; font-weight:400; color:rgba(255,255,255,0.95); }
+.estado-inicial p {
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 420px;
+  margin: 0 auto;
+}
 
-  /* ===========================
-     SLIDER: IMÁGENES / CONTROL POR CLASE (TAMAÑOS INDIVIDUALES)
-     - Usa las clases .img-1, .img-2, .img-3, .img-4 en cada <img>
-     - Ajusta width / max-width / height aquí según quieras
-  ============================ */
-  .fade-item img {
-    display:block;
-    width: 320px;      /* valor por defecto si no se especifica clase */
-    max-width: 68vw;
-    height: auto;
-    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
-    transition: transform .28s ease;
-  }
+/* Loading */
+.loading-card {
+  display: none;
+  text-align: center;
+  padding: 44px 20px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,58,112,.09);
+}
 
-  /* Tamaños individuales (modifica estos valores libremente) */
-  .fade-item img.img-1 { width: 360px; }   /* imagen 1 */
-  .fade-item img.img-2 { width: 300px; }   /* imagen 2 */
-  .fade-item img.img-3 { width: 420px; }   /* imagen 3 */
-  .fade-item img.img-4 { width: 600px; }   /* imagen 4 */
+.loading-card.show { display: block; }
 
-  /* Responsivo: reduce imágenes en móvil */
-  @media (max-width:700px){
-    .fade-item { font-size:28px; }
-    .fade-item img { width:220px; }
-    .fade-item img.img-1 { width:240px; }
-    .fade-item img.img-2 { width:200px; }
-    .fade-item img.img-3 { width:260px; }
-    .fade-item img.img-4 { max-width: 83vw; }
-  }
+.spin {
+  width: 40px; height: 40px;
+  border: 4px solid #dde8f4;
+  border-top-color: #003A70;
+  border-radius: 50%;
+  animation: spin .75s linear infinite;
+  margin: 0 auto 14px;
+}
 
+@keyframes spin { to { transform: rotate(360deg); } }
 
+.loading-card p {
+  color: #7a9ab8;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* ===========================
+   TARJETA DE CONSTANCIA
+=========================== */
+.cert-card {
+  display: none;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 28px rgba(0,58,112,.13);
+  overflow: hidden;
+  animation: fadeUp .3s ease;
+}
+
+.cert-card.show { display: block; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* Cabecera azul */
+.cert-header {
+  background: linear-gradient(135deg, #003A70 0%, #005099 100%);
+  padding: 24px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cert-header-left { flex: 1; }
+
+.cert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 13px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border: 1px solid transparent;
+}
+
+.cert-badge.valido {
+  background: rgba(16,185,129,.22);
+  border-color: rgba(16,185,129,.5);
+  color: #6ee7b7;
+}
+
+.cert-badge.invalido {
+  background: rgba(239,68,68,.22);
+  border-color: rgba(239,68,68,.5);
+  color: #fca5a5;
+}
+
+.cert-id {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.cert-tipo {
+  font-size: 11px;
+  color: rgba(255,255,255,.55);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* QR en cabecera */
+.cert-qr-wrap {
+  flex-shrink: 0;
+}
+
+.cert-qr-wrap img {
+  width: 82px;
+  height: 82px;
+  border-radius: 8px;
+  background: #fff;
+  display: block;
+  padding: 4px;
+}
+
+/* Cuerpo de la tarjeta */
+.cert-body {
+  padding: 24px 26px 20px;
+}
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 20px;
+}
+
+.cert-field {}
+.cert-field.full { grid-column: 1 / -1; }
+
+.cf-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #7a9ab8;
+  margin-bottom: 3px;
+}
+
+.cf-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a2a3a;
+  line-height: 1.4;
+}
+
+.cf-value.big { font-size: 15px; }
+
+/* Divisor interno */
+.cert-divider {
+  height: 1px;
+  background: #e8eef6;
+  margin: 0 26px;
+}
+
+/* Pie de tarjeta */
+.cert-footer {
+  padding: 13px 26px;
+  background: #f4f7fb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #7a9ab8;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cert-footer strong { color: #003A70; }
+
+.cf-fiptrac {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #003A70;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ===========================
+   TARJETA DE ERROR
+=========================== */
+.error-card {
+  display: none;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,58,112,.09);
+  padding: 44px 26px;
+  text-align: center;
+  animation: fadeUp .3s ease;
+}
+
+.error-card.show { display: block; }
+
+.ec-icon  { font-size: 48px; margin-bottom: 14px; display: block; }
+.ec-title { font-size: 18px; font-weight: 700; color: #991b1b; margin-bottom: 8px; }
+.ec-msg   { font-size: 13px; color: #666; line-height: 1.7; max-width:380px; margin:0 auto; }
+
+.ec-retry {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 22px;
+  background: #003A70;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  transition: background .2s;
+}
+
+.ec-retry:hover { background: #002C55; }
+
+/* ===========================
+   SECCIÓN INFORMATIVA
+=========================== */
+.info-section {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.info-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0,58,112,.07);
+  border-top: 3px solid #003A70;
+}
+
+.info-card .ic-icon { font-size: 32px; margin-bottom: 10px; display: block; }
+.info-card h3 { font-size: 14px; font-weight: 700; color: #003A70; margin-bottom: 6px; }
+.info-card p  { font-size: 12px; color: #666; line-height: 1.6; margin: 0; }
+
+@media(max-width:700px){
+  .info-section { grid-template-columns: 1fr; }
+}
+
+/* ===========================
+   RESPONSIVE TARJETA
+=========================== */
+@media(max-width:560px){
+  .cert-header   { flex-direction: column; align-items: flex-start; }
+  .cert-grid     { grid-template-columns: 1fr; }
+  .cert-field.full { grid-column: 1; }
+  .cert-footer   { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .hero-const h1 { font-size: 26px; }
+}
 </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-<header class="nav">
+<!-- ══════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════ -->
+<header>
   <div class="nav-container">
-
-    <!-- Logo clicable: vuelve a index.html 
-<div class="logo">
-<a href="index.html" aria-label="Ir al inicio">
-<img src="assets/images/sin fondo.png" alt="FIPTRAC - logo">
-</a>
-</div>
-    -->
-
-    <!-- Menú (Eventos permanece incluido) -->
     <nav class="menu" id="menu">
-      <!-- <a href="cursos.html">Cursos</a>        eliminar LOGO (clicable)-->
       <a href="index.html">Inicio</a>
       <a href="cursos.html">Cursos</a>
       <a href="certificaciones.html">Certificaciones</a>
@@ -251,8 +501,8 @@
       <a href="laboratorios.html">Laboratorios</a>
       <a href="directorio.html">Empresas</a>
       <a href="contacto.html">Contacto</a>
+      <a href="constancias.html" class="active">Constancias</a>
     </nav>
-
     <div class="hamburger" id="hamburger" aria-label="Abrir menú">
       <span></span><span></span><span></span>
     </div>
@@ -260,156 +510,263 @@
 </header>
 
 
-<!-- HERO / SLIDER -->
-<section class="hero" aria-label="Hero">
-  <div class="hero-content">
-
-    <!-- Cada .fade-item puede ser texto o imagen. 
-         Si contiene <img>, añade además la clase img-1/2/3/4 según corresponda. -->
-    <div class="fade-item active" id="fade1">
-      <span class="slide-text">✔ Cursos 100 % en español</span>
-    </div>
-
-    <div class="fade-item" id="fade2">
-      <span class="slide-text">✔ Impacto directo en el desempeño profesional</span>
-    </div>
-
-    <div class="fade-item" id="fade3">
-      <span class="slide-text">✔ Enfoque práctico y técnico</span>
-    </div>
-
-    <div class="fade-item" id="fade4">
-      <!-- imagen con clase individual img-4 -->
-      <img src="assets/images/sin fondo.png" alt="Logo fondo" class="img-4">
-    </div>
-
-  </div>
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero-const">
+  <h1>Validación de Constancias</h1>
+  <p>Ingresa el número de constancia para verificar su autenticidad en el registro oficial de FIPTRAC.</p>
 </section>
 
 
+<!-- ══════════════════════════════════════════
+     BUSCADOR
+══════════════════════════════════════════ -->
+<div class="search-wrap">
+  <div class="search-box">
+    <input type="text" id="inputId"
+           placeholder="Ej. FIPTRAC-0001"
+           maxlength="20"
+           onkeydown="if(event.key==='Enter') buscar()">
+    <button onclick="buscar()">Verificar</button>
+  </div>
+</div>
 
 
+<!-- ══════════════════════════════════════════
+     RESULTADO
+══════════════════════════════════════════ -->
+<div class="result-area">
+
+  <!-- Estado inicial -->
+  <div class="estado-inicial" id="estadoInicial">
+    <span class="ei-icon">🔍</span>
+    <p>Ingresa el número de constancia que aparece en el documento o escanea el código QR para verificar su validez en tiempo real.</p>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-card" id="loadingCard">
+    <div class="spin"></div>
+    <p>Verificando constancia…</p>
+  </div>
+
+  <!-- Tarjeta válida -->
+  <div class="cert-card" id="certCard">
+
+    <div class="cert-header">
+      <div class="cert-header-left">
+        <div class="cert-badge" id="certBadge">● VÁLIDO</div>
+        <div class="cert-id"   id="certId">—</div>
+        <div class="cert-tipo" id="certTipo">—</div>
+      </div>
+      <div class="cert-qr-wrap">
+        <img id="certQrImg" src="" alt="QR de validación">
+      </div>
+    </div>
+
+    <div class="cert-body">
+      <div class="cert-grid" id="certGrid">
+        <!-- se llena dinámicamente -->
+      </div>
+    </div>
+
+    <div class="cert-divider"></div>
+
+    <div class="cert-footer">
+      <span>Fecha de registro: <strong id="certFecha">—</strong></span>
+      <span class="cf-fiptrac">✔ FIPTRAC, SC.</span>
+    </div>
+
+  </div>
+
+  <!-- Error -->
+  <div class="error-card" id="errorCard">
+    <span class="ec-icon">⚠️</span>
+    <div class="ec-title">Constancia no encontrada</div>
+    <div class="ec-msg" id="ecMsg">
+      No se encontró ningún registro con ese número.
+      Verifica que el ID sea correcto e intenta nuevamente.
+    </div>
+    <button class="ec-retry" onclick="resetBusqueda()">Intentar de nuevo</button>
+  </div>
+
+</div>
 
 
+<!-- ══════════════════════════════════════════
+     SECCIÓN INFORMATIVA
+══════════════════════════════════════════ -->
+<div class="info-section">
+
+  <div class="info-card">
+    <span class="ic-icon">🔐</span>
+    <h3>Registro oficial</h3>
+    <p>Cada constancia emitida queda registrada de forma permanente en nuestra base de datos con un ID único e irrepetible.</p>
+  </div>
+
+  <div class="info-card">
+    <span class="ic-icon">📱</span>
+    <h3>Verificación por QR</h3>
+    <p>Escanea el código QR del documento físico o digital para acceder directamente a esta página de validación.</p>
+  </div>
+
+  <div class="info-card">
+    <span class="ic-icon">✅</span>
+    <h3>Validez garantizada</h3>
+    <p>Las constancias FIPTRAC son emitidas por instructores certificados bajo estándares NFPA y acreditaciones internacionales.</p>
+  </div>
+
+</div>
 
 
-
-
-
-
-
-
-
-  
-
-
-
-<!-- ============================== SCRIPTS ============================== -->
-
-  
-<!--  HAMBURGER  --> 
-<script>
-  // HAMBURGER toggle (movil)
-  document.getElementById('hamburger').addEventListener('click', ()=>{
-    document.getElementById('menu').classList.toggle('show');
-  });
-</script>
-  
-
-<!--  NAVBAR  --> 
-<script>
-  // HEADER: añadir clase .scrolled + comportamiento "hide on scroll"
-  (function(){
-    const header = document.querySelector('header');
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-      const current = window.pageYOffset || document.documentElement.scrollTop;
-      // scrolled style (background + compact)
-      if (current > 30) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-
-      // hide/show on scroll direction
-      if (current > lastScroll && current > 120) {
-        // scrolling down
-        header.classList.add('nav-hide');
-      } else {
-        // scrolling up
-        header.classList.remove('nav-hide');
-      }
-      lastScroll = current <= 0 ? 0 : current; // For Mobile or negative scrolling
-    }, { passive: true });
-  })();
-</script>
-
-
-<!--  HERO  --> 
-<script>
-  // SLIDER / TRANSICIONES
-  const items = [
-    document.getElementById("fade1"),
-    document.getElementById("fade2"),
-    document.getElementById("fade3"),
-    document.getElementById("fade4")
-  ];
-
-  let index = 0;
-  function changeSlide(){
-    items.forEach(i => i.classList.remove("active"));
-    items[index].classList.add("active");
-    index = (index + 1) % items.length;
-  }
-  // inicia intercambio (puedes cambiar 3500 a otro valor en ms)
-  let slideInterval = setInterval(changeSlide, 2500);
-
-  // si quieres controlar manualmente (ej. pausar on hover) puedes hacerlo:
-  document.querySelector('.hero').addEventListener('mouseenter', ()=> clearInterval(slideInterval));
-  document.querySelector('.hero').addEventListener('mouseleave', ()=> slideInterval = setInterval(changeSlide, 2500));
-</script>
-
-
-<script>
-/* ================= POPUPS FOOTER ================= */
-
-function abrirPopup(id){
-  const popup = document.getElementById(id);
-  if(popup) popup.style.display = 'flex';
-}
-
-function cerrarPopup(id){
-  const popup = document.getElementById(id);
-  if(popup) popup.style.display = 'none';
-}
-
-/* Cerrar con click fuera */
-document.addEventListener('click', e => {
-  if(e.target.classList.contains('fiptrac-overlay')){
-    e.target.style.display = 'none';
-  }
-});
-
-/* Cerrar con ESC */
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape'){
-    document
-      .querySelectorAll('.fiptrac-overlay')
-      .forEach(p => p.style.display = 'none');
-  }
-});
-</script>
-
-
-
-<!--  FOOTER  --> 
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</noscript>
 <script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
 
 <div id="footer-container"></div>
-
 <script>
   fetch("footer.html")
-    .then(response => response.text())
+    .then(r => r.text())
+    .then(d => { document.getElementById("footer-container").innerHTML = d; });
+</script>
+
+
+<!-- ══════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════ -->
+<script>
+// ── URL de la Web App (actualiza si regeneras la implementación) ──
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz7_5HYwSupDvvK2MsB63Mn33rho8Wv2ZU-f77fxaWg5xIL-rf_bErm9TY3LMW7BZsr/exec";
+
+// ── NAVBAR: hamburger ──
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('menu').classList.toggle('show');
+});
+
+// ── NAVBAR: scroll behavior (sticky + hide on scroll down) ──
+(function(){
+  const header = document.querySelector('header');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const current = window.pageYOffset || document.documentElement.scrollTop;
+    if (current > 30) header.classList.add('scrolled');
+    else              header.classList.remove('scrolled');
+    if (current > lastScroll && current > 120) header.classList.add('nav-hide');
+    else                                        header.classList.remove('nav-hide');
+    lastScroll = current <= 0 ? 0 : current;
+  }, { passive: true });
+})();
+
+// ── AUTO-BUSCAR si viene ?id= en la URL ──
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  if (id) {
+    document.getElementById('inputId').value = id.toUpperCase();
+    buscar();
+  }
+});
+
+// ── BUSCAR ──
+function buscar() {
+  const id = document.getElementById('inputId').value.trim().toUpperCase();
+  if (!id) { alert('Ingresa un número de constancia.'); return; }
+
+  ocultarTodo();
+  document.getElementById('loadingCard').classList.add('show');
+
+  fetch(WEB_APP_URL + "?id=" + encodeURIComponent(id))
+    .then(r => r.json())
     .then(data => {
-      document.getElementById("footer-container").innerHTML = data;
+      document.getElementById('loadingCard').classList.remove('show');
+      if (data.error) mostrarError(data.error);
+      else            mostrarConstancia(data);
+    })
+    .catch(() => {
+      document.getElementById('loadingCard').classList.remove('show');
+      mostrarError('Error de conexión. Intenta nuevamente.');
     });
+}
+
+// ── MOSTRAR CONSTANCIA ──
+function mostrarConstancia(d) {
+  const esValido = String(d.valido).trim().toUpperCase() === 'VÁLIDO';
+
+  // Badge
+  const badge = document.getElementById('certBadge');
+  badge.textContent = esValido ? '● VÁLIDO' : '● NO VÁLIDO';
+  badge.className   = 'cert-badge ' + (esValido ? 'valido' : 'invalido');
+
+  document.getElementById('certId').textContent   = d.id;
+  document.getElementById('certTipo').textContent = d.tipo;
+  document.getElementById('certFecha').textContent = d.fechaRegistro;
+
+  // QR
+  const qrTarget = encodeURIComponent(window.location.origin + '/constancias.html?id=' + d.id);
+  document.getElementById('certQrImg').src =
+    'https://api.qrserver.com/v1/create-qr-code/?size=164x164&data=' + qrTarget;
+
+  // Grid de datos
+  const razonHTML = (d.razonSocial && d.razonSocial.trim() !== '')
+    ? `<div class="cert-field">
+         <div class="cf-label">Razón Social / Empresa</div>
+         <div class="cf-value">${d.razonSocial}</div>
+       </div>` : '';
+
+  document.getElementById('certGrid').innerHTML = `
+    <div class="cert-field full">
+      <div class="cf-label">Nombre completo</div>
+      <div class="cf-value big">${d.nombre}</div>
+    </div>
+    ${razonHTML}
+    <div class="cert-field full">
+      <div class="cf-label">Curso / Certificación</div>
+      <div class="cf-value">${d.curso}</div>
+    </div>
+    <div class="cert-field">
+      <div class="cf-label">Fecha de inicio</div>
+      <div class="cf-value">${d.inicio}</div>
+    </div>
+    <div class="cert-field">
+      <div class="cf-label">Fecha de término</div>
+      <div class="cf-value">${d.termino}</div>
+    </div>
+    <div class="cert-field full">
+      <div class="cf-label">Otorga</div>
+      <div class="cf-value">${d.otorga}</div>
+    </div>
+  `;
+
+  document.getElementById('certCard').classList.add('show');
+}
+
+// ── MOSTRAR ERROR ──
+function mostrarError(msg) {
+  document.getElementById('ecMsg').textContent = msg;
+  document.getElementById('errorCard').classList.add('show');
+}
+
+// ── RESET ──
+function ocultarTodo() {
+  document.getElementById('estadoInicial').style.display = 'none';
+  document.getElementById('certCard').classList.remove('show');
+  document.getElementById('errorCard').classList.remove('show');
+  document.getElementById('loadingCard').classList.remove('show');
+}
+
+function resetBusqueda() {
+  document.getElementById('inputId').value = '';
+  document.getElementById('estadoInicial').style.display = 'block';
+  document.getElementById('certCard').classList.remove('show');
+  document.getElementById('errorCard').classList.remove('show');
+}
 </script>
 
 </body>
+</html>
