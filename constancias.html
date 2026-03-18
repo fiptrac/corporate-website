@@ -552,12 +552,22 @@ header.nav-hide { transform: translateY(-110%); }
   <h1>Validación de Constancias</h1>
   <p>Verifica la autenticidad de nuestras constancias emitidas en el registro oficial de FIPTRAC.</p>
 
+<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:22px;">
   <a href="https://www.fiptrac.com/generador_constancias.html"
      target="_blank"
      class="btn-generar-constancia">
     <i class="fa-solid fa-plus" style="margin-right:8px;"></i>
     Generar nueva constancia
   </a>
+
+  <button class="btn-generar-constancia"
+          onclick="abrirEncuesta()"
+          style="border:none;cursor:pointer;">
+    <i class="fa-solid fa-star" style="margin-right:8px;"></i>
+    Encuesta de satisfacción
+  </button>
+</div>
+   
 </section>
 
 <!-- ══════════════════════════════════════════
@@ -808,5 +818,370 @@ function resetBusqueda() {
 }
 </script>
 
+
+
+
+<!-- ══ POPUP ENCUESTA ══ -->
+<div class="popup" id="popupEncuesta" style="display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.55);backdrop-filter:blur(3px);
+  align-items:center;justify-content:center;z-index:9999;">
+
+  <div class="popup-card" style="background:#fff;width:92%;max-width:520px;
+    max-height:90vh;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,0.35);
+    display:flex;flex-direction:column;animation:popupIn .35s ease;position:relative;">
+
+    <button onclick="cerrarEncuesta()" style="position:absolute;top:16px;right:18px;
+      background:none;border:none;font-size:22px;cursor:pointer;">✕</button>
+
+    <!-- HEADER -->
+    <div style="padding:26px 26px 14px;border-bottom:1px solid #eee;flex-shrink:0;">
+      <h3 style="text-align:center;color:#003A70;margin:0;font-size:20px;
+          font-family:'Montserrat',sans-serif;">
+        ⭐ Encuesta de satisfacción
+      </h3>
+      <p style="text-align:center;color:#7a9ab8;font-size:12px;
+          margin:8px 0 0;font-family:'Montserrat',sans-serif;">
+        Tu opinión nos ayuda a mejorar
+      </p>
+    </div>
+
+    <!-- CONTENIDO CON SCROLL -->
+    <div style="padding:20px 26px 26px;overflow-y:auto;flex:1;font-family:'Montserrat',sans-serif;">
+      <form id="formEncuesta" onsubmit="return false;">
+
+        <!-- TIPO -->
+        <label style="font-size:13px;font-weight:600;margin-top:10px;display:block;color:#003A70;">
+          Tipo <span style="color:#ef4444;">*</span>
+        </label>
+        <select id="enc_tipo" required onchange="cargarCursosEncuesta()"
+          style="width:100%;padding:12px;margin-top:6px;border-radius:10px;
+                 border:1px solid #ccc;font-size:14px;font-family:'Montserrat',sans-serif;">
+          <option value="">— Selecciona —</option>
+          <option value="CURSO">Curso</option>
+          <option value="CERTIFICACIÓN">Certificación</option>
+        </select>
+
+        <!-- CURSO / CERT -->
+        <label style="font-size:13px;font-weight:600;margin-top:14px;display:block;color:#003A70;">
+          Curso / Certificación <span style="color:#ef4444;">*</span>
+        </label>
+        <select id="enc_curso" required
+          style="width:100%;padding:12px;margin-top:6px;border-radius:10px;
+                 border:1px solid #ccc;font-size:14px;font-family:'Montserrat',sans-serif;">
+          <option value="">— Selecciona el tipo primero —</option>
+        </select>
+
+        <!-- NOMBRE -->
+        <label style="font-size:13px;font-weight:600;margin-top:14px;display:block;color:#003A70;">
+          Nombre completo <span style="color:#ef4444;">*</span>
+        </label>
+        <input id="enc_nombre" type="text" required placeholder="TU NOMBRE COMPLETO"
+          oninput="this.value=this.value.toUpperCase()"
+          style="width:100%;padding:12px;margin-top:6px;border-radius:10px;
+                 border:1px solid #ccc;font-size:14px;font-family:'Montserrat',sans-serif;
+                 letter-spacing:1px;box-sizing:border-box;">
+
+        <!-- RAZÓN SOCIAL -->
+        <label style="font-size:13px;font-weight:600;margin-top:14px;display:block;color:#003A70;">
+          Razón Social / Empresa
+        </label>
+        <input id="enc_razon" type="text" placeholder="EMPRESA U ORGANIZACIÓN (OPCIONAL)"
+          oninput="this.value=this.value.toUpperCase()"
+          style="width:100%;padding:12px;margin-top:6px;border-radius:10px;
+                 border:1px solid #ccc;font-size:14px;font-family:'Montserrat',sans-serif;
+                 letter-spacing:1px;box-sizing:border-box;">
+
+        <!-- DIVIDER -->
+        <div style="border-top:1px dashed #d6e0ec;margin:20px 0 16px;"></div>
+        <p style="font-size:11px;color:#7a9ab8;text-align:center;margin:0 0 16px;letter-spacing:.5px;">
+          PREGUNTAS DE SATISFACCIÓN — Selecciona una opción por pregunta
+        </p>
+
+        <!-- ══════════════════════════════════════
+             PREGUNTAS DE SATISFACCIÓN
+             Para agregar una nueva pregunta:
+             1. Copia un bloque .enc-pregunta completo
+             2. Cambia el id (enc_p6, enc_p7…)
+             3. Cambia el texto de la etiqueta <label>
+             4. Agrega la columna correspondiente en guardarEncuesta() en Code.gs
+             Para cambiar las opciones:
+             Edita los textos de los <label> dentro de .enc-opciones
+             manteniendo el mismo value (Excelente, Muy bueno, etc.)
+        ══════════════════════════════════════ -->
+
+        <!-- P1 -->
+        <div class="enc-pregunta" style="margin-bottom:18px;">
+          <label style="font-size:13px;font-weight:600;color:#003A70;display:block;margin-bottom:8px;">
+            1. ¿Cómo calificarías el contenido del curso / certificación? <span style="color:#ef4444;">*</span>
+          </label>
+          <div class="enc-opciones" style="display:flex;flex-wrap:wrap;gap:8px;" id="grp_p1">
+            <label class="enc-opt"><input type="radio" name="enc_p1" value="Excelente" required> Excelente</label>
+            <label class="enc-opt"><input type="radio" name="enc_p1" value="Muy bueno"> Muy bueno</label>
+            <label class="enc-opt"><input type="radio" name="enc_p1" value="Bueno"> Bueno</label>
+            <label class="enc-opt"><input type="radio" name="enc_p1" value="Regular"> Regular</label>
+            <label class="enc-opt"><input type="radio" name="enc_p1" value="Deficiente"> Deficiente</label>
+          </div>
+        </div>
+
+        <!-- P2 -->
+        <div class="enc-pregunta" style="margin-bottom:18px;">
+          <label style="font-size:13px;font-weight:600;color:#003A70;display:block;margin-bottom:8px;">
+            2. ¿Cómo evalúas al instructor? <span style="color:#ef4444;">*</span>
+          </label>
+          <div class="enc-opciones" style="display:flex;flex-wrap:wrap;gap:8px;" id="grp_p2">
+            <label class="enc-opt"><input type="radio" name="enc_p2" value="Excelente" required> Excelente</label>
+            <label class="enc-opt"><input type="radio" name="enc_p2" value="Muy bueno"> Muy bueno</label>
+            <label class="enc-opt"><input type="radio" name="enc_p2" value="Bueno"> Bueno</label>
+            <label class="enc-opt"><input type="radio" name="enc_p2" value="Regular"> Regular</label>
+            <label class="enc-opt"><input type="radio" name="enc_p2" value="Deficiente"> Deficiente</label>
+          </div>
+        </div>
+
+        <!-- P3 -->
+        <div class="enc-pregunta" style="margin-bottom:18px;">
+          <label style="font-size:13px;font-weight:600;color:#003A70;display:block;margin-bottom:8px;">
+            3. ¿Las instalaciones y materiales fueron adecuados? <span style="color:#ef4444;">*</span>
+          </label>
+          <div class="enc-opciones" style="display:flex;flex-wrap:wrap;gap:8px;" id="grp_p3">
+            <label class="enc-opt"><input type="radio" name="enc_p3" value="Excelente" required> Excelente</label>
+            <label class="enc-opt"><input type="radio" name="enc_p3" value="Muy bueno"> Muy bueno</label>
+            <label class="enc-opt"><input type="radio" name="enc_p3" value="Bueno"> Bueno</label>
+            <label class="enc-opt"><input type="radio" name="enc_p3" value="Regular"> Regular</label>
+            <label class="enc-opt"><input type="radio" name="enc_p3" value="Deficiente"> Deficiente</label>
+          </div>
+        </div>
+
+        <!-- P4 -->
+        <div class="enc-pregunta" style="margin-bottom:18px;">
+          <label style="font-size:13px;font-weight:600;color:#003A70;display:block;margin-bottom:8px;">
+            4. ¿El curso / certificación cumplió tus expectativas? <span style="color:#ef4444;">*</span>
+          </label>
+          <div class="enc-opciones" style="display:flex;flex-wrap:wrap;gap:8px;" id="grp_p4">
+            <label class="enc-opt"><input type="radio" name="enc_p4" value="Excelente" required> Excelente</label>
+            <label class="enc-opt"><input type="radio" name="enc_p4" value="Muy bueno"> Muy bueno</label>
+            <label class="enc-opt"><input type="radio" name="enc_p4" value="Bueno"> Bueno</label>
+            <label class="enc-opt"><input type="radio" name="enc_p4" value="Regular"> Regular</label>
+            <label class="enc-opt"><input type="radio" name="enc_p4" value="Deficiente"> Deficiente</label>
+          </div>
+        </div>
+
+        <!-- P5 -->
+        <div class="enc-pregunta" style="margin-bottom:18px;">
+          <label style="font-size:13px;font-weight:600;color:#003A70;display:block;margin-bottom:8px;">
+            5. ¿Recomendarías FIPTRAC a un colega? <span style="color:#ef4444;">*</span>
+          </label>
+          <div class="enc-opciones" style="display:flex;flex-wrap:wrap;gap:8px;" id="grp_p5">
+            <label class="enc-opt"><input type="radio" name="enc_p5" value="Definitivamente sí" required> Definitivamente sí</label>
+            <label class="enc-opt"><input type="radio" name="enc_p5" value="Probablemente sí"> Probablemente sí</label>
+            <label class="enc-opt"><input type="radio" name="enc_p5" value="Tal vez"> Tal vez</label>
+            <label class="enc-opt"><input type="radio" name="enc_p5" value="Probablemente no"> Probablemente no</label>
+            <label class="enc-opt"><input type="radio" name="enc_p5" value="No"> No</label>
+          </div>
+        </div>
+
+        <!-- FIN PREGUNTAS ══════════════════════ -->
+
+        <!-- COMENTARIOS -->
+        <label style="font-size:13px;font-weight:600;margin-top:4px;display:block;color:#003A70;">
+          Comentarios adicionales
+        </label>
+        <textarea id="enc_comentarios" rows="3" placeholder="Escribe aquí tus comentarios o sugerencias…"
+          style="width:100%;padding:12px;margin-top:6px;border-radius:10px;
+                 border:1px solid #ccc;font-size:13px;font-family:'Montserrat',sans-serif;
+                 resize:vertical;box-sizing:border-box;"></textarea>
+
+        <!-- BTN ENVIAR -->
+        <button id="btnEnviarEncuesta" type="submit" onclick="enviarEncuesta()"
+          style="margin-top:18px;width:100%;padding:14px;background:#003A70;color:#fff;
+                 border:none;border-radius:12px;font-family:'Montserrat',sans-serif;
+                 font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;
+                 transition:background .2s,transform .2s;text-transform:uppercase;">
+          Enviar encuesta
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Estilos radio buttons encuesta -->
+<style>
+@keyframes popupIn {
+  from { transform:translateY(20px); opacity:0; }
+  to   { transform:translateY(0);    opacity:1; }
+}
+
+.enc-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border: 1.5px solid #d6e0ec;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #003A70;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: 'Montserrat', sans-serif;
+  user-select: none;
+}
+
+.enc-opt:hover {
+  border-color: #003A70;
+  background: #f0f4f9;
+}
+
+.enc-opt input[type="radio"] {
+  display: none;
+}
+
+.enc-opt:has(input:checked) {
+  background: #003A70;
+  border-color: #003A70;
+  color: #fff;
+}
+</style>
+
+   <script>
+// ══════════════════════════════════════════
+// ENCUESTA DE SATISFACCIÓN
+// En generador_constancias.html debe ser la misma URL:
+// const ENC_API = const API_URL
+// ══════════════════════════════════════════
+const ENC_API = "https://script.google.com/macros/s/AKfycbwVQ63pnnILbV5DAe1wvsJTVzmun9IkERWTD2SnZbvygsXfUr7h1g4HSufQMxW4CYagUQ/exec";
+
+let encCursos = [];
+let encCerts  = [];
+
+function abrirEncuesta() {
+  document.getElementById('popupEncuesta').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  // Cargar listas si aún no se han cargado
+  if (encCursos.length === 0) {
+    fetch(ENC_API + "?action=getCursos")
+      .then(r => r.json())
+      .then(d => { encCursos = d; })
+      .catch(e => console.error('Error cargando cursos:', e));
+  }
+  if (encCerts.length === 0) {
+    fetch(ENC_API + "?action=getCertificaciones")
+      .then(r => r.json())
+      .then(d => { encCerts = d; })
+      .catch(e => console.error('Error cargando certs:', e));
+  }
+}
+
+function cerrarEncuesta() {
+  document.getElementById('popupEncuesta').style.display = 'none';
+  document.body.style.overflow = '';
+  document.getElementById('formEncuesta').reset();
+  document.getElementById('enc_curso').innerHTML = '<option value="">— Selecciona el tipo primero —</option>';
+}
+
+function cargarCursosEncuesta() {
+  const tipo = document.getElementById('enc_tipo').value;
+  const sel  = document.getElementById('enc_curso');
+  sel.innerHTML = '<option value="">— Cargando… —</option>';
+
+  const lista = tipo === 'CURSO' ? encCursos : encCerts;
+
+  if (!lista || lista.length === 0) {
+    // Intentar cargar si aún no hay datos
+    const action = tipo === 'CURSO' ? 'getCursos' : 'getCertificaciones';
+    fetch(ENC_API + "?action=" + action)
+      .then(r => r.json())
+      .then(d => {
+        if (tipo === 'CURSO') encCursos = d; else encCerts = d;
+        poblarSelectEncuesta(d, sel);
+      });
+  } else {
+    poblarSelectEncuesta(lista, sel);
+  }
+}
+
+function poblarSelectEncuesta(lista, sel) {
+  sel.innerHTML = '<option value="">— Selecciona —</option>';
+  lista.forEach(item => {
+    const o = document.createElement('option');
+    o.value = item.nombre;
+    o.textContent = item.nombre;
+    sel.appendChild(o);
+  });
+}
+
+function enviarEncuesta() {
+  const tipo     = document.getElementById('enc_tipo').value;
+  const curso    = document.getElementById('enc_curso').value;
+  const nombre   = document.getElementById('enc_nombre').value.trim();
+  const razon    = document.getElementById('enc_razon').value.trim();
+  const p1       = document.querySelector('input[name="enc_p1"]:checked');
+  const p2       = document.querySelector('input[name="enc_p2"]:checked');
+  const p3       = document.querySelector('input[name="enc_p3"]:checked');
+  const p4       = document.querySelector('input[name="enc_p4"]:checked');
+  const p5       = document.querySelector('input[name="enc_p5"]:checked');
+  const coment   = document.getElementById('enc_comentarios').value.trim();
+
+  // Validaciones
+  if (!tipo)   { alert('Selecciona el tipo de programa.'); return; }
+  if (!curso)  { alert('Selecciona el curso o certificación.'); return; }
+  if (!nombre) { alert('Ingresa tu nombre completo.'); return; }
+  if (!p1) { alert('Responde la pregunta 1.'); return; }
+  if (!p2) { alert('Responde la pregunta 2.'); return; }
+  if (!p3) { alert('Responde la pregunta 3.'); return; }
+  if (!p4) { alert('Responde la pregunta 4.'); return; }
+  if (!p5) { alert('Responde la pregunta 5.'); return; }
+
+  const btn = document.getElementById('btnEnviarEncuesta');
+  btn.disabled    = true;
+  btn.textContent = 'Enviando…';
+  btn.style.background = '#7a9ab8';
+
+  const datos = {
+    tipo:         tipo,
+    nombre:       nombre,
+    razonSocial:  razon,
+    curso:        curso,
+    p1:           p1.value,
+    p2:           p2.value,
+    p3:           p3.value,
+    p4:           p4.value,
+    p5:           p5.value,
+    comentarios:  coment
+  };
+
+  fetch(ENC_API + "?action=guardarEncuesta", {
+    method:  'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body:    JSON.stringify(datos)
+  })
+  .then(r => r.json())
+  .then(resp => {
+    if (resp.success) {
+      cerrarEncuesta();
+      alert('✅ ¡Gracias por tu opinión! Tu encuesta ha sido registrada correctamente.');
+    } else {
+      alert('Error al enviar la encuesta: ' + (resp.error || 'intenta nuevamente.'));
+    }
+  })
+  .catch(() => {
+    alert('Error de conexión. Intenta nuevamente.');
+  })
+  .finally(() => {
+    btn.disabled    = false;
+    btn.textContent = 'Enviar encuesta';
+    btn.style.background = '#003A70';
+  });
+}
+
+// Cerrar popup al hacer clic fuera
+document.getElementById('popupEncuesta').addEventListener('click', function(e) {
+  if (e.target === this) cerrarEncuesta();
+});   
+</script>
+
+   
+   
 </body>
 </html>
