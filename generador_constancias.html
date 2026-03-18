@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Constancias | FIPTRAC</title>
+
+<link rel="icon" type="image/png" href="assets/images/icono.png?v=2">
+<link rel="apple-touch-icon" href="assets/images/icono.png">
+<meta name="theme-color" content="#003A70">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --navy:   #003A70;
+  --navy2:  #002C55;
+  --red:    #ef4444;
+  --ice:    #f0f4f9;
+  --border: #d6e0ec;
+  --muted:  #5a7190;
+  --text:   #1a2a3a;
+  --white:  #ffffff;
+  --shadow: 0 6px 20px rgba(0,58,112,.10);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #eef2f8;
+  min-height: 100vh;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── LOGIN OVERLAY ── */
+#vistaLogin {
+  position: fixed; inset: 0; z-index: 999;
+  background: #eef2f8;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+
+.login-card {
+  background: var(--white); border-radius: 16px;
+  padding: 40px 36px; width: 100%; max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0,58,112,.14); text-align: center;
+}
+
+.login-logo { font-size: 22px; font-weight: 700; color: var(--navy); letter-spacing: 4px; margin-bottom: 6px; }
+.login-sub  { font-size: 11px; color: #7a9ab8; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 32px; }
+.login-icon { width:56px; height:56px; background:#eef2f8; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:24px; }
+.login-title { font-size:18px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.login-desc  { font-size:13px; color:#7a9ab8; margin-bottom:28px; line-height:1.6; }
+
+.login-input-wrap { position:relative; margin-bottom:16px; }
+.login-input-wrap input {
+  width:100%; padding:13px 46px 13px 16px;
+  border:1.5px solid var(--border); border-radius:10px;
+  font-family:'Montserrat',sans-serif; font-size:14px;
+  color:var(--text); letter-spacing:2px; outline:none;
+  transition:border-color .15s, box-shadow .15s;
+}
+.login-input-wrap input:focus { border-color:var(--navy); box-shadow:0 0 0 3px rgba(0,58,112,.08); }
+
+.login-eye {
+  position:absolute; right:14px; top:50%; transform:translateY(-50%);
+  background:none; border:none; cursor:pointer; font-size:16px; color:#7a9ab8; padding:0;
+}
+.login-eye:hover { color:var(--navy); }
+
+.btn-login {
+  width:100%; padding:14px; background:var(--navy); color:var(--white);
+  border:none; border-radius:10px; font-family:'Montserrat',sans-serif;
+  font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  cursor:pointer; transition:background .2s, transform .2s, box-shadow .2s;
+  box-shadow:0 6px 18px rgba(0,58,112,.28);
+}
+.btn-login:hover  { background:var(--navy2); transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,58,112,.36); }
+.btn-login:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+
+.login-error {
+  display:none; margin-top:14px; padding:10px 14px;
+  background:#fef2f2; border:1px solid #fecaca; border-radius:8px;
+  color:#991b1b; font-size:12px; font-weight:600;
+}
+.login-footer { margin-top:24px; font-size:11px; color:#b0bec5; }
+
+/* ── NAVBAR ── */
+header {
+  position: fixed; top:0; left:0; width:100%; z-index:999;
+  transition: transform .28s ease, background .35s ease, box-shadow .35s ease;
+  background: rgba(255,255,255,0.92);
+}
+header.scrolled { backdrop-filter:blur(6px); box-shadow:0 2px 12px rgba(0,0,0,.10); }
+header.nav-hide { transform:translateY(-110%); }
+
+.nav-container {
+  max-width:1200px; margin:auto; padding:10px 15px;
+  display:flex; align-items:center; justify-content:center; position:relative;
+}
+.menu { display:flex; justify-content:center; align-items:center; gap:30px; }
+.menu a { text-decoration:none; font-weight:600; color:#003A70; padding:6px 8px; border-radius:8px; transition:background .18s; }
+.menu a:hover { background:rgba(0,58,112,0.06); }
+.menu a.active { color:#ef4444; }
+
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; margin-left:auto; }
+.hamburger span { width:28px; height:3px; background:#003A70; border-radius:3px; display:block; }
+
+@media(max-width:850px){
+  .menu {
+    position:absolute; top:100%; right:12px; background:white;
+    width:220px; padding:16px; border-radius:12px;
+    box-shadow:0 8px 26px rgba(0,0,0,.12); flex-direction:column; gap:12px;
+    opacity:0; pointer-events:none; transform:translateY(-6px);
+    transition:opacity .28s, transform .28s;
+  }
+  .menu.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+  .hamburger { display:flex; }
+}
+
+/* ── HERO ── */
+.hero-gen {
+  background: linear-gradient(rgba(0,58,112,0.88), rgba(0,58,112,0.88));
+  padding: 110px 20px 50px;
+  text-align: center; color: #fff;
+  margin-bottom: 40px;
+}
+.hero-gen h1 { font-size:32px; font-weight:700; margin-bottom:8px; }
+.hero-gen p  { font-size:14px; font-weight:300; opacity:.85; max-width:500px; margin:0 auto; line-height:1.6; }
+
+/* ── PAGE ── */
+.page { max-width: 660px; margin: 0 auto; padding: 0 16px 80px; }
+
+/* ── CARD ── */
+.card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:14px; padding:24px 26px; margin-bottom:16px;
+  box-shadow:var(--shadow);
+}
+
+.slabel {
+  font-size:10px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--muted); margin-bottom:14px;
+  display:flex; align-items:center; gap:8px;
+}
+.slabel::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* ── TIPO TOGGLE ── */
+.tipo-wrap { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.tipo-opt {
+  border:2px solid var(--border); border-radius:10px; padding:13px 14px;
+  cursor:pointer; transition:all .18s; display:flex; align-items:center; gap:10px; user-select:none;
+}
+.tipo-opt:hover { border-color:var(--navy); }
+.tipo-opt.active { border-color:var(--navy); background:var(--navy); }
+.tipo-opt.active .tipo-txt { color:var(--white); }
+.tipo-icon { font-size:18px; }
+.tipo-txt  { font-size:12px; font-weight:700; letter-spacing:.5px; color:var(--navy); text-transform:uppercase; }
+
+/* ── FORM ── */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.s2 { grid-column:1/-1; }
+.fg { display:flex; flex-direction:column; gap:5px; }
+.fg label { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+.fg label .req { color:var(--red); }
+
+.fg input, .fg select {
+  padding:10px 13px; border:1.5px solid var(--border); border-radius:8px;
+  font-family:'Montserrat',sans-serif; font-size:13px; color:var(--text); background:var(--white);
+  transition:border-color .15s, box-shadow .15s; appearance:none; -webkit-appearance:none;
+}
+.fg input:focus, .fg select:focus { outline:none; border-color:var(--navy); box-shadow:0 0 0 3px rgba(0,58,112,.08); }
+.fg select {
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23003A70' d='M5 7L0 2h10z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 13px center; padding-right:34px; cursor:pointer;
+}
+
+.rbox {
+  padding:10px 13px; border:1.5px solid var(--border); border-radius:8px;
+  font-size:13px; font-weight:600; color:var(--navy); background:var(--ice);
+  min-height:40px; display:flex; align-items:center;
+}
+
+.fechas-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+.fpill { padding:10px 13px; border-radius:8px; border:1.5px solid var(--border); background:var(--ice); }
+.fpill .fpl { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+.fpill .fpv { font-size:13px; font-weight:600; color:var(--navy); }
+
+/* ── BTN PRINCIPAL ── */
+.btn-main {
+  width:100%; padding:14px; background:var(--navy); color:var(--white);
+  border:none; border-radius:10px; font-family:'Montserrat',sans-serif;
+  font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  cursor:pointer; transition:background .2s, transform .2s, box-shadow .2s;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  box-shadow:0 8px 20px rgba(0,58,112,.30);
+}
+.btn-main:hover:not(:disabled) { background:var(--navy2); transform:translateY(-2px); box-shadow:0 12px 26px rgba(0,58,112,.38); }
+.btn-main:disabled { opacity:.55; cursor:not-allowed; }
+.btn-dot { width:8px; height:8px; background:var(--red); border-radius:50%; flex-shrink:0; }
+
+/* ── ALERTAS ── */
+.alert {
+  border-radius:10px; padding:13px 15px; font-size:13px;
+  display:none; align-items:flex-start; gap:10px; margin-bottom:16px; animation:fadeD .22s ease;
+}
+.alert.show { display:flex; }
+.alert-ok  { background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
+.alert-err { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
+.a-ico  { font-size:15px; flex-shrink:0; margin-top:1px; }
+.a-body { flex:1; }
+.a-ttl  { font-weight:700; margin-bottom:2px; }
+.a-msg  { opacity:.8; font-size:12px; }
+.a-x    { background:none; border:none; cursor:pointer; font-size:14px; opacity:.4; padding:0; line-height:1; flex-shrink:0; }
+
+/* ── RESULT CARD ── */
+.res-card {
+  display:none; background:linear-gradient(135deg,var(--navy) 0%,#004e99 100%);
+  border-radius:14px; padding:20px 22px; margin-bottom:16px; color:var(--white);
+  animation:fadeD .28s ease; gap:18px; align-items:center;
+}
+.res-card.show { display:flex; }
+.res-qr img { width:88px; height:88px; border-radius:6px; background:#fff; display:block; }
+.res-info { flex:1; }
+.ri-pre { font-size:9px; letter-spacing:2px; text-transform:uppercase; opacity:.5; margin-bottom:3px; }
+.ri-id  { font-size:26px; font-weight:700; letter-spacing:1px; line-height:1; margin-bottom:10px; }
+.ri-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px 16px; }
+.ri-item .ril { font-size:9px; opacity:.5; text-transform:uppercase; letter-spacing:1px; }
+.ri-item .riv { font-size:11px; font-weight:600; margin-top:1px; line-height:1.3; }
+.btn-drive {
+  display:inline-flex; align-items:center; gap:6px; margin-top:12px;
+  padding:8px 14px; background:var(--red); color:#fff; border:none; border-radius:6px;
+  font-family:'Montserrat',sans-serif; font-size:10px; font-weight:700;
+  letter-spacing:1px; text-decoration:none; text-transform:uppercase; cursor:pointer; transition:opacity .2s;
+}
+.btn-drive:hover { opacity:.88; }
+
+/* ── LOADING ── */
+.veil {
+  display:none; position:fixed; inset:0; background:rgba(0,58,112,.52);
+  z-index:500; align-items:center; justify-content:center; flex-direction:column; gap:14px; backdrop-filter:blur(3px);
+}
+.veil.on { display:flex; }
+.spin { width:44px; height:44px; border:4px solid rgba(255,255,255,.2); border-top-color:#fff; border-radius:50%; animation:spin .75s linear infinite; }
+.veil-lbl { color:#fff; font-size:13px; font-weight:600; letter-spacing:1px; }
+
+/* ── MODAL CONSTANCIA ── */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:600;
+  background:rgba(0,34,68,.65); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center; padding:20px;
+}
+.modal-overlay.show { display:flex; }
+
+.modal-box {
+  background:#fff; border-radius:16px;
+  width:100%; max-width:900px; max-height:94vh;
+  display:flex; flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,.35); overflow:hidden;
+}
+
+.modal-bar {
+  background:var(--navy); padding:14px 20px;
+  display:flex; align-items:center; justify-content:space-between; flex-shrink:0;
+}
+.modal-bar-title { color:#fff; font-size:14px; font-weight:700; letter-spacing:1px; }
+.modal-bar-btns  { display:flex; gap:10px; align-items:center; }
+
+.btn-print {
+  padding:8px 18px; background:#fff; color:var(--navy);
+  border:none; border-radius:8px; font-family:'Montserrat',sans-serif;
+  font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+  cursor:pointer; transition:opacity .2s;
+}
+.btn-print:hover { opacity:.85; }
+
+.btn-close-modal {
+  background:rgba(255,255,255,.15); border:none; color:#fff;
+  width:32px; height:32px; border-radius:50%; font-size:16px; cursor:pointer;
+}
+
+.modal-frame { flex:1; border:none; width:100%; min-height:500px; background:#f4f4f4; }
+
+.modal-hint {
+  padding:10px 20px; background:#f4f7fb; border-top:1px solid #e0eaf4;
+  font-size:11px; color:#7a9ab8; text-align:center; flex-shrink:0;
+}
+
+/* ── ANIMS ── */
+@keyframes spin  { to { transform:rotate(360deg); } }
+@keyframes fadeD { from { opacity:0; transform:translateY(-5px); } to { opacity:1; transform:translateY(0); } }
+
+@media(max-width:540px){
+  .g2 { grid-template-columns:1fr; }
+  .s2 { grid-column:1; }
+  .card { padding:18px; }
+  .res-card.show { flex-direction:column; }
+}
+
+@media print { .modal-overlay, .veil, #vistaLogin { display:none !important; } }
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div id="vistaLogin">
+  <div class="login-card">
+    <div class="login-logo">FIPTRAC</div>
+    <div class="login-sub">Sistema de Constancias</div>
+    <div class="login-icon">🔒</div>
+    <div class="login-title">Acceso restringido</div>
+    <div class="login-desc">Ingresa la clave de acceso para continuar.</div>
+    <div class="login-input-wrap">
+      <input type="password" id="keyInput" placeholder="Clave de acceso"
+             maxlength="30" onkeydown="if(event.key==='Enter') verificar()">
+      <button class="login-eye" onclick="toggleOjo()" tabindex="-1" id="eyeBtn">👁</button>
+    </div>
+    <button class="btn-login" id="btnLogin" onclick="verificar()">Ingresar</button>
+    <div class="login-error" id="loginError">Clave incorrecta. Intenta nuevamente.</div>
+    <div class="login-footer">Solo personal autorizado de FIPTRAC</div>
+  </div>
+</div>
+
+<!-- ══ LOADING ══ -->
+<div class="veil" id="veil">
+  <div class="spin"></div>
+  <div class="veil-lbl">Generando constancia…</div>
+</div>
+
+<!-- ══ MODAL VISTA PREVIA ══ -->
+<div class="modal-overlay" id="modalConstancia">
+  <div class="modal-box">
+    <div class="modal-bar">
+      <div class="modal-bar-title">Vista previa — Constancia</div>
+      <div class="modal-bar-btns">
+        <button class="btn-print" id="btnImprimir">⬇ Descargar / Imprimir PDF</button>
+        <button class="btn-close-modal" onclick="cerrarModal()">✕</button>
+      </div>
+    </div>
+    <iframe class="modal-frame" id="previewFrame"></iframe>
+    <div class="modal-hint">
+      Al imprimir selecciona <strong>Guardar como PDF</strong>.
+      Desactiva encabezados y pies de página para mejor resultado.
+    </div>
+  </div>
+</div>
+
+<!-- ══ NAVBAR ══ -->
+<header id="mainHeader">
+  <div class="nav-container">
+    <nav class="menu" id="menu">
+      <a href="index.html">Inicio</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="certificaciones.html">Certificaciones</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="laboratorios.html">Laboratorios</a>
+      <a href="directorio.html">Empresas</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="constancias.html">Constancias</a>
+    </nav>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero-gen">
+  <h1>Generador de Constancias</h1>
+  <p>Completa el formulario para generar y enviar la constancia en PDF.</p>
+</section>
+
+<!-- ══ FORMULARIO ══ -->
+<main class="page">
+
+  <div class="alert alert-ok" id="aOk">
+    <span class="a-ico">✓</span>
+    <div class="a-body">
+      <div class="a-ttl">Constancia generada correctamente</div>
+      <div class="a-msg" id="aOkMsg"></div>
+    </div>
+    <button class="a-x" onclick="closeAlert('aOk')">✕</button>
+  </div>
+
+  <div class="alert alert-err" id="aErr">
+    <span class="a-ico">!</span>
+    <div class="a-body">
+      <div class="a-ttl">Error al generar la constancia</div>
+      <div class="a-msg" id="aErrMsg"></div>
+    </div>
+    <button class="a-x" onclick="closeAlert('aErr')">✕</button>
+  </div>
+
+  <div class="res-card" id="resCard">
+    <div class="res-qr"><img id="resQr" src="" alt="QR"></div>
+    <div class="res-info">
+      <div class="ri-pre">Constancia registrada</div>
+      <div class="ri-id" id="resId">—</div>
+      <div class="ri-grid" id="resGrid"></div>
+      <a class="btn-drive" id="resDrive" href="#" target="_blank">↗ Ver en Drive</a>
+      <button class="btn-drive" id="btnVerPrevia" onclick="abrirModal()" style="margin-left:8px;background:var(--navy);">
+        👁 Ver constancia
+      </button>
+    </div>
+  </div>
+
+  <!-- TIPO -->
+  <div class="card">
+    <div class="slabel">Tipo de constancia</div>
+    <div class="tipo-wrap">
+      <div class="tipo-opt active" id="optCurso" onclick="setTipo('CURSO')">
+        <span class="tipo-icon">📘</span><span class="tipo-txt">Curso</span>
+      </div>
+      <div class="tipo-opt" id="optCert" onclick="setTipo('CERTIFICACIÓN')">
+        <span class="tipo-icon">🏅</span><span class="tipo-txt">Certificación</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTICIPANTE -->
+  <div class="card">
+    <div class="slabel">Datos del participante</div>
+    <div class="g2">
+      <div class="fg">
+        <label>ID generado</label>
+        <div class="rbox" id="idBox">—</div>
+      </div>
+      <div class="fg">
+        <label>Tipo</label>
+        <div class="rbox" id="tipoBox">CURSO</div>
+      </div>
+      <div class="fg s2">
+        <label>Nombre completo <span class="req">*</span></label>
+        <input id="iNombre" type="text" placeholder="Nombre del participante"
+               oninput="toUpper(this)" autocomplete="off">
+      </div>
+      <div class="fg s2">
+        <label>Razón Social / Empresa</label>
+        <input id="iRazon" type="text" placeholder="Empresa u organización (opcional)"
+               oninput="toUpper(this)" autocomplete="off">
+      </div>
+    </div>
+  </div>
+
+  <!-- CURSO -->
+  <div class="card">
+    <div class="slabel">Curso o Certificación</div>
+    <div class="fg">
+      <label>Selecciona <span class="req">*</span></label>
+      <select id="sCurso" onchange="onCursoChange()">
+        <option value="">— Selecciona —</option>
+      </select>
+    </div>
+    <div id="fechasWrap" style="display:none;">
+      <div class="fechas-row">
+        <div class="fpill"><div class="fpl">Inicio</div><div class="fpv" id="fpI">—</div></div>
+        <div class="fpill"><div class="fpl">Término</div><div class="fpv" id="fpT">—</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTORGA -->
+  <div class="card">
+    <div class="slabel">Otorgante</div>
+    <div class="fg">
+      <label>Nombre de quien otorga <span class="req">*</span></label>
+      <input id="iOtorga" type="text" placeholder="Nombre completo del instructor"
+             oninput="toUpper(this)" autocomplete="off">
+    </div>
+  </div>
+
+  <button class="btn-main" id="btnGen" onclick="enviar()">
+    <span class="btn-dot"></span>Generar Constancia
+  </button>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<script src="https://kit.fontawesome.com/4ad8a5e1c2.js" crossorigin="anonymous"></script>
+<div id="footer-container"></div>
+<script>
+  fetch("footer.html")
+    .then(r => r.text())
+    .then(d => { document.getElementById("footer-container").innerHTML = d; });
+</script>
+
+<script>
+// ══════════════════════════════════════════
+// CONFIGURACIÓN
+// ══════════════════════════════════════════
+const API_URL  = "https://script.google.com/macros/s/AKfycbxT_CWviL-PamnxXuXhNvpAWcEXIFEi4CUxDwRmodDSjPIZHbI0SvcEE0YB4HzMYYBaAg/exec";
+const LOGO_URL = "https://www.fiptrac.com/assets/images/sin fondo.png";
+const QR_BASE  = "https://www.fiptrac.com/constancias.html";
+
+// ══════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════
+function toUpper(el){ const p=el.selectionStart; el.value=el.value.toUpperCase(); el.setSelectionRange(p,p); }
+function setLoading(v){ document.getElementById('veil').classList.toggle('on',v); document.getElementById('btnGen').disabled=v; }
+function closeAlert(id){ document.getElementById(id).classList.remove('show'); }
+
+// ══════════════════════════════════════════
+// NAVBAR
+// ══════════════════════════════════════════
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('menu').classList.toggle('show');
+});
+
+(function(){
+  const header = document.getElementById('mainHeader');
+  let last = 0;
+  window.addEventListener('scroll', () => {
+    const cur = window.pageYOffset || document.documentElement.scrollTop;
+    if (cur > 30) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+    if (cur > last && cur > 120) header.classList.add('nav-hide'); else header.classList.remove('nav-hide');
+    last = cur <= 0 ? 0 : cur;
+  }, { passive:true });
+})();
+
+// ══════════════════════════════════════════
+// LOGIN
+// ══════════════════════════════════════════
+function verificar() {
+  const key = document.getElementById('keyInput').value.trim();
+  if (!key) { document.getElementById('keyInput').focus(); return; }
+
+  document.getElementById('loginError').style.display = 'none';
+  document.getElementById('btnLogin').disabled = true;
+  document.getElementById('btnLogin').textContent = 'Verificando…';
+
+  fetch(API_URL + "?action=verificarClave&key=" + encodeURIComponent(key))
+    .then(r => r.json())
+    .then(data => {
+      if (data.ok) {
+        document.getElementById('vistaLogin').style.display = 'none';
+        cargarListas();
+        pedirID();
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('keyInput').value = '';
+        document.getElementById('keyInput').focus();
+        document.getElementById('btnLogin').disabled = false;
+        document.getElementById('btnLogin').textContent = 'Ingresar';
+      }
+    })
+    .catch(() => {
+      document.getElementById('loginError').style.display = 'block';
+      document.getElementById('btnLogin').disabled = false;
+      document.getElementById('btnLogin').textContent = 'Ingresar';
+    });
+}
+
+function toggleOjo() {
+  const input = document.getElementById('keyInput');
+  const btn   = document.getElementById('eyeBtn');
+  input.type  = input.type === 'password' ? 'text' : 'password';
+  btn.textContent = input.type === 'password' ? '👁' : '🙈';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('keyInput').focus();
+});
+
+// ══════════════════════════════════════════
+// FORMULARIO
+// ══════════════════════════════════════════
+let tipoActual='CURSO', listaCursos=[], listaCerts=[], idActual='';
+let htmlConstanciaActual = '';
+
+function setTipo(t){
+  tipoActual=t;
+  document.getElementById('tipoBox').textContent=t;
+  document.getElementById('optCurso').classList.toggle('active',t==='CURSO');
+  document.getElementById('optCert').classList.toggle('active',t==='CERTIFICACIÓN');
+  poblarSelect(); ocultarFechas();
+}
+
+function cargarListas(){
+  fetch(API_URL + "?action=getCursos")
+    .then(r => r.json())
+    .then(d => { listaCursos=d; if(tipoActual==='CURSO') poblarSelect(); })
+    .catch(e => console.error('Error cursos:',e));
+
+  fetch(API_URL + "?action=getCertificaciones")
+    .then(r => r.json())
+    .then(d => { listaCerts=d; if(tipoActual==='CERTIFICACIÓN') poblarSelect(); })
+    .catch(e => console.error('Error certs:',e));
+}
+
+function pedirID(){
+  document.getElementById('idBox').textContent = 'Cargando…';
+  fetch(API_URL + "?action=generarID")
+    .then(r => r.json())
+    .then(d => { idActual=d.id; document.getElementById('idBox').textContent=d.id; })
+    .catch(() => { idActual='FIPTRAC-0001'; document.getElementById('idBox').textContent=idActual; });
+}
+
+function poblarSelect(){
+  const lista = tipoActual==='CURSO' ? listaCursos : listaCerts;
+  const sel   = document.getElementById('sCurso');
+  if(!lista||lista.length===0){ sel.innerHTML='<option value="">— Sin datos —</option>'; return; }
+  sel.innerHTML='<option value="">— Selecciona —</option>';
+  lista.forEach((item,i)=>{
+    const o=document.createElement('option');
+    o.value=i; o.textContent=item.nombre; sel.appendChild(o);
+  });
+}
+
+function onCursoChange(){
+  const lista = tipoActual==='CURSO' ? listaCursos : listaCerts;
+  const idx   = document.getElementById('sCurso').value;
+  if(idx===''||!lista.length){ ocultarFechas(); return; }
+  const item  = lista[parseInt(idx)];
+  document.getElementById('fpI').textContent = item.inicio || '—';
+  document.getElementById('fpT').textContent = item.fin    || '—';
+  document.getElementById('fechasWrap').style.display = 'block';
+}
+
+function ocultarFechas(){
+  document.getElementById('fechasWrap').style.display='none';
+  document.getElementById('fpI').textContent='—';
+  document.getElementById('fpT').textContent='—';
+}
+
+function validar(){
+  if(!document.getElementById('iNombre').value.trim()){ alert('Ingresa el nombre del participante.'); return false; }
+  if(!document.getElementById('sCurso').value){ alert('Selecciona un curso o certificación.'); return false; }
+  if(!document.getElementById('iOtorga').value.trim()){ alert('Ingresa el nombre de quien otorga la constancia.'); return false; }
+  return true;
+}
+
+function enviar(){
+  if(!validar()) return;
+  const lista = tipoActual==='CURSO' ? listaCursos : listaCerts;
+  const idx   = parseInt(document.getElementById('sCurso').value);
+  const item  = lista[idx];
+  const datos = {
+    id:          idActual,
+    tipo:        tipoActual,
+    nombre:      document.getElementById('iNombre').value.trim(),
+    razonSocial: document.getElementById('iRazon').value.trim(),
+    curso:       item.nombre,
+    inicio:      item.inicio,
+    termino:     item.fin,
+    otorga:      document.getElementById('iOtorga').value.trim()
+  };
+
+  setLoading(true);
+  closeAlert('aOk'); closeAlert('aErr');
+  document.getElementById('resCard').classList.remove('show');
+
+  fetch(API_URL + "?action=generarConstancia", {
+    method:  'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body:    JSON.stringify(datos)
+  })
+  .then(r => r.json())
+  .then(resp => {
+    setLoading(false);
+    if(resp && resp.success) mostrarRes(datos, resp);
+    else mostrarErr((resp && resp.error) || 'Error desconocido.');
+  })
+  .catch(err => {
+    setLoading(false);
+    mostrarErr(err.message || String(err));
+  });
+}
+
+function mostrarRes(datos, resp) {
+  document.getElementById('aOkMsg').textContent =
+    'Constancia ' + resp.id + ' guardada y enviada por correo.';
+  document.getElementById('aOk').classList.add('show');
+
+  const qrData = encodeURIComponent(QR_BASE + '?id=' + resp.id);
+  document.getElementById('resQr').src =
+    'https://api.qrserver.com/v1/create-qr-code/?size=176x176&data=' + qrData;
+  document.getElementById('resId').textContent = resp.id;
+  document.getElementById('resDrive').href      = resp.url;
+
+  document.getElementById('resGrid').innerHTML = `
+    <div class="ri-item"><div class="ril">Nombre</div><div class="riv">${datos.nombre}</div></div>
+    <div class="ri-item"><div class="ril">Tipo</div><div class="riv">${datos.tipo}</div></div>
+    <div class="ri-item" style="grid-column:1/-1;">
+      <div class="ril">Curso / Certificación</div>
+      <div class="riv">${datos.curso}</div>
+    </div>
+    <div class="ri-item"><div class="ril">Inicio</div><div class="riv">${datos.inicio}</div></div>
+    <div class="ri-item"><div class="ril">Término</div><div class="riv">${datos.termino}</div></div>`;
+
+  document.getElementById('resCard').classList.add('show');
+  document.getElementById('resCard').scrollIntoView({ behavior:'smooth', block:'nearest' });
+
+  // Generar HTML de la constancia localmente — sin depender del servidor
+  htmlConstanciaActual = generarHtmlConstancia(datos, resp.id);
+
+  // Reset
+  document.getElementById('iNombre').value = '';
+  document.getElementById('iRazon').value  = '';
+  document.getElementById('iOtorga').value = '';
+  document.getElementById('sCurso').value  = '';
+  ocultarFechas();
+  pedirID();
+}
+
+// ══════════════════════════════════════════
+// GENERAR HTML CONSTANCIA (local, en el navegador)
+// Logo y QR son URLs directas — sin base64
+// ══════════════════════════════════════════
+function generarHtmlConstancia(datos, id) {
+  const qrUrl  = 'https://api.qrserver.com/v1/create-qr-code/?size=120x120&format=png&data='
+                 + encodeURIComponent(QR_BASE + '?id=' + id);
+  const esCurso = datos.tipo === 'CURSO';
+
+  const textoBody = esCurso
+    ? `Por medio de la presente, <strong>FIPTRAC</strong> hace constar que
+       <strong>${datos.nombre}</strong>${datos.razonSocial ? ', en representación de <strong>' + datos.razonSocial + '</strong>,' : ''}
+       participó y acreditó satisfactoriamente el <strong>${datos.curso}</strong>,
+       llevado a cabo del <strong>${datos.inicio}</strong> al <strong>${datos.termino}</strong>,
+       cumpliendo con todos los requisitos académicos y prácticos establecidos en el programa.`
+    : `Por medio de la presente, <strong>FIPTRAC</strong> certifica que
+       <strong>${datos.nombre}</strong>${datos.razonSocial ? ', en representación de <strong>' + datos.razonSocial + '</strong>,' : ''}
+       completó exitosamente el proceso de evaluación y demostró los conocimientos
+       y competencias requeridas para la <strong>${datos.curso}</strong>,
+       realizada del <strong>${datos.inicio}</strong> al <strong>${datos.termino}</strong>.`;
+
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Lato',Arial,sans-serif; background:#fff; color:#1a2a3a; width:750px; margin:0 auto; padding:0; }
+  .top-line { width:100%; height:4px; background:#003A70; margin-bottom:28px; }
+  .bot-line  { width:100%; height:4px; background:#003A70; margin-top:28px; }
+  table { border-collapse:collapse; }
+  .header-tbl { width:100%; padding-bottom:18px; border-bottom:1px solid #dde8f0; margin-bottom:22px; }
+  .logo-img { max-height:75px; max-width:190px; }
+  .id-lbl { font-size:9px; color:#aaa; letter-spacing:1px; text-transform:uppercase; text-align:right; }
+  .id-val { font-size:15px; font-weight:900; color:#003A70; letter-spacing:1px; text-align:right; }
+  .title-block { text-align:center; padding:18px 0 14px; }
+  .t-pre  { font-size:10px; letter-spacing:5px; color:#aaa; text-transform:uppercase; margin-bottom:6px; }
+  .t-main { font-size:50px; font-weight:900; color:#003A70; letter-spacing:4px; line-height:1; }
+  .t-sub  { font-size:22px; font-weight:300; font-style:italic; color:#003A70; margin-top:6px; font-family:Georgia,serif; }
+  .ctext  { font-size:13px; line-height:1.85; color:#222; text-align:justify; margin:20px 0 18px; }
+  .dc { border:1px solid #dde8f0; border-left:4px solid #003A70; border-radius:4px; padding:16px 20px; margin-bottom:24px; }
+  .dc-tbl { width:100%; }
+  .dc-tbl td { vertical-align:top; padding:5px 0; width:50%; }
+  .dcl { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#aaa; margin-bottom:2px; }
+  .dcv { font-size:13px; font-weight:700; color:#003A70; line-height:1.4; }
+  .bottom-tbl { width:100%; border-top:1px solid #dde8f0; padding-top:18px; margin-top:4px; }
+  .bottom-tbl td { vertical-align:bottom; }
+  .firma-space { height:40px; }
+  .firma-line  { width:220px; height:1px; background:#1a2a3a; margin-bottom:6px; }
+  .firma-name  { font-size:12px; font-weight:700; color:#1a2a3a; text-transform:uppercase; }
+  .firma-role  { font-size:10px; color:#888; margin-top:2px; }
+  .qr-img  { width:100px; height:100px; display:block; margin-left:auto; }
+  .qr-lbl  { font-size:8px; letter-spacing:1px; text-transform:uppercase; color:#bbb; margin-top:4px; text-align:center; }
+  @media print {
+    @page { margin:1cm; size:A4 portrait; }
+    body  { width:100% !important; }
+  }
+</style>
+</head>
+<body>
+<div class="top-line"></div>
+
+<table class="header-tbl">
+  <tr>
+    <td><img src="${LOGO_URL}" class="logo-img" alt="FIPTRAC"></td>
+    <td style="text-align:right; vertical-align:top;">
+      <div class="id-lbl">No. de Constancia</div>
+      <div class="id-val">${id}</div>
+    </td>
+  </tr>
+</table>
+
+<div class="title-block">
+  <div class="t-pre">Hace constar que</div>
+  <div class="t-main">CONSTANCIA</div>
+  <div class="t-sub">de ${esCurso ? 'curso' : 'certificación'}</div>
+</div>
+
+<p class="ctext">${textoBody}</p>
+
+<div class="dc">
+  <table class="dc-tbl">
+    <tr>
+      <td><div class="dcl">Nombre completo</div><div class="dcv">${datos.nombre}</div></td>
+      <td><div class="dcl">Razón Social / Empresa</div><div class="dcv">${datos.razonSocial || '—'}</div></td>
+    </tr>
+    <tr>
+      <td colspan="2"><div class="dcl">Curso / Certificación</div><div class="dcv">${datos.curso}</div></td>
+    </tr>
+    <tr>
+      <td><div class="dcl">Fecha de inicio</div><div class="dcv">${datos.inicio}</div></td>
+      <td><div class="dcl">Fecha de término</div><div class="dcv">${datos.termino}</div></td>
+    </tr>
+    <tr>
+      <td><div class="dcl">Otorga</div><div class="dcv">${datos.otorga}</div></td>
+      <td><div class="dcl">Fecha de registro</div><div class="dcv">${datos.fechaRegistro || ''}</div></td>
+    </tr>
+  </table>
+</div>
+
+<table class="bottom-tbl">
+  <tr>
+    <td>
+      <div class="firma-space"></div>
+      <div class="firma-line"></div>
+      <div class="firma-name">${datos.otorga}</div>
+      <div class="firma-role">FIPTRAC, SC - Instructor Certificado</div>
+    </td>
+    <td style="text-align:right; vertical-align:bottom;">
+      <img src="${qrUrl}" class="qr-img" alt="QR">
+      <div class="qr-lbl">Escanea para validar</div>
+    </td>
+  </tr>
+</table>
+
+<div class="bot-line"></div>
+</body>
+</html>`;
+}
+
+// ══════════════════════════════════════════
+// MODAL
+// ══════════════════════════════════════════
+function abrirModal() {
+  if (!htmlConstanciaActual) return;
+  const blob    = new Blob([htmlConstanciaActual], { type:'text/html;charset=utf-8' });
+  const blobUrl = URL.createObjectURL(blob);
+  document.getElementById('previewFrame').src = blobUrl;
+  document.getElementById('btnImprimir').onclick = function() {
+    const w = window.open(blobUrl, '_blank');
+    setTimeout(() => { w.focus(); w.print(); }, 800);
+  };
+  document.getElementById('modalConstancia').classList.add('show');
+}
+
+function cerrarModal() {
+  document.getElementById('modalConstancia').classList.remove('show');
+  document.getElementById('previewFrame').src = 'about:blank';
+}
+
+function mostrarErr(msg){
+  document.getElementById('aErrMsg').textContent=msg;
+  document.getElementById('aErr').classList.add('show');
+}
+</script>
+
+</body>
+</html>
