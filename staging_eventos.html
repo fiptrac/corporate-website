@@ -684,20 +684,20 @@ aria-label="Cerrar formulario">✕</button>
 
 
 <label>País</label>
-<input name="pais" required data-uppercase>
+<input name="pais" required oninput="this.value=this.value.toUpperCase()">
 
 <label>Datos fiscales</label>
 
 <div id="camposFactura" style="margin-top:10px">
 
   <label>Razón social</label>
-  <input name="razon_social" required data-uppercase>
+  <input name="razon_social" required oninput="this.value=this.value.toUpperCase()">
 
   <label>RFC</label>
-  <input name="rfc_ruc_rnc" required data-uppercase>
+  <input name="rfc_ruc_rnc" required oninput="this.value=this.value.toUpperCase()">
 
   <label>Domicilio fiscal</label>
-  <input name="domicilio_fiscal" required>
+  <input name="domicilio_fiscal" required oninput="this.value=this.value.toUpperCase()">
 
   <label>Código postal</label>
   <input name="codigo_postal" pattern="[0-9]{6}" required>
@@ -826,7 +826,7 @@ observer.observe(intro);
 <!--  MENÚ DE TARJETAS  --> 
 <script>
 /* ================== CONFIG ================== */
-const API = "https://script.google.com/macros/s/AKfycbz3ikgyiyJII6KUqUK6VQ_hT5QiENEgKXP9AUGOLJeUI4trJkBJkZL_jIXeoBV8JU05/exec";
+const API = "https://script.google.com/macros/s/AKfycbyFCbp7U92LQAK3yORRHAeDePBoFzbCWHPf2hP7WODYktcSR035wHKbBtx_ukrMk46W/exec";
 let cursoActual = "";
 let cupoActual = 0;
 
