@@ -668,7 +668,7 @@ aria-label="Cerrar formulario">✕</button>
 
 <input type="email" name="correo" placeholder="Correo" required>
 <input type="text" name="nombre" placeholder="NOMBRE COMPLETO" required oninput="this.value=this.value.toUpperCase()">
-<input type="text" name="puesto" placeholder="Puesto o cargo" required>
+<input type="text" name="puesto" placeholder="Puesto o cargo" required data-uppercase>
 <input type="tel" name="celular" placeholder="Celular (10 dígitos)" pattern="[0-9]{10}" required>
 
 <label>¿Cómo se enteró?</label>
@@ -683,26 +683,24 @@ aria-label="Cerrar formulario">✕</button>
 </select>
 
 
-
-
 <label>País</label>
-<input name="pais" data-uppercase>
+<input name="pais" required data-uppercase>
 
 <label>Datos fiscales</label>
 
 <div id="camposFactura" style="margin-top:10px">
 
   <label>Razón social</label>
-  <input name="razon_social" data-uppercase required>
+  <input name="razon_social" required data-uppercase>
 
   <label>RFC</label>
-  <input name="rfc_ruc_rnc" data-uppercase required>
+  <input name="rfc_ruc_rnc" required data-uppercase>
 
   <label>Domicilio fiscal</label>
   <input name="domicilio_fiscal" required>
 
   <label>Código postal</label>
-  <input name="codigo_postal" required>
+  <input name="codigo_postal" pattern="[0-9]{6}" required>
 
 
 </div>
