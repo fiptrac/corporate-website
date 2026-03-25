@@ -700,7 +700,7 @@ aria-label="Cerrar formulario">✕</button>
   <input name="domicilio_fiscal" required oninput="this.value=this.value.toUpperCase()">
 
   <label>Código postal</label>
-  <input name="codigo_postal" pattern="[0-9]{6}" required>
+  <input name="codigo_postal" required oninput="this.value=this.value.toUpperCase()">
 
 
 </div>
@@ -826,7 +826,7 @@ observer.observe(intro);
 <!--  MENÚ DE TARJETAS  --> 
 <script>
 /* ================== CONFIG ================== */
-const API = "https://script.google.com/macros/s/AKfycbxxebSOcSDpiIYBXM_DdUzkMmxHT6VTRZOrWw9vVe95PtwKaPRl8agwoNoqI_maG9tX/exec";
+const API = "https://script.google.com/macros/s/AKfycbyE5hXSlJKNYgBIQIVdZP8izwHJcJLuFA2a59NBsirnLL6h9fXJa0CVTb7H8UXg7UqX/exec";
 let cursoActual = "";
 let cupoActual = 0;
 
