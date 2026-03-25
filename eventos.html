@@ -668,7 +668,7 @@ aria-label="Cerrar formulario">✕</button>
 
 <input type="email" name="correo" placeholder="Correo" required>
 <input type="text" name="nombre" placeholder="NOMBRE COMPLETO" required oninput="this.value=this.value.toUpperCase()">
-<input type="text" name="puesto" placeholder="Puesto o cargo" required>
+<input type="text" name="puesto" placeholder="Puesto o cargo" required oninput="this.value=this.value.toUpperCase()">
 <input type="tel" name="celular" placeholder="Celular (10 dígitos)" pattern="[0-9]{10}" required>
 
 <label>¿Cómo se enteró?</label>
@@ -683,45 +683,25 @@ aria-label="Cerrar formulario">✕</button>
 </select>
 
 
-  <!-- Forma de pago -->
-<label>Forma de pago</label>
-<select name="forma_de_pago" required>
-  <option value="">Selecciona forma de pago</option>
-  <option>
-    Transferencia electrónica de fondos (USD o MXN)
-  </option>
-  <option>
-    EVO Payments (Tarjeta de crédito o débito VISA o MASTERCARD)
-  </option>
-</select>
-
-
-
 <label>País</label>
-<input name="pais" data-uppercase>
+<input name="pais" required oninput="this.value=this.value.toUpperCase()">
 
 <label>Datos fiscales</label>
 
 <div id="camposFactura" style="margin-top:10px">
 
   <label>Razón social</label>
-  <input name="razon_social" data-uppercase required>
+  <input name="razon_social" required oninput="this.value=this.value.toUpperCase()">
 
   <label>RFC</label>
-  <input name="rfc_ruc_rnc" data-uppercase required>
+  <input name="rfc_ruc_rnc" required oninput="this.value=this.value.toUpperCase()">
 
   <label>Domicilio fiscal</label>
-  <input name="domicilio_fiscal" required>
+  <input name="domicilio_fiscal" required oninput="this.value=this.value.toUpperCase()">
 
   <label>Código postal</label>
-  <input name="codigo_postal" required>
+  <input name="codigo_postal" required oninput="this.value=this.value.toUpperCase()">
 
-  <label>Uso del comprobante fiscal</label>
-  <select name="uso_del_comprobante_fiscal" required>
-    <option value="">Selecciona una opción</option>
-    <option>GASTOS EN GENERAL</option>
-    <option>POR DEFINIR</option>
-  </select>
 
 </div>
 
@@ -846,7 +826,7 @@ observer.observe(intro);
 <!--  MENÚ DE TARJETAS  --> 
 <script>
 /* ================== CONFIG ================== */
-const API = "https://script.google.com/macros/s/AKfycbxLmWbxeRiMK-d21oFsqgwotSmZXMicDOpbkTp_nz0PCZxGGecH6aj_1VxYKvYw4dA2/exec";
+const API = "https://script.google.com/macros/s/AKfycbyE5hXSlJKNYgBIQIVdZP8izwHJcJLuFA2a59NBsirnLL6h9fXJa0CVTb7H8UXg7UqX/exec";
 let cursoActual = "";
 let cupoActual = 0;
 
