@@ -717,7 +717,7 @@ con práctica intensiva en escenarios reales.
 <input name="nombre" data-uppercase required>
 
 <label>Puesto / Cargo</label>
-<input name="puesto_cargo">
+<input name="puesto_cargo" required>
 
 <label>
   CURP
@@ -788,7 +788,7 @@ con práctica intensiva en escenarios reales.
 
 
 <label>País</label>
-<input name="pais" data-uppercase>
+<input name="pais" data-uppercase required>
 
 <label>Datos fiscales</label>
 
@@ -831,7 +831,7 @@ con práctica intensiva en escenarios reales.
 
 <!-- Servicio de Traslados -->
 <label>Servicio de traslados</label>
-<input type="text" name="traslados" id="trasladosInput" placeholder="Selecciona una opción" readonly style="cursor:pointer;">
+<input type="text" name="traslados" id="trasladosInput" placeholder="Selecciona una opción" readonly required style="cursor:pointer;">
 
 <!-- POPUP DE SELECCIÓN ESTÉTICO -->
 <div id="popupTraslados" style="
@@ -864,13 +864,13 @@ con práctica intensiva en escenarios reales.
     </small>
 
     <div style="display:flex; flex-direction:column; gap:10px;">
-      <button type="button" class="btnOpcion" data-value="B" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+      <button type="button" class="btnOpcion" data-value="A – Traslado completo" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
         <b>A –</b> Requiero traslados AEROPUERTO AICM-HOTEL-FIPTRAC-AEROPUERTO Y TRASLADOS HOTEL-FIPTRAC-HOTEL <i>*SOLO APLICA EN HOTEL SUGERIDO Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
       </button>
-      <button type="button" class="btnOpcion" data-value="C" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+      <button type="button" class="btnOpcion" data-value="B – Sin traslado" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
         <b>B –</b> Haré todos los traslados por mi cuenta
       </button>
-      <button type="button" class="btnOpcion" data-value="D" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
+      <button type="button" class="btnOpcion" data-value="C – Traslado hotel–FIPTRAC" style="text-align:left; padding:12px; border-radius:10px; border:1px solid #ccc; background:#f4f6f8; cursor:pointer;">
         <b>C –</b> Requiero solo traslados Hotel-FIPTRAC Y FIPTRAC-Hotel <i>*SOLO APLICA PARA HUESPEDES EN HOTEL Y HORARIOS ESTABLECIDOS POR FIPTRAC*</i>
       </button>
     </div>
@@ -1093,7 +1093,7 @@ document.querySelectorAll("#popupTraslados .btnOpcion").forEach(btn => {
   
   
 <script>
-const API = "https://script.google.com/macros/s/AKfycbzttLbTm5yNcO1R2eSDiajeVloIfk5ZjFu4tsq9QWMKeoFEYeGRmormWe6iBnhfSt5h/exec";
+const API = "https://script.google.com/macros/s/AKfycbxlGETrV7hI-4pbjXV6usFYWtm72RCGmLxOgg07_nxhN3hNbx2lpdra3xasB0EUN5AU/exec";
 let cursoActual = "";
 
 const loaderCursos = document.getElementById("loaderCursos");
@@ -1179,6 +1179,13 @@ document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
 
   const form = e.target;
+
+  if (!form.checkValidity()) {
+  form.reportValidity();
+  return;
+}
+
+  
   const submitBtn = form.querySelector('button[type="submit"]');
 
   // 🚫 Evitar doble envío
@@ -1205,6 +1212,11 @@ document.getElementById("form").addEventListener("submit", e => {
     }
     data.curp = curp;
   }
+
+      if (!data.traslados) {
+  alert("Selecciona el servicio de traslados");
+  return;
+}
 
   // valores automáticos
   data.pago = "PENDIENTE";
